@@ -16,7 +16,6 @@ namespace TMCWorkbench
             browserControl1.Init();
             listViewControl1.Init();
             musicControl1.Init();
-
         }
 
         private void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)

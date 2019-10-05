@@ -36,8 +36,8 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableOuter = new System.Windows.Forms.TableLayoutPanel();
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
-            this.tablePlayer = new System.Windows.Forms.TableLayoutPanel();
             this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
+            this.tablePlayer = new System.Windows.Forms.TableLayoutPanel();
             this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
             this.listViewControl1 = new TMCWorkbench.Controls.ListViewControl();
             this.statusStrip1.SuspendLayout();
@@ -116,6 +116,14 @@
             this.tableInner.Size = new System.Drawing.Size(1004, 593);
             this.tableInner.TabIndex = 1;
             // 
+            // browserControl1
+            // 
+            this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.browserControl1.Location = new System.Drawing.Point(3, 3);
+            this.browserControl1.Name = "browserControl1";
+            this.browserControl1.Size = new System.Drawing.Size(244, 587);
+            this.browserControl1.TabIndex = 0;
+            // 
             // tablePlayer
             // 
             this.tablePlayer.ColumnCount = 1;
@@ -131,21 +139,13 @@
             this.tablePlayer.Size = new System.Drawing.Size(398, 587);
             this.tablePlayer.TabIndex = 2;
             // 
-            // browserControl1
-            // 
-            this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browserControl1.Location = new System.Drawing.Point(3, 3);
-            this.browserControl1.Name = "browserControl1";
-            this.browserControl1.Size = new System.Drawing.Size(244, 587);
-            this.browserControl1.TabIndex = 0;
-            // 
             // musicControl1
             // 
             this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.musicControl1.Location = new System.Drawing.Point(3, 522);
+            this.musicControl1.Location = new System.Drawing.Point(3, 521);
             this.musicControl1.Name = "musicControl1";
-            this.musicControl1.Size = new System.Drawing.Size(392, 62);
-            this.musicControl1.TabIndex = 7;
+            this.musicControl1.Size = new System.Drawing.Size(392, 63);
+            this.musicControl1.TabIndex = 9;
             // 
             // listViewControl1
             // 
@@ -174,7 +174,6 @@
         }
 
         #endregion
-        private Controls.MusicControl musicControl1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ImageList imageList1;
         private Controls.BrowserControl browserControl1;
@@ -184,6 +183,7 @@
         private System.Windows.Forms.TableLayoutPanel tableInner;
         private System.Windows.Forms.TableLayoutPanel tablePlayer;
         private Controls.ListViewControl listViewControl1;
+        private Controls.MusicControl musicControl1;
     }
 }
 
