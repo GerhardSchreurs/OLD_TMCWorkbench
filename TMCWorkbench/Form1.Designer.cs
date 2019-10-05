@@ -31,20 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button3 = new System.Windows.Forms.Button();
-            this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableOuter = new System.Windows.Forms.TableLayoutPanel();
-            this.imageListExt = new System.Windows.Forms.ImageList(this.components);
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
             this.tablePlayer = new System.Windows.Forms.TableLayoutPanel();
+            this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
+            this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
+            this.listViewControl1 = new TMCWorkbench.Controls.ListViewControl();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableInner.SuspendLayout();
@@ -61,56 +56,6 @@
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
-            // 
-            // browserControl1
-            // 
-            this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browserControl1.Location = new System.Drawing.Point(3, 3);
-            this.browserControl1.Name = "browserControl1";
-            this.browserControl1.Size = new System.Drawing.Size(244, 587);
-            this.browserControl1.TabIndex = 0;
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2,
-            this.columnHeader1,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.FullRowSelect = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(253, 3);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(344, 587);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Type";
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Name";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Created";
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Modified";
-            // 
-            // musicControl1
-            // 
-            this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.musicControl1.Location = new System.Drawing.Point(3, 522);
-            this.musicControl1.Name = "musicControl1";
-            this.musicControl1.Size = new System.Drawing.Size(392, 62);
-            this.musicControl1.TabIndex = 7;
             // 
             // imageList1
             // 
@@ -153,16 +98,6 @@
             this.tableOuter.Size = new System.Drawing.Size(1010, 619);
             this.tableOuter.TabIndex = 1;
             // 
-            // imageListExt
-            // 
-            this.imageListExt.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListExt.ImageStream")));
-            this.imageListExt.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListExt.Images.SetKeyName(0, "NULL.png");
-            this.imageListExt.Images.SetKeyName(1, "IT.png");
-            this.imageListExt.Images.SetKeyName(2, "XM.png");
-            this.imageListExt.Images.SetKeyName(3, "S3M.png");
-            this.imageListExt.Images.SetKeyName(4, "MOD.png");
-            // 
             // tableInner
             // 
             this.tableInner.BackColor = System.Drawing.SystemColors.Control;
@@ -171,8 +106,8 @@
             this.tableInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
             this.tableInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableInner.Controls.Add(this.browserControl1, 0, 0);
-            this.tableInner.Controls.Add(this.listView1, 1, 0);
             this.tableInner.Controls.Add(this.tablePlayer, 2, 0);
+            this.tableInner.Controls.Add(this.listViewControl1, 1, 0);
             this.tableInner.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableInner.Location = new System.Drawing.Point(3, 3);
             this.tableInner.Name = "tableInner";
@@ -196,6 +131,30 @@
             this.tablePlayer.Size = new System.Drawing.Size(398, 587);
             this.tablePlayer.TabIndex = 2;
             // 
+            // browserControl1
+            // 
+            this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.browserControl1.Location = new System.Drawing.Point(3, 3);
+            this.browserControl1.Name = "browserControl1";
+            this.browserControl1.Size = new System.Drawing.Size(244, 587);
+            this.browserControl1.TabIndex = 0;
+            // 
+            // musicControl1
+            // 
+            this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.musicControl1.Location = new System.Drawing.Point(3, 522);
+            this.musicControl1.Name = "musicControl1";
+            this.musicControl1.Size = new System.Drawing.Size(392, 62);
+            this.musicControl1.TabIndex = 7;
+            // 
+            // listViewControl1
+            // 
+            this.listViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewControl1.Location = new System.Drawing.Point(253, 3);
+            this.listViewControl1.Name = "listViewControl1";
+            this.listViewControl1.Size = new System.Drawing.Size(344, 587);
+            this.listViewControl1.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -217,19 +176,14 @@
         #endregion
         private Controls.MusicControl musicControl1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ImageList imageList1;
         private Controls.BrowserControl browserControl1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TableLayoutPanel tableOuter;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ImageList imageListExt;
         private System.Windows.Forms.TableLayoutPanel tableInner;
         private System.Windows.Forms.TableLayoutPanel tablePlayer;
+        private Controls.ListViewControl listViewControl1;
     }
 }
 

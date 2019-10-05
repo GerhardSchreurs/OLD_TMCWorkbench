@@ -70,10 +70,17 @@
     <Compile Include="Controls\BrowserControl.Designer.cs">
       <DependentUpon>BrowserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ListViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ListViewControl.Designer.cs">
+      <DependentUpon>ListViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MusicControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Events\EventArgs\BrowseEventArgs.cs" />
+    <Compile Include="Events\EventArgs\DirectoryInfoEventArgs.cs" />
+    <Compile Include="Events\EventArgs\FileInfoEventArgs.cs" />
     <Compile Include="Events\EventEvoker.cs" />
     <Compile Include="Extensions\CrossThreadExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -89,6 +96,9 @@
     <Compile Include="ThreadHelperClass.cs" />
     <EmbeddedResource Include="Controls\BrowserControl.resx">
       <DependentUpon>BrowserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ListViewControl.resx">
+      <DependentUpon>ListViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MusicControl.resx">
       <DependentUpon>MusicControl.cs</DependentUpon>
@@ -119,7 +129,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\VideoLAN.LibVLC.Windows.3.0.8\build\VideoLAN.LibVLC.Windows.targets" Condition="Exists('..\packages\VideoLAN.LibVLC.Windows.3.0.8\build\VideoLAN.LibVLC.Windows.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace TMCWorkbench.Events.EventArgs
 {
-    public class BrowseEventArgs
+    public class FileInfoEventArgs
     {
-        public BrowseEventArgs(DirectoryInfo directoryInfo)
+        public FileInfoEventArgs(FileInfo fileInfo)
         {
-            DirectoryInfo = directoryInfo;
+            FileInfo = fileInfo;
         }
 
-        public DirectoryInfo DirectoryInfo;
+        public FileInfo FileInfo;
     }
 }

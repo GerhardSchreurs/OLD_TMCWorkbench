@@ -10,12 +10,21 @@ namespace TMCWorkbench.Events
 {
     public static class EventInvoker
     {
-        public delegate void BrowseEventArgsDelegate(object sender, BrowseEventArgs playEventArgs);
-        public static event BrowseEventArgsDelegate OnBrowse;
+        public delegate void BrowseEventArgsDelegate(object sender, DirectoryInfoEventArgs directoryInfoEventArgs);
+        public static event BrowseEventArgsDelegate OnBrowserControlBrowse;
+
+        public delegate void ListViewSelectedEventArgsDelegate(object sender, FileInfoEventArgs fileinfoEventArgs);
+        public static event ListViewSelectedEventArgsDelegate OnListViewControlSelected;
+
 
         public static void RaiseOnBrowse(object sender, DirectoryInfo directoryInfo)
         {
-            OnBrowse?.Invoke(sender, new BrowseEventArgs(directoryInfo));
+            OnBrowserControlBrowse?.Invoke(sender, new DirectoryInfoEventArgs(directoryInfo));
+        }
+
+        public static void RaiseOnListViewSelected(object sender, FileInfo fileInfo)
+        {
+            OnListViewControlSelected?.Invoke(sender, new FileInfoEventArgs(fileInfo));
         }
     }
 }
