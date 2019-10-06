@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibVLCSharp.Shared;
 using Extensions;
+using System.Diagnostics;
 
 namespace TMCWorkbench.Controls
 {
@@ -16,6 +17,7 @@ namespace TMCWorkbench.Controls
     {
         private LibVLC _libVLC;
         private MediaPlayer _mediaPlayer;
+        private Media _media;
 
         public MusicControl()
         {
@@ -28,25 +30,56 @@ namespace TMCWorkbench.Controls
 
             _libVLC = new LibVLC();
             _mediaPlayer = new MediaPlayer(_libVLC);
-            _mediaPlayer.PositionChanged += _mediaPlayer_PositionChanged;
+            _mediaPlayer.PositionChanged += Handle_mediaPlayer_PositionChanged;
+
+            trackVolume.Value = Properties.Settings.Default.PlayerVolume;
+
+            //TODO: Save settings on quit / unload
+            trackVolume.ValueChanged += Handle_TrackVolume_ValueChanged;
         }
 
-        public void LoadTrack(string path)
+        private void Handle_TrackVolume_ValueChanged(object sender, EventArgs e)
+        {
+            _mediaPlayer.Volume = trackVolume.Value;
+
+            Properties.Settings.Default.PlayerVolume = trackVolume.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private string DurationToTimeString(long duration)
+        {
+            var timeSpan = TimeSpan.FromMilliseconds(duration);
+            return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+        }
+
+        public async Task LoadTrack(string path)
         {
             _mediaPlayer.Stop();
-            var media = new Media(_libVLC, path, FromType.FromPath);
-            _mediaPlayer.Media = media;
+
+            if (_media != null)
+            {
+                _media.Dispose();
+            }
+
+            _media = new Media(_libVLC, path, FromType.FromPath);
+            await _media.Parse(MediaParseOptions.ParseLocal);
+            lblTimeTotal.Text = DurationToTimeString(_media.Duration);
+
+            _mediaPlayer.Media = _media;
             _mediaPlayer.Play();
         }
 
-        private void _mediaPlayer_PositionChanged(object sender, MediaPlayerPositionChangedEventArgs e)
+        private void Handle_mediaPlayer_PositionChanged(object sender, MediaPlayerPositionChangedEventArgs e)
         {
-            var pos = (int)(e.Position * 1000) + 1;
+            var pos = (int)(e.Position * 1000);
 
-            if (pos > 1) { pos = 1; };
+            if (pos > 1000) { pos = 1000; };
             if (pos < 0) { pos = 0; };
 
+            var seconds = (_media.Duration * e.Position);
+
             trackPosition.PerformSafely(() => trackPosition.Value = pos);
+            lblTime.PerformSafely(() => lblTime.Text = DurationToTimeString((long)(seconds)));
         }
 
         private void BtnPlay_Click(object sender, EventArgs e)
@@ -66,15 +99,15 @@ namespace TMCWorkbench.Controls
 
         private void TrackPosition_MouseDown(object sender, MouseEventArgs e)
         {
-            _mediaPlayer.PositionChanged -= _mediaPlayer_PositionChanged;
+            _mediaPlayer.PositionChanged -= Handle_mediaPlayer_PositionChanged;
         }
 
         private void TrackPosition_MouseUp(object sender, MouseEventArgs e)
         {
-            _mediaPlayer.PositionChanged -= _mediaPlayer_PositionChanged;
+            _mediaPlayer.PositionChanged -= Handle_mediaPlayer_PositionChanged;
             var f = (float)trackPosition.Value / 1000;
             _mediaPlayer.Position = f;
-            _mediaPlayer.PositionChanged += _mediaPlayer_PositionChanged;
+            _mediaPlayer.PositionChanged += Handle_mediaPlayer_PositionChanged;
         }
     }
 }

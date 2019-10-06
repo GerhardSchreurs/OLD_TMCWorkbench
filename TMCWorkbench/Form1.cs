@@ -18,10 +18,10 @@ namespace TMCWorkbench
             musicControl1.Init();
         }
 
-        private void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
+        private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
         {
             toolStripStatusLabel.Text = fileinfoEventArgs.FileInfo.FullName;
-            musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName);
+            await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName);
         }
 
         private void Handle_BrowserControl_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
@@ -29,13 +29,13 @@ namespace TMCWorkbench
             listViewControl1.BrowseDirectory(playEventArgs.DirectoryInfo);
         }
 
-        private void Button3_Click(object sender, EventArgs e)
+        private async void Button3_Click(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog();
             dialog.Title = "choose track";
             var result = dialog.ShowDialog();
 
-            musicControl1.LoadTrack(dialog.FileName);
+            await musicControl1.LoadTrack(dialog.FileName);
         }
     }
 }
