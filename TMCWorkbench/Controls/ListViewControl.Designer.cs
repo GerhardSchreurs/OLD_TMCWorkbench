@@ -56,18 +56,22 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Type";
+            this.columnHeader2.Width = 40;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 123;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Created";
+            this.columnHeader3.Width = 80;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Modified";
+            this.columnHeader4.Width = 80;
             // 
             // ListViewControl
             // 

@@ -83,12 +83,12 @@ namespace TMCWorkbench.Controls
 
                         //Created
                         sub = new ListViewItem.ListViewSubItem();
-                        sub.Text = File.GetCreationTime(directoryInfo.FullName).ToShortDateString();
+                        sub.Text = File.GetLastWriteTime(fileInfo.FullName).ToShortDateString();
                         item.SubItems.Add(sub);
 
                         //Modified
                         sub = new ListViewItem.ListViewSubItem();
-                        sub.Text = File.GetLastWriteTime(directoryInfo.FullName).ToShortDateString();
+                        sub.Text = File.GetLastAccessTime(fileInfo.FullName).ToShortDateString();
                         item.SubItems.Add(sub);
 
                         listView1.Items.Add(item);

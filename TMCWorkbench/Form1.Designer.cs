@@ -39,22 +39,41 @@
             this.tablePlayer = new System.Windows.Forms.TableLayoutPanel();
             this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanelTop = new System.Windows.Forms.TableLayoutPanel();
+            this.txtSamples = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtInstruments = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtMessage = new TMCWorkbench.Controls.TextAreaControl();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tableLayoutPanelBot = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtMessage = new System.Windows.Forms.TextBox();
-            this.txtInstruments = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtSamples = new System.Windows.Forms.TextBox();
+            this.txtOutput = new TMCWorkbench.Controls.TextAreaControl();
+            this.panelSave = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.pnlMeta = new System.Windows.Forms.Panel();
+            this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
+            this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.listViewControl1 = new TMCWorkbench.Controls.ListViewControl();
+            this.button2 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableInner.SuspendLayout();
             this.tablePlayer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tableLayoutPanelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSamples)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInstruments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMessage)).BeginInit();
+            this.tableLayoutPanelBot.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).BeginInit();
+            this.panelSave.SuspendLayout();
+            this.pnlMeta.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -149,6 +168,7 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Name = "splitContainer1";
@@ -156,100 +176,305 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
+            this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanelTop);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanelBot);
             this.splitContainer1.Size = new System.Drawing.Size(1019, 634);
             this.splitContainer1.SplitterDistance = 316;
             this.splitContainer1.TabIndex = 10;
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanelTop
             // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 486F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.txtMessage, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtInstruments, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtSamples, 1, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1019, 316);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // txtMessage
-            // 
-            this.txtMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMessage.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMessage.Location = new System.Drawing.Point(3, 299);
-            this.txtMessage.Multiline = true;
-            this.txtMessage.Name = "txtMessage";
-            this.txtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessage.Size = new System.Drawing.Size(813, 14);
-            this.txtMessage.TabIndex = 5;
-            // 
-            // txtInstruments
-            // 
-            this.txtInstruments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInstruments.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInstruments.Location = new System.Drawing.Point(922, 23);
-            this.txtInstruments.Multiline = true;
-            this.txtInstruments.Name = "txtInstruments";
-            this.txtInstruments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtInstruments.Size = new System.Drawing.Size(94, 270);
-            this.txtInstruments.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(813, 276);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Message";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(922, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Instruments";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(822, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Samples";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tableLayoutPanelTop.ColumnCount = 3;
+            this.tableLayoutPanelTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
+            this.tableLayoutPanelTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
+            this.tableLayoutPanelTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 651F));
+            this.tableLayoutPanelTop.Controls.Add(this.txtSamples, 0, 1);
+            this.tableLayoutPanelTop.Controls.Add(this.txtInstruments, 1, 1);
+            this.tableLayoutPanelTop.Controls.Add(this.txtMessage, 2, 1);
+            this.tableLayoutPanelTop.Controls.Add(this.label4, 2, 0);
+            this.tableLayoutPanelTop.Controls.Add(this.label5, 1, 0);
+            this.tableLayoutPanelTop.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanelTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelTop.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanelTop.Name = "tableLayoutPanelTop";
+            this.tableLayoutPanelTop.RowCount = 2;
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelTop.Size = new System.Drawing.Size(1019, 316);
+            this.tableLayoutPanelTop.TabIndex = 0;
             // 
             // txtSamples
             // 
+            this.txtSamples.AllowMacroRecording = false;
+            this.txtSamples.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtSamples.AutoScrollMinSize = new System.Drawing.Size(68, 18);
+            this.txtSamples.BackBrush = null;
+            this.txtSamples.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSamples.CharHeight = 12;
+            this.txtSamples.CharWidth = 6;
+            this.txtSamples.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSamples.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.txtSamples.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSamples.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSamples.Location = new System.Drawing.Point(822, 23);
-            this.txtSamples.Multiline = true;
+            this.txtSamples.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtSamples.IsReplaceMode = false;
+            this.txtSamples.Location = new System.Drawing.Point(3, 23);
             this.txtSamples.Name = "txtSamples";
-            this.txtSamples.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtSamples.Size = new System.Drawing.Size(94, 270);
-            this.txtSamples.TabIndex = 3;
+            this.txtSamples.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtSamples.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtSamples.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSamples.ServiceColors")));
+            this.txtSamples.ShowLineNumbers = false;
+            this.txtSamples.Size = new System.Drawing.Size(178, 290);
+            this.txtSamples.TabIndex = 7;
+            this.txtSamples.Text = "txtSamples";
+            this.txtSamples.Zoom = 100;
+            // 
+            // txtInstruments
+            // 
+            this.txtInstruments.AllowMacroRecording = false;
+            this.txtInstruments.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtInstruments.AutoScrollMinSize = new System.Drawing.Size(92, 18);
+            this.txtInstruments.BackBrush = null;
+            this.txtInstruments.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtInstruments.CharHeight = 12;
+            this.txtInstruments.CharWidth = 6;
+            this.txtInstruments.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtInstruments.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtInstruments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtInstruments.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtInstruments.IsReplaceMode = false;
+            this.txtInstruments.Location = new System.Drawing.Point(187, 23);
+            this.txtInstruments.Name = "txtInstruments";
+            this.txtInstruments.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtInstruments.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtInstruments.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtInstruments.ServiceColors")));
+            this.txtInstruments.ShowLineNumbers = false;
+            this.txtInstruments.Size = new System.Drawing.Size(178, 290);
+            this.txtInstruments.TabIndex = 8;
+            this.txtInstruments.Text = "txtInstruments";
+            this.txtInstruments.Zoom = 100;
+            // 
+            // txtMessage
+            // 
+            this.txtMessage.AllowMacroRecording = false;
+            this.txtMessage.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtMessage.AutoScrollMinSize = new System.Drawing.Size(68, 18);
+            this.txtMessage.BackBrush = null;
+            this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMessage.CharHeight = 12;
+            this.txtMessage.CharWidth = 6;
+            this.txtMessage.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMessage.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMessage.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtMessage.IsReplaceMode = false;
+            this.txtMessage.Location = new System.Drawing.Point(371, 23);
+            this.txtMessage.Name = "txtMessage";
+            this.txtMessage.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtMessage.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtMessage.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtMessage.ServiceColors")));
+            this.txtMessage.ShowLineNumbers = false;
+            this.txtMessage.Size = new System.Drawing.Size(645, 290);
+            this.txtMessage.TabIndex = 9;
+            this.txtMessage.Text = "txtMessage";
+            this.txtMessage.Zoom = 100;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(371, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(645, 20);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Message";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Location = new System.Drawing.Point(187, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(178, 20);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Instruments";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(178, 20);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Samples";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanelBot
+            // 
+            this.tableLayoutPanelBot.ColumnCount = 2;
+            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 368F));
+            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 651F));
+            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBot.Controls.Add(this.tableLayoutPanel1, 1, 1);
+            this.tableLayoutPanelBot.Controls.Add(this.pnlMeta, 0, 1);
+            this.tableLayoutPanelBot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelBot.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanelBot.Name = "tableLayoutPanelBot";
+            this.tableLayoutPanelBot.RowCount = 2;
+            this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelBot.Size = new System.Drawing.Size(1019, 314);
+            this.tableLayoutPanelBot.TabIndex = 1;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.txtOutput, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panelSave, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(371, 23);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 288);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // txtOutput
+            // 
+            this.txtOutput.AllowMacroRecording = false;
+            this.txtOutput.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtOutput.AutoScrollMinSize = new System.Drawing.Size(62, 18);
+            this.txtOutput.BackBrush = null;
+            this.txtOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtOutput.CharHeight = 12;
+            this.txtOutput.CharWidth = 6;
+            this.txtOutput.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtOutput.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtOutput.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtOutput.IsReplaceMode = false;
+            this.txtOutput.Location = new System.Drawing.Point(3, 3);
+            this.txtOutput.Name = "txtOutput";
+            this.txtOutput.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtOutput.ServiceColors")));
+            this.txtOutput.ShowLineNumbers = false;
+            this.txtOutput.Size = new System.Drawing.Size(639, 252);
+            this.txtOutput.TabIndex = 10;
+            this.txtOutput.Text = "txtOutput";
+            this.txtOutput.Zoom = 100;
+            // 
+            // panelSave
+            // 
+            this.panelSave.Controls.Add(this.button1);
+            this.panelSave.Controls.Add(this.comboBox1);
+            this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSave.Location = new System.Drawing.Point(3, 261);
+            this.panelSave.Name = "panelSave";
+            this.panelSave.Size = new System.Drawing.Size(639, 24);
+            this.panelSave.TabIndex = 11;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button1.Location = new System.Drawing.Point(564, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 24);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Hardcore",
+            "Drum & bass",
+            "Trance"});
+            this.comboBox1.Location = new System.Drawing.Point(3, 0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // pnlMeta
+            // 
+            this.pnlMeta.Controls.Add(this.ctrDate);
+            this.pnlMeta.Controls.Add(this.ctrFileInfo);
+            this.pnlMeta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMeta.Location = new System.Drawing.Point(3, 23);
+            this.pnlMeta.Name = "pnlMeta";
+            this.pnlMeta.Size = new System.Drawing.Size(362, 288);
+            this.pnlMeta.TabIndex = 1;
+            // 
+            // ctrDate
+            // 
+            this.ctrDate.Date = new System.DateTime(((long)(0)));
+            this.ctrDate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrDate.Location = new System.Drawing.Point(0, 24);
+            this.ctrDate.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrDate.Name = "ctrDate";
+            this.ctrDate.Size = new System.Drawing.Size(362, 24);
+            this.ctrDate.TabIndex = 1;
+            // 
+            // ctrFileInfo
+            // 
+            this.ctrFileInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrFileInfo.Filename = null;
+            this.ctrFileInfo.Location = new System.Drawing.Point(0, 0);
+            this.ctrFileInfo.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrFileInfo.Name = "ctrFileInfo";
+            this.ctrFileInfo.Size = new System.Drawing.Size(362, 24);
+            this.ctrFileInfo.TabIndex = 0;
             // 
             // listViewControl1
             // 
@@ -258,6 +483,15 @@
             this.listViewControl1.Name = "listViewControl1";
             this.listViewControl1.Size = new System.Drawing.Size(344, 720);
             this.listViewControl1.TabIndex = 3;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1, -7);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -274,10 +508,19 @@
             this.tableInner.ResumeLayout(false);
             this.tablePlayer.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tableLayoutPanelTop.ResumeLayout(false);
+            this.tableLayoutPanelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSamples)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInstruments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMessage)).EndInit();
+            this.tableLayoutPanelBot.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).EndInit();
+            this.panelSave.ResumeLayout(false);
+            this.pnlMeta.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -293,13 +536,23 @@
         private Controls.ListViewControl listViewControl1;
         private Controls.MusicControl musicControl1;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTop;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBot;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private Controls.TextAreaControl txtSamples;
+        private Controls.TextAreaControl txtInstruments;
+        private Controls.TextAreaControl txtMessage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtMessage;
-        private System.Windows.Forms.TextBox txtInstruments;
-        private System.Windows.Forms.TextBox txtSamples;
+        private Controls.TextAreaControl txtOutput;
+        private System.Windows.Forms.Panel panelSave;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel pnlMeta;
+        private Controls.Resettable.ResettableTextControl ctrFileInfo;
+        private Controls.Resettable.ResettableDateControl ctrDate;
     }
 }
 

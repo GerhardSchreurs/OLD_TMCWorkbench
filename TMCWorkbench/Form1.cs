@@ -18,7 +18,7 @@ namespace TMCWorkbench
             listViewControl1.Init();
             musicControl1.Init();
 
-            splitContainer1.Panel2Collapsed = true;
+            splitContainer1.Panel2Collapsed = false;
         }
 
         private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
@@ -28,9 +28,17 @@ namespace TMCWorkbench
 
             var modInfo = ModLibrary.ModLibrary.Parse(fileinfoEventArgs.FileInfo.FullName);
 
+
             txtSamples.Text = modInfo.SampleText;
             txtMessage.Text = modInfo.SongText;
             txtInstruments.Text = modInfo.InstrumentText;
+
+            txtSamples.ClearUndo();
+            txtMessage.ClearUndo();
+            txtInstruments.ClearUndo();
+
+            ctrFileInfo.Filename = modInfo.FileName;
+            ctrDate.Date = modInfo.DateCreated;
         }
 
 
