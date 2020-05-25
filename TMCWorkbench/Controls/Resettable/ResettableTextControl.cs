@@ -10,14 +10,23 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableTextControl : ResettableControlPanel
+    public partial class ResettableTextControl : _ResettableControlPanel
     {
         public ResettableTextControl()
         {
             InitializeComponent();
 
-            this.resettableControl1.Title = "File:";
             this.resettableControl1.OnReset += ResettableControl1_OnReset;
+        }
+
+        public override string LabelTitle
+        {
+            get => base.LabelTitle;
+            set
+            {
+                base.LabelTitle = value;
+                this.resettableControl1.Title = value;
+            }
         }
 
         private void ResettableControl1_OnReset(object sender, EventArgs e)

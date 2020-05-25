@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableControlPanel
+    partial class _ResettableControlPanel
     {
         /// <summary> 
         /// Required designer variable.

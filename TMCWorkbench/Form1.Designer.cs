@@ -35,28 +35,31 @@
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableOuter = new System.Windows.Forms.TableLayoutPanel();
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
-            this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
             this.tablePlayer = new System.Windows.Forms.TableLayoutPanel();
-            this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelTop = new System.Windows.Forms.TableLayoutPanel();
-            this.txtSamples = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtInstruments = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtMessage = new TMCWorkbench.Controls.TextAreaControl();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanelBot = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtOutput = new TMCWorkbench.Controls.TextAreaControl();
             this.panelSave = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pnlMeta = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
+            this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
+            this.txtSamples = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtInstruments = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtMessage = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtOutput = new TMCWorkbench.Controls.TextAreaControl();
+            this.ctrBPM = new TMCWorkbench.Controls.Resettable.ResettableBpmControl();
+            this.ctrSpeed = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
+            this.ctrLength = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.listViewControl1 = new TMCWorkbench.Controls.ListViewControl();
-            this.button2 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableInner.SuspendLayout();
@@ -66,14 +69,14 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanelTop.SuspendLayout();
+            this.tableLayoutPanelBot.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panelSave.SuspendLayout();
+            this.pnlMeta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtSamples)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInstruments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMessage)).BeginInit();
-            this.tableLayoutPanelBot.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).BeginInit();
-            this.panelSave.SuspendLayout();
-            this.pnlMeta.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -135,14 +138,6 @@
             this.tableInner.Size = new System.Drawing.Size(1631, 726);
             this.tableInner.TabIndex = 1;
             // 
-            // browserControl1
-            // 
-            this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browserControl1.Location = new System.Drawing.Point(3, 3);
-            this.browserControl1.Name = "browserControl1";
-            this.browserControl1.Size = new System.Drawing.Size(244, 720);
-            this.browserControl1.TabIndex = 0;
-            // 
             // tablePlayer
             // 
             this.tablePlayer.ColumnCount = 1;
@@ -157,14 +152,6 @@
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tablePlayer.Size = new System.Drawing.Size(1025, 720);
             this.tablePlayer.TabIndex = 2;
-            // 
-            // musicControl1
-            // 
-            this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.musicControl1.Location = new System.Drawing.Point(3, 654);
-            this.musicControl1.Name = "musicControl1";
-            this.musicControl1.Size = new System.Drawing.Size(1019, 63);
-            this.musicControl1.TabIndex = 9;
             // 
             // splitContainer1
             // 
@@ -206,6 +193,143 @@
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelTop.Size = new System.Drawing.Size(1019, 316);
             this.tableLayoutPanelTop.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(371, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(645, 20);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Message";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Location = new System.Drawing.Point(187, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(178, 20);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Instruments";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(178, 20);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Samples";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanelBot
+            // 
+            this.tableLayoutPanelBot.ColumnCount = 2;
+            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 368F));
+            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 651F));
+            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBot.Controls.Add(this.tableLayoutPanel1, 1, 1);
+            this.tableLayoutPanelBot.Controls.Add(this.pnlMeta, 0, 1);
+            this.tableLayoutPanelBot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelBot.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanelBot.Name = "tableLayoutPanelBot";
+            this.tableLayoutPanelBot.RowCount = 2;
+            this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelBot.Size = new System.Drawing.Size(1019, 314);
+            this.tableLayoutPanelBot.TabIndex = 1;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.txtOutput, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panelSave, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(371, 23);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 288);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // panelSave
+            // 
+            this.panelSave.Controls.Add(this.btnSave);
+            this.panelSave.Controls.Add(this.comboBox1);
+            this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSave.Location = new System.Drawing.Point(3, 261);
+            this.panelSave.Name = "panelSave";
+            this.panelSave.Size = new System.Drawing.Size(639, 24);
+            this.panelSave.TabIndex = 11;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSave.Location = new System.Drawing.Point(564, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 24);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Hardcore",
+            "Drum & bass",
+            "Trance"});
+            this.comboBox1.Location = new System.Drawing.Point(3, 0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 1;
+            // 
+            // pnlMeta
+            // 
+            this.pnlMeta.Controls.Add(this.ctrBPM);
+            this.pnlMeta.Controls.Add(this.ctrSpeed);
+            this.pnlMeta.Controls.Add(this.ctrLength);
+            this.pnlMeta.Controls.Add(this.ctrDate);
+            this.pnlMeta.Controls.Add(this.ctrFileInfo);
+            this.pnlMeta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMeta.Location = new System.Drawing.Point(3, 23);
+            this.pnlMeta.Name = "pnlMeta";
+            this.pnlMeta.Size = new System.Drawing.Size(362, 288);
+            this.pnlMeta.TabIndex = 1;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1, -7);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // browserControl1
+            // 
+            this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.browserControl1.Location = new System.Drawing.Point(3, 3);
+            this.browserControl1.Name = "browserControl1";
+            this.browserControl1.Size = new System.Drawing.Size(244, 720);
+            this.browserControl1.TabIndex = 0;
+            // 
+            // musicControl1
+            // 
+            this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.musicControl1.Location = new System.Drawing.Point(3, 654);
+            this.musicControl1.Name = "musicControl1";
+            this.musicControl1.Size = new System.Drawing.Size(1019, 63);
+            this.musicControl1.TabIndex = 9;
             // 
             // txtSamples
             // 
@@ -312,73 +436,6 @@
             this.txtMessage.Text = "txtMessage";
             this.txtMessage.Zoom = 100;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(371, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(645, 20);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Message";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(187, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(178, 20);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Instruments";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(178, 20);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Samples";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanelBot
-            // 
-            this.tableLayoutPanelBot.ColumnCount = 2;
-            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 368F));
-            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 651F));
-            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelBot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelBot.Controls.Add(this.tableLayoutPanel1, 1, 1);
-            this.tableLayoutPanelBot.Controls.Add(this.pnlMeta, 0, 1);
-            this.tableLayoutPanelBot.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelBot.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelBot.Name = "tableLayoutPanelBot";
-            this.tableLayoutPanelBot.RowCount = 2;
-            this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelBot.Size = new System.Drawing.Size(1019, 314);
-            this.tableLayoutPanelBot.TabIndex = 1;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.txtOutput, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panelSave, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(371, 23);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 288);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
             // txtOutput
             // 
             this.txtOutput.AllowMacroRecording = false;
@@ -414,52 +471,46 @@
             this.txtOutput.Text = "txtOutput";
             this.txtOutput.Zoom = 100;
             // 
-            // panelSave
+            // ctrBPM
             // 
-            this.panelSave.Controls.Add(this.button1);
-            this.panelSave.Controls.Add(this.comboBox1);
-            this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSave.Location = new System.Drawing.Point(3, 261);
-            this.panelSave.Name = "panelSave";
-            this.panelSave.Size = new System.Drawing.Size(639, 24);
-            this.panelSave.TabIndex = 11;
+            this.ctrBPM.BPM = 0;
+            this.ctrBPM.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrBPM.LabelTitle = "BPM:";
+            this.ctrBPM.Location = new System.Drawing.Point(0, 96);
+            this.ctrBPM.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrBPM.Name = "ctrBPM";
+            this.ctrBPM.Size = new System.Drawing.Size(362, 24);
+            this.ctrBPM.TabIndex = 4;
             // 
-            // button1
+            // ctrSpeed
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button1.Location = new System.Drawing.Point(564, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 24);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ctrSpeed.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrSpeed.LabelTitle = "Speed/Tempo:";
+            this.ctrSpeed.Location = new System.Drawing.Point(0, 72);
+            this.ctrSpeed.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrSpeed.Name = "ctrSpeed";
+            this.ctrSpeed.Size = new System.Drawing.Size(362, 24);
+            this.ctrSpeed.TabIndex = 3;
+            this.ctrSpeed.ValueA = 0;
+            this.ctrSpeed.ValueB = 0;
             // 
-            // comboBox1
+            // ctrLength
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Hardcore",
-            "Drum & bass",
-            "Trance"});
-            this.comboBox1.Location = new System.Drawing.Point(3, 0);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // pnlMeta
-            // 
-            this.pnlMeta.Controls.Add(this.ctrDate);
-            this.pnlMeta.Controls.Add(this.ctrFileInfo);
-            this.pnlMeta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMeta.Location = new System.Drawing.Point(3, 23);
-            this.pnlMeta.Name = "pnlMeta";
-            this.pnlMeta.Size = new System.Drawing.Size(362, 288);
-            this.pnlMeta.TabIndex = 1;
+            this.ctrLength.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrLength.LabelTitle = "Minutes/Sec:";
+            this.ctrLength.Location = new System.Drawing.Point(0, 48);
+            this.ctrLength.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrLength.Name = "ctrLength";
+            this.ctrLength.Size = new System.Drawing.Size(362, 24);
+            this.ctrLength.TabIndex = 2;
+            this.ctrLength.ValueA = 0;
+            this.ctrLength.ValueB = 0;
             // 
             // ctrDate
             // 
             this.ctrDate.Date = new System.DateTime(((long)(0)));
             this.ctrDate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrDate.LabelTitle = "Date:";
             this.ctrDate.Location = new System.Drawing.Point(0, 24);
             this.ctrDate.Margin = new System.Windows.Forms.Padding(0);
             this.ctrDate.Name = "ctrDate";
@@ -470,6 +521,7 @@
             // 
             this.ctrFileInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctrFileInfo.Filename = null;
+            this.ctrFileInfo.LabelTitle = "Filename:";
             this.ctrFileInfo.Location = new System.Drawing.Point(0, 0);
             this.ctrFileInfo.Margin = new System.Windows.Forms.Padding(0);
             this.ctrFileInfo.Name = "ctrFileInfo";
@@ -483,15 +535,6 @@
             this.listViewControl1.Name = "listViewControl1";
             this.listViewControl1.Size = new System.Drawing.Size(344, 720);
             this.listViewControl1.TabIndex = 3;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1, -7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -513,14 +556,14 @@
             this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanelTop.ResumeLayout(false);
             this.tableLayoutPanelTop.PerformLayout();
+            this.tableLayoutPanelBot.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panelSave.ResumeLayout(false);
+            this.pnlMeta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtSamples)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInstruments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMessage)).EndInit();
-            this.tableLayoutPanelBot.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).EndInit();
-            this.panelSave.ResumeLayout(false);
-            this.pnlMeta.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -547,12 +590,15 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Controls.TextAreaControl txtOutput;
         private System.Windows.Forms.Panel panelSave;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel pnlMeta;
         private Controls.Resettable.ResettableTextControl ctrFileInfo;
         private Controls.Resettable.ResettableDateControl ctrDate;
+        private Controls.Resettable.ResettableDoubleIntControl ctrLength;
+        private Controls.Resettable.ResettableDoubleIntControl ctrSpeed;
+        private Controls.Resettable.ResettableBpmControl ctrBPM;
     }
 }
 

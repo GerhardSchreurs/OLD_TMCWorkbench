@@ -5,7 +5,7 @@ using System.Windows.Forms.Design;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public class ResettableControlPanelDesigner : ParentControlDesigner
+    public class _ResettableControlPanelDesigner : ParentControlDesigner
     {
         public override SelectionRules SelectionRules
         {

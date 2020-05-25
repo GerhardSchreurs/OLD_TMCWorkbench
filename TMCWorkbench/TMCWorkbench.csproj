@@ -94,25 +94,37 @@
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableControl.cs">
+    <Compile Include="Controls\Resettable\ResettableBpmControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableControl.Designer.cs">
-      <DependentUpon>ResettableControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableBpmControl.Designer.cs">
+      <DependentUpon>ResettableBpmControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableControlContentDesigner.cs" />
-    <Compile Include="Controls\Resettable\ResettableControlPanel.cs">
+    <Compile Include="Controls\Resettable\_ResettableControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableControlPanel.Designer.cs">
-      <DependentUpon>ResettableControlPanel.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\_ResettableControl.Designer.cs">
+      <DependentUpon>_ResettableControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableControlPanelDesigner.cs" />
+    <Compile Include="Controls\Resettable\_ResettableControlContentDesigner.cs" />
+    <Compile Include="Controls\Resettable\_ResettableControlPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\_ResettableControlPanel.Designer.cs">
+      <DependentUpon>_ResettableControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Resettable\_ResettableControlPanelDesigner.cs" />
     <Compile Include="Controls\Resettable\ResettableDateControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Resettable\ResettableDateControl.Designer.cs">
       <DependentUpon>ResettableDateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableDoubleIntControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableDoubleIntControl.Designer.cs">
+      <DependentUpon>ResettableDoubleIntControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\ResettableTextControl.cs">
       <SubType>UserControl</SubType>
@@ -134,6 +146,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\MillisecondsConverter.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,11 +160,17 @@
     <EmbeddedResource Include="Controls\MusicControl.resx">
       <DependentUpon>MusicControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableControl.resx">
-      <DependentUpon>ResettableControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\ResettableBpmControl.resx">
+      <DependentUpon>ResettableBpmControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableControlPanel.resx">
-      <DependentUpon>ResettableControlPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\ResettableDoubleIntControl.resx">
+      <DependentUpon>ResettableDoubleIntControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Resettable\_ResettableControl.resx">
+      <DependentUpon>_ResettableControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Resettable\_ResettableControlPanel.resx">
+      <DependentUpon>_ResettableControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableDateControl.resx">
       <DependentUpon>ResettableDateControl.cs</DependentUpon>

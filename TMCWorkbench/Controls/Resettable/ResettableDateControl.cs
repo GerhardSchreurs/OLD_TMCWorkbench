@@ -11,15 +11,30 @@ using System.Globalization;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableDateControl : ResettableControlPanel
+    public partial class ResettableDateControl : _ResettableControlPanel
     {
         public ResettableDateControl()
         {
             InitializeComponent();
 
-            this.resettableControl1.Title = "Date:";
+            this.resettableControl1.OnReset += ResettableControl1_OnReset;
 
             Init();
+        }
+
+        public override string LabelTitle
+        {
+            get => base.LabelTitle;
+            set
+            {
+                base.LabelTitle = value;
+                this.resettableControl1.Title = value;
+            }
+        }
+
+        private void ResettableControl1_OnReset(object sender, EventArgs e)
+        {
+            UpdateDate();
         }
 
         void Init()
@@ -57,14 +72,14 @@ namespace TMCWorkbench.Controls.Resettable
 
         void UpdateDate()
         {
+            this.ddlMonth.SelectedIndexChanged -= Handle_ddlMonth_SelectedIndexChanged;
+
             ddlYear.SelectedItem = _date.Year;
             ddlMonth.SelectedIndex = _date.Month - 1;
             UpdateDays(_date.Year, _date.Month);
             ddlDay.SelectedIndex = _date.Day - 1;
 
-            this.ddlMonth.SelectedIndexChanged -= Handle_ddlMonth_SelectedIndexChanged;
             this.ddlMonth.SelectedIndexChanged += Handle_ddlMonth_SelectedIndexChanged;
-
         }
 
         private DateTime _date;

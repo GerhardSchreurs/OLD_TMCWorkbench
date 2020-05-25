@@ -27,7 +27,7 @@ namespace TMCWorkbench
             await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName);
 
             var modInfo = ModLibrary.ModLibrary.Parse(fileinfoEventArgs.FileInfo.FullName);
-
+            var tupleTime = Helpers.MillisecondsConverter.ConvertToMinutesAndSeconds(musicControl1.Media.Duration);
 
             txtSamples.Text = modInfo.SampleText;
             txtMessage.Text = modInfo.SongText;
@@ -39,6 +39,14 @@ namespace TMCWorkbench
 
             ctrFileInfo.Filename = modInfo.FileName;
             ctrDate.Date = modInfo.DateCreated;
+
+            ctrLength.ValueA = tupleTime.Item1;
+            ctrLength.ValueB = tupleTime.Item2;
+
+            ctrSpeed.ValueA = modInfo.Speed;
+            ctrSpeed.ValueB = modInfo.Tempo;
+
+            ctrBPM.BPM = modInfo.EstimatedBPM;
         }
 
 

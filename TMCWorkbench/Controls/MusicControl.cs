@@ -17,7 +17,7 @@ namespace TMCWorkbench.Controls
     {
         private LibVLC _libVLC;
         private MediaPlayer _mediaPlayer;
-        private Media _media;
+        public Media Media;
 
         public MusicControl()
         {
@@ -56,16 +56,16 @@ namespace TMCWorkbench.Controls
         {
             _mediaPlayer.Stop();
 
-            if (_media != null)
+            if (Media != null)
             {
-                _media.Dispose();
+                Media.Dispose();
             }
 
-            _media = new Media(_libVLC, path, FromType.FromPath);
-            await _media.Parse(MediaParseOptions.ParseLocal);
-            lblTimeTotal.Text = DurationToTimeString(_media.Duration);
+            Media = new Media(_libVLC, path, FromType.FromPath);
+            await Media.Parse(MediaParseOptions.ParseLocal);
+            lblTimeTotal.Text = DurationToTimeString(Media.Duration);
 
-            _mediaPlayer.Media = _media;
+            _mediaPlayer.Media = Media;
             _mediaPlayer.Play();
         }
 
@@ -76,7 +76,7 @@ namespace TMCWorkbench.Controls
             if (pos > 1000) { pos = 1000; };
             if (pos < 0) { pos = 0; };
 
-            var seconds = (_media.Duration * e.Position);
+            var seconds = (Media.Duration * e.Position);
 
             trackPosition.PerformSafely(() => trackPosition.Value = pos);
             lblTime.PerformSafely(() => lblTime.Text = DurationToTimeString((long)(seconds)));
