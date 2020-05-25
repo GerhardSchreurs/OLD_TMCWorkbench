@@ -198,6 +198,11 @@
     <Compile Include="FormTest.Designer.cs">
       <DependentUpon>FormTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Private.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Private.settings</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Database.cs" />
     <Compile Include="Tools\DatabaseOLD.cs" />
     <Compile Include="Tools\DatabaseManager.cs" />
@@ -253,6 +258,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\Private.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Private.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
