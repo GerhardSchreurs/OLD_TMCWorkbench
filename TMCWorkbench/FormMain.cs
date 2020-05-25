@@ -5,9 +5,9 @@ using ModLibrary;
 
 namespace TMCWorkbench
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
 
@@ -27,7 +27,7 @@ namespace TMCWorkbench
             await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName);
 
             var modInfo = ModLibrary.ModLibrary.Parse(fileinfoEventArgs.FileInfo.FullName);
-            var tupleTime = Helpers.MillisecondsConverter.ConvertToMinutesAndSeconds(musicControl1.Media.Duration);
+            var tupleTime = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(musicControl1.Media.Duration);
 
             txtSamples.Text = modInfo.SampleText;
             txtMessage.Text = modInfo.SongText;
@@ -53,6 +53,14 @@ namespace TMCWorkbench
         private void Handle_BrowserControl_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
         {
             listViewControl1.BrowseDirectory(playEventArgs.DirectoryInfo);
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            using (var formTest = new FormTest())
+            {
+                formTest.ShowDialog();
+            }
         }
     }
 }

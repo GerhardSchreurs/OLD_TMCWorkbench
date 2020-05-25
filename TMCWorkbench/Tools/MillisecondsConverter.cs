@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMCWorkbench.Helpers
+namespace TMCWorkbench.Tools
 {
     public static class MillisecondsConverter
     {
