@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
 using TMCWorkbench.Events;
+using TMCWorkbench.Database;
 using ModLibrary;
 
 namespace TMCWorkbench
 {
     public partial class FormMain : Form
     {
+        private DB _db =  Database.DB.Instance();
+
         public FormMain()
         {
             InitializeComponent();
@@ -19,6 +22,13 @@ namespace TMCWorkbench
             musicControl1.Init();
 
             splitContainer1.Panel2Collapsed = false;
+        }
+
+        private async void Form_Load(object sender, EventArgs e)
+        {
+            toolStripStatusLabel.Text = "Loading";
+            await _db.GetDataTables();
+            toolStripStatusLabel.Text = "Done loading";
         }
 
         private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
@@ -60,6 +70,14 @@ namespace TMCWorkbench
             using (var formTest = new FormTest())
             {
                 formTest.ShowDialog();
+            }
+        }
+
+        private void btnBla_Click(object sender, EventArgs e)
+        {
+            using (var formStyles = new UCStyles())
+            {
+                formStyles.ShowDialog();
             }
         }
     }

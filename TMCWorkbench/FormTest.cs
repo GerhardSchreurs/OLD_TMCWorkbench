@@ -28,8 +28,7 @@ namespace TMCWorkbench
             //    db.Connection.Close();
             //}
 
-            var x = Database.Instance();
-            x.SetConnectionString(Properties.Private.Default.ConnectionString);
+            var x = new Database.Executor(Properties.Private.Default.ConnectionString);
             x.DataSetCreate("MyDataSet");
             x.DataSetQueryAdd("SELECT * FROM trackers");
             x.DataSetFill();
@@ -53,6 +52,13 @@ namespace TMCWorkbench
 
             //MessageBox.Show(table.Rows.Count.ToString());
             //x.Dispose();
+
+        }
+
+        private void FormTest_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'tmcDataSet.trackers' table. You can move, or remove it, as needed.
+            this.trackersTableAdapter.Fill(this.tmcDataSet.trackers);
 
         }
     }

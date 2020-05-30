@@ -36,7 +36,6 @@ namespace TMCWorkbench.Controls
             _menuItemRefresh.Click += Handle_menuItemRefresh_Click;
             _menuItemClear.Click += Handle_menuItemClear_Click;
             _menuItemSet.Click += Handle_menuItemSet_Click;
-
         }
 
         public void Init()

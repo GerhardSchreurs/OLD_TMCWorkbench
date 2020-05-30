@@ -9,24 +9,21 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace TMCWorkbench.Tools
+namespace TMCWorkbench.Database
 {
-    public class Database : IDisposable
+    public class Executor : IDisposable
     {
-        #region Singleton
-        private Database() { }
-        private static Database _instance = null;
-        public static Database Instance()
+        public Executor(string connectionstring)
         {
-            if (_instance == null)
-            {
-                _instance = new Database();
-                _instance.Init();
-            }
+            _regTableNameFormSql = new Regex("select.*?from\\s([a-zA-Z.]*)", RegexOptions.IgnoreCase);
+            _transactionActive = false;
+            _transactionFinished = false;
+            _isScalarAutoId = true;
+            _isParametersAutoClear = true;
+            _parameters = new Dictionary<string, object>();
 
-            return _instance;
+            SetConnectionString(connectionstring);
         }
-        #endregion
 
         private MySqlConnection _connection;
         private MySqlTransaction _transaction;
@@ -43,15 +40,10 @@ namespace TMCWorkbench.Tools
 
         private Regex _regTableNameFormSql;
 
-        private void Init()
-        {
-            _regTableNameFormSql = new Regex("select.*?from\\s([a-zA-Z.]*)", RegexOptions.IgnoreCase);
-            _transactionActive = false;
-            _transactionFinished = false;
-            _isScalarAutoId = true;
-            _isParametersAutoClear = true;
-            _parameters = new Dictionary<string, object>();
-        }
+        //The new Shit
+
+
+
 
         private void  InitDataAdapter(string sql)
         {

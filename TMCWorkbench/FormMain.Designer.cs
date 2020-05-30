@@ -59,6 +59,7 @@
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.listViewControl1 = new TMCWorkbench.Controls.ListViewControl();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnBla = new System.Windows.Forms.Button();
             this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
             this.btnTest = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -528,28 +529,40 @@
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.btnBla, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.browserControl1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnTest, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 720);
             this.tableLayoutPanel2.TabIndex = 4;
+            // 
+            // btnBla
+            // 
+            this.btnBla.Location = new System.Drawing.Point(3, 703);
+            this.btnBla.Name = "btnBla";
+            this.btnBla.Size = new System.Drawing.Size(75, 14);
+            this.btnBla.TabIndex = 3;
+            this.btnBla.Text = "Bla";
+            this.btnBla.UseVisualStyleBackColor = true;
+            this.btnBla.Click += new System.EventHandler(this.btnBla_Click);
             // 
             // browserControl1
             // 
             this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.browserControl1.Location = new System.Drawing.Point(3, 3);
             this.browserControl1.Name = "browserControl1";
-            this.browserControl1.Size = new System.Drawing.Size(238, 674);
+            this.browserControl1.Size = new System.Drawing.Size(238, 654);
             this.browserControl1.TabIndex = 1;
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(3, 683);
+            this.btnTest.Location = new System.Drawing.Point(3, 663);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(75, 23);
             this.btnTest.TabIndex = 2;
@@ -574,6 +587,7 @@
             this.Controls.Add(this.tableOuter);
             this.Name = "FormMain";
             this.Text = "TMC Workbench";
+            this.Load += new System.EventHandler(this.Form_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tableOuter.ResumeLayout(false);
@@ -632,6 +646,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private Controls.BrowserControl browserControl1;
         private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.Button btnBla;
     }
 }
 

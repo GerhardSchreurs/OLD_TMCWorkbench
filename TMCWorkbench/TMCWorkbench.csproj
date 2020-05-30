@@ -119,11 +119,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AddNameControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AddNameControl.Designer.cs">
+      <DependentUpon>AddNameControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BrowserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\BrowserControl.Designer.cs">
       <DependentUpon>BrowserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IntegerTextBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ListViewControl.cs">
       <SubType>UserControl</SubType>
@@ -181,9 +190,20 @@
     <Compile Include="Controls\TextAreaControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Database\Attributes\Attributes.cs" />
+    <Compile Include="Database\DB.cs" />
+    <Compile Include="Database\IRow.cs" />
+    <Compile Include="Database\Row.cs" />
+    <Compile Include="Database\Table.cs" />
+    <Compile Include="Dialogs\StylesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\StylesDialog.Designer.cs">
+      <DependentUpon>StylesDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Events\EventArgs\DirectoryInfoEventArgs.cs" />
     <Compile Include="Events\EventArgs\FileInfoEventArgs.cs" />
-    <Compile Include="Events\EventEvoker.cs" />
+    <Compile Include="Events\EventInvoker.cs" />
     <Compile Include="Extensions\CrossThreadExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="FormMain.cs">
@@ -198,12 +218,20 @@
     <Compile Include="FormTest.Designer.cs">
       <DependentUpon>FormTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\RowStyle.cs" />
+    <Compile Include="Model\TableStyles.cs" />
     <Compile Include="Properties\Private.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Private.settings</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Database.cs" />
+    <Compile Include="tmcDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tmcDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Executor.cs" />
+    <Compile Include="Tools\Converter.cs" />
     <Compile Include="Tools\DatabaseOLD.cs" />
     <Compile Include="Tools\DatabaseManager.cs" />
     <Compile Include="Tools\MillisecondsConverter.cs" />
@@ -212,6 +240,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThreadHelperClass.cs" />
     <Compile Include="Tools\Test.cs" />
+    <Compile Include="UCForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCForm.Designer.cs">
+      <DependentUpon>UCForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCStyles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCStyles.Designer.cs">
+      <DependentUpon>UCStyles.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\AddNameControl.resx">
+      <DependentUpon>AddNameControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BrowserControl.resx">
       <DependentUpon>BrowserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -242,6 +285,9 @@
     <EmbeddedResource Include="Controls\TextAreaControl.resx">
       <DependentUpon>TextAreaControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\StylesDialog.resx">
+      <DependentUpon>StylesDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -257,6 +303,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UCForm.resx">
+      <DependentUpon>UCForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCStyles.resx">
+      <DependentUpon>UCStyles.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Private.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -271,6 +323,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="tmcDataSet.xsc">
+      <DependentUpon>tmcDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="tmcDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>tmcDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tmcDataSet.xss">
+      <DependentUpon>tmcDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
