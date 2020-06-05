@@ -17,18 +17,18 @@ namespace TMCWorkbench.Model
         }
 
         [Col(IsAutoIncrement =true, IsPrimaryKey =true)]
-        public Int16 Style_id;
+        public Int16 Style_id { get; set; }
 
         [Col]
-        public Int16? Alt_style_id;
+        public Int16? Alt_style_id { get; set; }
 
         [Col]
-        public Int16? Parent_style_id;
+        public Int16? Parent_style_id { get; set; }
 
         [Col]
-        public string Name;
+        public string Name { get; set; }
 
         [Col]
-        public sbyte Weight;
+        public sbyte Weight { get; set; }
     }
 }

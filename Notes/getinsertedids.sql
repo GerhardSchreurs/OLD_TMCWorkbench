@@ -1,0 +1,19 @@
+START TRANSACTION;
+SELECT MAX(style_id) INTO @FIRST_INSERT_ID FROM styles;
+
+INSERT INTO styles (name,weight) VALUES ('test6', 5); 
+
+/* SELECT * FROM styles */
+SELECT 
+(
+	SELECT `style_id`
+	FROM `styles` 
+	WHERE style_id > @FIRST_INSERT_ID OR @FIRST_INSERT_ID IS NULL
+	LIMIT 1
+) AS FIRST_INSERT_ID,
+(
+	SELECT LAST_INSERT_ID()
+) AS LAST_INSERT_ID;
+	
+
+COMMIT;

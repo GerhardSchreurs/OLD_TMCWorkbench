@@ -29,5 +29,17 @@ namespace Extensions
         {
             return Int32.Parse(s);
         }
+
+        public static string StripLastChar(this string s, string strip)
+        {
+            if (s == null) return null;
+
+            if (s.EndsWith(strip, StringComparison.InvariantCulture))
+            {
+                return s.Substring(0, s.LastIndexOf(strip, StringComparison.InvariantCulture));
+            }
+
+            return s;
+        }
     }
 }

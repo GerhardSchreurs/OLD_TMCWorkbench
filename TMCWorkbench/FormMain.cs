@@ -59,7 +59,6 @@ namespace TMCWorkbench
             ctrBPM.BPM = modInfo.EstimatedBPM;
         }
 
-
         private void Handle_BrowserControl_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
         {
             listViewControl1.BrowseDirectory(playEventArgs.DirectoryInfo);
@@ -67,10 +66,13 @@ namespace TMCWorkbench
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            using (var formTest = new FormTest())
-            {
-                formTest.ShowDialog();
-            }
+            //using (var formTest = new FormTest())
+            //{
+            //    formTest.ShowDialog();
+            //}
+
+            DB.Instance().TableStyles.Rows[0].Name = "hoi";
+            DB.Instance().TableStyles.UpdateData();
         }
 
         private void btnBla_Click(object sender, EventArgs e)

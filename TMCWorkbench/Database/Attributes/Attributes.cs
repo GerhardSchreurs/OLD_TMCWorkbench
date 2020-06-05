@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,9 +19,14 @@ namespace TMCWorkbench.Database.Attributes
     //{
     //}
 
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited =false)]
     public class Col : Attribute
     {
+        //public Col([CallerMemberName] string propertyName = null)
+        //{
+        //    Debug.WriteLine(propertyName);
+        //}
+
         private bool _isPrimaryKey;
         private bool _isAutoIncrement;
 
@@ -35,5 +42,4 @@ namespace TMCWorkbench.Database.Attributes
             set => _isAutoIncrement = value;
         }
     }
-
 }

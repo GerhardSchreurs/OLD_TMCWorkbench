@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -188,6 +189,14 @@ namespace TMCWorkbench.Database
             }
         }
 
+        private void UpdateCommandWithParameters(MySqlCommand command, SqlQuery query)
+        {
+            foreach (var param in query.Parameters)
+            {
+                command.Parameters.AddWithValue(param.Key, param.Value);
+            }
+        }
+
         public DataTable GetDataTable(string sql, string tableName = "")
         {
             var dataTable = new DataTable();
@@ -336,6 +345,116 @@ namespace TMCWorkbench.Database
 
             ParametersClearOnAuto();
         }
+
+        //************************************************//
+
+        internal List<SqlQuery> SqlQueries;
+
+        public void QueryNew()
+        {
+            if (SqlQueries == null) SqlQueries = new List<SqlQuery>();
+            SqlQueries.Add(new SqlQuery(""));
+        }
+
+        public void QuerySetSQL(string sql)
+        {
+            SqlQueries.Last().SQL = sql;
+        }
+
+        public void QueryAddParam(string name, object value)
+        {
+            SqlQueries.Last().AddParam(name, value);
+        }
+
+        public void QueryAddParamList(string name, List<object> list)
+        {
+            Contract.Requires(list != null);
+
+            for (var i = 0; i<list.Count; i++)
+            {
+                SqlQueries.Last().AddParam($"name{i}", list[i]);
+            }
+        }
+
+        public int QueryProcessNonQuery()
+        {
+            return 0;
+        }
+        
+        public DataTable QueryProcessReader()
+        {
+            return null;
+        }
+
+        public Tuple<int, int> QueryProcessGetIds(string tableName, string columnName)
+        {
+            if (_transactionActive == true & _transactionFinished == true)
+            {
+                //An error occurred during this transaction...
+                return new Tuple<int, int>(-1,-1);
+            }
+
+            foreach (var query in SqlQueries)
+            {
+                using (var cmd = new MySqlCommand(query.SQL, _connection))
+                {
+                    UpdateCommandWithParameters(cmd);
+
+                    if (_transactionActive)
+                    {
+                        cmd.Transaction = _transaction;
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            TransactionRollback(ex);
+                        }
+                    }
+                    else
+                    {
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        cmd.Connection.Close();
+                    }
+                }
+
+                ParametersClearOnAuto();
+            }
+
+            return new Tuple<int, int>(-1,-1);
+
+
+            //using (var cmd = new MySqlCommand(sql, _connection))
+            //{
+            //    UpdateCommandWithParameters(cmd);
+
+            //    if (_transactionActive)
+            //    {
+            //        cmd.Transaction = _transaction;
+            //        try
+            //        {
+            //            cmd.ExecuteNonQuery();
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            TransactionRollback(ex);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        cmd.Connection.Open();
+            //        cmd.ExecuteNonQuery();
+            //        cmd.Connection.Close();
+            //    }
+            //}
+
+            //ParametersClearOnAuto();
+        }
+
+
+
 
         public void DataSetCreate(string name)
         {
@@ -498,6 +617,24 @@ namespace TMCWorkbench.Database
             }
         }
     }
+
+    internal class SqlQuery
+    {
+        public string SQL;
+        public Dictionary<string, object> Parameters;
+
+        public SqlQuery(string sql)
+        {
+            SQL = sql;
+        }
+
+        public void AddParam(string name, object value)
+        {
+            if (Parameters == null) { Parameters = new Dictionary<string, object>(); }
+            Parameters.Add(name, value);
+        }
+    }
+
 
     internal class DataSetQuery
     {

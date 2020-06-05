@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TMCWorkbench.Database;
 
 namespace TMCWorkbench
 {
@@ -14,6 +15,10 @@ namespace TMCWorkbench
         [STAThread]
         static void Main()
         {
+            //var aspect = new ColAspect();
+            //aspect.Weave<ColPointCut>();
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());
