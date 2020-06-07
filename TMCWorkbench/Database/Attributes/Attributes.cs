@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AwesomeProxy;
+using AwesomeProxy.FilterAttribute;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -19,13 +22,12 @@ namespace TMCWorkbench.Database.Attributes
     //{
     //}
 
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited =false)]
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited =false)]
     public class Col : Attribute
     {
-        //public Col([CallerMemberName] string propertyName = null)
-        //{
-        //    Debug.WriteLine(propertyName);
-        //}
+        public Col([CallerMemberName] string propertyName = null)
+        {
+        }
 
         private bool _isPrimaryKey;
         private bool _isAutoIncrement;
@@ -40,6 +42,19 @@ namespace TMCWorkbench.Database.Attributes
         {
             get => _isAutoIncrement;
             set => _isAutoIncrement = value;
+        }
+    }
+
+    public class RowAttribute : AopBaseAttribute
+    {
+        public override void OnExecuted(ExecutedContext result)
+        {
+            Console.WriteLine(JsonConvert.SerializeObject(result.Args));
+        }
+
+        public override void OnExecuting(ExecutingContext args)
+        {
+            //Console.WriteLine($"Inkomende parameters:{JsonConvert.SerializeObject(args.Args)}");
         }
     }
 }

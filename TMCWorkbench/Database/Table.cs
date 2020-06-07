@@ -1,4 +1,5 @@
-﻿using Extensions;
+﻿using AwesomeProxy;
+using Extensions;
 using Force.DeepCloner;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using TMCWorkbench.Database.Attributes;
 using TMCWorkbench.Database.Extensions;
+using TMCWorkbench.Extensions;
 
 namespace TMCWorkbench.Database
 {
@@ -30,10 +32,17 @@ namespace TMCWorkbench.Database
 
     public abstract class Table<T> where T : Row, new()
     {
-        //private List<T> RowsOld = new List<T>();
+        private List<T> RowsOld = new List<T>();
         public List<T> Rows = new List<T>();
         public List<C> Cols = new List<C>();
         public C ColPK;
+
+        public List<T> Rowz { 
+            get
+            {
+                return Rows.Where(x => x.DataRowState != DataRowState.Deleted || x.DataRowState == DataRowState.Detached).ToList();
+            }
+        }
 
         private string _tableName;
 
@@ -41,35 +50,36 @@ namespace TMCWorkbench.Database
         {
             _tableName = tableName;
 
-            //var members = typeof(T).GetMembers().Where(x => x.DeclaringType == typeof(T));
+            var members = typeof(T).GetMembers().Where(x => x.DeclaringType == typeof(T));
 
-            //foreach (var member in members)
-            //{
-            //    var attrs = (Col[])member.GetCustomAttributes(typeof(Col), false);
-
-            //    foreach (var attr in attrs)
-            //    {
-            //        AddCol(member, attr.IsPrimaryKey, attr.IsAutoIncrement);
-            //    }
-            //}
-
-            var type = typeof(T);
-            var properties = type.GetProperties().Where(x => x.DeclaringType == type);
-
-            foreach (var property in properties)
+            foreach (var member in members)
             {
-                var attrs = (Col[])property.GetCustomAttributes(typeof(Col), false);
+                var attrs = (Col[])member.GetCustomAttributes(typeof(Col), false);
 
                 foreach (var attr in attrs)
                 {
-                    AddCol(property, attr.IsPrimaryKey, attr.IsAutoIncrement);
+                    AddCol(member, attr.IsPrimaryKey, attr.IsAutoIncrement);
                 }
             }
+
+            //var type = typeof(T);
+            //var properties = type.GetProperties().Where(x => x.DeclaringType == type);
+
+            //foreach (var property in properties)
+            //{
+            //    var attrs = (Col[])property.GetCustomAttributes(typeof(Col), false);
+
+            //    foreach (var attr in attrs)
+            //    {
+            //        AddCol(property, attr.IsPrimaryKey, attr.IsAutoIncrement);
+            //    }
+            //}
         }
 
         public T NewRow()
         {
             var row = new T();
+            //var row = ProxyFactory.GetProxyInstance<T>();
             row.DataRowState = DataRowState.Detached;
             return row;
         }
@@ -78,6 +88,42 @@ namespace TMCWorkbench.Database
         {
             row.DataRowState = DataRowState.Added;
             Rows.Add(row);
+            RowsOld.Add(row.DeepClone());
+        }
+
+        private void AddRowFromDB(T row)
+        {
+            row.DataRowState = DataRowState.Unchanged;
+            Rows.Add(row);
+            RowsOld.Add(row.DeepClone());
+        }
+
+        public void DeleteRowByIndex(int index)
+        {
+            Rows[index].DataRowState = DataRowState.Deleted;
+            RowsOld[index].DataRowState = DataRowState.Deleted;
+        }
+
+        public void DeleteRowById(int id)
+        {
+            GetRowById(id).DataRowState = DataRowState.Deleted;
+            GetOldRowById(id).DataRowState = DataRowState.Deleted;
+        }
+
+        public void DeleteRow(T row)
+        {
+            DeleteRowById(row.GetValueInt32(ColPK));
+        }
+
+
+        public T GetRowById(int id)
+        {
+            return Rows.Where(x => x.GetValueInt32(ColPK) == id).FirstOrNull();
+        }
+
+        private T GetOldRowById(int id)
+        {
+            return RowsOld.Where(x => x.GetValueInt32(ColPK) == id).FirstOrNull();
         }
 
         private void AddCol(MemberInfo member, bool isPrimaryKey, bool isAutoIncrement)
@@ -107,9 +153,10 @@ namespace TMCWorkbench.Database
                 {
                     var dbrow = new T();
                     dbrow.Init(row);
-
-                    Rows.Add(dbrow);
+                    //Rows.Add(ProxyFactory.GetProxyInstance<T>(dbrow));
                     //RowsOld.Add(dbrow.DeepClone());
+
+                    AddRowFromDB(dbrow);
                 }
             }
         }
@@ -125,25 +172,34 @@ namespace TMCWorkbench.Database
             //Maybe, I write my own dataset generator in the future
             //Once I have written some more code.
 
-            //for (var i = 0; i<Rows.Count; i++)
-            //{
-            //    var row = Rows[i];
-               
-            //    if (row.DataRowState == DataRowState.Unchanged)
-            //    {
-            //        var rowOld = RowsOld[i];
+            for (var i = 0; i < Rows.Count; i++)
+            {
+                var row = Rows[i];
 
-            //        foreach (var col in Cols)
-            //        {
-            //            if (row.GetValue(col) != rowOld.GetValue(col))
-            //            {
-            //                //modified
-            //                row.DataRowState = DataRowState.Modified;
-            //                continue;
-            //            }
-            //        }
-            //    }
-            //}
+                if (row.DataRowState == DataRowState.Unchanged)
+                {
+                    var rowOld = RowsOld[i];
+
+                    foreach (var col in Cols)
+                    {
+                        var newValue = row.GetValue(col);
+                        var oldValue = rowOld.GetValue(col);
+
+                        if (oldValue == null && newValue == null)
+                        {
+                            continue;
+                        }
+
+                        if ((oldValue == null && newValue != null) || (oldValue != null && newValue == null) || (oldValue.Equals(newValue) == false))
+                        {
+                            //modified
+                            row.DataRowState = DataRowState.Modified;
+                            rowOld.DataRowState = DataRowState.Modified;
+                            break;
+                        }
+                    }
+                }
+            }
 
             return Rows.Where(x => x.DataRowState == DataRowState.Modified);
         }
@@ -157,8 +213,8 @@ namespace TMCWorkbench.Database
             var rows = GetRowsDeleted();
             if (!rows.Any()) return;
 
-            DB.Executor.QueryNew();
-            DB.Executor.QuerySetSQL($"DELETE FROM {_tableName} WHERE {ColPK.Name} IN (@ids)");
+            DB.Executor.QueryNew(DataRowState.Deleted);
+            DB.Executor.QuerySetSQL(DataRowState.Deleted, $"DELETE FROM {_tableName} WHERE {ColPK.Name} IN (@ids)");
 
             var ids = new List<object>();
 
@@ -167,7 +223,7 @@ namespace TMCWorkbench.Database
                 ids.Add(row.GetValue(ColPK));
             }
 
-            DB.Executor.QueryAddParamList("@delete_id", ids);
+            DB.Executor.QueryAddParamIds(DataRowState.Deleted, "@ids", ids);
         }
 
         void ProcessRowsModified()
@@ -175,23 +231,23 @@ namespace TMCWorkbench.Database
             var rows = GetRowsModified();
             if (!rows.Any()) return;
 
-            DB.Executor.QueryNew();
+            DB.Executor.QueryNew(DataRowState.Modified);
 
             foreach (var row in rows)
             {
-                var sql = $"UPDATE {_tableName} SET (";
+                var sql = $"UPDATE {_tableName} SET ";
 
                 for (var i = 0; i<Cols.Count; i++)
                 {
-                    DB.Executor.QueryAddParam($"@update_id{i}", row.GetValue(Cols[i]));
+                    DB.Executor.QueryAddParam(DataRowState.Modified, $"@update_id{i}", row.GetValue(Cols[i]));
                     sql += $"{Cols[i].Name} = @update_id{i},";
                 }
 
                 sql = sql.StripLastChar(",");
-                sql += $") WHERE {ColPK.Name} = @id";
+                sql += $" WHERE {ColPK.Name} = @id";
 
-                DB.Executor.QuerySetSQL(sql);
-                DB.Executor.QueryAddParam("@id", row.GetValue(ColPK));
+                DB.Executor.QuerySetSQL(DataRowState.Modified, sql);
+                DB.Executor.QueryAddParam(DataRowState.Modified, "@id", row.GetValue(ColPK));
             }
         }
 
@@ -200,7 +256,9 @@ namespace TMCWorkbench.Database
             var rows = GetRowsAdded();
             if (!rows.Any()) return;
 
-            DB.Executor.QueryNew();
+            DB.Executor.QueryNew(DataRowState.Added);
+
+            var rowIndex = 0;
 
             foreach (var row in rows)
             {
@@ -208,20 +266,22 @@ namespace TMCWorkbench.Database
                 var columns = "";
                 var values = "";
 
-                for (var i = 0; i<Cols.Count; i++)
+                for (var j = 0; j<Cols.Count; j++)
                 {
-                    var col = Cols[i];
+                    var col = Cols[j];
 
                     columns += col.Name + ",";
-                    values += $"@insert_id{i},";
+                    values += $"@insert_id{rowIndex}_{j},";
 
-                    DB.Executor.QueryAddParam($"@insert_id{i}", row.GetValue(col));
+                    DB.Executor.QueryAddParam(DataRowState.Added, $"@insert_id{rowIndex}_{j}", row.GetValue(col));
                 }
 
                 columns = columns.StripLastChar(",");
                 values = values.StripLastChar(",");
 
-                DB.Executor.QuerySetSQL($"{sql} ({columns}) VALUES ({values})");
+                DB.Executor.QuerySetSQL(DataRowState.Added, $"{sql} ({columns}) VALUES ({values})");
+
+                rowIndex++;
             }
         }
 
@@ -235,6 +295,29 @@ namespace TMCWorkbench.Database
             ProcessRowsAdded();
 
             DB.Executor.QueryProcessNonQuery();
+
+            CleanUp();
+        }
+
+        void CleanUp()
+        {
+            if (Rows.Count == 0) return;
+
+            for (var i = Rows.Count - 1; i>=0; i--)
+            {
+                var row = Rows[i];
+
+                if (row.DataRowState == DataRowState.Deleted)
+                {
+                    Rows.RemoveAt(i);
+                    RowsOld.RemoveAt(i);
+                }
+                else if (row.DataRowState == DataRowState.Added || row.DataRowState == DataRowState.Modified)
+                {
+                    row.DataRowState = DataRowState.Unchanged;
+                    RowsOld[i].DataRowState = DataRowState.Unchanged;
+                }
+            }
         }
 
         public void UpdateDataAndReflect(bool retrieveIdValues)

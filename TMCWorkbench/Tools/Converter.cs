@@ -16,6 +16,11 @@ namespace TMCWorkbench.Tools
             return Convert.ToInt16(value, _fmt);
         }
 
+        public static Int32 ToInt32(object value)
+        {
+            return Convert.ToInt32(value, _fmt);
+        }
+
         public static Byte ToByte(object value)
         {
             return Convert.ToByte(value, _fmt);

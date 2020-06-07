@@ -152,7 +152,12 @@ namespace TMCWorkbench.Database
                     _dataAdapter.SelectCommand.Parameters.Clear();
                 }
                 _parameters.Clear();
-            }
+
+                SqlQueries = null;
+                SqlQueriesDeleted = null;
+                SqlQueriesModified = null;
+                SqlQueriesAdded = null;
+    }
         }
 
         public void ParametersClear()
@@ -350,35 +355,187 @@ namespace TMCWorkbench.Database
 
         internal List<SqlQuery> SqlQueries;
 
-        public void QueryNew()
+        internal List<SqlQuery> SqlQueriesDeleted;
+        internal List<SqlQuery> SqlQueriesModified;
+        internal List<SqlQuery> SqlQueriesAdded;
+
+        private List<SqlQuery> GetSqlQueryList(DataRowState rowState)
         {
-            if (SqlQueries == null) SqlQueries = new List<SqlQuery>();
-            SqlQueries.Add(new SqlQuery(""));
+            if (rowState == DataRowState.Deleted)
+            {
+                return SqlQueriesDeleted;
+            }
+            else if (rowState == DataRowState.Modified)
+            {
+                return SqlQueriesModified;
+            }
+            else if (rowState == DataRowState.Added)
+            {
+                return SqlQueriesAdded;
+            }
+
+            throw new NotImplementedException("Can only support Deleted, Modified or Added");
         }
 
-        public void QuerySetSQL(string sql)
+        public void QueryNew(DataRowState rowState)
         {
-            SqlQueries.Last().SQL = sql;
+            var list = GetSqlQueryList(rowState);
+
+            if (list == null) list = new List<SqlQuery>();
+            list.Add(new SqlQuery(""));
+
+            if (rowState == DataRowState.Deleted)
+            {
+                SqlQueriesDeleted = list;
+            }
+            else if (rowState == DataRowState.Modified)
+            {
+                SqlQueriesModified = list;
+            }
+            else if (rowState == DataRowState.Added)
+            {
+                SqlQueriesAdded = list;
+            }
         }
 
-        public void QueryAddParam(string name, object value)
+        public void QuerySetSQL(DataRowState rowState, string sql)
         {
-            SqlQueries.Last().AddParam(name, value);
+            GetSqlQueryList(rowState).Last().SQL = sql;
         }
 
-        public void QueryAddParamList(string name, List<object> list)
+        public void QueryAddParam(DataRowState rowState, string name, object value)
+        {
+            var list = GetSqlQueryList(rowState);
+            list.Last().AddParam(name, value);
+        }
+
+        //TODO: Not sure what i wanted to do with this function
+        public void QueryAddParamList(DataRowState rowState, string name, List<object> list)
         {
             Contract.Requires(list != null);
 
             for (var i = 0; i<list.Count; i++)
             {
-                SqlQueries.Last().AddParam($"name{i}", list[i]);
+                GetSqlQueryList(rowState).Last().AddParam($"name{i}", list[i]);
             }
+        }
+
+        public void QueryAddParamIds(DataRowState rowState, string name, List<object> list)
+        {
+            Contract.Requires(list != null);
+            GetSqlQueryList(rowState).Last().AddParam(name, string.Join(",", list.ToArray()));
+        }
+
+        private int QueryProcessNonQueryCmd(SqlQuery query)
+        {
+            var returnValue = -1;
+
+            using (var cmd = new MySqlCommand(query.SQL, _connection))
+            {
+                UpdateCommandWithParameters(cmd, query);
+
+                if (_transactionActive)
+                {
+                    cmd.Transaction = _transaction;
+
+                    try
+                    {
+                        returnValue = cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        TransactionRollback(ex);
+                    }
+                }
+                else
+                {
+                    cmd.Connection.Open();
+                    returnValue = cmd.ExecuteNonQuery();
+                    cmd.Connection.Close();
+                }
+            }
+
+            //TODO: clear parameters?
+
+            return returnValue;
+        }
+
+        private int QueryProcessNonQuery(DataRowState state)
+        {
+            var queries = GetSqlQueryList(state);
+            if (queries == null) return 0;
+
+            var count = 0;
+
+            foreach (var query in queries)
+            {
+                var value = QueryProcessNonQueryCmd(query);
+
+                if (value == -1)
+                {
+                    count = -1;
+                    break;
+                }
+                else
+                {
+                    count += value;
+                }
+            }
+
+            return count;
+        }
+
+        private bool QueryProcessNonQueryCount(DataRowState state, ref int counter)
+        {
+            var value = QueryProcessNonQuery(state);
+            if (value == -1)
+            {
+                counter = -1;
+                return false;
+            }
+            else
+            {
+                counter += value;
+            }
+            return true;
         }
 
         public int QueryProcessNonQuery()
         {
-            return 0;
+            if (_transactionActive == true & _transactionFinished == true)
+            {
+                //An error occurred during this transaction...
+                return -1;
+            }
+
+            var count = 0;
+
+            TransactionStart();
+
+            try
+            {
+                var success = true;
+
+                if (success)
+                    success = QueryProcessNonQueryCount(DataRowState.Deleted, ref count);
+
+                if (success)
+                    success = QueryProcessNonQueryCount(DataRowState.Modified, ref count);
+
+                if (success)
+                    success = QueryProcessNonQueryCount(DataRowState.Added, ref count);
+
+            }
+            catch (Exception ex)
+            {
+                TransactionRollback(ex);
+            }
+
+            TransactionEnd();
+
+            ParametersClearOnAuto();
+
+            return count;
         }
         
         public DataTable QueryProcessReader()

@@ -71,8 +71,18 @@ namespace TMCWorkbench
             //    formTest.ShowDialog();
             //}
 
-            DB.Instance().TableStyles.Rows[0].Name = "hoi";
+            DB.Instance().TableStyles.Rows[0].Name = "woehaa";
+            DB.Instance().TableStyles.DeleteRowById(64);
+
+            var row = DB.Instance().TableStyles.NewRow();
+
+            row.Name = "new";
+            row.Weight = -1;
+
+            DB.Instance().TableStyles.AddRow(row);
+
             DB.Instance().TableStyles.UpdateData();
+
         }
 
         private void btnBla_Click(object sender, EventArgs e)

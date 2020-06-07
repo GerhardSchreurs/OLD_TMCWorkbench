@@ -31,6 +31,8 @@ namespace TMCWorkbench
 
         Model.RowStyle _row;
 
+        private bool _isDirty;
+
         public UCStyles()
         {
             InitializeComponent();
@@ -63,21 +65,34 @@ namespace TMCWorkbench
 
             //var id = _adapter.Update(rows);
             //rows[0][0] = id;
+
+            UpdateTreeView();
+        }
+
+        void UpdateTreeView()
+        {
             PopulateTree();
             treeView.ExpandAll();
+            _isDirty = true;
         }
 
         private void Handle_menuItemAdd_Click(object sender, EventArgs e)
         {
-            //using (var dialog = new Dialogs.StylesDialog(_table, _row.style_id, isEdit: false))
-            //{
-            //    dialog.ShowDialog();
-            //}
+            using (var dialog = new Dialogs.StylesDialog(_row, isEdit: false))
+            {
+                dialog.ShowDialog();
+            }
         }
 
         private void Handle_menuItemDelete_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var result = MessageBox.Show("Are you sure?", "Some Title", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                //do something
+                _data.DeleteRow(_row);
+                UpdateTreeView();
+            }
         }
 
         private void Handle_menuItemEdit_Click(object sender, EventArgs e)
@@ -86,6 +101,13 @@ namespace TMCWorkbench
             {
                 dialog.ShowDialog();
             }
+        }
+
+        private bool HasRowChildRows()
+        {
+            return _data.Rowz.Where
+                (x => x.Alt_style_id == _row.Style_id || x.Parent_style_id == _row.Style_id)
+                .Any();
         }
 
         private void Handle_TreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -103,7 +125,8 @@ namespace TMCWorkbench
             {
                 _menuItemAdd.Enabled = false;
             }
-            else if (_row.Parent_style_id == null)
+
+            if (HasRowChildRows())
             {
                 _menuItemDelete.Enabled = false;
             }
@@ -130,7 +153,7 @@ namespace TMCWorkbench
             //    }
             //}
 
-            foreach (var row in _data.Rows.Where(x => x.Parent_style_id == null && x.Alt_style_id == null))
+            foreach (var row in _data.Rowz.Where(x => x.Parent_style_id == null && x.Alt_style_id == null))
             {
                 var treeRoot = new TreeNode();
                 treeRoot.Text = row.Name;
@@ -148,7 +171,7 @@ namespace TMCWorkbench
         private List<TreeNode> GetChildNodes(short parentID)
         {
             var nodes = new List<TreeNode>();
-            var rows = _data.Rows.Where(x => x.Parent_style_id != null && x.Alt_style_id == null  && x.Parent_style_id == parentID);
+            var rows = _data.Rowz.Where(x => x.Parent_style_id != null && x.Alt_style_id == null  && x.Parent_style_id == parentID);
 
             foreach (var row in rows)
             {
@@ -176,7 +199,7 @@ namespace TMCWorkbench
         private List<TreeNode> GetAltNodes(short parentID)
         {
             var nodes = new List<TreeNode>();
-            var rows = _data.Rows.Where(x => x.Alt_style_id != null && x.Alt_style_id == parentID);
+            var rows = _data.Rowz.Where(x => x.Alt_style_id != null && x.Alt_style_id == parentID);
 
             foreach (var row in rows)
             {
@@ -190,6 +213,11 @@ namespace TMCWorkbench
             }
 
             return nodes;
+        }
+
+        private void Handle_btnSave_Click(object sender, EventArgs e)
+        {
+            _data.UpdateData();
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TMCWorkbench.Model;
+using TMCWorkbench.Tools;
 
 namespace TMCWorkbench.Dialogs
 {
@@ -53,7 +54,7 @@ namespace TMCWorkbench.Dialogs
 
             if (txtWeight.Text.IsNotNullOrEmpty())
             {
-                row.Weight = Convert.ToSByte(txtWeight.Text);
+                row.Weight = Converter.ToSByte(txtWeight.Text);
             }
 
             row.Weight = weight;
@@ -68,14 +69,29 @@ namespace TMCWorkbench.Dialogs
             }
             else
             {
+                //var row = _db.TableStyles.NewRow();
+                //if (_row.Parent_style_id == null)
+                //{
+                //    row.Parent_style_id = _row.Style_id;
+                //}
+                //else
+                //{
+                //    row.Alt_style_id = _row.Style_id;
+                //}
+
                 var row = _db.TableStyles.NewRow();
-                if (_row.Parent_style_id == null)
+
+                if (_row.Parent_style_id == null && _row.Alt_style_id == null)
                 {
                     row.Parent_style_id = _row.Style_id;
                 }
-                else
+                else if (_row.Parent_style_id != null)
                 {
-                    row.Alt_style_id = _row.Style_id;
+                    row.Parent_style_id = _row.Style_id;
+                }
+                else if (_row.Alt_style_id != null)
+                {
+                    row.Alt_style_id = _row.Alt_style_id;
                 }
 
                 Process(row);
@@ -85,7 +101,6 @@ namespace TMCWorkbench.Dialogs
 
             RaiseOnUpdated();
             Close();
-
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

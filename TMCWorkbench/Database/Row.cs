@@ -2,6 +2,7 @@
 using System.Data;
 using System.Dynamic;
 using System.Linq.Expressions;
+using TMCWorkbench.Database.Attributes;
 using TMCWorkbench.Tools;
 
 namespace TMCWorkbench.Database
@@ -9,6 +10,12 @@ namespace TMCWorkbench.Database
     public abstract class Row
     {
         public DataRowState DataRowState = DataRowState.Unchanged;
+        public DataRowState DataRowOldState = DataRowState.Unchanged;
+
+        public void DataRowStateReset()
+        {
+            DataRowState = DataRowOldState;
+        }
 
         //string
         public string SetString(DataRow row, int index)

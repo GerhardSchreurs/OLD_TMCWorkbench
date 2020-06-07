@@ -9,6 +9,8 @@ namespace TMCWorkbench.Model
     {
         public override void Init(DataRow row)
         {
+            //TODO, make func, set if exists
+
             Style_id = SetInt16(row, 0);
             Alt_style_id = SetInt16Null(row, 1);
             Parent_style_id = SetInt16Null(row, 2);
@@ -16,19 +18,19 @@ namespace TMCWorkbench.Model
             Weight = SetSByte(row, 4);
         }
 
-        [Col(IsAutoIncrement =true, IsPrimaryKey =true)]
-        public Int16 Style_id { get; set; }
+        [Col(IsAutoIncrement = true, IsPrimaryKey = true)]
+        public Int16 Style_id;
 
         [Col]
-        public Int16? Alt_style_id { get; set; }
+        public Int16? Alt_style_id;
 
         [Col]
-        public Int16? Parent_style_id { get; set; }
+        public Int16? Parent_style_id;
 
         [Col]
-        public string Name { get; set; }
+        public string Name;
 
         [Col]
-        public sbyte Weight { get; set; }
+        public sbyte Weight;
     }
 }

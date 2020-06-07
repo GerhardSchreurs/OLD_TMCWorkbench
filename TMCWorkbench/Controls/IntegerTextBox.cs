@@ -5,6 +5,8 @@ namespace TMCWorkbench.Controls
 {
     public class IntegerTextBox : TextBox
     {
+        public bool AllowsNegatives { get; set; }
+
         public IntegerTextBox() : base()
         {
             this.KeyPress -= Handle_IntegerTextBox_KeyPress;
@@ -15,7 +17,21 @@ namespace TMCWorkbench.Controls
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true;
+                if (AllowsNegatives)
+                {
+                    if (e.KeyChar == '-' && Text.Length == 0)
+                    {
+                        //Do nothing
+                    }
+                    else
+                    {
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    e.Handled = true;
+                }
             }
         }
 

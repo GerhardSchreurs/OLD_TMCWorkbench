@@ -74,6 +74,7 @@
             // 
             // txtWeight
             // 
+            this.txtWeight.AllowsNegatives = true;
             this.txtWeight.Location = new System.Drawing.Point(81, 59);
             this.txtWeight.Name = "txtWeight";
             this.txtWeight.Size = new System.Drawing.Size(100, 20);
