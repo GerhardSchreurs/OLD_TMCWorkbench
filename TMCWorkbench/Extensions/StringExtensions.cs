@@ -30,6 +30,12 @@ namespace Extensions
             return Int32.Parse(s);
         }
 
+        public static bool IsNumeric(this string s)
+        {
+            double test;
+            return double.TryParse(s, out test);
+        }
+
         public static string StripLastChar(this string s, string strip)
         {
             if (s == null) return null;

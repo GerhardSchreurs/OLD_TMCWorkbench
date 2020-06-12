@@ -42,6 +42,7 @@ namespace TMCWorkbench.Dialogs
             }
             else
             {
+                //add
                 this.btnAction.Text = "Add";
             }
         }
@@ -83,7 +84,7 @@ namespace TMCWorkbench.Dialogs
 
                 if (_row.Parent_style_id == null && _row.Alt_style_id == null)
                 {
-                    row.Parent_style_id = _row.Style_id;
+                    //This is a new basegroup, do nothing
                 }
                 else if (_row.Parent_style_id != null)
                 {

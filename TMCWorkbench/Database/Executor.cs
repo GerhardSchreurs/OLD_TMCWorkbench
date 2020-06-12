@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using TMCWorkbench.Extensions;
+using TMCWorkbench.Tools;
 
 namespace TMCWorkbench.Database
 {
@@ -107,37 +109,6 @@ namespace TMCWorkbench.Database
             set => _isParametersAutoClear = value;
         }
 
-        public void TransactionStart()
-        {
-            ConnectionOpen();
-            _transaction = _connection.BeginTransaction();
-            _transactionActive = true;
-            _transactionFinished = false;
-        }
-
-        public void TransactionEnd()
-        {
-            if (_transactionActive == true & _transactionFinished == false)
-            {
-                _transaction.Commit();
-                _transactionActive = false;
-                _transactionFinished = false;
-            }
-            else
-            {
-                //An error occured during the transaction. Transaction has been rolled back
-                throw _transactionException;
-            }
-        }
-
-        public void TransactionRollback(Exception ex = null)
-        {
-            _transaction.Rollback();
-            _transactionException = ex;
-            _transactionFinished = true;
-            _connection.Close();
-        }
-
         public void AddParameter(string name, object value)
         {
             _parameters.Add(name, value);
@@ -154,6 +125,7 @@ namespace TMCWorkbench.Database
                 _parameters.Clear();
 
                 SqlQueries = null;
+                SqlQueriesScalar = null;
                 SqlQueriesDeleted = null;
                 SqlQueriesModified = null;
                 SqlQueriesAdded = null;
@@ -191,14 +163,6 @@ namespace TMCWorkbench.Database
                 {
                     command.Parameters.AddWithValue(_parameters.ElementAt(i).Key, _parameters.ElementAt(i).Value);
                 }
-            }
-        }
-
-        private void UpdateCommandWithParameters(MySqlCommand command, SqlQuery query)
-        {
-            foreach (var param in query.Parameters)
-            {
-                command.Parameters.AddWithValue(param.Key, param.Value);
             }
         }
 
@@ -351,13 +315,54 @@ namespace TMCWorkbench.Database
             ParametersClearOnAuto();
         }
 
+        private void UpdateCommandWithParameters(MySqlCommand command, SqlQuery query)
+        {
+            if (query.Parameters == null) { return; }
+            foreach (var param in query.Parameters)
+            {
+                command.Parameters.AddWithValue(param.Key, param.Value);
+            }
+        }
+
         //************************************************//
+
+        public void TransactionStart()
+        {
+            ConnectionOpen();
+            _transaction = _connection.BeginTransaction();
+            _transactionActive = true;
+            _transactionFinished = false;
+        }
+
+        public void TransactionEnd()
+        {
+            if (_transactionActive == true & _transactionFinished == false)
+            {
+                _transaction.Commit();
+                _transactionActive = false;
+                _transactionFinished = false;
+            }
+            else
+            {
+                //An error occured during the transaction. Transaction has been rolled back
+                throw _transactionException;
+            }
+        }
+
+        public void TransactionRollback(Exception ex = null)
+        {
+            _transaction.Rollback();
+            _transactionException = ex;
+            _transactionFinished = true;
+            _connection.Close();
+        }
 
         internal List<SqlQuery> SqlQueries;
 
         internal List<SqlQuery> SqlQueriesDeleted;
         internal List<SqlQuery> SqlQueriesModified;
         internal List<SqlQuery> SqlQueriesAdded;
+        internal List<SqlQuery> SqlQueriesScalar;
 
         private List<SqlQuery> GetSqlQueryList(DataRowState rowState)
         {
@@ -377,14 +382,21 @@ namespace TMCWorkbench.Database
             throw new NotImplementedException("Can only support Deleted, Modified or Added");
         }
 
-        public void QueryNew(DataRowState rowState)
+        public void QueryNew(DataRowState rowState, CommandMethod commandMethod = CommandMethod.NonQuery, bool isCountQuery = false)
         {
             var list = GetSqlQueryList(rowState);
 
             if (list == null) list = new List<SqlQuery>();
-            list.Add(new SqlQuery(""));
 
-            if (rowState == DataRowState.Deleted)
+            var query = new SqlQuery("");
+            query.CommandMethod = commandMethod;
+            list.Add(query);
+
+            if (isCountQuery)
+            {
+                SqlQueriesScalar = list;
+            } 
+            else if (rowState == DataRowState.Deleted)
             {
                 SqlQueriesDeleted = list;
             }
@@ -409,6 +421,12 @@ namespace TMCWorkbench.Database
             list.Last().AddParam(name, value);
         }
 
+        public void QueryAddParam(DataRowState rowState, string name, out object value)
+        {
+            var list = GetSqlQueryList(rowState);
+            list.Last().AddParam(name, value);
+        }
+
         //TODO: Not sure what i wanted to do with this function
         public void QueryAddParamList(DataRowState rowState, string name, List<object> list)
         {
@@ -426,7 +444,7 @@ namespace TMCWorkbench.Database
             GetSqlQueryList(rowState).Last().AddParam(name, string.Join(",", list.ToArray()));
         }
 
-        private int QueryProcessNonQueryCmd(SqlQuery query)
+        private int QueryProcessCommandNonQuery(SqlQuery query)
         {
             var returnValue = -1;
 
@@ -460,7 +478,41 @@ namespace TMCWorkbench.Database
             return returnValue;
         }
 
-        private int QueryProcessNonQuery(DataRowState state)
+        private object QueryProcessCommandScalar(SqlQuery query)
+        {
+            object returnValue = -1;
+
+            using (var cmd = new MySqlCommand(query.SQL, _connection))
+            {
+                UpdateCommandWithParameters(cmd, query);
+
+                if (_transactionActive)
+                {
+                    cmd.Transaction = _transaction;
+
+                    try
+                    {
+                        returnValue = cmd.ExecuteScalar();
+                    }
+                    catch (Exception ex)
+                    {
+                        TransactionRollback(ex);
+                    }
+                }
+                else
+                {
+                    cmd.Connection.Open();
+                    returnValue = cmd.ExecuteScalar();
+                    cmd.Connection.Close();
+                }
+            }
+
+            //TODO: clear parameters?
+
+            return returnValue;
+        }
+
+        private int QueryProcessQueries(DataRowState state)
         {
             var queries = GetSqlQueryList(state);
             if (queries == null) return 0;
@@ -469,7 +521,7 @@ namespace TMCWorkbench.Database
 
             foreach (var query in queries)
             {
-                var value = QueryProcessNonQueryCmd(query);
+                var value = QueryProcessCommandNonQuery(query);
 
                 if (value == -1)
                 {
@@ -485,9 +537,9 @@ namespace TMCWorkbench.Database
             return count;
         }
 
-        private bool QueryProcessNonQueryCount(DataRowState state, ref int counter)
+        private bool QueryProcessCount(DataRowState state, ref int counter)
         {
-            var value = QueryProcessNonQuery(state);
+            var value = QueryProcessQueries(state);
             if (value == -1)
             {
                 counter = -1;
@@ -500,15 +552,37 @@ namespace TMCWorkbench.Database
             return true;
         }
 
-        public int QueryProcessNonQuery()
+        private object QueryProcessScalar(int index)
         {
-            if (_transactionActive == true & _transactionFinished == true)
+            if (SqlQueriesScalar == null || SqlQueriesScalar.Count < index)
             {
-                //An error occurred during this transaction...
                 return -1;
             }
 
-            var count = 0;
+            if (index == 0)
+            {
+                return QueryProcessCommandScalar(SqlQueriesScalar[index]);
+            }
+            else
+            {
+                //TODO:
+                return QueryProcessCommandScalar(SqlQueriesScalar[index]);
+            }
+        }
+
+        public Tuple<int,int,int> QueryProcess(bool retrieveAndUpdateIds = false)
+        {
+            var tuple = new Tuple<int, int, int>(-1, -1, -1);
+
+            if (_transactionActive == true & _transactionFinished == true)
+            {
+                //An error occurred during this transaction...
+                return tuple;
+            }
+
+            var count = -1;
+            var insertStartIndex = -1;
+            var insertEndIndex = -1;
 
             TransactionStart();
 
@@ -517,25 +591,45 @@ namespace TMCWorkbench.Database
                 var success = true;
 
                 if (success)
-                    success = QueryProcessNonQueryCount(DataRowState.Deleted, ref count);
+                    success = QueryProcessCount(DataRowState.Deleted, ref count);
 
                 if (success)
-                    success = QueryProcessNonQueryCount(DataRowState.Modified, ref count);
+                    success = QueryProcessCount(DataRowState.Modified, ref count);
 
                 if (success)
-                    success = QueryProcessNonQueryCount(DataRowState.Added, ref count);
+                {
+                    if (retrieveAndUpdateIds)
+                    {
+                        var startId = QueryProcessScalar(0);
+                        if (startId.IsNumeric())
+                        {
+                            insertStartIndex = Converter.ToInt32(startId);
+                        }
+                    }
 
+                    success = QueryProcessCount(DataRowState.Added, ref count);
+
+                    if (retrieveAndUpdateIds)
+                    {
+                        var startId = QueryProcessScalar(1);
+                        if (startId.IsNumeric())
+                        {
+                            insertEndIndex = Converter.ToInt32(startId);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 TransactionRollback(ex);
+                return tuple;
             }
 
             TransactionEnd();
 
             ParametersClearOnAuto();
 
-            return count;
+            return new Tuple<int, int, int>(count, insertStartIndex, insertEndIndex); ;
         }
         
         public DataTable QueryProcessReader()
@@ -609,9 +703,6 @@ namespace TMCWorkbench.Database
 
             //ParametersClearOnAuto();
         }
-
-
-
 
         public void DataSetCreate(string name)
         {
@@ -779,6 +870,7 @@ namespace TMCWorkbench.Database
     {
         public string SQL;
         public Dictionary<string, object> Parameters;
+        public CommandMethod CommandMethod = CommandMethod.NonQuery;
 
         public SqlQuery(string sql)
         {
@@ -790,13 +882,25 @@ namespace TMCWorkbench.Database
             if (Parameters == null) { Parameters = new Dictionary<string, object>(); }
             Parameters.Add(name, value);
         }
+
+        public void AddOutParam(string name, out object value)
+        {
+            if (Parameters == null) { Parameters = new Dictionary<string, object>(); }
+            Parameters.Add(name, value);
+        }
     }
 
+    public enum CommandMethod
+    {
+        NonQuery,
+        Scalar,
+        Reader
+    }
 
     internal class DataSetQuery
     {
-        public string SQL { get; set; }
         public NameValueCollection Parameters { get; }
+        public string SQL { get; set; }
         private string _tableName;
 
         //Used when datatable is passed from DataSetTableAdd

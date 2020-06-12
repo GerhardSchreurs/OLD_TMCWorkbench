@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using TMCWorkbench.Events;
 using TMCWorkbench.Database;
 using ModLibrary;
+using System.Linq;
 
 namespace TMCWorkbench
 {
@@ -71,18 +72,19 @@ namespace TMCWorkbench
             //    formTest.ShowDialog();
             //}
 
-            DB.Instance().TableStyles.Rows[0].Name = "woehaa";
-            DB.Instance().TableStyles.DeleteRowById(64);
+            DB.Instance().TableStyles.Rows[0].Name = "UPDATE" + DateTime.Now.ToString();
+
+            var lastRowID = DB.Instance().TableStyles.Rows.Last().Style_id;
+            DB.Instance().TableStyles.DeleteRowById(lastRowID);
 
             var row = DB.Instance().TableStyles.NewRow();
 
-            row.Name = "new";
+            row.Name = "INSERT " + DateTime.Now.ToString();
             row.Weight = -1;
 
             DB.Instance().TableStyles.AddRow(row);
 
-            DB.Instance().TableStyles.UpdateData();
-
+            DB.Instance().TableStyles.UpdateDataUpdateIds();
         }
 
         private void btnBla_Click(object sender, EventArgs e)

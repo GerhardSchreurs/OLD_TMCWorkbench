@@ -251,10 +251,20 @@ namespace TMCWorkbench.Database
             }
         }
 
-        void ProcessRowsAdded()
+        void ProcessRowsAdded(bool retrieveIds = false)
         {
             var rows = GetRowsAdded();
             if (!rows.Any()) return;
+
+            var firstId = -1;
+            var lastId = -1;
+
+            if (retrieveIds)
+            {
+                DB.Executor.QueryNew(DataRowState.Added);
+                DB.Executor.QuerySetSQL(DataRowState.Added, $"SELECT MAX({ColPK.Name}) INTO @FIRST_INSERT_ID FROM {_tableName};");
+                DB.Executor.QueryAddParam(DataRowState.Added, "@FIRST_INSERT_ID");
+            }
 
             DB.Executor.QueryNew(DataRowState.Added);
 
@@ -283,6 +293,23 @@ namespace TMCWorkbench.Database
 
                 rowIndex++;
             }
+
+            if (retrieveIds)
+            {
+                DB.Executor.QueryNew(DataRowState.Added);
+
+                var sql = $@"SELECT 
+                (
+                    SELECT `{ColPK.Name}` FROM `{_tableName}` 
+                    WHERE {ColPK.Name} > @FIRST_INSERT_ID OR @FIRST_INSERT_ID IS NULL
+                    LIMIT 1
+                ) AS FIRST_INSERT_ID,
+                (
+	                SELECT LAST_INSERT_ID()
+                )";
+
+                DB.Executor.QuerySetSQL(DataRowState.Added, sql);
+            }
         }
 
         public void UpdateData()
@@ -294,7 +321,21 @@ namespace TMCWorkbench.Database
             ProcessRowsModified();
             ProcessRowsAdded();
 
-            DB.Executor.QueryProcessNonQuery();
+            DB.Executor.QueryProcess();
+
+            CleanUp();
+        }
+
+        public void UpdateDataUpdateIds()
+        {
+            if (Rows.Count == 0) return;
+            if (ColPK == null) throw new NotSupportedException("Cannot UpdateData() without a primary key");
+
+            ProcessRowsDeleted();
+            ProcessRowsModified();
+            ProcessRowsAdded(true);
+
+            DB.Executor.QueryProcess();
 
             CleanUp();
         }

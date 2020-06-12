@@ -12,5 +12,13 @@ namespace TMCWorkbench.Extensions
         {
             return src.GetType().GetProperty(propName).GetValue(src, null);
         }
+
+        public static bool IsNumeric(this object value)
+        {
+            if (value == null) { return false; }
+            var s = value.ToString();
+            return IsNumeric(s);
+        }
+
     }
 }
