@@ -24,8 +24,6 @@ namespace TMCWorkbench.Dialogs
         }
 
         private bool _isEdit;
-        private Model.RowStyle _row;
-        private Database.DB _db = Database.DB.Instance();
 
         public StylesDialog(Model.RowStyle row, bool isEdit = false)
         {
@@ -70,16 +68,6 @@ namespace TMCWorkbench.Dialogs
             }
             else
             {
-                //var row = _db.TableStyles.NewRow();
-                //if (_row.Parent_style_id == null)
-                //{
-                //    row.Parent_style_id = _row.Style_id;
-                //}
-                //else
-                //{
-                //    row.Alt_style_id = _row.Style_id;
-                //}
-
                 var row = _db.TableStyles.NewRow();
 
                 if (_row.Parent_style_id == null && _row.Alt_style_id == null)
