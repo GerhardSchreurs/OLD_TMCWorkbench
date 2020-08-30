@@ -8,6 +8,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+Private.config
 Private.settings
 Private.Designer.cs
 
