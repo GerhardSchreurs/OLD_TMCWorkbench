@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using TMCWorkbench.Events;
 using ModLibrary;
 using System.Linq;
+using TMCWorkbench.DB;
 
 namespace TMCWorkbench
 {
@@ -25,7 +26,7 @@ namespace TMCWorkbench
         private async void Form_Load(object sender, EventArgs e)
         {
             toolStripStatusLabel.Text = "Loading";
-            //TODO DB
+            DB.Manager.Instance.GetStyles();
             toolStripStatusLabel.Text = "Done loading";
         }
 
@@ -64,6 +65,17 @@ namespace TMCWorkbench
 
         private void btnTest_Click(object sender, EventArgs e)
         {
+            //var manager = new DB.DatabaseManager();
+
+            //using (var context = new DatabaseContext())
+            //{
+            //    manager.SetupDB(context);
+
+            //    //SetupDB(context);
+            //    //LoadStuff(context);
+            //    //PrintTable(context.Styles);
+            //}
+
             //using (var formTest = new FormTest())
             //{
             //    formTest.ShowDialog();

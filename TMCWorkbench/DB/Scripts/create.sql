@@ -1,0 +1,2 @@
+﻿ALTER TABLE `tracks`	CHANGE COLUMN `Date_track_created` `Date_track_created` DATETIME NOT NULL DEFAULT NOW();
+ALTER TABLE `tracks`	CHANGE COLUMN `Date_modified` `Date_modified` DATETIME NOT NULL ON UPDATE NOW();

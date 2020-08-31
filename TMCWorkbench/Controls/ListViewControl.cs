@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using TMCWorkbench.Events;
-using TMCWorkbench.Model.Enums;
+using TMCWorkbench.Enums;
 
 namespace TMCWorkbench.Controls
 {
