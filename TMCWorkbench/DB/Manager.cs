@@ -52,6 +52,21 @@ namespace TMCWorkbench.DB
             C.Styles.Load();
         }
 
+        public void Add(Style style)
+        {
+            C.Styles.Add(style);
+        }
+
+        public void Delete(Style style)
+        {
+            C.Styles.Remove(style);
+        }
+
+        public void Save()
+        {
+            C.SaveChanges();
+        }
+
         public void Dispose()
         {
             try

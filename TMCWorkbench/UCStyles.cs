@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TMCDatabase;
 using TMCDatabase.Model;
+using TMCWorkbench.Dialogs;
 //using TMCWorkbench.Dialogs;
 using TMCWorkbench.Tools;
 
@@ -32,6 +33,8 @@ namespace TMCWorkbench
         //TableStyles _data = DB.Instance().TableStyles;
         //Model.RowStyle _row;
 
+
+        private Style _row;
         private bool _isDirty;
 
         public UCStyles()
@@ -42,8 +45,6 @@ namespace TMCWorkbench
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
-            Styles = DB.C.Styles.ToList();
 
             _contextMenuNodeOptions.MenuItems.Add(_menuItemAdd);
             _contextMenuNodeOptions.MenuItems.Add(_menuItemEdit);
@@ -57,12 +58,14 @@ namespace TMCWorkbench
             //_table = new tmcDataSet.stylesDataTable();
             //_adapter.Fill(_table);
 
+            Styles = DB.C.Styles.ToList();
             PopulateTree();
 
             this.treeView.NodeMouseClick += Handle_TreeView_NodeMouseClick;
 
             //###
-            //StylesDialog.OnUpdated += Handle_StylesDialog_OnUpdated;
+
+            StylesDialog.OnUpdated += Handle_StylesDialog_OnUpdated;
         }
 
         private void Handle_StylesDialog_OnUpdated(object sender, EventArgs e)
@@ -78,50 +81,78 @@ namespace TMCWorkbench
             UpdateTreeView();
         }
 
+        private List<Style> _expanded;
+
         void UpdateTreeView()
         {
+            _expanded = new List<Style>();
+
+            if (_row != null)
+            {
+                var row = _row;
+
+                //Get parent rows
+                while (row.Parent_style_id != null)
+                {
+                    row = Styles.Where(x => x.Style_id == row.Parent_style_id).First();
+                    _expanded.Add(row);
+                }
+
+                //Get parent ALT rows
+                //while (row.Alt_style_id != null)
+                //{
+                //    row = Styles.Where(x => x.Style_id == row.Alt_style_id).First();
+                //    _expanded.Add(row);
+                //}
+
+                _expanded.Add(_row);
+            }
+
+            Styles = DB.C.Styles.ToList();
             PopulateTree();
-            treeView.ExpandAll();
+            //treeView.ExpandAll();
             _isDirty = true;
         }
 
+        bool IsInExpanded(Style row)
+        {
+            if (_expanded == null) { return false; };
+            return _expanded.Contains(row);
+        }
+
         private void Handle_menuItemAdd_Click(object sender, EventArgs e)
-        {   //###
-            //using (var dialog = new Dialogs.StylesDialog(_row, isEdit: false))
-            //{
-            //    dialog.ShowDialog();
-            //}
+        {   
+            using (var dialog = new Dialogs.StylesDialog(_row, isEdit: false))
+            {
+                dialog.ShowDialog();
+            }
         }
 
         private void Handle_menuItemDelete_Click(object sender, EventArgs e)
         {
-            //###
-            //var result = MessageBox.Show("Are you sure?", "Some Title", MessageBoxButtons.YesNo);
-            //if (result == DialogResult.Yes)
-            //{
-            //    //do something
-            //    _data.DeleteRow(_row);
-            //    UpdateTreeView();
-            //}
+            var result = MessageBox.Show("Are you sure?", "Some Title", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                //do something
+                DB.Delete(_row);
+                DB.Save();
+                UpdateTreeView();
+            }
         }
 
         private void Handle_menuItemEdit_Click(object sender, EventArgs e)
         {
             //###
-            //using (var dialog = new Dialogs.StylesDialog(_row, isEdit: true))
-            //{
-            //    dialog.ShowDialog();
-            //}
+            using (var dialog = new Dialogs.StylesDialog(_row, isEdit: true))
+            {
+                dialog.ShowDialog();
+            }
         }
 
         private bool HasRowChildRows()
         {
-            //###
-            //return _data.Rowz.Where
-            //    (x => x.Alt_style_id == _row.Style_id || x.Parent_style_id == _row.Style_id)
-            //    .Any();
-
-            return false;
+            //return Styles.Where(x => x.Alt_style_id == _row.Style_id || x.Parent_style_id == _row.Style_id).Any();
+            return Styles.Where(x => x.Parent_style_id == _row.Style_id).Any();
         }
 
         private void Handle_TreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -130,43 +161,65 @@ namespace TMCWorkbench
 
             _menuItemAdd.Enabled = true;
             _menuItemDelete.Enabled = true;
+            _menuItemEdit.Enabled = true;
 
             var sourceNode = ((TreeView)sender).GetNodeAt(new Point(e.X, e.Y));
+            var tag = Converter.ToInt32(sourceNode.Tag);
 
-            //###
-            //_row = _data.FindById(Converter.ToInt16(sourceNode.Tag));
+            if (tag == -1) 
+            {
+                _row = null;
+                _menuItemEdit.Enabled = false;
+                _menuItemDelete.Enabled = false;
+            }
+            else
+            {
+                _row = Styles.Where(x => x.Style_id == tag).First();
 
-            //if (_row.Alt_style_id != null)
-            //{
-            //    _menuItemAdd.Enabled = false;
-            //}
+                //if (_row.Alt_style_id != null)
+                //{
+                //    _menuItemAdd.Enabled = false;
+                //}
 
-            //if (HasRowChildRows())
-            //{
-            //    _menuItemDelete.Enabled = false;
-            //}
+                if (HasRowChildRows())
+                {
+                    _menuItemDelete.Enabled = false;
+                }
+            }
 
-            //_contextMenuNodeOptions.Show(treeView, e.Location);
+            _contextMenuNodeOptions.Show(treeView, e.Location);
         }
 
         private void PopulateTree()
         {
             this.treeView.Nodes.Clear();
 
+            var rootNode = new TreeNode();
+            rootNode.Tag = -1;
+            rootNode.Text = "ROOT";
+            this.treeView.Nodes.Add(rootNode);
 
-            foreach (var row in Styles.Where(x => x.Parent_style_id == null && x.Alt_style_id == null))
+            //foreach (var row in Styles.Where(x => x.Parent_style_id == null && x.Alt_style_id == null))
+            foreach (var row in Styles.Where(x => x.Parent_style_id == null))
             {
-                var treeRoot = new TreeNode();
-                treeRoot.Text = row.Name;
-                treeRoot.Tag = row.Style_id;
-                treeRoot.ExpandAll();
-                this.treeView.Nodes.Add(treeRoot);
+                var node = new TreeNode();
+                node.Text = row.Name;
+                node.Tag = row.Style_id;
+                //treeRoot.ExpandAll();
+                rootNode.Nodes.Add(node);
 
-                foreach (TreeNode childNode in GetChildNodes(row.Style_id))
+                foreach (TreeNode childNode in GetChildNodes(row))
                 {
-                    treeRoot.Nodes.Add(childNode);
+                    node.Nodes.Add(childNode);
+                }
+
+                if (IsInExpanded(row))
+                {
+                    node.Expand();
                 }
             }
+
+            rootNode.Expand();
 
             //###
             //foreach (var row in _data.Rowz.Where(x => x.Parent_style_id == null && x.Alt_style_id == null))
@@ -184,27 +237,44 @@ namespace TMCWorkbench
             //}
         }
 
-        private List<TreeNode> GetChildNodes(int parentID)
+        private List<TreeNode> GetChildNodes(Style parentRow)
         {
+            int parentID = parentRow.Style_id;
             var nodes = new List<TreeNode>();
 
-            var rows = Styles.Where(x => x.Parent_style_id != null && x.Alt_style_id == null && x.Parent_style_id == parentID);
+            //var rows = Styles.Where(x => x.Parent_style_id != null && x.Alt_style_id == null && x.Parent_style_id == parentID);
+            var rows = Styles.Where(x => x.Parent_style_id != null && x.Parent_style_id == parentID);
 
             foreach (var row in rows)
             {
                 var childNode = new TreeNode();
                 childNode.Text = row.Name;
                 childNode.Tag = row.Style_id;
-                childNode.ExpandAll();
 
-                foreach (TreeNode node in GetChildNodes(row.Style_id))
+                if (row.IsAlt)
+                {
+                    childNode.ForeColor = Color.Green;
+                }
+
+
+                if (IsInExpanded(row))
+                {
+                    childNode.Expand();
+                }
+
+                foreach (TreeNode node in GetChildNodes(row))
                 {
                     childNode.Nodes.Add(node);
 
-                    foreach (TreeNode altNode in GetAltNodes(Convert.ToInt32(node.Tag)))
-                    {
-                        node.Nodes.Add(altNode);
-                    }
+                    //if (row.IsAlt)
+                    //{
+                    //    node.ForeColor = Color.Green;
+                    //}
+
+                    //foreach (TreeNode altNode in GetAltNodes(Convert.ToInt32(node.Tag)))
+                    //{
+                    //    node.Nodes.Add(altNode);
+                    //}
                 }
 
                 nodes.Add(childNode);
@@ -213,25 +283,25 @@ namespace TMCWorkbench
             return nodes;
         }
 
-        private List<TreeNode> GetAltNodes(int parentID)
-        {
-            var nodes = new List<TreeNode>();
+        //private List<TreeNode> GetAltNodes(int parentID)
+        //{
+        //    var nodes = new List<TreeNode>();
 
-            var rows = Styles.Where(x => x.Alt_style_id != null && x.Alt_style_id == parentID);
+        //    var rows = Styles.Where(x => x.Alt_style_id != null && x.Alt_style_id == parentID);
 
-            foreach (var row in rows)
-            {
-                var childNode = new TreeNode();
-                childNode.Text = row.Name;
-                childNode.Tag = row.Style_id;
-                childNode.ExpandAll();
-                childNode.ForeColor = Color.Green;
+        //    foreach (var row in rows)
+        //    {
+        //        var childNode = new TreeNode();
+        //        childNode.Text = row.Name;
+        //        childNode.Tag = row.Style_id;
+        //        childNode.ExpandAll();
+        //        childNode.ForeColor = Color.Green;
 
-                nodes.Add(childNode);
-            }
+        //        nodes.Add(childNode);
+        //    }
 
-            return nodes;
-        }
+        //    return nodes;
+        //}
 
         private void Handle_btnSave_Click(object sender, EventArgs e)
         {

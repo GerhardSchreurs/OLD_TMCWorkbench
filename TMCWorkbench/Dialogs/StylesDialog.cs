@@ -8,35 +8,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TMCWorkbench.Model;
+using TMCDatabase.Model;
 using TMCWorkbench.Tools;
 
 namespace TMCWorkbench.Dialogs
 {
     public partial class StylesDialog : Form
     {
+        private TMCWorkbench.DB.Manager DB = TMCWorkbench.DB.Manager.Instance;
+
         public delegate void DataUpdatedEventHandler(object sender, EventArgs e);
         public static event DataUpdatedEventHandler OnUpdated;
+        
+        private bool _isEdit;
+        private Style _row;
 
         private void RaiseOnUpdated()
         {
             OnUpdated?.Invoke(this, new EventArgs());
         }
 
-        private bool _isEdit;
-
-        public StylesDialog(Model.RowStyle row, bool isEdit = false)
+        public StylesDialog(Style row, bool isEdit = false)
         {
             InitializeComponent();
 
             _isEdit = isEdit;
             _row = row;
+            radStyle.Checked = true;
 
             if (isEdit)
             {
                 this.btnAction.Text = "Save";
                 txtName.Text = _row.Name;
                 txtWeight.Text = _row.Weight.ToString();
+
+                if (_row.IsAlt)
+                {
+                    radAlt.Checked = true;
+                }
+                else
+                {
+                    radStyle.Checked = true;
+                }
             }
             else
             {
@@ -45,7 +58,7 @@ namespace TMCWorkbench.Dialogs
             }
         }
 
-        private void Process(Model.RowStyle row)
+        private void Process(Style row)
         {
             row.Name = txtName.Text;
 
@@ -56,6 +69,7 @@ namespace TMCWorkbench.Dialogs
                 row.Weight = Converter.ToSByte(txtWeight.Text);
             }
 
+            row.IsAlt = radAlt.Checked;
             row.Weight = weight;
         }
 
@@ -64,30 +78,34 @@ namespace TMCWorkbench.Dialogs
             if (_isEdit)
             {
                 Process(_row);
-                _row.DataRowState = DataRowState.Modified;
+                //_row.DataRowState = DataRowState.Modified;
             }
             else
             {
-                var row = _db.TableStyles.NewRow();
+                //var row = _db.TableStyles.NewRow();
+                var row = new Style();
 
-                if (_row.Parent_style_id == null && _row.Alt_style_id == null)
+                if (_row == null)
                 {
-                    //This is a new basegroup, do nothing
+                    //Do nothing
                 }
-                else if (_row.Parent_style_id != null)
+                else
                 {
-                    row.Parent_style_id = _row.Style_id;
-                }
-                else if (_row.Alt_style_id != null)
-                {
-                    row.Alt_style_id = _row.Alt_style_id;
+                    row.ParentStyle = _row;
+
+                    if (radAlt.Checked)
+                    {
+                        row.IsAlt = true;
+                    }
                 }
 
                 Process(row);
+                DB.Add(row);
 
-                _db.TableStyles.AddRow(row);
+                //_db.TableStyles.AddRow(row);
             }
 
+            DB.Save();
             RaiseOnUpdated();
             Close();
         }
