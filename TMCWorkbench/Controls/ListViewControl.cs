@@ -5,6 +5,8 @@ using System.IO;
 using System.Windows.Forms;
 using TMCWorkbench.Events;
 using TMCWorkbench.Enums;
+using System.Security.Cryptography;
+using TMCWorkbench.DB;
 
 namespace TMCWorkbench.Controls
 {
@@ -23,88 +25,101 @@ namespace TMCWorkbench.Controls
             //Does nothing atm.
         }
 
+        protected string GetMD5HashFromFile(string fileName)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(fileName))
+                {
+                    return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
+                }
+            }
+        }
+
+        private bool IsInDB(MD5 md5, FileInfo fileInfo)
+        {
+            //var hash = string.Empty;
+
+            //using (var stream = File.OpenRead(fileInfo.FullName))
+            //{
+            //    hash = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", string.Empty);
+
+            //    Console.WriteLine(hash);
+            //}
+
+            //return true;
+
+            Guid id;
+
+            using (var stream = File.OpenRead(fileInfo.FullName))
+            {
+                var hash = md5.ComputeHash(stream);
+                id = new Guid(hash);
+                Console.WriteLine(hash);
+            }
+
+            return Manager.Instance.IsTrackInDB(id);
+            //check if in DB
+
+
+        }
+
+
         public void BrowseDirectory(DirectoryInfo directoryInfo)
         {
             try
             {
-                //TreeNode newSelected = e.Node;
                 listView1.Items.Clear();
 
-                //foreach (DirectoryInfo dir in info.GetDirectories())
-                //{
-                //    item = new ListViewItem(dir.Name, 0);
-                //    subItems = new ListViewItem.ListViewSubItem[]
-                //    {
-                //        new ListViewItem.ListViewSubItem(item, "Directory"), new ListViewItem.ListViewSubItem(item,  dir.LastAccessTime.ToShortDateString())
-                //    };
-                //    item.SubItems.AddRange(subItems);
-                //    listView1.Items.Add(item);
-                //}
-
-                foreach (FileInfo fileInfo in directoryInfo.GetFiles())
+                using (var md5 = MD5.Create())
                 {
-                    var extensionString = GetStringExtensionFromFileInfo(fileInfo);
-                    var extension = GetExtensionFromString(extensionString);
-
-                    //if (IsSupportedFile(extension))
-                    //{
-                    //    item = new ListViewItem(file.Name);
-                    //    item.Tag = file;
-
-                    //    var x = new ListViewItem("la");
-                    //    x.Text = "bla";
-
-
-                    //    subItems = new ListViewItem.ListViewSubItem[]
-                    //    {
-                    //        new ListViewItem.ListViewSubItem(item, extension),
-                    //        new ListViewItem.ListViewSubItem(item, file.LastAccessTime.ToShortDateString())
-                    //    };
-
-                    //    //item.SubItems.AddRange(subItems);
-                    //    listView1.Items.Add(item);
-                    //}
-
-                    if (IsSupportedFile(extension))
+                    foreach (FileInfo fileInfo in directoryInfo.GetFiles())
                     {
-                        ListViewItem.ListViewSubItem sub;
-
-                        //Type
-                        var item = new ListViewItem();
-                        item.UseItemStyleForSubItems = false;
-                        item.Tag = fileInfo;
-                        item.Text = extensionString;
-                        item.ForeColor = GetColorForExtension(extension);
-
-                        //Name
-                        sub = new ListViewItem.ListViewSubItem();
-                        sub.Text = fileInfo.Name;
-                        item.SubItems.Add(sub);
-
-                        //Created
-                        sub = new ListViewItem.ListViewSubItem();
-                        sub.Text = File.GetLastWriteTime(fileInfo.FullName).ToShortDateString();
-                        item.SubItems.Add(sub);
-
-                        //Modified
-                        sub = new ListViewItem.ListViewSubItem();
-                        sub.Text = File.GetLastAccessTime(fileInfo.FullName).ToShortDateString();
-                        item.SubItems.Add(sub);
-
-                        listView1.Items.Add(item);
+                        var extensionString = GetStringExtensionFromFileInfo(fileInfo);
+                        var extension = GetExtensionFromString(extensionString);
 
 
-                        //var x = new ListViewItem.ListViewSubItem();
-                        //x.Text = "hallo";
-                        //x.BackColor = Color.Red;
+                        if (IsSupportedFile(extension))
+                        {
+                            var isInDb = IsInDB(md5, fileInfo);
 
-                        //listViewItem.SubItems.Add(x);
-                        //listViewItem.SubItems.Add(new ListViewItem.ListViewSubItem().Text = "deze");
-                        //listViewItem.SubItems.Add(new ListViewItem.ListViewSubItem().Text = "wereld");
+                            ListViewItem.ListViewSubItem sub;
 
-                        //listView1.Items.Add(listViewItem);
+                            var item = new ListViewItem();
+                            item.UseItemStyleForSubItems = false;
+                            item.Tag = fileInfo;
+                            item.Text = isInDb ? "Y" : "N";
 
+                            //Type
+                            sub = new ListViewItem.ListViewSubItem();
+                            sub.Text = extensionString;
+                            sub.ForeColor = GetColorForExtension(extension);
+                            item.SubItems.Add(sub);
 
+                            //Type
+                            //var item = new ListViewItem();
+                            //item.UseItemStyleForSubItems = false;
+                            //item.Tag = fileInfo;
+                            //item.Text = extensionString;
+                            //item.ForeColor = GetColorForExtension(extension);
+
+                            //Name
+                            sub = new ListViewItem.ListViewSubItem();
+                            sub.Text = fileInfo.Name;
+                            item.SubItems.Add(sub);
+
+                            //Created
+                            sub = new ListViewItem.ListViewSubItem();
+                            sub.Text = File.GetLastWriteTime(fileInfo.FullName).ToShortDateString();
+                            item.SubItems.Add(sub);
+
+                            //Modified
+                            sub = new ListViewItem.ListViewSubItem();
+                            sub.Text = File.GetLastAccessTime(fileInfo.FullName).ToShortDateString();
+                            item.SubItems.Add(sub);
+
+                            listView1.Items.Add(item);
+                        }
                     }
                 }
 

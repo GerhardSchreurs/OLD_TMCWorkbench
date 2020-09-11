@@ -36,33 +36,37 @@
             this.tableOuter = new System.Windows.Forms.TableLayoutPanel();
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
             this.tablePlayer = new System.Windows.Forms.TableLayoutPanel();
-            this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelTop = new System.Windows.Forms.TableLayoutPanel();
-            this.txtSamples = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtInstruments = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtMessage = new TMCWorkbench.Controls.TextAreaControl();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanelBot = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtOutput = new TMCWorkbench.Controls.TextAreaControl();
             this.panelSave = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pnlMeta = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnBla = new System.Windows.Forms.Button();
+            this.btnTest = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
+            this.txtSamples = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtInstruments = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtMessage = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtOutput = new TMCWorkbench.Controls.TextAreaControl();
             this.ctrBPM = new TMCWorkbench.Controls.Resettable.ResettableBpmControl();
             this.ctrSpeed = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
             this.ctrLength = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.listViewControl1 = new TMCWorkbench.Controls.ListViewControl();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnBla = new System.Windows.Forms.Button();
             this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
-            this.btnTest = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableInner.SuspendLayout();
@@ -72,15 +76,16 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanelTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSamples)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInstruments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMessage)).BeginInit();
             this.tableLayoutPanelBot.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).BeginInit();
             this.panelSave.SuspendLayout();
             this.pnlMeta.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSamples)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInstruments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMessage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -96,9 +101,9 @@
             this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 732);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 728);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1637, 20);
+            this.statusStrip1.Size = new System.Drawing.Size(1637, 24);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -112,15 +117,16 @@
             // 
             this.tableOuter.ColumnCount = 1;
             this.tableOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableOuter.Controls.Add(this.tableInner, 0, 0);
-            this.tableOuter.Controls.Add(this.statusStrip1, 1, 1);
+            this.tableOuter.Controls.Add(this.menuStrip1, 0, 0);
+            this.tableOuter.Controls.Add(this.tableInner, 0, 1);
+            this.tableOuter.Controls.Add(this.statusStrip1, 1, 2);
             this.tableOuter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableOuter.Location = new System.Drawing.Point(0, 0);
             this.tableOuter.Name = "tableOuter";
-            this.tableOuter.RowCount = 2;
+            this.tableOuter.RowCount = 3;
+            this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableOuter.Size = new System.Drawing.Size(1637, 752);
             this.tableOuter.TabIndex = 1;
             // 
@@ -135,11 +141,11 @@
             this.tableInner.Controls.Add(this.listViewControl1, 1, 0);
             this.tableInner.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableInner.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableInner.Location = new System.Drawing.Point(3, 3);
+            this.tableInner.Location = new System.Drawing.Point(3, 27);
             this.tableInner.Name = "tableInner";
             this.tableInner.RowCount = 1;
             this.tableInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableInner.Size = new System.Drawing.Size(1631, 726);
+            this.tableInner.Size = new System.Drawing.Size(1631, 698);
             this.tableInner.TabIndex = 1;
             // 
             // tablePlayer
@@ -155,16 +161,8 @@
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tablePlayer.Size = new System.Drawing.Size(1025, 720);
+            this.tablePlayer.Size = new System.Drawing.Size(1025, 692);
             this.tablePlayer.TabIndex = 2;
-            // 
-            // musicControl1
-            // 
-            this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.musicControl1.Location = new System.Drawing.Point(3, 654);
-            this.musicControl1.Name = "musicControl1";
-            this.musicControl1.Size = new System.Drawing.Size(1019, 63);
-            this.musicControl1.TabIndex = 9;
             // 
             // splitContainer1
             // 
@@ -181,8 +179,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanelBot);
-            this.splitContainer1.Size = new System.Drawing.Size(1019, 634);
-            this.splitContainer1.SplitterDistance = 316;
+            this.splitContainer1.Size = new System.Drawing.Size(1019, 606);
+            this.splitContainer1.SplitterDistance = 302;
             this.splitContainer1.TabIndex = 10;
             // 
             // tableLayoutPanelTop
@@ -204,113 +202,8 @@
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.Size = new System.Drawing.Size(1019, 316);
+            this.tableLayoutPanelTop.Size = new System.Drawing.Size(1019, 302);
             this.tableLayoutPanelTop.TabIndex = 0;
-            // 
-            // txtSamples
-            // 
-            this.txtSamples.AllowMacroRecording = false;
-            this.txtSamples.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtSamples.AutoScrollMinSize = new System.Drawing.Size(68, 18);
-            this.txtSamples.BackBrush = null;
-            this.txtSamples.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSamples.CharHeight = 12;
-            this.txtSamples.CharWidth = 6;
-            this.txtSamples.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSamples.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSamples.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSamples.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtSamples.IsReplaceMode = false;
-            this.txtSamples.Location = new System.Drawing.Point(3, 23);
-            this.txtSamples.Name = "txtSamples";
-            this.txtSamples.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtSamples.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtSamples.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSamples.ServiceColors")));
-            this.txtSamples.ShowLineNumbers = false;
-            this.txtSamples.Size = new System.Drawing.Size(178, 290);
-            this.txtSamples.TabIndex = 7;
-            this.txtSamples.Text = "txtSamples";
-            this.txtSamples.Zoom = 100;
-            // 
-            // txtInstruments
-            // 
-            this.txtInstruments.AllowMacroRecording = false;
-            this.txtInstruments.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtInstruments.AutoScrollMinSize = new System.Drawing.Size(92, 18);
-            this.txtInstruments.BackBrush = null;
-            this.txtInstruments.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtInstruments.CharHeight = 12;
-            this.txtInstruments.CharWidth = 6;
-            this.txtInstruments.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtInstruments.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtInstruments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtInstruments.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtInstruments.IsReplaceMode = false;
-            this.txtInstruments.Location = new System.Drawing.Point(187, 23);
-            this.txtInstruments.Name = "txtInstruments";
-            this.txtInstruments.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtInstruments.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtInstruments.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtInstruments.ServiceColors")));
-            this.txtInstruments.ShowLineNumbers = false;
-            this.txtInstruments.Size = new System.Drawing.Size(178, 290);
-            this.txtInstruments.TabIndex = 8;
-            this.txtInstruments.Text = "txtInstruments";
-            this.txtInstruments.Zoom = 100;
-            // 
-            // txtMessage
-            // 
-            this.txtMessage.AllowMacroRecording = false;
-            this.txtMessage.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtMessage.AutoScrollMinSize = new System.Drawing.Size(68, 18);
-            this.txtMessage.BackBrush = null;
-            this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMessage.CharHeight = 12;
-            this.txtMessage.CharWidth = 6;
-            this.txtMessage.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtMessage.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMessage.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtMessage.IsReplaceMode = false;
-            this.txtMessage.Location = new System.Drawing.Point(371, 23);
-            this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtMessage.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtMessage.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtMessage.ServiceColors")));
-            this.txtMessage.ShowLineNumbers = false;
-            this.txtMessage.Size = new System.Drawing.Size(645, 290);
-            this.txtMessage.TabIndex = 9;
-            this.txtMessage.Text = "txtMessage";
-            this.txtMessage.Zoom = 100;
             // 
             // label4
             // 
@@ -360,7 +253,7 @@
             this.tableLayoutPanelBot.RowCount = 2;
             this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelBot.Size = new System.Drawing.Size(1019, 314);
+            this.tableLayoutPanelBot.Size = new System.Drawing.Size(1019, 300);
             this.tableLayoutPanelBot.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -376,50 +269,15 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 288);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 274);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // txtOutput
-            // 
-            this.txtOutput.AllowMacroRecording = false;
-            this.txtOutput.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtOutput.AutoScrollMinSize = new System.Drawing.Size(62, 18);
-            this.txtOutput.BackBrush = null;
-            this.txtOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtOutput.CharHeight = 12;
-            this.txtOutput.CharWidth = 6;
-            this.txtOutput.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtOutput.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtOutput.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtOutput.IsReplaceMode = false;
-            this.txtOutput.Location = new System.Drawing.Point(3, 3);
-            this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtOutput.ServiceColors")));
-            this.txtOutput.ShowLineNumbers = false;
-            this.txtOutput.Size = new System.Drawing.Size(639, 252);
-            this.txtOutput.TabIndex = 10;
-            this.txtOutput.Text = "txtOutput";
-            this.txtOutput.Zoom = 100;
             // 
             // panelSave
             // 
             this.panelSave.Controls.Add(this.btnSave);
             this.panelSave.Controls.Add(this.comboBox1);
             this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSave.Location = new System.Drawing.Point(3, 261);
+            this.panelSave.Location = new System.Drawing.Point(3, 247);
             this.panelSave.Name = "panelSave";
             this.panelSave.Size = new System.Drawing.Size(639, 24);
             this.panelSave.TabIndex = 11;
@@ -456,8 +314,234 @@
             this.pnlMeta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMeta.Location = new System.Drawing.Point(3, 23);
             this.pnlMeta.Name = "pnlMeta";
-            this.pnlMeta.Size = new System.Drawing.Size(362, 288);
+            this.pnlMeta.Size = new System.Drawing.Size(362, 274);
             this.pnlMeta.TabIndex = 1;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.btnBla, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.browserControl1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnTest, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 692);
+            this.tableLayoutPanel2.TabIndex = 4;
+            // 
+            // btnBla
+            // 
+            this.btnBla.Location = new System.Drawing.Point(3, 675);
+            this.btnBla.Name = "btnBla";
+            this.btnBla.Size = new System.Drawing.Size(75, 14);
+            this.btnBla.TabIndex = 3;
+            this.btnBla.Text = "Bla";
+            this.btnBla.UseVisualStyleBackColor = true;
+            this.btnBla.Click += new System.EventHandler(this.btnBla_Click);
+            // 
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(3, 635);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTest.TabIndex = 2;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1, -7);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1637, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // musicControl1
+            // 
+            this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.musicControl1.Location = new System.Drawing.Point(3, 626);
+            this.musicControl1.Name = "musicControl1";
+            this.musicControl1.Size = new System.Drawing.Size(1019, 63);
+            this.musicControl1.TabIndex = 9;
+            // 
+            // txtSamples
+            // 
+            this.txtSamples.AllowMacroRecording = false;
+            this.txtSamples.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtSamples.AutoScrollMinSize = new System.Drawing.Size(68, 18);
+            this.txtSamples.BackBrush = null;
+            this.txtSamples.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSamples.CharHeight = 12;
+            this.txtSamples.CharWidth = 6;
+            this.txtSamples.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSamples.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtSamples.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSamples.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtSamples.IsReplaceMode = false;
+            this.txtSamples.Location = new System.Drawing.Point(3, 23);
+            this.txtSamples.Name = "txtSamples";
+            this.txtSamples.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtSamples.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtSamples.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSamples.ServiceColors")));
+            this.txtSamples.ShowLineNumbers = false;
+            this.txtSamples.Size = new System.Drawing.Size(178, 276);
+            this.txtSamples.TabIndex = 7;
+            this.txtSamples.Text = "txtSamples";
+            this.txtSamples.Zoom = 100;
+            // 
+            // txtInstruments
+            // 
+            this.txtInstruments.AllowMacroRecording = false;
+            this.txtInstruments.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtInstruments.AutoScrollMinSize = new System.Drawing.Size(92, 18);
+            this.txtInstruments.BackBrush = null;
+            this.txtInstruments.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtInstruments.CharHeight = 12;
+            this.txtInstruments.CharWidth = 6;
+            this.txtInstruments.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtInstruments.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtInstruments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtInstruments.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtInstruments.IsReplaceMode = false;
+            this.txtInstruments.Location = new System.Drawing.Point(187, 23);
+            this.txtInstruments.Name = "txtInstruments";
+            this.txtInstruments.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtInstruments.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtInstruments.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtInstruments.ServiceColors")));
+            this.txtInstruments.ShowLineNumbers = false;
+            this.txtInstruments.Size = new System.Drawing.Size(178, 276);
+            this.txtInstruments.TabIndex = 8;
+            this.txtInstruments.Text = "txtInstruments";
+            this.txtInstruments.Zoom = 100;
+            // 
+            // txtMessage
+            // 
+            this.txtMessage.AllowMacroRecording = false;
+            this.txtMessage.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtMessage.AutoScrollMinSize = new System.Drawing.Size(68, 18);
+            this.txtMessage.BackBrush = null;
+            this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMessage.CharHeight = 12;
+            this.txtMessage.CharWidth = 6;
+            this.txtMessage.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMessage.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMessage.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtMessage.IsReplaceMode = false;
+            this.txtMessage.Location = new System.Drawing.Point(371, 23);
+            this.txtMessage.Name = "txtMessage";
+            this.txtMessage.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtMessage.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtMessage.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtMessage.ServiceColors")));
+            this.txtMessage.ShowLineNumbers = false;
+            this.txtMessage.Size = new System.Drawing.Size(645, 276);
+            this.txtMessage.TabIndex = 9;
+            this.txtMessage.Text = "txtMessage";
+            this.txtMessage.Zoom = 100;
+            // 
+            // txtOutput
+            // 
+            this.txtOutput.AllowMacroRecording = false;
+            this.txtOutput.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtOutput.AutoScrollMinSize = new System.Drawing.Size(62, 18);
+            this.txtOutput.BackBrush = null;
+            this.txtOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtOutput.CharHeight = 12;
+            this.txtOutput.CharWidth = 6;
+            this.txtOutput.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtOutput.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtOutput.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtOutput.IsReplaceMode = false;
+            this.txtOutput.Location = new System.Drawing.Point(3, 3);
+            this.txtOutput.Name = "txtOutput";
+            this.txtOutput.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtOutput.ServiceColors")));
+            this.txtOutput.ShowLineNumbers = false;
+            this.txtOutput.Size = new System.Drawing.Size(639, 238);
+            this.txtOutput.TabIndex = 10;
+            this.txtOutput.Text = "txtOutput";
+            this.txtOutput.Zoom = 100;
             // 
             // ctrBPM
             // 
@@ -521,63 +605,16 @@
             this.listViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewControl1.Location = new System.Drawing.Point(253, 3);
             this.listViewControl1.Name = "listViewControl1";
-            this.listViewControl1.Size = new System.Drawing.Size(344, 720);
+            this.listViewControl1.Size = new System.Drawing.Size(344, 692);
             this.listViewControl1.TabIndex = 3;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.btnBla, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.browserControl1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnTest, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 720);
-            this.tableLayoutPanel2.TabIndex = 4;
-            // 
-            // btnBla
-            // 
-            this.btnBla.Location = new System.Drawing.Point(3, 703);
-            this.btnBla.Name = "btnBla";
-            this.btnBla.Size = new System.Drawing.Size(75, 14);
-            this.btnBla.TabIndex = 3;
-            this.btnBla.Text = "Bla";
-            this.btnBla.UseVisualStyleBackColor = true;
-            this.btnBla.Click += new System.EventHandler(this.btnBla_Click);
             // 
             // browserControl1
             // 
             this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.browserControl1.Location = new System.Drawing.Point(3, 3);
             this.browserControl1.Name = "browserControl1";
-            this.browserControl1.Size = new System.Drawing.Size(238, 654);
+            this.browserControl1.Size = new System.Drawing.Size(238, 626);
             this.browserControl1.TabIndex = 1;
-            // 
-            // btnTest
-            // 
-            this.btnTest.Location = new System.Drawing.Point(3, 663);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTest.TabIndex = 2;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1, -7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -585,6 +622,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1637, 752);
             this.Controls.Add(this.tableOuter);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.Text = "TMC Workbench";
             this.Load += new System.EventHandler(this.Form_Load);
@@ -600,15 +638,17 @@
             this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanelTop.ResumeLayout(false);
             this.tableLayoutPanelTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSamples)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInstruments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMessage)).EndInit();
             this.tableLayoutPanelBot.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).EndInit();
             this.panelSave.ResumeLayout(false);
             this.pnlMeta.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSamples)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInstruments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMessage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -647,6 +687,10 @@
         private Controls.BrowserControl browserControl1;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Button btnBla;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     }
 }
 

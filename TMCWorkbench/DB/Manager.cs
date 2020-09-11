@@ -52,6 +52,11 @@ namespace TMCWorkbench.DB
             C.Styles.Load();
         }
 
+        public bool IsTrackInDB(Guid guid)
+        {
+            return C.Tracks.Any(x => x.Md5 == guid);
+        }
+
         public void Add(Style style)
         {
             C.Styles.Add(style);
