@@ -17,9 +17,9 @@ using TMCWorkbench.Tools;
 
 namespace TMCWorkbench
 {
-    public partial class UCStyles : UCForm
+    public partial class UCStyles : _UCForm
     {
-        private TMCWorkbench.DB.Manager DB = TMCWorkbench.DB.Manager.Instance;
+        private TMCWorkbench.DB.DBManager DB = TMCWorkbench.DB.DBManager.Instance;
 
         private ContextMenu _contextMenuNodeOptions = new ContextMenu();
 
@@ -203,7 +203,7 @@ namespace TMCWorkbench
             foreach (var row in Styles.Where(x => x.Parent_style_id == null))
             {
                 var node = new TreeNode();
-                node.Text = row.Name;
+                node.Text = $"[{row.Weight}] {row.Name}";
                 node.Tag = row.Style_id;
                 //treeRoot.ExpandAll();
                 rootNode.Nodes.Add(node);
@@ -248,7 +248,7 @@ namespace TMCWorkbench
             foreach (var row in rows)
             {
                 var childNode = new TreeNode();
-                childNode.Text = row.Name;
+                childNode.Text = $"[{row.Weight}] {row.Name}";
                 childNode.Tag = row.Style_id;
 
                 if (row.IsAlt)

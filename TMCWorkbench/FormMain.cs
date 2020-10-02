@@ -9,6 +9,8 @@ namespace TMCWorkbench
 {
     public partial class FormMain : Form
     {
+        public DBManager DB = DBManager.Instance;
+
         public FormMain()
         {
             InitializeComponent();
@@ -26,8 +28,20 @@ namespace TMCWorkbench
         private async void Form_Load(object sender, EventArgs e)
         {
             toolStripStatusLabel.Text = "Loading";
-            DB.Manager.Instance.GetStyles();
+            DB.LoadStyles();
+            DB.LoadTrackstyles();
             toolStripStatusLabel.Text = "Done loading";
+
+            txtSamplesOrg.Dock = DockStyle.Fill;
+            txtSamplesNew.Dock = DockStyle.Fill;
+
+            txtInstrumentsOrg.Dock = DockStyle.Fill;
+            txtInstrumentsNew.Dock = DockStyle.Fill;
+
+            txtMessageOrg.Dock = DockStyle.Fill;
+            txtMessageNew.Dock = DockStyle.Fill;
+
+            tabControl.SelectedIndex = 1;
         }
 
         private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
@@ -35,27 +49,61 @@ namespace TMCWorkbench
             toolStripStatusLabel.Text = fileinfoEventArgs.FileInfo.FullName;
             await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName);
 
-            var modInfo = ModLibrary.ModLibrary.Parse(fileinfoEventArgs.FileInfo.FullName);
+            var guid = Manager.Instance.GetFileGuid(fileinfoEventArgs.FileInfo.FullName);
+            var isInDb = DB.IsTrackInDB(guid);
+            var modInfo = ModLibrary.ModLibrary.ParseAndGuessStyle(fileinfoEventArgs.FileInfo.FullName, DBManager.Instance.TrackStyles);
             var tupleTime = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(musicControl1.Media.Duration);
+            //lblTest.Text = modInfo.TrackStyle;
 
-            txtSamples.Text = modInfo.SampleText;
-            txtMessage.Text = modInfo.SongText;
-            txtInstruments.Text = modInfo.InstrumentText;
+            txtSamplesOrg.Text = modInfo.SampleText;
+            txtMessageOrg.Text = modInfo.SongText;
+            txtInstrumentsOrg.Text = modInfo.InstrumentText;
 
-            txtSamples.ClearUndo();
-            txtMessage.ClearUndo();
-            txtInstruments.ClearUndo();
+            txtSamplesOrg.ClearUndo();
+            txtMessageOrg.ClearUndo();
+            txtInstrumentsOrg.ClearUndo();
 
-            ctrFileInfo.Filename = modInfo.FileName;
-            ctrDate.Date = modInfo.DateCreated;
+            ctrFileInfoOrg.Filename = modInfo.FileName;
+            ctrDateOrg.Date = modInfo.DateCreated;
 
-            ctrLength.ValueA = tupleTime.Item1;
-            ctrLength.ValueB = tupleTime.Item2;
+            ctrLengthOrg.ValueA = tupleTime.Item1;
+            ctrLengthOrg.ValueB = tupleTime.Item2;
 
-            ctrSpeed.ValueA = modInfo.Speed;
-            ctrSpeed.ValueB = modInfo.Tempo;
+            ctrSpeedOrg.ValueA = modInfo.Speed;
+            ctrSpeedOrg.ValueB = modInfo.Tempo;
 
-            ctrBPM.BPM = modInfo.EstimatedBPM;
+            ctrBPMOrg.BPM = modInfo.EstimatedBPM;
+
+            ctrStyleOrg.Init();
+            ctrStyleOrg.SetStyle(modInfo.TrackStyle);
+
+            if (isInDb)
+            {
+                if (DB.LoadTrackInfo(guid) == false) return;
+
+                var track = DB.Track;
+
+                txtSamplesNew.Text = track.SampleText;
+                txtMessageNew.Text = track.SongText;
+                txtInstrumentsNew.Text = track.InstrumentText;
+
+                ctrFileInfoNew.Filename = track.FileName;
+                ctrDateNew.Date = track.Date_created;
+
+                ctrLengthNew.ValueA = 0;
+                ctrLengthNew.ValueB = 0;
+
+                ctrSpeedNew.ValueA = track.Speed;
+                ctrSpeedNew.ValueB = track.Tempo;
+
+                ctrBPMNew.BPM = track.Bpm;
+
+                ctrStyleNew.Init();
+                ctrStyleNew.SetStyle(track.Style?.Name);
+
+
+            }
+   
         }
 
         private void Handle_BrowserControl_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
@@ -76,10 +124,10 @@ namespace TMCWorkbench
             //    //PrintTable(context.Styles);
             //}
 
-            //using (var formTest = new FormTest())
-            //{
-            //    formTest.ShowDialog();
-            //}
+            using (var formTest = new FormTest())
+            {
+                formTest.ShowDialog();
+            }
         }
 
         private void btnBla_Click(object sender, EventArgs e)
@@ -87,6 +135,69 @@ namespace TMCWorkbench
             using (var formStyles = new UCStyles())
             {
                 formStyles.ShowDialog();
+            }
+        }
+
+        private void SwitchTabs(bool showNew)
+        {
+            if (showNew)
+            {
+                //NEW
+                txtInstrumentsOrg.Visible = false;
+                txtInstrumentsNew.Visible = true;
+
+                txtMessageOrg.Visible = false;
+                txtMessageNew.Visible = true;
+
+                txtSamplesOrg.Visible = false;
+                txtSamplesNew.Visible = true;
+
+                //pnlMetaOrg.Visible = false;
+                //pnlMetaNew.Visible = true;
+            }
+            else
+            {
+                //OLD
+                txtInstrumentsOrg.Visible = true;
+                txtInstrumentsNew.Visible = false;
+
+                txtMessageOrg.Visible = true;
+                txtMessageNew.Visible = false;
+
+                txtSamplesOrg.Visible = true;
+                txtSamplesNew.Visible = false;
+
+                //pnlMetaOrg.Visible = true;
+                //pnlMetaNew.Visible = false;
+
+            }
+        }
+
+        private void tabControl_Selected(object sender, TabControlEventArgs e)
+        {
+            if (tabControl.SelectedIndex == 0)
+            {
+                SwitchTabs(true);
+            } 
+            else
+            {
+                SwitchTabs(false);
+            }
+        }
+
+        private void stylesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var form = new UCStyles())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void scenegroupsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var form = new UCGroups())
+            {
+                form.ShowDialog();
             }
         }
     }

@@ -43,6 +43,10 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="CheckBoxComboBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Controls\External\CheckBoxComboBox.dll</HintPath>
+    </Reference>
     <Reference Include="ConsoleTables, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ConsoleTables.2.4.2\lib\net40\ConsoleTables.dll</HintPath>
       <Private>True</Private>
@@ -175,6 +179,18 @@
     <Compile Include="Controls\Resettable\ResettableBpmControl.Designer.cs">
       <DependentUpon>ResettableBpmControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Resettable\_ResettableDropDownControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\_ResettableDropDownControl.Designer.cs">
+      <DependentUpon>_ResettableDropDownControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableStyleDropDownControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableStyleDropDownControl.Designer.cs">
+      <DependentUpon>ResettableStyleDropDownControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Resettable\_ResettableControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -210,7 +226,7 @@
     <Compile Include="Controls\TextAreaControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DB\Manager.cs" />
+    <Compile Include="DB\DBManager.cs" />
     <Compile Include="Dialogs\StylesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,6 +246,13 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="FormTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTest.Designer.cs">
+      <DependentUpon>FormTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manager.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Properties\Private.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -243,11 +266,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThreadHelperClass.cs" />
     <Compile Include="Tools\Test.cs" />
-    <Compile Include="UCForm.cs">
+    <Compile Include="UCGroups.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UCForm.Designer.cs">
-      <DependentUpon>UCForm.cs</DependentUpon>
+    <Compile Include="UCGroups.Designer.cs">
+      <DependentUpon>UCGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_UCForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_UCForm.Designer.cs">
+      <DependentUpon>_UCForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UCStyles.cs">
       <SubType>Form</SubType>
@@ -273,6 +302,9 @@
     <EmbeddedResource Include="Controls\Resettable\ResettableDoubleIntControl.resx">
       <DependentUpon>ResettableDoubleIntControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Resettable\_ResettableDropDownControl.resx">
+      <DependentUpon>_ResettableDropDownControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\_ResettableControl.resx">
       <DependentUpon>_ResettableControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -294,6 +326,9 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormTest.resx">
+      <DependentUpon>FormTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -303,8 +338,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UCForm.resx">
-      <DependentUpon>UCForm.cs</DependentUpon>
+    <EmbeddedResource Include="UCGroups.resx">
+      <DependentUpon>UCGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_UCForm.resx">
+      <DependentUpon>_UCForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCStyles.resx">
       <DependentUpon>UCStyles.cs</DependentUpon>

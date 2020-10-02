@@ -15,7 +15,7 @@ namespace TMCWorkbench.Dialogs
 {
     public partial class StylesDialog : Form
     {
-        private TMCWorkbench.DB.Manager DB = TMCWorkbench.DB.Manager.Instance;
+        private TMCWorkbench.DB.DBManager DB = TMCWorkbench.DB.DBManager.Instance;
 
         public delegate void DataUpdatedEventHandler(object sender, EventArgs e);
         public static event DataUpdatedEventHandler OnUpdated;

@@ -7,6 +7,7 @@ using TMCWorkbench.Events;
 using TMCWorkbench.Enums;
 using System.Security.Cryptography;
 using TMCWorkbench.DB;
+using TMCDatabase.Model;
 
 namespace TMCWorkbench.Controls
 {
@@ -36,6 +37,20 @@ namespace TMCWorkbench.Controls
             }
         }
 
+        private Guid GetGuid(MD5 md5, FileInfo fileInfo)
+        {
+            Guid id;
+
+            using (var stream = File.OpenRead(fileInfo.FullName))
+            {
+                var hash = md5.ComputeHash(stream);
+                id = new Guid(hash);
+                Console.WriteLine(BitConverter.ToString(hash));
+            }
+
+            return id;
+        }
+
         private bool IsInDB(MD5 md5, FileInfo fileInfo)
         {
             //var hash = string.Empty;
@@ -49,16 +64,7 @@ namespace TMCWorkbench.Controls
 
             //return true;
 
-            Guid id;
-
-            using (var stream = File.OpenRead(fileInfo.FullName))
-            {
-                var hash = md5.ComputeHash(stream);
-                id = new Guid(hash);
-                Console.WriteLine(hash);
-            }
-
-            return Manager.Instance.IsTrackInDB(id);
+            return DBManager.Instance.IsTrackInDB(GetGuid(md5, fileInfo));
             //check if in DB
 
 
@@ -70,7 +76,8 @@ namespace TMCWorkbench.Controls
             try
             {
                 listView1.Items.Clear();
-
+                var i = 0;
+                
                 using (var md5 = MD5.Create())
                 {
                     foreach (FileInfo fileInfo in directoryInfo.GetFiles())

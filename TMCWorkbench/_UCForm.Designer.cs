@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench
 {
-    partial class UCForm
+    partial class _UCForm
     {
         /// <summary>
         /// Required designer variable.

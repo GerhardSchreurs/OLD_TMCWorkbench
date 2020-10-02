@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench
 {
-    public partial class UCForm : Form
+    public partial class _UCForm : Form
     {
         private bool _isUCForm;
 
-        public UCForm()
+        public _UCForm()
         {
             InitializeComponent();
 
