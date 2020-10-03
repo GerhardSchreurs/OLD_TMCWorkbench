@@ -44,9 +44,10 @@ namespace TMCWorkbench.DB
 
         public List<Style> Styles;
         public List<TrackStyle> TrackStyles;
+        public List<Scenegroup> SceneGroups;
+        public List<Composer> Composers;
 
         public Track Track;
-
 
         private void Init()
         {
@@ -62,8 +63,26 @@ namespace TMCWorkbench.DB
                 C.Styles.Load();
                 Styles = C.Styles.ToList();
             }
-
         }
+
+        public void LoadSceneGroups(bool refresh = false)
+        {
+            if (refresh || refresh == false && SceneGroups == null)
+            {
+                C.Scenegroups.Load();
+                SceneGroups = C.Scenegroups.ToList();
+            }
+        }
+
+        public void LoadComposers(bool refresh = false)
+        {
+            if (refresh || refresh == false && Composers == null)
+            {
+                C.Composers.Load();
+                Composers = C.Composers.ToList();
+            }
+        }
+
 
         public void LoadTrackstyles()
         {
