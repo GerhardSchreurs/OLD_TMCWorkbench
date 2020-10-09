@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TMCWorkbench.DB;
-using TMCWorkbench.Extensions;
+using Extensions;
 using FastColoredTextBoxNS;
 using TMCDatabase.Model;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableStyleDropDownControl : _ResettableDropDownControl
+    public partial class ResettableStyleDropDownControl : _ResettableDropDownHoldControl
     {
         public ResettableStyleDropDownControl()
         {

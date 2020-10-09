@@ -31,17 +31,19 @@ namespace TMCWorkbench.Controls.Resettable
 
         private void ResettableControl1_OnReset(object sender, EventArgs e)
         {
-            Filename = _fileName;
+            Text = _text;
         }
 
-        private string _fileName;
+        private string _text;
 
-        public string Filename
+        public override string Text
         {
-            get { return _fileName;  }
+            get { 
+                return txtText.Text;  
+            }
             set {
-                _fileName = value;
-                this.txtFilename.Text = value;
+                _text = value;
+                this.txtText.Text = value;
             }
         }
     }

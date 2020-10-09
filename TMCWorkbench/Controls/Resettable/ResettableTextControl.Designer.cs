@@ -30,7 +30,7 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.resettableControl1 = new TMCWorkbench.Controls.ResettableControl();
-            this.txtFilename = new System.Windows.Forms.TextBox();
+            this.txtText = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +40,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 114F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.resettableControl1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtFilename, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtText, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -59,14 +59,14 @@
             this.resettableControl1.Size = new System.Drawing.Size(114, 24);
             this.resettableControl1.TabIndex = 0;
             // 
-            // txtFilename
+            // txtText
             // 
-            this.txtFilename.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtFilename.Location = new System.Drawing.Point(114, 3);
-            this.txtFilename.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
-            this.txtFilename.Name = "txtFilename";
-            this.txtFilename.Size = new System.Drawing.Size(248, 20);
-            this.txtFilename.TabIndex = 1;
+            this.txtText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtText.Location = new System.Drawing.Point(114, 3);
+            this.txtText.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
+            this.txtText.Name = "txtText";
+            this.txtText.Size = new System.Drawing.Size(248, 20);
+            this.txtText.TabIndex = 1;
             // 
             // ResettableTextControl
             // 
@@ -84,6 +84,6 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private ResettableControl resettableControl1;
-        private System.Windows.Forms.TextBox txtFilename;
+        private System.Windows.Forms.TextBox txtText;
     }
 }

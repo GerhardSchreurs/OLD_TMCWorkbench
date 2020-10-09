@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMCWorkbench.Tools;
 
-namespace TMCWorkbench.Extensions
+namespace Extensions
 {
     public static class ObjectExtensions
     {
@@ -17,7 +18,12 @@ namespace TMCWorkbench.Extensions
         {
             if (value == null) { return false; }
             var s = value.ToString();
-            return IsNumeric(s);
+            return Extensions.StringExtensions.IsNumeric(s);
+        }
+
+        public static int ToInt(this object value)
+        {
+            return Converter.ToInt32(value);
         }
 
     }

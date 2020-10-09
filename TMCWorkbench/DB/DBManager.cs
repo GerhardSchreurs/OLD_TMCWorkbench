@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,7 @@ namespace TMCWorkbench.DB
         public List<TrackStyle> TrackStyles;
         public List<Scenegroup> SceneGroups;
         public List<Composer> Composers;
+        public List<C_Scenegroup_Composer> GroupsComposers;
 
         public Track Track;
 
@@ -83,6 +85,14 @@ namespace TMCWorkbench.DB
             }
         }
 
+        public void LoadGroupsComposers(bool refresh = false)
+        {
+            if (refresh || refresh == false && GroupsComposers == null)
+            {
+                C.C_Scenegroup_Composers.Load();
+                GroupsComposers = C.C_Scenegroup_Composers.ToList();
+            }
+        }
 
         public void LoadTrackstyles()
         {
@@ -129,6 +139,8 @@ namespace TMCWorkbench.DB
             TrackStyles.Add(trackStyle);
         }
 
+        
+
         public bool IsTrackInDB(Guid guid)
         {
             return C.Tracks.Any(x => x.Md5 == guid);
@@ -139,9 +151,66 @@ namespace TMCWorkbench.DB
             C.Styles.Add(style);
         }
 
+        public void AddComposerToGroup(int sceneGroupId, int composerId, bool isFounder = false)
+        {
+            var group = new C_Scenegroup_Composer();
+            group.FK_scenegroup_id = sceneGroupId;
+            group.FK_composer_id = composerId;
+            group.IsFounder = isFounder;
+
+            C.C_Scenegroup_Composers.Add(group);
+        }
+
+        public void Add(Scenegroup scenegroup, bool save = true, bool refresh = true)
+        {
+            C.Scenegroups.Add(scenegroup);
+
+            if (save)
+            {
+                C.SaveChanges();
+            }
+            if (refresh)
+            {
+                LoadSceneGroups(true);
+            }
+        }
+
+        public void RemoveComposerFromGroup(Scenegroup sceneGroup, List<Composer> composers)
+        {
+            if (composers == null) return;
+
+            var collection = new List<C_Scenegroup_Composer>();
+            //composers.ForEach(c => collection.Add(GroupsComposers.Where(x => x.FK_composer_id == c.Composer_id).First()));
+            //GroupsComposers
+
+            foreach(var composer in composers)
+            {
+                foreach (var x in GroupsComposers.Where(g => g.FK_scenegroup_id == sceneGroup.Scenegroup_id))
+                {
+                    if (x.FK_composer_id == composer.Composer_id)
+                    {
+                        collection.Add(x);
+                    }
+                }
+            }
+
+            //var collection = C.C_Scenegroup_Composers.Where(x => x.FK_scenegroup_id == sceneGroup.Scenegroup_id);
+            C.C_Scenegroup_Composers.RemoveRange(collection);
+        }
+
+        public void Remove(Scenegroup scenegroup)
+        {
+            C.Scenegroups.Remove(scenegroup);
+        }
+
         public void Delete(Style style)
         {
             C.Styles.Remove(style);
+        }
+
+        public void Replace(Scenegroup scenegroup)
+        {
+            C.Scenegroups.AddOrUpdate(scenegroup);
         }
 
         public void Save()

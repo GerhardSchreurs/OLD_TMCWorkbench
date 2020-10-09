@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMCWorkbench.Extensions
+namespace Extensions
 {
     public static class IEnumerableExtensions
     {

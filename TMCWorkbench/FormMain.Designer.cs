@@ -700,7 +700,7 @@
             // ctrFileInfoNew
             // 
             this.ctrFileInfoNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrFileInfoNew.Filename = null;
+            this.ctrFileInfoNew.Text = null;
             this.ctrFileInfoNew.LabelTitle = "Filename:";
             this.ctrFileInfoNew.Location = new System.Drawing.Point(0, 0);
             this.ctrFileInfoNew.Margin = new System.Windows.Forms.Padding(0);
@@ -780,7 +780,7 @@
             // ctrFileInfoOrg
             // 
             this.ctrFileInfoOrg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrFileInfoOrg.Filename = null;
+            this.ctrFileInfoOrg.Text = null;
             this.ctrFileInfoOrg.LabelTitle = "Filename:";
             this.ctrFileInfoOrg.Location = new System.Drawing.Point(0, 0);
             this.ctrFileInfoOrg.Margin = new System.Windows.Forms.Padding(0);
@@ -880,7 +880,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // editToolStripMenuItem
@@ -895,14 +895,14 @@
             // stylesToolStripMenuItem
             // 
             this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
-            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.stylesToolStripMenuItem.Text = "Styles";
             this.stylesToolStripMenuItem.Click += new System.EventHandler(this.stylesToolStripMenuItem_Click);
             // 
             // scenegroupsToolStripMenuItem
             // 
             this.scenegroupsToolStripMenuItem.Name = "scenegroupsToolStripMenuItem";
-            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.scenegroupsToolStripMenuItem.Text = "Scenegroups";
             this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.scenegroupsToolStripMenuItem_Click);
             // 

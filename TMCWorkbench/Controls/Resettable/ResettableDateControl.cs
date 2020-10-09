@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using Extensions;
 
 namespace TMCWorkbench.Controls.Resettable
 {
@@ -39,7 +40,7 @@ namespace TMCWorkbench.Controls.Resettable
 
         void Init()
         {
-            for (var i = 1990; i < DateTime.Now.Year; i++)
+            for (var i = 1990; i <= DateTime.Now.Year + 1; i++)
             {
                 ddlYear.Items.Add(i);
             }
@@ -81,6 +82,25 @@ namespace TMCWorkbench.Controls.Resettable
 
             this.ddlMonth.SelectedIndexChanged += Handle_ddlMonth_SelectedIndexChanged;
         }
+
+        public bool IsValidDate()
+        {
+            var returnValue = false;
+
+            if (ddlYear.SelectedIndex >= 0)
+            {
+                var year = ddlYear.Text.ToInt();
+                var month = ddlMonth.SelectedIndex + 1;
+                var day = ddlDay.SelectedIndex + 1;
+
+                _date = new DateTime(year, month, day, _date.Hour, _date.Minute, _date.Second, _date.Millisecond);
+
+                returnValue = true;
+            }
+
+            return returnValue;
+        }
+
 
         private DateTime _date;
         public DateTime Date

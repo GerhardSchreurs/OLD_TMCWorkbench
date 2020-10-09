@@ -63,7 +63,7 @@ namespace TMCWorkbench
             txtMessageOrg.ClearUndo();
             txtInstrumentsOrg.ClearUndo();
 
-            ctrFileInfoOrg.Filename = modInfo.FileName;
+            ctrFileInfoOrg.Text = modInfo.FileName;
             ctrDateOrg.Date = modInfo.DateCreated;
 
             ctrLengthOrg.ValueA = tupleTime.Item1;
@@ -87,7 +87,7 @@ namespace TMCWorkbench
                 txtMessageNew.Text = track.SongText;
                 txtInstrumentsNew.Text = track.InstrumentText;
 
-                ctrFileInfoNew.Filename = track.FileName;
+                ctrFileInfoNew.Text = track.FileName;
                 ctrDateNew.Date = track.Date_created;
 
                 ctrLengthNew.ValueA = 0;
