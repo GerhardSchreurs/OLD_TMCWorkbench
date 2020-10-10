@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TMCDatabase.Model;
+using TMCDatabase.DBModel;
 using TMCWorkbench.DB;
 using Extensions;
+using TMCDatabase.Model;
 
 namespace TMCWorkbench
 {
@@ -19,8 +20,10 @@ namespace TMCWorkbench
         //BindingSource _sourceGridGroup;
 
         private Scenegroup _sceneGroup;
-        private C_Scenegroup_Composer _groupsComposers;
-        private Composer _composer;
+        private Artist _artist;
+        private List<C_Scenegroup_Composer> _groupsComposers;
+
+        private List<Artist> _artists;
         private List<Composer> _gridComposers;
         private List<Composer> _dropDownComposers;
         private int _gridGroupsIndex;
@@ -44,7 +47,7 @@ namespace TMCWorkbench
             ddlComposers.ValueMember = "Composer_id";
 
             BindGridGroup();
-            BindComposerData();
+            BindGridArtists();
 
             gridGroups.Select();
         }
@@ -69,59 +72,65 @@ namespace TMCWorkbench
             gridGroups.SelectionChanged += gridGroups_SelectionChanged;
         }
 
-        private List<Composer> GetGridComposers(int id)
+        private void BindGridArtists()
         {
-            //Don't know how to do it in linq/lambda
+            gridArtists.SelectionChanged -= gridArists_SelectionChanged;
+            gridArtists.DataSource = null;
 
-            var groupComposers = DB.GroupsComposers.Where(x => x.FK_scenegroup_id == id);
-
-            var composers = new List<Composer>();
-
-            foreach (var group in groupComposers)
+            if (_sceneGroup != null)
             {
-                composers.Add(DB.Composers.Where(c => c.Composer_id == group.FK_composer_id).FirstOrDefault());
+                RetrieveArtistsData(_sceneGroup.Scenegroup_id);
+
+                gridArtists.DataSource = _artists;
+                gridArtists.ClearSelection();
+
+                ddlComposers.DataSource = _dropDownComposers;
             }
 
-            return composers;
+            gridArtists.SelectionChanged += gridArists_SelectionChanged;
         }
 
-        private void RetrieveComposerData(int id)
+        private void RetrieveArtistsData(int id)
         {
-            var groupComposers = DB.GroupsComposers.Where(x => x.FK_scenegroup_id == id);
-            _gridComposers = new List<Composer>();
+            //var groupComposers = DB.GroupsComposers.Where(x => x.FK_scenegroup_id == id);
+            //_gridComposers = new List<Composer>();
+            //_dropDownComposers = new List<Composer>();
+
+            //foreach (var group in groupComposers)
+            //{
+            //    _gridComposers.Add(DB.Composers.Where(c => c.Composer_id == group.FK_composer_id).FirstOrDefault());
+            //}
+
+            //foreach (var composer in DB.Composers.OrderByDescending(c => c.Composer_id))
+            //{
+            //    if (!_gridComposers.Contains(composer))
+            //    {
+            //        _dropDownComposers.Add(composer);
+            //    }
+            //}
+
             _dropDownComposers = new List<Composer>();
+
+            var groupComposers = DB.GroupsComposers.Where(x => x.FK_scenegroup_id == id);
+            var composers = new List<Composer>();
+            _artists = new List<Artist>();
 
             foreach (var group in groupComposers)
             {
-                _gridComposers.Add(DB.Composers.Where(c => c.Composer_id == group.FK_composer_id).FirstOrDefault());
+                _artists.Add(new Artist(group));
+                composers.Add(group.Composer);
             }
 
-            foreach (var composer in DB.Composers.OrderByDescending(c => c.Composer_id)) 
+            foreach (var composer in DB.Composers.OrderByDescending(c => c.Composer_id))
             {
-                if (!_gridComposers.Contains(composer))
+                if (!composers.Contains(composer))
                 {
                     _dropDownComposers.Add(composer);
                 }
             }
         }
 
-        private void BindComposerData()
-        {
-            gridComposers.SelectionChanged -= gridComposers_SelectionChanged;
-            gridComposers.DataSource = null;
 
-            if (_sceneGroup != null)
-            {
-                RetrieveComposerData(_sceneGroup.Scenegroup_id);
-
-                gridComposers.DataSource = _gridComposers;
-                gridComposers.ClearSelection();
-
-                ddlComposers.DataSource = _dropDownComposers;
-            }
-
-            gridComposers.SelectionChanged += gridComposers_SelectionChanged;
-        }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
@@ -145,7 +154,7 @@ namespace TMCWorkbench
 
             ctrAbout.Text = _sceneGroup.About;
 
-            BindComposerData();
+            BindGridArtists();
         }
 
         private void gridGroups_SelectionChanged(object sender, EventArgs e)
@@ -158,12 +167,12 @@ namespace TMCWorkbench
             UpdateControls();
         }
 
-        private void gridComposers_SelectionChanged(object sender, EventArgs e)
+        private void gridArists_SelectionChanged(object sender, EventArgs e)
         {
-            if (gridComposers.SelectedRows.Count == 0) return;
+            if (gridArtists.SelectedRows.Count == 0) return;
 
-            _gridComposerIndex = gridComposers.SelectedRows[0].Index;
-            _composer = gridComposers.SelectedRows[0].DataBoundItem as Composer;
+            _gridComposerIndex = gridArtists.SelectedRows[0].Index;
+            _artist = gridArtists.SelectedRows[0].DataBoundItem as Artist;
         }
 
         private void Handle_btnAddScenegroup_Click(object sender, EventArgs e)
@@ -182,7 +191,7 @@ namespace TMCWorkbench
             //gridGroups.Refresh();
         }
 
-        private void Handle_gridGroups_KeyUp(object sender, KeyEventArgs e)
+        private void Handle_gridSceneGroups_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Delete) return;
 
@@ -204,11 +213,11 @@ namespace TMCWorkbench
             BindGridGroup();
         }
 
-        private void Handle_gridComposers_KeyUp(object sender, KeyEventArgs e)
+        private void Handle_gridArtists_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Delete) return;
 
-            var rowsSelected = gridComposers.SelectedRows.Count;
+            var rowsSelected = gridArtists.SelectedRows.Count;
 
             var result = MessageBox.Show("Are you sure?", $"You are about to delete {rowsSelected} row(s) from composers in scenegroup", MessageBoxButtons.OKCancel);
             var composers = new List<Composer>();
@@ -217,8 +226,8 @@ namespace TMCWorkbench
             {
                 for (var i = rowsSelected - 1; i >= 0; i--)
                 {
-                    var row = gridComposers.SelectedRows[i].DataBoundItem as Composer;
-                    composers.Add(row);
+                    var row = gridArtists.SelectedRows[i].DataBoundItem as Artist;
+                    composers.Add(row.GetComposer());
                 }
             }
 
@@ -228,7 +237,7 @@ namespace TMCWorkbench
 
                 DB.Save();
                 DB.LoadGroupsComposers(true);
-                BindComposerData();
+                BindGridArtists();
             }
         }
 
@@ -258,11 +267,11 @@ namespace TMCWorkbench
         {
             if (!ddlComposers.SelectedValue.IsNumeric()) return;
 
-            DB.AddComposerToGroup(_sceneGroup.Scenegroup_id, ddlComposers.SelectedValue.ToInt());
+            DB.AddComposerToGroup(_sceneGroup.Scenegroup_id, ddlComposers.SelectedValue.ToInt(), chkIsComposer.Checked);
             DB.Save();
             DB.LoadSceneGroups();
             DB.LoadGroupsComposers(true);
-            BindComposerData();
+            BindGridArtists();
 
             gridGroups.Select();
         }

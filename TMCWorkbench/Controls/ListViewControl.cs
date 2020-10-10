@@ -7,7 +7,7 @@ using TMCWorkbench.Events;
 using TMCWorkbench.Enums;
 using System.Security.Cryptography;
 using TMCWorkbench.DB;
-using TMCDatabase.Model;
+using TMCDatabase.DBModel;
 
 namespace TMCWorkbench.Controls
 {

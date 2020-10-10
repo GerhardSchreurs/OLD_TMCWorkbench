@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TMCDatabase.Model;
+using TMCDatabase.DBModel;
 using TMCWorkbench.Tools;
 
 namespace TMCWorkbench.Dialogs

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using TMCWorkbench.DB;
 using Extensions;
 using FastColoredTextBoxNS;
-using TMCDatabase.Model;
+using TMCDatabase.DBModel;
 
 namespace TMCWorkbench.Controls.Resettable
 {
@@ -44,7 +44,7 @@ namespace TMCWorkbench.Controls.Resettable
 
             var bindingSource = new BindingSource();
             var list = query.ToList();
-            var s = new TMCDatabase.Model.Style();
+            var s = new TMCDatabase.DBModel.Style();
             s.Style_id = 0;
             s.Name = "== SELECT STYLE ==";
 

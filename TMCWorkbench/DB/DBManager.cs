@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TMCDatabase;
-using TMCDatabase.Model;
+using TMCDatabase.DBModel;
 using TMCDatabase.Utility;
 
 namespace TMCWorkbench.DB
