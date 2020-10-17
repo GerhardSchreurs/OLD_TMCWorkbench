@@ -284,11 +284,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThreadHelperClass.cs" />
     <Compile Include="Tools\Test.cs" />
-    <Compile Include="UCGroups.cs">
+    <Compile Include="UCSceneGroups.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UCGroups.Designer.cs">
-      <DependentUpon>UCGroups.cs</DependentUpon>
+    <Compile Include="UCSceneGroups.Designer.cs">
+      <DependentUpon>UCSceneGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCComposers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCComposers.Designer.cs">
+      <DependentUpon>UCComposers.cs</DependentUpon>
     </Compile>
     <Compile Include="_UCForm.cs">
       <SubType>Form</SubType>
@@ -365,8 +371,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UCGroups.resx">
-      <DependentUpon>UCGroups.cs</DependentUpon>
+    <EmbeddedResource Include="UCSceneGroups.resx">
+      <DependentUpon>UCSceneGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCComposers.resx">
+      <DependentUpon>UCComposers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_UCForm.resx">
       <DependentUpon>_UCForm.cs</DependentUpon>

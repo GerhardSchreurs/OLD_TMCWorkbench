@@ -195,7 +195,15 @@ namespace TMCWorkbench
 
         private void scenegroupsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var form = new UCGroups())
+            using (var form = new UCSceneGroups())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void composersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var form = new UCComposers())
             {
                 form.ShowDialog();
             }

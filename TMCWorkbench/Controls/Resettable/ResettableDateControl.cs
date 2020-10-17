@@ -75,15 +75,26 @@ namespace TMCWorkbench.Controls.Resettable
         {
             this.ddlMonth.SelectedIndexChanged -= Handle_ddlMonth_SelectedIndexChanged;
 
-            ddlYear.SelectedItem = _date.Year;
-            ddlMonth.SelectedIndex = _date.Month - 1;
-            UpdateDays(_date.Year, _date.Month);
-            ddlDay.SelectedIndex = _date.Day - 1;
+            if (_date.HasValue)
+            {
+                ddlYear.SelectedItem = _date.Value.Year;
+                ddlMonth.SelectedIndex = _date.Value.Month - 1;
+                UpdateDays(_date.Value.Year, _date.Value.Month);
+                ddlDay.SelectedIndex = _date.Value.Day - 1;
+            }
+            else
+            {
+                ddlYear.SelectedIndex = -1;
+                ddlMonth.SelectedIndex = -1;
+                ddlDay.SelectedIndex = -1;
+            }
+
+
 
             this.ddlMonth.SelectedIndexChanged += Handle_ddlMonth_SelectedIndexChanged;
         }
 
-        public bool IsValidDate()
+        public bool ProcessEnteredDate()
         {
             var returnValue = false;
 
@@ -92,8 +103,18 @@ namespace TMCWorkbench.Controls.Resettable
                 var year = ddlYear.Text.ToInt();
                 var month = ddlMonth.SelectedIndex + 1;
                 var day = ddlDay.SelectedIndex + 1;
+                int hour = 0, minute = 0, second = 0, millisecond = 0;
 
-                _date = new DateTime(year, month, day, _date.Hour, _date.Minute, _date.Second, _date.Millisecond);
+                if (_date.HasValue)
+                {
+                    hour = _date.Value.Hour;
+                    minute = _date.Value.Minute;
+                    second = _date.Value.Second;
+                    millisecond = _date.Value.Millisecond;
+                }
+
+
+                _date = new DateTime(year, month, day, hour, minute, second, millisecond);
 
                 returnValue = true;
             }
@@ -102,11 +123,12 @@ namespace TMCWorkbench.Controls.Resettable
         }
 
 
-        private DateTime _date;
-        public DateTime Date
+        private DateTime? _date;
+        public DateTime? Date
         {
             get
             {
+                ProcessEnteredDate();
                 return _date;
             }
             set

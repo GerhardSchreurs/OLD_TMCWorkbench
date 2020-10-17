@@ -14,22 +14,21 @@ using TMCDatabase.Model;
 
 namespace TMCWorkbench
 {
-    public partial class UCGroups : _UCForm
+    public partial class UCSceneGroups : _UCForm
     {
         DBManager DB = DBManager.Instance;
         //BindingSource _sourceGridGroup;
 
         private Scenegroup _sceneGroup;
-        private Artist _artist;
+        private ScenegroupComposer _scenegroupComposer;
         private List<C_Scenegroup_Composer> _groupsComposers;
 
-        private List<Artist> _artists;
+        private List<ScenegroupComposer> _sceneGroupComposers;
         private List<Composer> _gridComposers;
         private List<Composer> _dropDownComposers;
         private int _gridGroupsIndex;
-        private int _gridComposerIndex;
 
-        public UCGroups()
+        public UCSceneGroups()
         {
             InitializeComponent();
         }
@@ -46,21 +45,19 @@ namespace TMCWorkbench
             ddlComposers.DisplayMember = "Name";
             ddlComposers.ValueMember = "Composer_id";
 
-            BindGridGroup();
-            BindGridArtists();
+            BindSceneGroups();
 
             gridGroups.Select();
+            Handle_gridGroups_SelectionChanged(null, null);
         }
 
-        private void BindGridGroup()
+        private void BindSceneGroups()
         {
-            gridGroups.SelectionChanged -= gridGroups_SelectionChanged;
+            gridGroups.SelectionChanged -= Handle_gridGroups_SelectionChanged;
 
             gridGroups.DataSource = null;
             gridGroups.DataSource = DB.SceneGroups.OrderByDescending(x => x.Scenegroup_id).ToList();
             gridGroups.ClearSelection();
-
-            var index = _gridGroupsIndex;
 
             if (gridGroups.Rows.Count < _gridGroupsIndex)
             {
@@ -69,28 +66,28 @@ namespace TMCWorkbench
 
             gridGroups.Rows[_gridGroupsIndex].Selected = true;
             gridGroups.CurrentCell = gridGroups.Rows[_gridGroupsIndex].Cells[0];
-            gridGroups.SelectionChanged += gridGroups_SelectionChanged;
+            gridGroups.SelectionChanged += Handle_gridGroups_SelectionChanged;
         }
 
-        private void BindGridArtists()
+        private void BindComposers()
         {
-            gridArtists.SelectionChanged -= gridArists_SelectionChanged;
+            gridArtists.SelectionChanged -= Handle_gridArists_SelectionChanged;
             gridArtists.DataSource = null;
 
             if (_sceneGroup != null)
             {
-                RetrieveArtistsData(_sceneGroup.Scenegroup_id);
+                RetrieveScenegroupComposerData(_sceneGroup.Scenegroup_id);
 
-                gridArtists.DataSource = _artists;
+                gridArtists.DataSource = _sceneGroupComposers;
                 gridArtists.ClearSelection();
 
                 ddlComposers.DataSource = _dropDownComposers;
             }
 
-            gridArtists.SelectionChanged += gridArists_SelectionChanged;
+            gridArtists.SelectionChanged += Handle_gridArists_SelectionChanged;
         }
 
-        private void RetrieveArtistsData(int id)
+        private void RetrieveScenegroupComposerData(int id)
         {
             //var groupComposers = DB.GroupsComposers.Where(x => x.FK_scenegroup_id == id);
             //_gridComposers = new List<Composer>();
@@ -113,11 +110,11 @@ namespace TMCWorkbench
 
             var groupComposers = DB.GroupsComposers.Where(x => x.FK_scenegroup_id == id);
             var composers = new List<Composer>();
-            _artists = new List<Artist>();
+            _sceneGroupComposers = new List<ScenegroupComposer>();
 
             foreach (var group in groupComposers)
             {
-                _artists.Add(new Artist(group));
+                _sceneGroupComposers.Add(new ScenegroupComposer(group, true));
                 composers.Add(group.Composer);
             }
 
@@ -134,7 +131,8 @@ namespace TMCWorkbench
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            gridGroups.SelectionChanged -= gridGroups_SelectionChanged;
+            gridGroups.SelectionChanged -= Handle_gridGroups_SelectionChanged;
+            gridArtists.SelectionChanged -= Handle_gridArists_SelectionChanged;
             base.OnFormClosed(e);
         }
 
@@ -143,21 +141,15 @@ namespace TMCWorkbench
         {
             ctrName.Text = _sceneGroup.Name;
 
-            if (_sceneGroup.Date_scenegroup_start.HasValue)
-            {
-                ctrDateStart.Date = _sceneGroup.Date_scenegroup_start.Value;
-            }
-            if (_sceneGroup.Date_scenegroup_stop.HasValue)
-            {
-                ctrDateStop.Date = _sceneGroup.Date_scenegroup_stop.Value;
-            }
+            ctrDateStart.Date = _sceneGroup.Date_scenegroup_start;
+            ctrDateStop.Date = _sceneGroup.Date_scenegroup_stop;
 
             ctrAbout.Text = _sceneGroup.About;
 
-            BindGridArtists();
+            BindComposers();
         }
 
-        private void gridGroups_SelectionChanged(object sender, EventArgs e)
+        private void Handle_gridGroups_SelectionChanged(object sender, EventArgs e)
         {
             if (gridGroups.SelectedRows.Count == 0) return;
 
@@ -167,12 +159,11 @@ namespace TMCWorkbench
             UpdateControls();
         }
 
-        private void gridArists_SelectionChanged(object sender, EventArgs e)
+        private void Handle_gridArists_SelectionChanged(object sender, EventArgs e)
         {
             if (gridArtists.SelectedRows.Count == 0) return;
 
-            _gridComposerIndex = gridArtists.SelectedRows[0].Index;
-            _artist = gridArtists.SelectedRows[0].DataBoundItem as Artist;
+            _scenegroupComposer = gridArtists.SelectedRows[0].DataBoundItem as ScenegroupComposer;
         }
 
         private void Handle_btnAddScenegroup_Click(object sender, EventArgs e)
@@ -183,7 +174,7 @@ namespace TMCWorkbench
             scenegroup.Name = txtAddSceneGroup.Text;
             DB.Add(scenegroup, true);
 
-            BindGridGroup();
+            BindSceneGroups();
 
             //var x = DB.SceneGroups;
 
@@ -210,7 +201,7 @@ namespace TMCWorkbench
 
             DB.Save();
             DB.LoadSceneGroups(true);
-            BindGridGroup();
+            BindSceneGroups();
         }
 
         private void Handle_gridArtists_KeyUp(object sender, KeyEventArgs e)
@@ -226,7 +217,7 @@ namespace TMCWorkbench
             {
                 for (var i = rowsSelected - 1; i >= 0; i--)
                 {
-                    var row = gridArtists.SelectedRows[i].DataBoundItem as Artist;
+                    var row = gridArtists.SelectedRows[i].DataBoundItem as ScenegroupComposer;
                     composers.Add(row.GetComposer());
                 }
             }
@@ -237,33 +228,26 @@ namespace TMCWorkbench
 
                 DB.Save();
                 DB.LoadGroupsComposers(true);
-                BindGridArtists();
+                BindComposers();
             }
         }
 
-        private void ctrSave_OnButtonClick(object sender, EventArgs e)
+        private void Handle_ctrSave_OnButtonClick(object sender, EventArgs e)
         {
-            if (ctrDateStart.IsValidDate())
-            {
-                _sceneGroup.Date_scenegroup_start = ctrDateStart.Date;
-            }
-            if (ctrDateStop.IsValidDate())
-            {
-                _sceneGroup.Date_scenegroup_stop = ctrDateStop.Date;
-            }
-
+            _sceneGroup.Date_scenegroup_start = ctrDateStart.Date;
+            _sceneGroup.Date_scenegroup_stop = ctrDateStop.Date;
             _sceneGroup.Name = ctrName.Text;
             _sceneGroup.About = ctrAbout.Text;
 
             DB.Replace(_sceneGroup);
             DB.Save();
             DB.LoadSceneGroups(true);
-            BindGridGroup();
+            BindSceneGroups();
 
             gridGroups.Select();
         }
 
-        private void btnAddComposer_Click(object sender, EventArgs e)
+        private void Handle_btnAddComposer_Click(object sender, EventArgs e)
         {
             if (!ddlComposers.SelectedValue.IsNumeric()) return;
 
@@ -271,7 +255,7 @@ namespace TMCWorkbench
             DB.Save();
             DB.LoadSceneGroups();
             DB.LoadGroupsComposers(true);
-            BindGridArtists();
+            BindComposers();
 
             gridGroups.Select();
         }

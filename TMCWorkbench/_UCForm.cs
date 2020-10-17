@@ -25,5 +25,16 @@ namespace TMCWorkbench
                 this.Dock = DockStyle.Fill;
             }
         }
+
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if (Form.ModifierKeys == Keys.None && keyData == Keys.Escape)
+            {
+                Close();
+                return true;
+            }
+
+            return base.ProcessDialogKey(keyData);
+        }
     }
 }

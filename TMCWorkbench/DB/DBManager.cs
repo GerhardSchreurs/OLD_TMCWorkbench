@@ -56,6 +56,7 @@ namespace TMCWorkbench.DB
             CON = new MySqlConnection(Configurator.ConnectionString);
             CON.Open();
             C = new DatabaseContext(CON,false);
+            C.Database.Log = Console.WriteLine;
         }
 
         public void LoadStyles(bool refresh = false)
@@ -175,13 +176,25 @@ namespace TMCWorkbench.DB
             }
         }
 
+        public void Add(Composer composer, bool save = true, bool refresh = true)
+        {
+            C.Composers.Add(composer);
+
+            if (save)
+            {
+                C.SaveChanges();
+            }
+            if (refresh)
+            {
+                LoadComposers(true);
+            }
+        }
+
         public void RemoveComposerFromGroup(Scenegroup sceneGroup, List<Composer> composers)
         {
             if (composers == null) return;
 
             var collection = new List<C_Scenegroup_Composer>();
-            //composers.ForEach(c => collection.Add(GroupsComposers.Where(x => x.FK_composer_id == c.Composer_id).First()));
-            //GroupsComposers
 
             foreach(var composer in composers)
             {
@@ -194,8 +207,32 @@ namespace TMCWorkbench.DB
                 }
             }
 
-            //var collection = C.C_Scenegroup_Composers.Where(x => x.FK_scenegroup_id == sceneGroup.Scenegroup_id);
             C.C_Scenegroup_Composers.RemoveRange(collection);
+        }
+
+        public void RemoveComposerFromGroup(Composer composer, List<Scenegroup> scenegroups)
+        {
+            if (scenegroups == null) return;
+
+            var collection = new List<C_Scenegroup_Composer>();
+
+            foreach (var scenegroup in scenegroups)
+            {
+                foreach (var x in GroupsComposers.Where(g => g.FK_composer_id == composer.Composer_id))
+                {
+                    if (x.FK_scenegroup_id == scenegroup.Scenegroup_id)
+                    {
+                        collection.Add(x);
+                    }
+                }
+            }
+
+            C.C_Scenegroup_Composers.RemoveRange(collection);
+        }
+
+        public void Remove(Composer composer)
+        {
+            C.Composers.Remove(composer);
         }
 
         public void Remove(Scenegroup scenegroup)
@@ -211,6 +248,11 @@ namespace TMCWorkbench.DB
         public void Replace(Scenegroup scenegroup)
         {
             C.Scenegroups.AddOrUpdate(scenegroup);
+        }
+
+        public void Replace(Composer composer)
+        {
+            C.Composers.AddOrUpdate(composer);
         }
 
         public void Save()

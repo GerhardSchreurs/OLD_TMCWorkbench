@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench
 {
-    partial class UCGroups
+    partial class UCSceneGroups
     {
         /// <summary>
         /// Required designer variable.
@@ -40,17 +40,17 @@
             this.gridGroups = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanelRight = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAddComposer = new System.Windows.Forms.Button();
             this.ddlComposers = new System.Windows.Forms.ComboBox();
+            this.btnAddComposer = new System.Windows.Forms.Button();
+            this.chkIsComposer = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ctrAbout = new TMCWorkbench.Controls.Resettable.ResettableTextAreaControl();
             this.ctrDateStop = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
             this.ctrDateStart = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
             this.ctrName = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.ctrSave = new TMCWorkbench.Controls.Resettable.ResettableButtonControl();
-            this.gridArtists = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkIsComposer = new System.Windows.Forms.CheckBox();
+            this.gridArtists = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanelOuter.SuspendLayout();
             this.tableLayoutPanelDivider.SuspendLayout();
             this.tableLayoutPanelLeft.SuspendLayout();
@@ -203,8 +203,8 @@
             this.tableLayoutPanelRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelRight.Controls.Add(this.tableLayoutPanel1, 0, 3);
             this.tableLayoutPanelRight.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanelRight.Controls.Add(this.gridArtists, 0, 2);
             this.tableLayoutPanelRight.Controls.Add(this.label1, 0, 1);
+            this.tableLayoutPanelRight.Controls.Add(this.gridArtists, 0, 2);
             this.tableLayoutPanelRight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelRight.Location = new System.Drawing.Point(516, 3);
             this.tableLayoutPanelRight.Name = "tableLayoutPanelRight";
@@ -213,6 +213,7 @@
             this.tableLayoutPanelRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanelRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanelRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelRight.Size = new System.Drawing.Size(467, 530);
             this.tableLayoutPanelRight.TabIndex = 1;
             // 
@@ -232,7 +233,16 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(467, 40);
-            this.tableLayoutPanel1.TabIndex = 5;
+            this.tableLayoutPanel1.TabIndex = 6;
+            // 
+            // ddlComposers
+            // 
+            this.ddlComposers.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ddlComposers.FormattingEnabled = true;
+            this.ddlComposers.Location = new System.Drawing.Point(3, 16);
+            this.ddlComposers.Name = "ddlComposers";
+            this.ddlComposers.Size = new System.Drawing.Size(301, 21);
+            this.ddlComposers.TabIndex = 3;
             // 
             // btnAddComposer
             // 
@@ -243,16 +253,17 @@
             this.btnAddComposer.TabIndex = 2;
             this.btnAddComposer.Text = "Add";
             this.btnAddComposer.UseVisualStyleBackColor = true;
-            this.btnAddComposer.Click += new System.EventHandler(this.btnAddComposer_Click);
             // 
-            // ddlComposers
+            // chkIsComposer
             // 
-            this.ddlComposers.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ddlComposers.FormattingEnabled = true;
-            this.ddlComposers.Location = new System.Drawing.Point(3, 16);
-            this.ddlComposers.Name = "ddlComposers";
-            this.ddlComposers.Size = new System.Drawing.Size(301, 21);
-            this.ddlComposers.TabIndex = 3;
+            this.chkIsComposer.AutoSize = true;
+            this.chkIsComposer.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.chkIsComposer.Location = new System.Drawing.Point(310, 20);
+            this.chkIsComposer.Name = "chkIsComposer";
+            this.chkIsComposer.Size = new System.Drawing.Size(14, 17);
+            this.chkIsComposer.TabIndex = 4;
+            this.chkIsComposer.Text = "checkBox1";
+            this.chkIsComposer.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -318,7 +329,17 @@
             this.ctrSave.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.ctrSave.Size = new System.Drawing.Size(461, 24);
             this.ctrSave.TabIndex = 12;
-            this.ctrSave.OnButtonClick += new System.EventHandler(this.ctrSave_OnButtonClick);
+            this.ctrSave.OnButtonClick += new System.EventHandler(this.Handle_ctrSave_OnButtonClick);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 225);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(103, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Composers in group:";
             // 
             // gridArtists
             // 
@@ -334,34 +355,13 @@
             this.gridArtists.TabIndex = 3;
             this.gridArtists.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Handle_gridArtists_KeyUp);
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 225);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Composers in group:";
-            // 
-            // chkIsComposer
-            // 
-            this.chkIsComposer.AutoSize = true;
-            this.chkIsComposer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.chkIsComposer.Location = new System.Drawing.Point(310, 20);
-            this.chkIsComposer.Name = "chkIsComposer";
-            this.chkIsComposer.Size = new System.Drawing.Size(14, 17);
-            this.chkIsComposer.TabIndex = 4;
-            this.chkIsComposer.Text = "checkBox1";
-            this.chkIsComposer.UseVisualStyleBackColor = true;
-            // 
-            // UCGroups
+            // UCSceneGroups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1032, 582);
             this.Controls.Add(this.tableLayoutPanelOuter);
-            this.Name = "UCGroups";
+            this.Name = "UCSceneGroups";
             this.Text = "UCGroups";
             this.tableLayoutPanelOuter.ResumeLayout(false);
             this.tableLayoutPanelDivider.ResumeLayout(false);
@@ -398,13 +398,13 @@
         private Controls.Resettable.ResettableDateControl ctrDateStart;
         private Controls.Resettable.ResettableTextControl ctrName;
         private System.Windows.Forms.DataGridView gridArtists;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnAddComposer;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox ddlComposers;
         private Controls.Resettable.ResettableDateControl ctrDateStop;
         private Controls.Resettable.ResettableTextAreaControl ctrAbout;
         private Controls.Resettable.ResettableButtonControl ctrSave;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ComboBox ddlComposers;
+        private System.Windows.Forms.Button btnAddComposer;
         private System.Windows.Forms.CheckBox chkIsComposer;
     }
 }
