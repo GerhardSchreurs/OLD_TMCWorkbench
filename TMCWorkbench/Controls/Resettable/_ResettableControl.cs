@@ -19,6 +19,8 @@ namespace TMCWorkbench.Controls
         public delegate void ResetEventHandler(object sender, EventArgs e);
         public event ResetEventHandler OnReset;
 
+        private ToolTip _toopTip;
+
         private void RaiseOnReset()
         {
             OnReset?.Invoke(this, new EventArgs());
@@ -27,6 +29,11 @@ namespace TMCWorkbench.Controls
         public ResettableControl()
         {
             InitializeComponent();
+            _toopTip = new ToolTip();
+            _toopTip.AutoPopDelay = 10000;
+            _toopTip.InitialDelay = 100;
+            _toopTip.ReshowDelay = 500;
+            _toopTip.ShowAlways = true;
             //TypeDescriptor.AddAttributes(this.pnlContent, new DesignerAttribute(typeof(ResettableControlPanelDesigner)));
         }
 
@@ -46,9 +53,21 @@ namespace TMCWorkbench.Controls
             set { lblTitle.Text = value; }
         }
 
+        private string _toolTipValue;
+
+        public string Tooltip
+        {
+            get { return _toolTipValue; }
+            set {
+                _toolTipValue = value;
+                _toopTip.SetToolTip(btnReset, value);
+            }
+        }
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             RaiseOnReset();
         }
+
     }
 }

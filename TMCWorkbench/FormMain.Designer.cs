@@ -34,6 +34,17 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableOuter = new System.Windows.Forms.TableLayoutPanel();
+            this.tableMenu = new System.Windows.Forms.TableLayoutPanel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scenegroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.composersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
             this.tablePlayer = new System.Windows.Forms.TableLayoutPanel();
             this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
@@ -58,39 +69,29 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pnlMeta = new System.Windows.Forms.Panel();
-            this.pnlMetaNew = new System.Windows.Forms.Panel();
-            this.ctrStyleNew = new TMCWorkbench.Controls.Resettable.ResettableStyleDropDownControl();
-            this.ctrBPMNew = new TMCWorkbench.Controls.Resettable.ResettableBpmControl();
-            this.ctrSpeedNew = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
-            this.ctrLengthNew = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
-            this.ctrDateNew = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
-            this.ctrFileInfoNew = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
-            this.ctrStyleOrg = new TMCWorkbench.Controls.Resettable.ResettableStyleDropDownControl();
-            this.ctrBPMOrg = new TMCWorkbench.Controls.Resettable.ResettableBpmControl();
-            this.ctrSpeedOrg = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
-            this.ctrLengthOrg = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
-            this.ctrDateOrg = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
-            this.ctrFileInfoOrg = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
+            this.ctrComposerText = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
+            this.ctrComposer = new TMCWorkbench.Controls.Resettable.ResettableComposerDropDownControl();
+            this.ctrStyle = new TMCWorkbench.Controls.Resettable.ResettableStyleDropDownControl();
+            this.ctrBPM = new TMCWorkbench.Controls.Resettable.ResettableBpmControl();
+            this.ctrSpeed = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
+            this.ctrLength = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
+            this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
+            this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.listViewControl1 = new TMCWorkbench.Controls.ListViewControl();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnBla = new System.Windows.Forms.Button();
             this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
             this.btnTest = new System.Windows.Forms.Button();
-            this.tableMenu = new System.Windows.Forms.TableLayoutPanel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scenegroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
-            this.composersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctrScenegroup = new TMCWorkbench.Controls.Resettable.ResettableSceneGroupDropDownControl();
+            this.ctrScenegroupText = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
+            this.ctrStyleText = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
+            this.tableMenu.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            this.tabControl.SuspendLayout();
             this.tableInner.SuspendLayout();
             this.tablePlayer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -112,12 +113,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).BeginInit();
             this.panelSave.SuspendLayout();
             this.pnlMeta.SuspendLayout();
-            this.pnlMetaNew.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableMenu.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
-            this.tabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -133,7 +130,7 @@
             this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 900);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 837);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1637, 24);
             this.statusStrip1.TabIndex = 1;
@@ -149,9 +146,9 @@
             // 
             this.tableOuter.ColumnCount = 1;
             this.tableOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableOuter.Controls.Add(this.tableMenu, 0, 0);
             this.tableOuter.Controls.Add(this.tableInner, 0, 1);
             this.tableOuter.Controls.Add(this.statusStrip1, 1, 2);
-            this.tableOuter.Controls.Add(this.tableMenu, 0, 0);
             this.tableOuter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableOuter.Location = new System.Drawing.Point(0, 0);
             this.tableOuter.Name = "tableOuter";
@@ -159,8 +156,111 @@
             this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableOuter.Size = new System.Drawing.Size(1637, 924);
+            this.tableOuter.Size = new System.Drawing.Size(1637, 861);
             this.tableOuter.TabIndex = 1;
+            // 
+            // tableMenu
+            // 
+            this.tableMenu.ColumnCount = 2;
+            this.tableMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 608F));
+            this.tableMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableMenu.Controls.Add(this.menuStrip1, 0, 0);
+            this.tableMenu.Controls.Add(this.tabControl, 1, 0);
+            this.tableMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableMenu.Location = new System.Drawing.Point(0, 0);
+            this.tableMenu.Margin = new System.Windows.Forms.Padding(0);
+            this.tableMenu.Name = "tableMenu";
+            this.tableMenu.RowCount = 1;
+            this.tableMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableMenu.Size = new System.Drawing.Size(1637, 24);
+            this.tableMenu.TabIndex = 2;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(608, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stylesToolStripMenuItem,
+            this.scenegroupsToolStripMenuItem,
+            this.composersToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // stylesToolStripMenuItem
+            // 
+            this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
+            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.stylesToolStripMenuItem.Text = "Styles";
+            this.stylesToolStripMenuItem.Click += new System.EventHandler(this.stylesToolStripMenuItem_Click);
+            // 
+            // scenegroupsToolStripMenuItem
+            // 
+            this.scenegroupsToolStripMenuItem.Name = "scenegroupsToolStripMenuItem";
+            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.scenegroupsToolStripMenuItem.Text = "Scenegroups";
+            this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.scenegroupsToolStripMenuItem_Click);
+            // 
+            // composersToolStripMenuItem
+            // 
+            this.composersToolStripMenuItem.Name = "composersToolStripMenuItem";
+            this.composersToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.composersToolStripMenuItem.Text = "Composers";
+            this.composersToolStripMenuItem.Click += new System.EventHandler(this.composersToolStripMenuItem_Click);
+            // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Location = new System.Drawing.Point(611, 3);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(200, 18);
+            this.tabControl.TabIndex = 7;
+            this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl_Selected);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(192, 0);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Database";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(192, 0);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Original";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tableInner
             // 
@@ -177,7 +277,7 @@
             this.tableInner.Name = "tableInner";
             this.tableInner.RowCount = 1;
             this.tableInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableInner.Size = new System.Drawing.Size(1631, 870);
+            this.tableInner.Size = new System.Drawing.Size(1631, 807);
             this.tableInner.TabIndex = 1;
             // 
             // tablePlayer
@@ -193,13 +293,13 @@
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tablePlayer.Size = new System.Drawing.Size(1025, 864);
+            this.tablePlayer.Size = new System.Drawing.Size(1025, 801);
             this.tablePlayer.TabIndex = 2;
             // 
             // musicControl1
             // 
             this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.musicControl1.Location = new System.Drawing.Point(3, 798);
+            this.musicControl1.Location = new System.Drawing.Point(3, 735);
             this.musicControl1.Name = "musicControl1";
             this.musicControl1.Size = new System.Drawing.Size(1019, 63);
             this.musicControl1.TabIndex = 9;
@@ -219,8 +319,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanelBot);
-            this.splitContainer1.Size = new System.Drawing.Size(1019, 778);
-            this.splitContainer1.SplitterDistance = 387;
+            this.splitContainer1.Size = new System.Drawing.Size(1019, 715);
+            this.splitContainer1.SplitterDistance = 355;
             this.splitContainer1.TabIndex = 10;
             // 
             // tableLayoutPanelTop
@@ -242,7 +342,7 @@
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.Size = new System.Drawing.Size(1019, 387);
+            this.tableLayoutPanelTop.Size = new System.Drawing.Size(1019, 355);
             this.tableLayoutPanelTop.TabIndex = 0;
             // 
             // label4
@@ -285,7 +385,7 @@
             this.pnlSamples.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSamples.Location = new System.Drawing.Point(3, 23);
             this.pnlSamples.Name = "pnlSamples";
-            this.pnlSamples.Size = new System.Drawing.Size(178, 361);
+            this.pnlSamples.Size = new System.Drawing.Size(178, 329);
             this.pnlSamples.TabIndex = 10;
             // 
             // txtSamplesNew
@@ -365,7 +465,7 @@
             this.pnlInstruments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlInstruments.Location = new System.Drawing.Point(187, 23);
             this.pnlInstruments.Name = "pnlInstruments";
-            this.pnlInstruments.Size = new System.Drawing.Size(178, 361);
+            this.pnlInstruments.Size = new System.Drawing.Size(178, 329);
             this.pnlInstruments.TabIndex = 11;
             // 
             // txtInstrumentsNew
@@ -445,7 +545,7 @@
             this.pnlMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMessage.Location = new System.Drawing.Point(371, 23);
             this.pnlMessage.Name = "pnlMessage";
-            this.pnlMessage.Size = new System.Drawing.Size(645, 361);
+            this.pnlMessage.Size = new System.Drawing.Size(645, 329);
             this.pnlMessage.TabIndex = 12;
             // 
             // txtMessageNew
@@ -533,7 +633,7 @@
             this.tableLayoutPanelBot.RowCount = 2;
             this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelBot.Size = new System.Drawing.Size(1019, 387);
+            this.tableLayoutPanelBot.Size = new System.Drawing.Size(1019, 356);
             this.tableLayoutPanelBot.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -549,7 +649,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 361);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 330);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // txtOutput
@@ -582,7 +682,7 @@
             this.txtOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtOutput.ServiceColors")));
             this.txtOutput.ShowLineNumbers = false;
-            this.txtOutput.Size = new System.Drawing.Size(639, 325);
+            this.txtOutput.Size = new System.Drawing.Size(639, 294);
             this.txtOutput.TabIndex = 10;
             this.txtOutput.Text = "txtOutput";
             this.txtOutput.Zoom = 100;
@@ -592,7 +692,7 @@
             this.panelSave.Controls.Add(this.btnSave);
             this.panelSave.Controls.Add(this.comboBox1);
             this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSave.Location = new System.Drawing.Point(3, 334);
+            this.panelSave.Location = new System.Drawing.Point(3, 303);
             this.panelSave.Name = "panelSave";
             this.panelSave.Size = new System.Drawing.Size(639, 24);
             this.panelSave.TabIndex = 11;
@@ -621,178 +721,121 @@
             // 
             // pnlMeta
             // 
-            this.pnlMeta.Controls.Add(this.pnlMetaNew);
             this.pnlMeta.Controls.Add(this.pnlMetaOrg);
             this.pnlMeta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMeta.Location = new System.Drawing.Point(3, 23);
             this.pnlMeta.Name = "pnlMeta";
-            this.pnlMeta.Size = new System.Drawing.Size(362, 361);
+            this.pnlMeta.Size = new System.Drawing.Size(362, 330);
             this.pnlMeta.TabIndex = 1;
-            // 
-            // pnlMetaNew
-            // 
-            this.pnlMetaNew.Controls.Add(this.ctrStyleNew);
-            this.pnlMetaNew.Controls.Add(this.ctrBPMNew);
-            this.pnlMetaNew.Controls.Add(this.ctrSpeedNew);
-            this.pnlMetaNew.Controls.Add(this.ctrLengthNew);
-            this.pnlMetaNew.Controls.Add(this.ctrDateNew);
-            this.pnlMetaNew.Controls.Add(this.ctrFileInfoNew);
-            this.pnlMetaNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlMetaNew.Location = new System.Drawing.Point(0, 170);
-            this.pnlMetaNew.Name = "pnlMetaNew";
-            this.pnlMetaNew.Size = new System.Drawing.Size(362, 170);
-            this.pnlMetaNew.TabIndex = 1;
-            // 
-            // ctrStyleNew
-            // 
-            this.ctrStyleNew.LabelTitle = "Style:";
-            this.ctrStyleNew.Location = new System.Drawing.Point(0, 120);
-            this.ctrStyleNew.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrStyleNew.Name = "ctrStyleNew";
-            this.ctrStyleNew.Size = new System.Drawing.Size(365, 24);
-            this.ctrStyleNew.TabIndex = 11;
-            // 
-            // ctrBPMNew
-            // 
-            this.ctrBPMNew.BPM = 0;
-            this.ctrBPMNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrBPMNew.LabelTitle = "BPM:";
-            this.ctrBPMNew.Location = new System.Drawing.Point(0, 96);
-            this.ctrBPMNew.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrBPMNew.Name = "ctrBPMNew";
-            this.ctrBPMNew.Size = new System.Drawing.Size(362, 24);
-            this.ctrBPMNew.TabIndex = 10;
-            // 
-            // ctrSpeedNew
-            // 
-            this.ctrSpeedNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrSpeedNew.LabelTitle = "Speed/Tempo:";
-            this.ctrSpeedNew.Location = new System.Drawing.Point(0, 72);
-            this.ctrSpeedNew.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrSpeedNew.Name = "ctrSpeedNew";
-            this.ctrSpeedNew.Size = new System.Drawing.Size(362, 24);
-            this.ctrSpeedNew.TabIndex = 9;
-            this.ctrSpeedNew.ValueA = 0;
-            this.ctrSpeedNew.ValueB = 0;
-            // 
-            // ctrLengthNew
-            // 
-            this.ctrLengthNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrLengthNew.LabelTitle = "Minutes/Sec:";
-            this.ctrLengthNew.Location = new System.Drawing.Point(0, 48);
-            this.ctrLengthNew.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrLengthNew.Name = "ctrLengthNew";
-            this.ctrLengthNew.Size = new System.Drawing.Size(362, 24);
-            this.ctrLengthNew.TabIndex = 8;
-            this.ctrLengthNew.ValueA = 0;
-            this.ctrLengthNew.ValueB = 0;
-            // 
-            // ctrDateNew
-            // 
-            this.ctrDateNew.Date = new System.DateTime(((long)(0)));
-            this.ctrDateNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrDateNew.LabelTitle = "Date:";
-            this.ctrDateNew.Location = new System.Drawing.Point(0, 24);
-            this.ctrDateNew.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrDateNew.Name = "ctrDateNew";
-            this.ctrDateNew.Size = new System.Drawing.Size(362, 24);
-            this.ctrDateNew.TabIndex = 7;
-            // 
-            // ctrFileInfoNew
-            // 
-            this.ctrFileInfoNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrFileInfoNew.LabelTitle = "Filename:";
-            this.ctrFileInfoNew.Location = new System.Drawing.Point(0, 0);
-            this.ctrFileInfoNew.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrFileInfoNew.Name = "ctrFileInfoNew";
-            this.ctrFileInfoNew.Size = new System.Drawing.Size(362, 24);
-            this.ctrFileInfoNew.TabIndex = 6;
             // 
             // pnlMetaOrg
             // 
-            this.pnlMetaOrg.Controls.Add(this.ctrStyleOrg);
-            this.pnlMetaOrg.Controls.Add(this.ctrBPMOrg);
-            this.pnlMetaOrg.Controls.Add(this.ctrSpeedOrg);
-            this.pnlMetaOrg.Controls.Add(this.ctrLengthOrg);
-            this.pnlMetaOrg.Controls.Add(this.ctrDateOrg);
-            this.pnlMetaOrg.Controls.Add(this.ctrFileInfoOrg);
+            this.pnlMetaOrg.Controls.Add(this.ctrStyleText);
+            this.pnlMetaOrg.Controls.Add(this.ctrScenegroupText);
+            this.pnlMetaOrg.Controls.Add(this.ctrScenegroup);
+            this.pnlMetaOrg.Controls.Add(this.ctrComposerText);
+            this.pnlMetaOrg.Controls.Add(this.ctrComposer);
+            this.pnlMetaOrg.Controls.Add(this.ctrStyle);
+            this.pnlMetaOrg.Controls.Add(this.ctrBPM);
+            this.pnlMetaOrg.Controls.Add(this.ctrSpeed);
+            this.pnlMetaOrg.Controls.Add(this.ctrLength);
+            this.pnlMetaOrg.Controls.Add(this.ctrDate);
+            this.pnlMetaOrg.Controls.Add(this.ctrFileInfo);
             this.pnlMetaOrg.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMetaOrg.Location = new System.Drawing.Point(0, 0);
             this.pnlMetaOrg.Name = "pnlMetaOrg";
-            this.pnlMetaOrg.Size = new System.Drawing.Size(362, 170);
+            this.pnlMetaOrg.Size = new System.Drawing.Size(362, 283);
             this.pnlMetaOrg.TabIndex = 0;
             // 
-            // ctrStyleOrg
+            // ctrComposerText
             // 
-            this.ctrStyleOrg.LabelTitle = "Style";
-            this.ctrStyleOrg.Location = new System.Drawing.Point(0, 120);
-            this.ctrStyleOrg.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrStyleOrg.Name = "ctrStyleOrg";
-            this.ctrStyleOrg.Size = new System.Drawing.Size(365, 24);
-            this.ctrStyleOrg.TabIndex = 11;
+            this.ctrComposerText.LabelTitle = "Composer (S)";
+            this.ctrComposerText.Location = new System.Drawing.Point(0, 192);
+            this.ctrComposerText.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrComposerText.Name = "ctrComposerText";
+            this.ctrComposerText.Size = new System.Drawing.Size(365, 24);
+            this.ctrComposerText.TabIndex = 13;
             // 
-            // ctrBPMOrg
+            // ctrComposer
             // 
-            this.ctrBPMOrg.BPM = 0;
-            this.ctrBPMOrg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrBPMOrg.LabelTitle = "BPM:";
-            this.ctrBPMOrg.Location = new System.Drawing.Point(0, 96);
-            this.ctrBPMOrg.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrBPMOrg.Name = "ctrBPMOrg";
-            this.ctrBPMOrg.Size = new System.Drawing.Size(362, 24);
-            this.ctrBPMOrg.TabIndex = 10;
+            this.ctrComposer.LabelTitle = "Composer";
+            this.ctrComposer.Location = new System.Drawing.Point(0, 168);
+            this.ctrComposer.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrComposer.Name = "ctrComposer";
+            this.ctrComposer.Size = new System.Drawing.Size(365, 24);
+            this.ctrComposer.TabIndex = 12;
             // 
-            // ctrSpeedOrg
+            // ctrStyle
             // 
-            this.ctrSpeedOrg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrSpeedOrg.LabelTitle = "Speed/Tempo:";
-            this.ctrSpeedOrg.Location = new System.Drawing.Point(0, 72);
-            this.ctrSpeedOrg.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrSpeedOrg.Name = "ctrSpeedOrg";
-            this.ctrSpeedOrg.Size = new System.Drawing.Size(362, 24);
-            this.ctrSpeedOrg.TabIndex = 9;
-            this.ctrSpeedOrg.ValueA = 0;
-            this.ctrSpeedOrg.ValueB = 0;
+            this.ctrStyle.LabelTitle = "Style";
+            this.ctrStyle.Location = new System.Drawing.Point(0, 120);
+            this.ctrStyle.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrStyle.Name = "ctrStyle";
+            this.ctrStyle.Size = new System.Drawing.Size(365, 24);
+            this.ctrStyle.TabIndex = 11;
             // 
-            // ctrLengthOrg
+            // ctrBPM
             // 
-            this.ctrLengthOrg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrLengthOrg.LabelTitle = "Minutes/Sec:";
-            this.ctrLengthOrg.Location = new System.Drawing.Point(0, 48);
-            this.ctrLengthOrg.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrLengthOrg.Name = "ctrLengthOrg";
-            this.ctrLengthOrg.Size = new System.Drawing.Size(362, 24);
-            this.ctrLengthOrg.TabIndex = 8;
-            this.ctrLengthOrg.ValueA = 0;
-            this.ctrLengthOrg.ValueB = 0;
+            this.ctrBPM.BPM = 0;
+            this.ctrBPM.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrBPM.LabelTitle = "BPM:";
+            this.ctrBPM.Location = new System.Drawing.Point(0, 96);
+            this.ctrBPM.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrBPM.Name = "ctrBPM";
+            this.ctrBPM.Size = new System.Drawing.Size(362, 24);
+            this.ctrBPM.TabIndex = 10;
             // 
-            // ctrDateOrg
+            // ctrSpeed
             // 
-            this.ctrDateOrg.Date = new System.DateTime(((long)(0)));
-            this.ctrDateOrg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrDateOrg.LabelTitle = "Date:";
-            this.ctrDateOrg.Location = new System.Drawing.Point(0, 24);
-            this.ctrDateOrg.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrDateOrg.Name = "ctrDateOrg";
-            this.ctrDateOrg.Size = new System.Drawing.Size(362, 24);
-            this.ctrDateOrg.TabIndex = 7;
+            this.ctrSpeed.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrSpeed.LabelTitle = "Speed/Tempo:";
+            this.ctrSpeed.Location = new System.Drawing.Point(0, 72);
+            this.ctrSpeed.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrSpeed.Name = "ctrSpeed";
+            this.ctrSpeed.Size = new System.Drawing.Size(362, 24);
+            this.ctrSpeed.TabIndex = 9;
+            this.ctrSpeed.ValueA = 0;
+            this.ctrSpeed.ValueB = 0;
             // 
-            // ctrFileInfoOrg
+            // ctrLength
             // 
-            this.ctrFileInfoOrg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrFileInfoOrg.LabelTitle = "Filename:";
-            this.ctrFileInfoOrg.Location = new System.Drawing.Point(0, 0);
-            this.ctrFileInfoOrg.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrFileInfoOrg.Name = "ctrFileInfoOrg";
-            this.ctrFileInfoOrg.Size = new System.Drawing.Size(362, 24);
-            this.ctrFileInfoOrg.TabIndex = 6;
+            this.ctrLength.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrLength.LabelTitle = "Minutes/Sec:";
+            this.ctrLength.Location = new System.Drawing.Point(0, 48);
+            this.ctrLength.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrLength.Name = "ctrLength";
+            this.ctrLength.Size = new System.Drawing.Size(362, 24);
+            this.ctrLength.TabIndex = 8;
+            this.ctrLength.ValueA = 0;
+            this.ctrLength.ValueB = 0;
+            // 
+            // ctrDate
+            // 
+            this.ctrDate.Date = new System.DateTime(((long)(0)));
+            this.ctrDate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrDate.LabelTitle = "Date:";
+            this.ctrDate.Location = new System.Drawing.Point(0, 24);
+            this.ctrDate.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrDate.Name = "ctrDate";
+            this.ctrDate.Size = new System.Drawing.Size(362, 24);
+            this.ctrDate.TabIndex = 7;
+            // 
+            // ctrFileInfo
+            // 
+            this.ctrFileInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrFileInfo.LabelTitle = "Filename:";
+            this.ctrFileInfo.Location = new System.Drawing.Point(0, 0);
+            this.ctrFileInfo.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrFileInfo.Name = "ctrFileInfo";
+            this.ctrFileInfo.Size = new System.Drawing.Size(362, 24);
+            this.ctrFileInfo.TabIndex = 6;
             // 
             // listViewControl1
             // 
             this.listViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewControl1.Location = new System.Drawing.Point(253, 3);
             this.listViewControl1.Name = "listViewControl1";
-            this.listViewControl1.Size = new System.Drawing.Size(344, 864);
+            this.listViewControl1.Size = new System.Drawing.Size(344, 801);
             this.listViewControl1.TabIndex = 3;
             // 
             // tableLayoutPanel2
@@ -810,12 +853,12 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 864);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 801);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // btnBla
             // 
-            this.btnBla.Location = new System.Drawing.Point(3, 847);
+            this.btnBla.Location = new System.Drawing.Point(3, 784);
             this.btnBla.Name = "btnBla";
             this.btnBla.Size = new System.Drawing.Size(75, 14);
             this.btnBla.TabIndex = 3;
@@ -828,114 +871,18 @@
             this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.browserControl1.Location = new System.Drawing.Point(3, 3);
             this.browserControl1.Name = "browserControl1";
-            this.browserControl1.Size = new System.Drawing.Size(238, 798);
+            this.browserControl1.Size = new System.Drawing.Size(238, 735);
             this.browserControl1.TabIndex = 1;
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(3, 807);
+            this.btnTest.Location = new System.Drawing.Point(3, 744);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(75, 23);
             this.btnTest.TabIndex = 2;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
-            // tableMenu
-            // 
-            this.tableMenu.ColumnCount = 2;
-            this.tableMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 1032F));
-            this.tableMenu.Controls.Add(this.menuStrip1, 0, 0);
-            this.tableMenu.Controls.Add(this.tabControl, 1, 0);
-            this.tableMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableMenu.Location = new System.Drawing.Point(0, 0);
-            this.tableMenu.Margin = new System.Windows.Forms.Padding(0);
-            this.tableMenu.Name = "tableMenu";
-            this.tableMenu.RowCount = 1;
-            this.tableMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableMenu.Size = new System.Drawing.Size(1637, 24);
-            this.tableMenu.TabIndex = 2;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(605, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stylesToolStripMenuItem,
-            this.scenegroupsToolStripMenuItem,
-            this.composersToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // stylesToolStripMenuItem
-            // 
-            this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
-            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.stylesToolStripMenuItem.Text = "Styles";
-            this.stylesToolStripMenuItem.Click += new System.EventHandler(this.stylesToolStripMenuItem_Click);
-            // 
-            // scenegroupsToolStripMenuItem
-            // 
-            this.scenegroupsToolStripMenuItem.Name = "scenegroupsToolStripMenuItem";
-            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.scenegroupsToolStripMenuItem.Text = "Scenegroups";
-            this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.scenegroupsToolStripMenuItem_Click);
-            // 
-            // tabControl
-            // 
-            this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Controls.Add(this.tabPage2);
-            this.tabControl.Location = new System.Drawing.Point(608, 3);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(200, 18);
-            this.tabControl.TabIndex = 7;
-            this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl_Selected);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(192, 0);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Database";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 0);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Original";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -946,18 +893,38 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // composersToolStripMenuItem
+            // ctrScenegroup
             // 
-            this.composersToolStripMenuItem.Name = "composersToolStripMenuItem";
-            this.composersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.composersToolStripMenuItem.Text = "Composers";
-            this.composersToolStripMenuItem.Click += new System.EventHandler(this.composersToolStripMenuItem_Click);
+            this.ctrScenegroup.LabelTitle = "Scenegroup";
+            this.ctrScenegroup.Location = new System.Drawing.Point(0, 216);
+            this.ctrScenegroup.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrScenegroup.Name = "ctrScenegroup";
+            this.ctrScenegroup.Size = new System.Drawing.Size(365, 24);
+            this.ctrScenegroup.TabIndex = 14;
+            // 
+            // ctrScenegroupText
+            // 
+            this.ctrScenegroupText.LabelTitle = "Scenegroup (S)";
+            this.ctrScenegroupText.Location = new System.Drawing.Point(0, 240);
+            this.ctrScenegroupText.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrScenegroupText.Name = "ctrScenegroupText";
+            this.ctrScenegroupText.Size = new System.Drawing.Size(365, 24);
+            this.ctrScenegroupText.TabIndex = 15;
+            // 
+            // ctrStyleText
+            // 
+            this.ctrStyleText.LabelTitle = "Style (S)";
+            this.ctrStyleText.Location = new System.Drawing.Point(0, 144);
+            this.ctrStyleText.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrStyleText.Name = "ctrStyleText";
+            this.ctrStyleText.Size = new System.Drawing.Size(365, 24);
+            this.ctrStyleText.TabIndex = 16;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1637, 924);
+            this.ClientSize = new System.Drawing.Size(1637, 861);
             this.Controls.Add(this.tableOuter);
             this.Name = "FormMain";
             this.Text = "TMC Workbench";
@@ -966,6 +933,11 @@
             this.statusStrip1.PerformLayout();
             this.tableOuter.ResumeLayout(false);
             this.tableOuter.PerformLayout();
+            this.tableMenu.ResumeLayout(false);
+            this.tableMenu.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.tabControl.ResumeLayout(false);
             this.tableInner.ResumeLayout(false);
             this.tablePlayer.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -988,14 +960,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).EndInit();
             this.panelSave.ResumeLayout(false);
             this.pnlMeta.ResumeLayout(false);
-            this.pnlMetaNew.ResumeLayout(false);
             this.pnlMetaOrg.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableMenu.ResumeLayout(false);
-            this.tableMenu.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1044,22 +1010,20 @@
         private Controls.TextAreaControl txtMessageNew;
         private Controls.TextAreaControl txtMessageOrg;
         private System.Windows.Forms.Panel pnlMetaOrg;
-        private Controls.Resettable.ResettableStyleDropDownControl ctrStyleOrg;
-        private Controls.Resettable.ResettableBpmControl ctrBPMOrg;
-        private Controls.Resettable.ResettableDoubleIntControl ctrSpeedOrg;
-        private Controls.Resettable.ResettableDoubleIntControl ctrLengthOrg;
-        private Controls.Resettable.ResettableDateControl ctrDateOrg;
-        private Controls.Resettable.ResettableTextControl ctrFileInfoOrg;
-        private System.Windows.Forms.Panel pnlMetaNew;
-        private Controls.Resettable.ResettableStyleDropDownControl ctrStyleNew;
-        private Controls.Resettable.ResettableBpmControl ctrBPMNew;
-        private Controls.Resettable.ResettableDoubleIntControl ctrSpeedNew;
-        private Controls.Resettable.ResettableDoubleIntControl ctrLengthNew;
-        private Controls.Resettable.ResettableDateControl ctrDateNew;
-        private Controls.Resettable.ResettableTextControl ctrFileInfoNew;
+        private Controls.Resettable.ResettableStyleDropDownControl ctrStyle;
+        private Controls.Resettable.ResettableBpmControl ctrBPM;
+        private Controls.Resettable.ResettableDoubleIntControl ctrSpeed;
+        private Controls.Resettable.ResettableDoubleIntControl ctrLength;
+        private Controls.Resettable.ResettableDateControl ctrDate;
+        private Controls.Resettable.ResettableTextControl ctrFileInfo;
         private System.Windows.Forms.ToolStripMenuItem stylesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scenegroupsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem composersToolStripMenuItem;
+        private Controls.Resettable.ResettableComposerDropDownControl ctrComposer;
+        private Controls.Resettable.ResettableTextControl ctrComposerText;
+        private Controls.Resettable.ResettableSceneGroupDropDownControl ctrScenegroup;
+        private Controls.Resettable.ResettableTextControl ctrStyleText;
+        private Controls.Resettable.ResettableTextControl ctrScenegroupText;
     }
 }
 

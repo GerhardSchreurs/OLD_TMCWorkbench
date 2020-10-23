@@ -63,20 +63,17 @@ namespace TMCWorkbench
             txtMessageOrg.ClearUndo();
             txtInstrumentsOrg.ClearUndo();
 
-            ctrFileInfoOrg.Text = modInfo.FileName;
-            ctrDateOrg.Date = modInfo.DateCreated;
+            ctrFileInfo.Text = modInfo.FileName;
+            ctrDate.Date = modInfo.DateCreated;
+            ctrLength.ValueA = tupleTime.Item1;
+            ctrLength.ValueB = tupleTime.Item2;
+            ctrSpeed.ValueA = modInfo.Speed;
+            ctrSpeed.ValueB = modInfo.Tempo;
+            ctrBPM.BPM = modInfo.EstimatedBPM;
+            ctrStyle.Init();
+            ctrStyle.SetStyle(modInfo.TrackStyle);
 
-            ctrLengthOrg.ValueA = tupleTime.Item1;
-            ctrLengthOrg.ValueB = tupleTime.Item2;
-
-            ctrSpeedOrg.ValueA = modInfo.Speed;
-            ctrSpeedOrg.ValueB = modInfo.Tempo;
-
-            ctrBPMOrg.BPM = modInfo.EstimatedBPM;
-
-            ctrStyleOrg.Init();
-            ctrStyleOrg.SetStyle(modInfo.TrackStyle);
-
+            
             if (isInDb)
             {
                 if (DB.LoadTrackInfo(guid) == false) return;
@@ -87,19 +84,19 @@ namespace TMCWorkbench
                 txtMessageNew.Text = track.SongText;
                 txtInstrumentsNew.Text = track.InstrumentText;
 
-                ctrFileInfoNew.Text = track.FileName;
-                ctrDateNew.Date = track.Date_created;
+                //ctrFileInfoNew.Text = track.FileName;
+                //ctrDateNew.Date = track.Date_created;
 
-                ctrLengthNew.ValueA = 0;
-                ctrLengthNew.ValueB = 0;
+                //ctrLengthNew.ValueA = 0;
+                //ctrLengthNew.ValueB = 0;
 
-                ctrSpeedNew.ValueA = track.Speed;
-                ctrSpeedNew.ValueB = track.Tempo;
+                //ctrSpeedNew.ValueA = track.Speed;
+                //ctrSpeedNew.ValueB = track.Tempo;
 
-                ctrBPMNew.BPM = track.Bpm;
+                //ctrBPMNew.BPM = track.Bpm;
 
-                ctrStyleNew.Init();
-                ctrStyleNew.SetStyle(track.Style?.Name);
+                //ctrStyleNew.SetStyle(track.Style?.Name);
+                //ctrComposerNew.SetComposer(track.FK_composer_id);
 
 
             }

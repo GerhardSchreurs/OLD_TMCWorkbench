@@ -185,6 +185,18 @@
     <Compile Include="Controls\Resettable\ResettableButtonControl.Designer.cs">
       <DependentUpon>ResettableButtonControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Resettable\ResettableComposerDropDownControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableComposerDropDownControl.Designer.cs">
+      <DependentUpon>ResettableComposerDropDownControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableSceneGroupDropDownControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableSceneGroupDropDownControl.Designer.cs">
+      <DependentUpon>ResettableSceneGroupDropDownControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Resettable\ResettableTextAreaControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

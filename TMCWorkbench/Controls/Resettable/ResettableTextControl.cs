@@ -44,6 +44,7 @@ namespace TMCWorkbench.Controls.Resettable
             set {
                 _text = value;
                 this.txtText.Text = value;
+                this.resettableControl1.Tooltip = value;
             }
         }
     }
