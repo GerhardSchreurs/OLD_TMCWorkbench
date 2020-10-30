@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Extensions;
+using TMCWorkbench.Extensions;
 
 namespace TMCWorkbench.Controls.Resettable
 {
@@ -20,16 +21,22 @@ namespace TMCWorkbench.Controls.Resettable
             this.txtBPM.KeyPress += Handle_textBox_KeyPress;
             this.btnPlus.Click += Handle_BtnPlus_Click;
             this.btnMin.Click += Handle_BtnMin_Click;
+            this.resettableControl1.OnReset += Handle_ResettableControl1_OnReset;
+        }
+
+        private void Handle_ResettableControl1_OnReset(object sender, EventArgs e)
+        {
+            UpdateUI(_bpmOriginal);
         }
 
         private void Handle_BtnPlus_Click(object sender, EventArgs e)
         {
-            this.txtBPM.Text = (txtBPM.Text.ToInt() * 2).ToString();
+            this.txtBPM.Text = (txtBPM.Text.ToInt() * 2).ToStr();
         }
 
         private void Handle_BtnMin_Click(object sender, EventArgs e)
         {
-            this.txtBPM.Text = (txtBPM.Text.ToInt() / 2).ToString();
+            this.txtBPM.Text = (txtBPM.Text.ToInt() / 2).ToStr();
         }
 
         public override string LabelTitle
@@ -50,16 +57,36 @@ namespace TMCWorkbench.Controls.Resettable
             }
         }
 
-        private int _bpm;
+        private void UpdateUI(int bpm)
+        {
+            txtBPM.Text = bpm.ToStr();
+        }
+
+        public void SetValue(int bpm)
+        {
+            this.resettableControl1.ResetToolTip();
+            BPM = bpm;
+
+            UpdateUI(bpm);
+        }
+
+        public void SetValueOriginal(int bpm)
+        {
+            _bpmOriginal = bpm;
+
+            this.resettableControl1.SetToolTip(bpm.ToStr(), BPM.ToStr());
+        }
+
+        private int _bpmOriginal;
 
         public int BPM
         {
-            get { return _bpm; }
-            set
-            {
-                _bpm = value;
-                txtBPM.Text = value.ToString();
-            }
+            get; private set;
+            //set
+            //{
+            //    _bpm = value;
+            //    txtBPM.Text = value.ToStr();
+            //}
         }
     }
 }

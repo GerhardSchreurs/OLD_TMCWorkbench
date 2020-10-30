@@ -164,6 +164,12 @@
     <Compile Include="Controls\ListViewControl.Designer.cs">
       <DependentUpon>ListViewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MetaDataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MetaDataControl.Designer.cs">
+      <DependentUpon>MetaDataControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MusicControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -267,6 +273,8 @@
     <Compile Include="Events\EventArgs\FileInfoEventArgs.cs" />
     <Compile Include="Events\EventInvoker.cs" />
     <Compile Include="Extensions\CrossThreadExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\IntegerExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="FormMain.cs">
@@ -328,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ListViewControl.resx">
       <DependentUpon>ListViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MetaDataControl.resx">
+      <DependentUpon>MetaDataControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MusicControl.resx">
       <DependentUpon>MusicControl.cs</DependentUpon>

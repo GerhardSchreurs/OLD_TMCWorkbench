@@ -19,6 +19,18 @@ namespace TMCWorkbench.Controls.Resettable
             this.resettableControl1.OnReset += ResettableControl1_OnReset;
         }
 
+        public void SwitchMode()
+        {
+            if (this.txtText.ForeColor == SystemColors.WindowText)
+            {
+                this.txtText.ForeColor = Color.DarkSlateGray;
+            }
+            else
+            {
+                this.txtText.ForeColor = SystemColors.WindowText;
+            }
+        }
+
         public override string LabelTitle
         {
             get => base.LabelTitle;
@@ -29,23 +41,37 @@ namespace TMCWorkbench.Controls.Resettable
             }
         }
 
-        private void ResettableControl1_OnReset(object sender, EventArgs e)
-        {
-            Text = _text;
-        }
-
-        private string _text;
-
         public override string Text
         {
             get { 
                 return txtText.Text;  
             }
             set {
+                this.resettableControl1.ResetToolTip();
                 _text = value;
                 this.txtText.Text = value;
-                this.resettableControl1.Tooltip = value;
             }
+        }
+
+        private string _original;
+        private string _text;
+
+        public string Original
+        {
+            get
+            {
+                return _original;
+            }
+            set
+            {
+                _original = value;
+                this.resettableControl1.SetToolTip(value, _text);
+            }
+        }
+
+        private void ResettableControl1_OnReset(object sender, EventArgs e)
+        {
+            Text = _original;
         }
     }
 }

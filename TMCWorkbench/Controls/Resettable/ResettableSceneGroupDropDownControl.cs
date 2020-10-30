@@ -31,7 +31,7 @@ namespace TMCWorkbench.Controls.Resettable
 
         public void Init()
         {
-            DBManager.Instance.LoadStyles();
+            DBManager.Instance.LoadSceneGroups();
 
             var query = from scenegroup in DB.DBManager.Instance.SceneGroups
                         select new { scenegroup.Name, scenegroup.Scenegroup_id };
@@ -70,6 +70,10 @@ namespace TMCWorkbench.Controls.Resettable
             if (id.HasValue)
             {
                 ddList.SelectedValue = id.Value;
+            }
+            else
+            {
+                ddList.SelectedValue = 0;
             }
         }
     }

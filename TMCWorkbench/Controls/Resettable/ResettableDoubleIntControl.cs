@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Extensions;
+using TMCWorkbench.Extensions;
 
 namespace TMCWorkbench.Controls.Resettable
 {
@@ -16,8 +18,7 @@ namespace TMCWorkbench.Controls.Resettable
         {
             InitializeComponent();
 
-            InitBoxes();
-
+            this.resettableControl1.OnReset += Handle_ResettableControl1_OnReset;
             this.txtValueA.KeyPress += Handle_textBox_KeyPress;
             this.txtValueB.KeyPress += Handle_textBox_KeyPress;
             this.resettableControl1.OnReset += Handle_ResettableControl1_OnReset;
@@ -33,15 +34,15 @@ namespace TMCWorkbench.Controls.Resettable
             }
         }
 
-        void InitBoxes()
+        void UpdateUI(int valueA, int valueB)
         {
-            ValueA = _valueA;
-            ValueB = _valueB;
+            txtValueA.Text = valueA.ToStr();
+            txtValueB.Text = valueB.ToStr() ;
         }
 
         private void Handle_ResettableControl1_OnReset(object sender, EventArgs e)
         {
-            InitBoxes();
+            UpdateUI(_valueOriginalA, _valueOriginalB);
         }
 
         private void Handle_textBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -52,27 +53,32 @@ namespace TMCWorkbench.Controls.Resettable
             }
         }
 
-        private int _valueA;
-        private int _valueB;
+        private int _valueOriginalA;
+        private int _valueOriginalB;
 
-        public int ValueA
+        public void SetValues(int valueA, int valueB)
         {
-            get { return _valueA; }
-            set { 
-                _valueA = value;
-                txtValueA.Text = value.ToString();
-            }
+            this.resettableControl1.ResetToolTip();
+
+            ValueA = valueA;
+            ValueB = valueB;
+
+            UpdateUI(ValueA, ValueB);
         }
 
-        public int ValueB
+        public void SetValuesOriginal(int valueA, int valueB)
         {
-            get { return _valueB; }
-            set
-            {
-                _valueB = value;
-                txtValueB.Text = value.ToString();
-            }
+            _valueOriginalA = valueA;
+            _valueOriginalB = valueB;
+
+            var oldValue = $"{valueA}/{valueB}";
+            var newValue = $"{ValueA}/{ValueB}";
+
+            this.resettableControl1.SetToolTip(oldValue, newValue);
         }
 
+        public int ValueA { get; private set; }
+
+        public int ValueB { get; private set; }
     }
 }

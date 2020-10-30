@@ -21,6 +21,7 @@ namespace TMCWorkbench
             browserControl1.Init();
             listViewControl1.Init();
             musicControl1.Init();
+            ctrMetaData.Init();
 
             splitContainer1.Panel2Collapsed = false;
         }
@@ -52,54 +53,57 @@ namespace TMCWorkbench
             var guid = Manager.Instance.GetFileGuid(fileinfoEventArgs.FileInfo.FullName);
             var isInDb = DB.IsTrackInDB(guid);
             var modInfo = ModLibrary.ModLibrary.ParseAndGuessStyle(fileinfoEventArgs.FileInfo.FullName, DBManager.Instance.TrackStyles);
-            var tupleTime = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(musicControl1.Media.Duration);
+            //var tupleTime = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(musicControl1.Media.Duration);
+
+            ctrMetaData.LoadData(modInfo, isInDb, guid, musicControl1.Media.Duration);
+            
             //lblTest.Text = modInfo.TrackStyle;
 
-            txtSamplesOrg.Text = modInfo.SampleText;
-            txtMessageOrg.Text = modInfo.SongText;
-            txtInstrumentsOrg.Text = modInfo.InstrumentText;
+            //txtSamplesOrg.Text = modInfo.SampleText;
+            //txtMessageOrg.Text = modInfo.SongText;
+            //txtInstrumentsOrg.Text = modInfo.InstrumentText;
 
-            txtSamplesOrg.ClearUndo();
-            txtMessageOrg.ClearUndo();
-            txtInstrumentsOrg.ClearUndo();
+            //txtSamplesOrg.ClearUndo();
+            //txtMessageOrg.ClearUndo();
+            //txtInstrumentsOrg.ClearUndo();
 
-            ctrFileInfo.Text = modInfo.FileName;
-            ctrDate.Date = modInfo.DateCreated;
-            ctrLength.ValueA = tupleTime.Item1;
-            ctrLength.ValueB = tupleTime.Item2;
-            ctrSpeed.ValueA = modInfo.Speed;
-            ctrSpeed.ValueB = modInfo.Tempo;
-            ctrBPM.BPM = modInfo.EstimatedBPM;
-            ctrStyle.Init();
-            ctrStyle.SetStyle(modInfo.TrackStyle);
+            //ctrFileInfo.Text = modInfo.FileName;
+            //ctrDate.Date = modInfo.DateCreated;
+            //ctrLength.ValueA = tupleTime.Item1;
+            //ctrLength.ValueB = tupleTime.Item2;
+            //ctrSpeed.ValueA = modInfo.Speed;
+            //ctrSpeed.ValueB = modInfo.Tempo;
+            //ctrBPM.BPM = modInfo.EstimatedBPM;
+            //ctrStyle.Init();
+            //ctrStyle.SetStyle(modInfo.TrackStyle);
 
             
-            if (isInDb)
-            {
-                if (DB.LoadTrackInfo(guid) == false) return;
+            //if (isInDb)
+            //{
+            //    if (DB.LoadTrackInfo(guid) == false) return;
 
-                var track = DB.Track;
+            //    var track = DB.Track;
 
-                txtSamplesNew.Text = track.SampleText;
-                txtMessageNew.Text = track.SongText;
-                txtInstrumentsNew.Text = track.InstrumentText;
+            //    txtSamplesNew.Text = track.SampleText;
+            //    txtMessageNew.Text = track.SongText;
+            //    txtInstrumentsNew.Text = track.InstrumentText;
 
-                //ctrFileInfoNew.Text = track.FileName;
-                //ctrDateNew.Date = track.Date_created;
+            //    //ctrFileInfoNew.Text = track.FileName;
+            //    //ctrDateNew.Date = track.Date_created;
 
-                //ctrLengthNew.ValueA = 0;
-                //ctrLengthNew.ValueB = 0;
+            //    //ctrLengthNew.ValueA = 0;
+            //    //ctrLengthNew.ValueB = 0;
 
-                //ctrSpeedNew.ValueA = track.Speed;
-                //ctrSpeedNew.ValueB = track.Tempo;
+            //    //ctrSpeedNew.ValueA = track.Speed;
+            //    //ctrSpeedNew.ValueB = track.Tempo;
 
-                //ctrBPMNew.BPM = track.Bpm;
+            //    //ctrBPMNew.BPM = track.Bpm;
 
-                //ctrStyleNew.SetStyle(track.Style?.Name);
-                //ctrComposerNew.SetComposer(track.FK_composer_id);
+            //    //ctrStyleNew.SetStyle(track.Style?.Name);
+            //    //ctrComposerNew.SetComposer(track.FK_composer_id);
 
 
-            }
+            //}
    
         }
 

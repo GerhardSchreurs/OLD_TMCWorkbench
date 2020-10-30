@@ -60,15 +60,30 @@ namespace TMCWorkbench.Controls.Resettable
 
         }
 
-        public void SetStyle(string text)
+        public bool SetStyle(string text)
         {
-            if (text == null) return;
+            if (text == null) return false;
 
             var style = DB.DBManager.Instance.Styles.Where(x => x.Name.ToLower() == text.ToLower()).FirstOrNull();
 
             if (style != null)
             {
                 ddList.SelectedValue = style.Style_id;
+                return true;
+            }
+
+            return false;
+        }
+
+        public void SetStyle(int? id)
+        {
+            if (id.HasValue)
+            {
+                ddList.SelectedValue = id.Value;
+            }
+            else
+            {
+                ddList.SelectedValue = 0;
             }
         }
     }

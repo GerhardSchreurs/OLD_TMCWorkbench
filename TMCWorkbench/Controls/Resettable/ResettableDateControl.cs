@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using Extensions;
+using TMCWorkbench.Extensions;
 
 namespace TMCWorkbench.Controls.Resettable
 {
@@ -18,7 +19,7 @@ namespace TMCWorkbench.Controls.Resettable
         {
             InitializeComponent();
 
-            this.resettableControl1.OnReset += ResettableControl1_OnReset;
+            this.resettableControl1.OnReset += Handle_ResettableControl1_OnReset;
 
             Init();
         }
@@ -31,11 +32,6 @@ namespace TMCWorkbench.Controls.Resettable
                 base.LabelTitle = value;
                 this.resettableControl1.Title = value;
             }
-        }
-
-        private void ResettableControl1_OnReset(object sender, EventArgs e)
-        {
-            UpdateDate();
         }
 
         void Init()
@@ -71,16 +67,16 @@ namespace TMCWorkbench.Controls.Resettable
             }
         }
 
-        void UpdateDate()
+        void UpdateDate(DateTime? date)
         {
             this.ddlMonth.SelectedIndexChanged -= Handle_ddlMonth_SelectedIndexChanged;
 
-            if (_date.HasValue)
+            if (date.HasValue)
             {
-                ddlYear.SelectedItem = _date.Value.Year;
-                ddlMonth.SelectedIndex = _date.Value.Month - 1;
-                UpdateDays(_date.Value.Year, _date.Value.Month);
-                ddlDay.SelectedIndex = _date.Value.Day - 1;
+                ddlYear.SelectedItem = date.Value.Year;
+                ddlMonth.SelectedIndex = date.Value.Month - 1;
+                UpdateDays(_date.Value.Year, date.Value.Month);
+                ddlDay.SelectedIndex = date.Value.Day - 1;
             }
             else
             {
@@ -88,7 +84,6 @@ namespace TMCWorkbench.Controls.Resettable
                 ddlMonth.SelectedIndex = -1;
                 ddlDay.SelectedIndex = -1;
             }
-
 
 
             this.ddlMonth.SelectedIndexChanged += Handle_ddlMonth_SelectedIndexChanged;
@@ -124,6 +119,8 @@ namespace TMCWorkbench.Controls.Resettable
 
 
         private DateTime? _date;
+        private DateTime? _original;
+        
         public DateTime? Date
         {
             get
@@ -134,8 +131,27 @@ namespace TMCWorkbench.Controls.Resettable
             set
             {
                 _date = value;
-                UpdateDate();
+                this.resettableControl1.ResetToolTip();
+                UpdateDate(_date);
             }
+        }
+
+        public DateTime? Original
+        {
+            get
+            {
+                return _original;
+            }
+            set
+            {
+                _original = value;
+                this.resettableControl1.SetToolTip(value, _date);
+            }
+        }
+
+        private void Handle_ResettableControl1_OnReset(object sender, EventArgs e)
+        {
+            UpdateDate(_original);
         }
     }
 }

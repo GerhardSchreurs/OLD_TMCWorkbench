@@ -71,6 +71,10 @@ namespace TMCWorkbench.Controls.Resettable
             {
                 ddList.SelectedValue = id.Value;
             }
+            else
+            {
+                ddList.SelectedValue = 0;
+            }
         }
     }
 }
