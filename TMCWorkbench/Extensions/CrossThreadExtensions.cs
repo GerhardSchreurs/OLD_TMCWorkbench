@@ -5,7 +5,7 @@ namespace Extensions
 {
     public static class CrossThreadExtensions
     {
-        public static void PerformSafely(this Control target, Action action)
+        public static void Do(this Control target, Action action)
         {
             if (target.InvokeRequired)
             {
@@ -17,7 +17,7 @@ namespace Extensions
             }
         }
 
-        public static void PerformSafely<T1>(this Control target, Action<T1> action, T1 parameter)
+        public static void Do<T1>(this Control target, Action<T1> action, T1 parameter)
         {
             if (target.InvokeRequired)
             {
@@ -29,7 +29,7 @@ namespace Extensions
             }
         }
 
-        public static void PerformSafely<T1, T2>(this Control target, Action<T1, T2> action, T1 p1, T2 p2)
+        public static void Do<T1, T2>(this Control target, Action<T1, T2> action, T1 p1, T2 p2)
         {
             if (target.InvokeRequired)
             {

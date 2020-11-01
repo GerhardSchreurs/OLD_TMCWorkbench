@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using LibVLCSharp.Shared;
 using Extensions;
 using System.Diagnostics;
+using TMCWorkbench.Events;
 
 namespace TMCWorkbench.Controls
 {
@@ -54,7 +55,9 @@ namespace TMCWorkbench.Controls
 
         public async Task LoadTrack(string path)
         {
+            Debug.WriteLine("MusicControl LoadTrack START");
             _mediaPlayer.Stop();
+            Debug.WriteLine("MusicControl DINGES");
 
             if (Media != null)
             {
@@ -62,11 +65,21 @@ namespace TMCWorkbench.Controls
             }
 
             Media = new Media(_libVLC, path, FromType.FromPath);
-            await Media.Parse(MediaParseOptions.ParseLocal);
-            lblTimeTotal.Text = DurationToTimeString(Media.Duration);
+            Debug.WriteLine(" MusicControl Parse START");
+            await Media.Parse(MediaParseOptions.ParseLocal).ConfigureAwait(false);
+            Debug.WriteLine(" MusicControl Parse STOP");
+
+            lblTimeTotal.Do(() => lblTimeTotal.Text = DurationToTimeString(Media.Duration));
 
             _mediaPlayer.Media = Media;
             _mediaPlayer.Play();
+
+
+            Debug.WriteLine(" MusicControl INVOKE START");
+            EventInvoker.RaiseOnMediaLoaded(this, Media.Duration);
+            Debug.WriteLine(" MusicControl INVOKE STOP");
+
+            Debug.WriteLine("MusicControl LoadTrack STOP");
         }
 
         private void Handle_mediaPlayer_PositionChanged(object sender, MediaPlayerPositionChangedEventArgs e)
@@ -78,8 +91,8 @@ namespace TMCWorkbench.Controls
 
             var seconds = (Media.Duration * e.Position);
 
-            trackPosition.PerformSafely(() => trackPosition.Value = pos);
-            lblTime.PerformSafely(() => lblTime.Text = DurationToTimeString((long)(seconds)));
+            trackPosition.Do(() => trackPosition.Value = pos);
+            lblTime.Do(() => lblTime.Text = DurationToTimeString((long)(seconds)));
         }
 
         private void BtnPlay_Click(object sender, EventArgs e)
