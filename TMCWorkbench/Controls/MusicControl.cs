@@ -11,6 +11,8 @@ using LibVLCSharp.Shared;
 using Extensions;
 using System.Diagnostics;
 using TMCWorkbench.Events;
+using Extensions;
+using System.Threading;
 
 namespace TMCWorkbench.Controls
 {
@@ -31,12 +33,13 @@ namespace TMCWorkbench.Controls
 
             _libVLC = new LibVLC();
             _mediaPlayer = new MediaPlayer(_libVLC);
-            _mediaPlayer.PositionChanged += Handle_mediaPlayer_PositionChanged;
 
             trackVolume.Value = Properties.Settings.Default.PlayerVolume;
+            trackVolume.ValueChanged += Handle_TrackVolume_ValueChanged;
+
+            Wire();
 
             //TODO: Save settings on quit / unload
-            trackVolume.ValueChanged += Handle_TrackVolume_ValueChanged;
         }
 
         private void Handle_TrackVolume_ValueChanged(object sender, EventArgs e)
@@ -53,10 +56,25 @@ namespace TMCWorkbench.Controls
             return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
         }
 
+        private void Wire()
+        {
+            _mediaPlayer.PositionChanged += Handle_mediaPlayer_PositionChanged;
+        }
+
+        private void UnWire()
+        {
+            _mediaPlayer.PositionChanged -= Handle_mediaPlayer_PositionChanged;
+        }
+
         public async Task LoadTrack(string path)
         {
             Debug.WriteLine("MusicControl LoadTrack START");
-            _mediaPlayer.Stop();
+            _mediaPlayer.Pause();
+            UnWire();
+
+            //MediaPlayer.Stop() Might DEADLOCK, see description in Stop() method.
+            //https://github.com/ZeBobo5/Vlc.DotNet/issues/542
+            ThreadPool.QueueUserWorkItem(_ => _mediaPlayer.Stop());
             Debug.WriteLine("MusicControl DINGES");
 
             if (Media != null)
@@ -72,12 +90,8 @@ namespace TMCWorkbench.Controls
             lblTimeTotal.Do(() => lblTimeTotal.Text = DurationToTimeString(Media.Duration));
 
             _mediaPlayer.Media = Media;
+            Wire();
             _mediaPlayer.Play();
-
-
-            Debug.WriteLine(" MusicControl INVOKE START");
-            EventInvoker.RaiseOnMediaLoaded(this, Media.Duration);
-            Debug.WriteLine(" MusicControl INVOKE STOP");
 
             Debug.WriteLine("MusicControl LoadTrack STOP");
         }
