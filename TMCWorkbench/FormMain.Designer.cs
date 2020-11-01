@@ -43,8 +43,8 @@
             this.scenegroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.composersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabOriginal = new System.Windows.Forms.TabPage();
+            this.tabDatabase = new System.Windows.Forms.TabPage();
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
             this.tablePlayer = new System.Windows.Forms.TableLayoutPanel();
             this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
@@ -223,34 +223,36 @@
             // 
             // tabControl
             // 
-            this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Controls.Add(this.tabPage2);
-            this.tabControl.Location = new System.Drawing.Point(611, 3);
+            this.tabControl.Controls.Add(this.tabOriginal);
+            this.tabControl.Controls.Add(this.tabDatabase);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(608, 0);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(200, 18);
+            this.tabControl.Size = new System.Drawing.Size(1029, 24);
             this.tabControl.TabIndex = 7;
             this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl_Selected);
             // 
-            // tabPage1
+            // tabOriginal
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(192, 0);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Database";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabOriginal.Location = new System.Drawing.Point(4, 22);
+            this.tabOriginal.Name = "tabOriginal";
+            this.tabOriginal.Padding = new System.Windows.Forms.Padding(3);
+            this.tabOriginal.Size = new System.Drawing.Size(1021, 0);
+            this.tabOriginal.TabIndex = 0;
+            this.tabOriginal.Text = "Original";
+            this.tabOriginal.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tabDatabase
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 0);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Original";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabDatabase.Location = new System.Drawing.Point(4, 22);
+            this.tabDatabase.Name = "tabDatabase";
+            this.tabDatabase.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDatabase.Size = new System.Drawing.Size(1021, 0);
+            this.tabDatabase.TabIndex = 1;
+            this.tabDatabase.Text = "Database";
+            this.tabDatabase.UseVisualStyleBackColor = true;
             // 
             // tableInner
             // 
@@ -263,11 +265,12 @@
             this.tableInner.Controls.Add(this.listViewControl1, 1, 0);
             this.tableInner.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableInner.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableInner.Location = new System.Drawing.Point(3, 27);
+            this.tableInner.Location = new System.Drawing.Point(3, 24);
+            this.tableInner.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.tableInner.Name = "tableInner";
             this.tableInner.RowCount = 1;
             this.tableInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableInner.Size = new System.Drawing.Size(1631, 807);
+            this.tableInner.Size = new System.Drawing.Size(1631, 810);
             this.tableInner.TabIndex = 1;
             // 
             // tablePlayer
@@ -283,13 +286,13 @@
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tablePlayer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tablePlayer.Size = new System.Drawing.Size(1025, 801);
+            this.tablePlayer.Size = new System.Drawing.Size(1025, 804);
             this.tablePlayer.TabIndex = 2;
             // 
             // musicControl1
             // 
             this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.musicControl1.Location = new System.Drawing.Point(3, 735);
+            this.musicControl1.Location = new System.Drawing.Point(3, 738);
             this.musicControl1.Name = "musicControl1";
             this.musicControl1.Size = new System.Drawing.Size(1019, 63);
             this.musicControl1.TabIndex = 9;
@@ -298,7 +301,8 @@
             // 
             this.splitContainer1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Location = new System.Drawing.Point(3, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -309,8 +313,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanelBot);
-            this.splitContainer1.Size = new System.Drawing.Size(1019, 715);
-            this.splitContainer1.SplitterDistance = 355;
+            this.splitContainer1.Size = new System.Drawing.Size(1019, 721);
+            this.splitContainer1.SplitterDistance = 357;
             this.splitContainer1.TabIndex = 10;
             // 
             // tableLayoutPanelTop
@@ -327,12 +331,13 @@
             this.tableLayoutPanelTop.Controls.Add(this.pnlMessage, 2, 1);
             this.tableLayoutPanelTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTop.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanelTop.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.tableLayoutPanelTop.Name = "tableLayoutPanelTop";
             this.tableLayoutPanelTop.RowCount = 2;
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTop.Size = new System.Drawing.Size(1019, 355);
+            this.tableLayoutPanelTop.Size = new System.Drawing.Size(1019, 357);
             this.tableLayoutPanelTop.TabIndex = 0;
             // 
             // label4
@@ -375,7 +380,7 @@
             this.pnlSamples.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSamples.Location = new System.Drawing.Point(3, 23);
             this.pnlSamples.Name = "pnlSamples";
-            this.pnlSamples.Size = new System.Drawing.Size(178, 329);
+            this.pnlSamples.Size = new System.Drawing.Size(178, 331);
             this.pnlSamples.TabIndex = 10;
             // 
             // txtSamplesNew
@@ -455,7 +460,7 @@
             this.pnlInstruments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlInstruments.Location = new System.Drawing.Point(187, 23);
             this.pnlInstruments.Name = "pnlInstruments";
-            this.pnlInstruments.Size = new System.Drawing.Size(178, 329);
+            this.pnlInstruments.Size = new System.Drawing.Size(178, 331);
             this.pnlInstruments.TabIndex = 11;
             // 
             // txtInstrumentsNew
@@ -535,7 +540,7 @@
             this.pnlMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMessage.Location = new System.Drawing.Point(371, 23);
             this.pnlMessage.Name = "pnlMessage";
-            this.pnlMessage.Size = new System.Drawing.Size(645, 329);
+            this.pnlMessage.Size = new System.Drawing.Size(645, 331);
             this.pnlMessage.TabIndex = 12;
             // 
             // txtMessageNew
@@ -623,7 +628,7 @@
             this.tableLayoutPanelBot.RowCount = 2;
             this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelBot.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelBot.Size = new System.Drawing.Size(1019, 356);
+            this.tableLayoutPanelBot.Size = new System.Drawing.Size(1019, 360);
             this.tableLayoutPanelBot.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -639,7 +644,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 330);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 334);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // txtOutput
@@ -672,7 +677,7 @@
             this.txtOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.txtOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtOutput.ServiceColors")));
             this.txtOutput.ShowLineNumbers = false;
-            this.txtOutput.Size = new System.Drawing.Size(639, 294);
+            this.txtOutput.Size = new System.Drawing.Size(639, 298);
             this.txtOutput.TabIndex = 10;
             this.txtOutput.Text = "txtOutput";
             this.txtOutput.Zoom = 100;
@@ -682,7 +687,7 @@
             this.panelSave.Controls.Add(this.btnSave);
             this.panelSave.Controls.Add(this.comboBox1);
             this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSave.Location = new System.Drawing.Point(3, 303);
+            this.panelSave.Location = new System.Drawing.Point(3, 307);
             this.panelSave.Name = "panelSave";
             this.panelSave.Size = new System.Drawing.Size(639, 24);
             this.panelSave.TabIndex = 11;
@@ -715,7 +720,7 @@
             this.pnlMeta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMeta.Location = new System.Drawing.Point(3, 23);
             this.pnlMeta.Name = "pnlMeta";
-            this.pnlMeta.Size = new System.Drawing.Size(362, 330);
+            this.pnlMeta.Size = new System.Drawing.Size(362, 334);
             this.pnlMeta.TabIndex = 1;
             // 
             // pnlMetaOrg
@@ -740,7 +745,7 @@
             this.listViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewControl1.Location = new System.Drawing.Point(253, 3);
             this.listViewControl1.Name = "listViewControl1";
-            this.listViewControl1.Size = new System.Drawing.Size(344, 801);
+            this.listViewControl1.Size = new System.Drawing.Size(344, 804);
             this.listViewControl1.TabIndex = 3;
             // 
             // tableLayoutPanel2
@@ -758,12 +763,12 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 801);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(244, 804);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
             // btnBla
             // 
-            this.btnBla.Location = new System.Drawing.Point(3, 784);
+            this.btnBla.Location = new System.Drawing.Point(3, 787);
             this.btnBla.Name = "btnBla";
             this.btnBla.Size = new System.Drawing.Size(75, 14);
             this.btnBla.TabIndex = 3;
@@ -776,12 +781,12 @@
             this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.browserControl1.Location = new System.Drawing.Point(3, 3);
             this.browserControl1.Name = "browserControl1";
-            this.browserControl1.Size = new System.Drawing.Size(238, 735);
+            this.browserControl1.Size = new System.Drawing.Size(238, 738);
             this.browserControl1.TabIndex = 1;
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(3, 744);
+            this.btnTest.Location = new System.Drawing.Point(3, 747);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(75, 23);
             this.btnTest.TabIndex = 2;
@@ -876,8 +881,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabOriginal;
+        private System.Windows.Forms.TabPage tabDatabase;
         private System.Windows.Forms.Panel pnlSamples;
         private Controls.TextAreaControl txtSamplesNew;
         private Controls.TextAreaControl txtSamplesOrg;

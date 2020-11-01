@@ -4,6 +4,8 @@ using TMCWorkbench.Events;
 using ModLibrary;
 using System.Linq;
 using TMCWorkbench.DB;
+using TMCDatabase.DBModel;
+using System.Drawing;
 
 namespace TMCWorkbench
 {
@@ -24,6 +26,33 @@ namespace TMCWorkbench
             ctrMetaData.Init();
 
             splitContainer1.Panel2Collapsed = false;
+
+            tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
+            tabControl.DrawItem += Handle_TabControl_DrawItem;
+            tabControl.Selecting += Handle_TabControl_Selecting;
+        }
+
+        private void Handle_TabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPageIndex < 0) return;
+            e.Cancel = !e.TabPage.Enabled;
+        }
+
+        private void Handle_TabControl_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            var tab = tabControl.TabPages[e.Index];
+            var color = Color.Black;
+            
+            if (tab.Enabled == false)
+            {
+                color = Color.LightGray;
+            }
+            else if (tabControl.SelectedTab == tab)
+            {
+                color = Color.Blue;
+            }
+
+            TextRenderer.DrawText(e.Graphics, tab.Text, e.Font, e.Bounds, color);
         }
 
         private async void Form_Load(object sender, EventArgs e)
@@ -42,7 +71,59 @@ namespace TMCWorkbench
             txtMessageOrg.Dock = DockStyle.Fill;
             txtMessageNew.Dock = DockStyle.Fill;
 
-            tabControl.SelectedIndex = 1;
+            tabControl.SelectedIndex = 0;
+            SwitchTabs(false);
+        }
+
+        void EnableTabControl()
+        {
+            tabDatabase.Enabled = true;
+            tabOriginal.Enabled = true;
+            tabControl.Refresh();
+        }
+
+        void DisableTabDatabase()
+        {
+            ((Control)tabDatabase).Enabled = false;
+            tabControl.Refresh();
+        }
+        
+        void DisableTabOriginal()
+        {
+            ((Control)tabOriginal).Enabled = false;
+            tabControl.Refresh();
+        }
+
+        void InitTextFields(ModInfo modInfo, Track track)
+        {
+            txtSamplesOrg.Text = "";
+            txtInstrumentsOrg.Text = "";
+            txtMessageOrg.Text = "";
+            txtSamplesNew.Text = "";
+            txtInstrumentsNew.Text = "";
+            txtMessageNew.Text = "";
+
+            if (modInfo != null)
+            {
+                txtSamplesOrg.Text = modInfo.SampleText;
+                txtInstrumentsOrg.Text = modInfo.InstrumentText;
+                txtMessageOrg.Text = modInfo.SongText;
+
+                //if (track == null)
+                //{
+                //    SwitchTabs(false);
+                //    DisableTabDatabase();
+                //}
+            }
+            if (track != null)
+            {
+                txtSamplesNew.Text = track.SampleText;
+                txtInstrumentsNew.Text = track.InstrumentText;
+                txtMessageNew.Text = track.SongText;
+
+                //SwitchTabs(true);
+            }
+
         }
 
         private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
@@ -53,58 +134,33 @@ namespace TMCWorkbench
             var guid = Manager.Instance.GetFileGuid(fileinfoEventArgs.FileInfo.FullName);
             var isInDb = DB.IsTrackInDB(guid);
             var modInfo = ModLibrary.ModLibrary.ParseAndGuessStyle(fileinfoEventArgs.FileInfo.FullName, DBManager.Instance.TrackStyles);
-            //var tupleTime = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(musicControl1.Media.Duration);
 
-            ctrMetaData.LoadData(modInfo, isInDb, guid, musicControl1.Media.Duration);
-            
-            //lblTest.Text = modInfo.TrackStyle;
+            Track track = null;
 
-            //txtSamplesOrg.Text = modInfo.SampleText;
-            //txtMessageOrg.Text = modInfo.SongText;
-            //txtInstrumentsOrg.Text = modInfo.InstrumentText;
+            if (isInDb)
+            {
+                if (DB.LoadTrackInfo(guid))
+                {
+                    track = DB.Track;
+                }
+            }
 
-            //txtSamplesOrg.ClearUndo();
-            //txtMessageOrg.ClearUndo();
-            //txtInstrumentsOrg.ClearUndo();
+            InitTextFields(modInfo, track);
 
-            //ctrFileInfo.Text = modInfo.FileName;
-            //ctrDate.Date = modInfo.DateCreated;
-            //ctrLength.ValueA = tupleTime.Item1;
-            //ctrLength.ValueB = tupleTime.Item2;
-            //ctrSpeed.ValueA = modInfo.Speed;
-            //ctrSpeed.ValueB = modInfo.Tempo;
-            //ctrBPM.BPM = modInfo.EstimatedBPM;
-            //ctrStyle.Init();
-            //ctrStyle.SetStyle(modInfo.TrackStyle);
+            //Setup tabs
+            EnableTabControl();
 
-            
-            //if (isInDb)
-            //{
-            //    if (DB.LoadTrackInfo(guid) == false) return;
+            if (modInfo != null && track == null)
+            {
+                DisableTabDatabase();
+            } 
+            else if (track != null && modInfo == null)
+            {
+                DisableTabOriginal();
+            }
 
-            //    var track = DB.Track;
-
-            //    txtSamplesNew.Text = track.SampleText;
-            //    txtMessageNew.Text = track.SongText;
-            //    txtInstrumentsNew.Text = track.InstrumentText;
-
-            //    //ctrFileInfoNew.Text = track.FileName;
-            //    //ctrDateNew.Date = track.Date_created;
-
-            //    //ctrLengthNew.ValueA = 0;
-            //    //ctrLengthNew.ValueB = 0;
-
-            //    //ctrSpeedNew.ValueA = track.Speed;
-            //    //ctrSpeedNew.ValueB = track.Tempo;
-
-            //    //ctrBPMNew.BPM = track.Bpm;
-
-            //    //ctrStyleNew.SetStyle(track.Style?.Name);
-            //    //ctrComposerNew.SetComposer(track.FK_composer_id);
-
-
-            //}
-   
+            SwitchTabs(track != null);
+            ctrMetaData.LoadData(modInfo, track, musicControl1.Media.Duration);
         }
 
         private void Handle_BrowserControl_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
@@ -143,7 +199,9 @@ namespace TMCWorkbench
         {
             if (showNew)
             {
-                //NEW
+                //Original
+                tabControl.SelectedTab = tabDatabase;
+
                 txtInstrumentsOrg.Visible = false;
                 txtInstrumentsNew.Visible = true;
 
@@ -158,7 +216,9 @@ namespace TMCWorkbench
             }
             else
             {
-                //OLD
+                //Database
+                tabControl.SelectedTab = tabOriginal;
+
                 txtInstrumentsOrg.Visible = true;
                 txtInstrumentsNew.Visible = false;
 
@@ -178,11 +238,11 @@ namespace TMCWorkbench
         {
             if (tabControl.SelectedIndex == 0)
             {
-                SwitchTabs(true);
+                SwitchTabs(false);
             } 
             else
             {
-                SwitchTabs(false);
+                SwitchTabs(true);
             }
         }
 

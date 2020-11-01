@@ -34,17 +34,14 @@ namespace TMCWorkbench.Controls
             ctrScenegroupText.SwitchMode();
         }
 
-        public void LoadData(ModInfo modInfo, bool isInDB, Guid guid, long duration)
+        public void LoadData(ModInfo modInfo, TMCDatabase.DBModel.Track track, long duration)
         {
             if (modInfo == null) return;
 
             var time = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(duration);
 
-            if (isInDB)
+            if (track != null)
             {
-                if (DB.LoadTrackInfo(guid) == false) return;
-
-                var track = DB.Track;
                 var timeDB = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(track.Length);
 
                 ctrFileInfo.Text = track.FileName;
