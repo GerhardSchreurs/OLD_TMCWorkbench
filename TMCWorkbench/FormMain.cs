@@ -79,43 +79,43 @@ namespace TMCWorkbench
 
         void EnableTabControl()
         {
-            tabDatabase.Do(()=>tabDatabase.Enabled = true);
-            tabOriginal.Do(()=>tabOriginal.Enabled = true);
-            tabControl.Do(() => tabControl.Refresh());
+            tabDatabase.Enabled = true;
+            tabOriginal.Enabled = true;
+            tabControl.Refresh();
         }
 
         void DisableTabDatabase()
         {
-            tabDatabase.Do(()=>tabDatabase.Enabled = false);
-            tabControl.Do(()=> tabControl.Refresh());
+            tabDatabase.Enabled = false;
+            tabControl.Refresh();
         }
         
         void DisableTabOriginal()
         {
-            tabOriginal.Do(()=>tabOriginal.Enabled = false);
-            tabControl.Do(()=> tabControl.Refresh());
+            tabOriginal.Enabled = false;
+            tabControl.Refresh();
         }
 
         void InitTextFields(ModInfo modInfo, Track track)
         {
-            txtSamplesOrg.Do(()=>txtSamplesOrg.Text = "");
-            txtInstrumentsOrg.Do(() => txtInstrumentsOrg.Text = "");
-            txtMessageOrg.Do(() => txtMessageOrg.Text = "");
-            txtSamplesNew.Do(() => txtSamplesNew.Text = "");
-            txtInstrumentsNew.Do(() => txtInstrumentsNew.Text = "");
-            txtMessageNew.Do(() => txtMessageNew.Text = "");
+            txtSamplesOrg.Text = "";
+            txtInstrumentsOrg.Text = "";
+            txtMessageOrg.Text = "";
+            txtSamplesNew.Text = "";
+            txtInstrumentsNew.Text = "";
+            txtMessageNew.Text = "";
 
             if (modInfo != null)
             {
-                txtSamplesOrg.Do(()=> txtSamplesOrg.Text = modInfo.SampleText);
-                txtInstrumentsOrg.Do(()=> txtInstrumentsOrg.Text = modInfo.InstrumentText);
-                txtMessageOrg.Do(()=> txtMessageOrg.Text = modInfo.SongText);
+                txtSamplesOrg.Text = modInfo.SampleText;
+                txtInstrumentsOrg.Text = modInfo.InstrumentText;
+                txtMessageOrg.Text = modInfo.SongText;
             }
             if (track != null)
             {
-                txtSamplesNew.Do(()=> txtSamplesNew.Text = track.SampleText);
-                txtInstrumentsNew.Do(()=> txtInstrumentsNew.Text = track.InstrumentText);
-                txtMessageNew.Do(()=>txtMessageNew.Text = track.SongText);
+                txtSamplesNew.Text = track.SampleText;
+                txtInstrumentsNew.Text = track.InstrumentText;
+                txtMessageNew.Text = track.SongText;
             }
 
             GenerateSummary();
@@ -212,7 +212,7 @@ namespace TMCWorkbench
         private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
         {
             toolStripStatusLabel.Text = fileinfoEventArgs.FileInfo.FullName;
-            await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName).ConfigureAwait(false);
+            await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName).ConfigureAwait(true);
 
             var guid = Manager.Instance.GetFileGuid(fileinfoEventArgs.FileInfo.FullName);
             var isInDb = DB.IsTrackInDB(guid);
@@ -283,16 +283,16 @@ namespace TMCWorkbench
             if (showNew)
             {
                 //Original
-                tabControl.Do(()=>tabControl.SelectedTab = tabDatabase);
+                tabControl.SelectedTab = tabDatabase;
 
-                txtInstrumentsOrg.Do(()=>txtInstrumentsOrg.Visible = false);
-                txtInstrumentsNew.Do(()=>txtInstrumentsNew.Visible = true);
+                txtInstrumentsOrg.Visible = false;
+                txtInstrumentsNew.Visible = true;
 
-                txtMessageOrg.Do(()=>txtMessageOrg.Visible = false);
-                txtMessageNew.Do(()=>txtMessageNew.Visible = true);
+                txtMessageOrg.Visible = false;
+                txtMessageNew.Visible = true;
 
-                txtSamplesOrg.Do(()=>txtSamplesOrg.Visible = false);
-                txtSamplesNew.Do(()=>txtSamplesNew.Visible = true);
+                txtSamplesOrg.Visible = false;
+                txtSamplesNew.Visible = true;
 
                 //pnlMetaOrg.Visible = false;
                 //pnlMetaNew.Visible = true;
@@ -300,16 +300,16 @@ namespace TMCWorkbench
             else
             {
                 //Database
-                tabControl.Do(()=>tabControl.SelectedTab = tabOriginal);
+                tabControl.SelectedTab = tabOriginal;
 
-                txtInstrumentsOrg.Do(()=>txtInstrumentsOrg.Visible = true);
-                txtInstrumentsNew.Do(() => txtInstrumentsNew.Visible = false);
+                txtInstrumentsOrg.Visible = true;
+                txtInstrumentsNew.Visible = false;
 
-                txtMessageOrg.Do(() => txtMessageOrg.Visible = true);
-                txtMessageNew.Do(() => txtMessageNew.Visible = false);
+                txtMessageOrg.Visible = true;
+                txtMessageNew.Visible = false;
 
-                txtSamplesOrg.Do(() => txtSamplesOrg.Visible = true);
-                txtSamplesNew.Do(() => txtSamplesNew.Visible = false);
+                txtSamplesOrg.Visible = true;
+                txtSamplesNew.Visible = false;
 
                 //pnlMetaOrg.Visible = true;
                 //pnlMetaNew.Visible = false;

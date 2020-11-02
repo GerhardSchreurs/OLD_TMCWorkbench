@@ -83,7 +83,7 @@ namespace TMCWorkbench.Controls
 
             Media = new Media(_libVLC, path, FromType.FromPath);
             Debug.WriteLine(" MusicControl Parse START");
-            await Media.Parse(MediaParseOptions.ParseLocal).ConfigureAwait(false);
+            await Media.Parse(MediaParseOptions.ParseLocal).ConfigureAwait(true);
             Debug.WriteLine(" MusicControl Parse STOP");
 
             lblTimeTotal.Do(() => lblTimeTotal.Text = DurationToTimeString(Media.Duration));
