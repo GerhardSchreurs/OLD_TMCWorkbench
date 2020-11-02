@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
-using Extensions;
-using TMCWorkbench.Extensions;
+using TMCWorkbench;
 
 namespace TMCWorkbench.Controls.Resettable
 {
@@ -92,7 +91,6 @@ namespace TMCWorkbench.Controls.Resettable
         public bool ProcessEnteredDate()
         {
             var returnValue = false;
-
             if (ddlYear.SelectedIndex >= 0)
             {
                 var year = ddlYear.Text.ToInt();

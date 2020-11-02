@@ -8,10 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibVLCSharp.Shared;
-using Extensions;
+using TMCWorkbench;
 using System.Diagnostics;
 using TMCWorkbench.Events;
-using Extensions;
 using System.Threading;
 
 namespace TMCWorkbench.Controls

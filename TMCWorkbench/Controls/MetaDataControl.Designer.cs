@@ -40,8 +40,8 @@
             this.ctrSpeed = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
             this.ctrLength = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
-            this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
+            this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.SuspendLayout();
@@ -180,17 +180,6 @@
             this.ctrDate.Size = new System.Drawing.Size(654, 24);
             this.ctrDate.TabIndex = 7;
             // 
-            // ctrFileInfo
-            // 
-            this.ctrFileInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrFileInfo.LabelTitle = "Filename:";
-            this.ctrFileInfo.Location = new System.Drawing.Point(0, 0);
-            this.ctrFileInfo.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrFileInfo.Name = "ctrFileInfo";
-            this.ctrFileInfo.Original = null;
-            this.ctrFileInfo.Size = new System.Drawing.Size(654, 24);
-            this.ctrFileInfo.TabIndex = 6;
-            // 
             // ctrTrackTitle
             // 
             this.ctrTrackTitle.Dock = System.Windows.Forms.DockStyle.Top;
@@ -201,6 +190,17 @@
             this.ctrTrackTitle.Original = null;
             this.ctrTrackTitle.Size = new System.Drawing.Size(654, 24);
             this.ctrTrackTitle.TabIndex = 17;
+            // 
+            // ctrFileInfo
+            // 
+            this.ctrFileInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrFileInfo.LabelTitle = "Filename:";
+            this.ctrFileInfo.Location = new System.Drawing.Point(0, 0);
+            this.ctrFileInfo.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrFileInfo.Name = "ctrFileInfo";
+            this.ctrFileInfo.Original = null;
+            this.ctrFileInfo.Size = new System.Drawing.Size(654, 24);
+            this.ctrFileInfo.TabIndex = 6;
             // 
             // MetaDataControl
             // 
@@ -219,17 +219,17 @@
 
         private System.Windows.Forms.Panel pnlMeta;
         private System.Windows.Forms.Panel pnlMetaOrg;
-        private Resettable.ResettableTextControl ctrStyleText;
-        private Resettable.ResettableTextControl ctrScenegroupText;
-        private Resettable.ResettableSceneGroupDropDownControl ctrScenegroup;
-        private Resettable.ResettableTextControl ctrComposerText;
-        private Resettable.ResettableComposerDropDownControl ctrComposer;
-        private Resettable.ResettableStyleDropDownControl ctrStyle;
-        private Resettable.ResettableBpmControl ctrBPM;
-        private Resettable.ResettableDoubleIntControl ctrSpeed;
-        private Resettable.ResettableDoubleIntControl ctrLength;
-        private Resettable.ResettableDateControl ctrDate;
-        private Resettable.ResettableTextControl ctrFileInfo;
-        private Resettable.ResettableTextControl ctrTrackTitle;
+        public Resettable.ResettableTextControl ctrStyleText;
+        public Resettable.ResettableTextControl ctrScenegroupText;
+        public Resettable.ResettableSceneGroupDropDownControl ctrScenegroup;
+        public Resettable.ResettableTextControl ctrComposerText;
+        public Resettable.ResettableComposerDropDownControl ctrComposer;
+        public Resettable.ResettableStyleDropDownControl ctrStyle;
+        public Resettable.ResettableBpmControl ctrBPM;
+        public Resettable.ResettableDoubleIntControl ctrSpeed;
+        public Resettable.ResettableDoubleIntControl ctrLength;
+        public Resettable.ResettableDateControl ctrDate;
+        public Resettable.ResettableTextControl ctrFileInfo;
+        public Resettable.ResettableTextControl ctrTrackTitle;
     }
 }

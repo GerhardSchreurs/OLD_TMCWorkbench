@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TMCWorkbench.DB;
-using Extensions;
+using TMCWorkbench;
 
 namespace TMCWorkbench.Controls.Resettable
 {

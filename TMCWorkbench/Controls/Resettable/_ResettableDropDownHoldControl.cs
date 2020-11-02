@@ -16,5 +16,19 @@ namespace TMCWorkbench.Controls.Resettable
         {
             InitializeComponent();
         }
+
+        public string GetValue()
+        {
+            var value = string.Empty;
+
+            ddList.BeginInvoke(new MethodInvoker(delegate {
+                if (ddList.SelectedIndex > 0)
+                {
+                    value = ddList.SelectedValue.ToStr();
+                }
+            }));
+
+            return value;
+        }
     }
 }

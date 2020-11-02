@@ -47,36 +47,36 @@
             this.tabDatabase = new System.Windows.Forms.TabPage();
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
             this.tablePlayer = new System.Windows.Forms.TableLayoutPanel();
+            this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanelTop = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.pnlSamples = new System.Windows.Forms.Panel();
+            this.txtSamplesNew = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtSamplesOrg = new TMCWorkbench.Controls.TextAreaControl();
             this.pnlInstruments = new System.Windows.Forms.Panel();
+            this.txtInstrumentsNew = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtInstrumentsOrg = new TMCWorkbench.Controls.TextAreaControl();
             this.pnlMessage = new System.Windows.Forms.Panel();
+            this.txtMessageNew = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtMessageOrg = new TMCWorkbench.Controls.TextAreaControl();
             this.tableLayoutPanelBot = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.ctrSummary = new TMCWorkbench.Controls.TextAreaControl();
             this.panelSave = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnBla = new System.Windows.Forms.Button();
-            this.btnTest = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.musicControl1 = new TMCWorkbench.Controls.MusicControl();
-            this.txtSamplesNew = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtSamplesOrg = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtInstrumentsNew = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtInstrumentsOrg = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtMessageNew = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtMessageOrg = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtOutput = new TMCWorkbench.Controls.TextAreaControl();
             this.ctrMetaData = new TMCWorkbench.Controls.MetaDataControl();
             this.listViewControl1 = new TMCWorkbench.Controls.ListViewControl();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnBla = new System.Windows.Forms.Button();
             this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
+            this.btnTest = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableMenu.SuspendLayout();
@@ -90,21 +90,21 @@
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanelTop.SuspendLayout();
             this.pnlSamples.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSamplesNew)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSamplesOrg)).BeginInit();
             this.pnlInstruments.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInstrumentsNew)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInstrumentsOrg)).BeginInit();
             this.pnlMessage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMessageNew)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMessageOrg)).BeginInit();
             this.tableLayoutPanelBot.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ctrSummary)).BeginInit();
             this.panelSave.SuspendLayout();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSamplesNew)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSamplesOrg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInstrumentsNew)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInstrumentsOrg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMessageNew)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMessageOrg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -289,6 +289,14 @@
             this.tablePlayer.Size = new System.Drawing.Size(1025, 804);
             this.tablePlayer.TabIndex = 2;
             // 
+            // musicControl1
+            // 
+            this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.musicControl1.Location = new System.Drawing.Point(3, 738);
+            this.musicControl1.Name = "musicControl1";
+            this.musicControl1.Size = new System.Drawing.Size(1019, 63);
+            this.musicControl1.TabIndex = 9;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -374,6 +382,78 @@
             this.pnlSamples.Size = new System.Drawing.Size(178, 331);
             this.pnlSamples.TabIndex = 10;
             // 
+            // txtSamplesNew
+            // 
+            this.txtSamplesNew.AllowMacroRecording = false;
+            this.txtSamplesNew.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtSamplesNew.AutoScrollMinSize = new System.Drawing.Size(0, 18);
+            this.txtSamplesNew.BackBrush = null;
+            this.txtSamplesNew.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSamplesNew.CharHeight = 12;
+            this.txtSamplesNew.CharWidth = 6;
+            this.txtSamplesNew.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSamplesNew.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtSamplesNew.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtSamplesNew.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtSamplesNew.IsReplaceMode = false;
+            this.txtSamplesNew.Location = new System.Drawing.Point(0, 56);
+            this.txtSamplesNew.Name = "txtSamplesNew";
+            this.txtSamplesNew.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtSamplesNew.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtSamplesNew.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSamplesNew.ServiceColors")));
+            this.txtSamplesNew.ShowLineNumbers = false;
+            this.txtSamplesNew.Size = new System.Drawing.Size(178, 56);
+            this.txtSamplesNew.TabIndex = 9;
+            this.txtSamplesNew.Text = "txtSamplesNew";
+            this.txtSamplesNew.WordWrap = true;
+            this.txtSamplesNew.Zoom = 100;
+            // 
+            // txtSamplesOrg
+            // 
+            this.txtSamplesOrg.AllowMacroRecording = false;
+            this.txtSamplesOrg.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtSamplesOrg.AutoScrollMinSize = new System.Drawing.Size(0, 18);
+            this.txtSamplesOrg.BackBrush = null;
+            this.txtSamplesOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSamplesOrg.CharHeight = 12;
+            this.txtSamplesOrg.CharWidth = 6;
+            this.txtSamplesOrg.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSamplesOrg.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtSamplesOrg.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtSamplesOrg.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtSamplesOrg.IsReplaceMode = false;
+            this.txtSamplesOrg.Location = new System.Drawing.Point(0, 0);
+            this.txtSamplesOrg.Name = "txtSamplesOrg";
+            this.txtSamplesOrg.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtSamplesOrg.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtSamplesOrg.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSamplesOrg.ServiceColors")));
+            this.txtSamplesOrg.ShowLineNumbers = false;
+            this.txtSamplesOrg.Size = new System.Drawing.Size(178, 56);
+            this.txtSamplesOrg.TabIndex = 8;
+            this.txtSamplesOrg.Text = "txtSamplesOrg";
+            this.txtSamplesOrg.WordWrap = true;
+            this.txtSamplesOrg.Zoom = 100;
+            // 
             // pnlInstruments
             // 
             this.pnlInstruments.Controls.Add(this.txtInstrumentsNew);
@@ -384,6 +464,78 @@
             this.pnlInstruments.Size = new System.Drawing.Size(178, 331);
             this.pnlInstruments.TabIndex = 11;
             // 
+            // txtInstrumentsNew
+            // 
+            this.txtInstrumentsNew.AllowMacroRecording = false;
+            this.txtInstrumentsNew.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtInstrumentsNew.AutoScrollMinSize = new System.Drawing.Size(0, 18);
+            this.txtInstrumentsNew.BackBrush = null;
+            this.txtInstrumentsNew.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtInstrumentsNew.CharHeight = 12;
+            this.txtInstrumentsNew.CharWidth = 6;
+            this.txtInstrumentsNew.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtInstrumentsNew.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtInstrumentsNew.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtInstrumentsNew.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtInstrumentsNew.IsReplaceMode = false;
+            this.txtInstrumentsNew.Location = new System.Drawing.Point(0, 56);
+            this.txtInstrumentsNew.Name = "txtInstrumentsNew";
+            this.txtInstrumentsNew.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtInstrumentsNew.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtInstrumentsNew.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtInstrumentsNew.ServiceColors")));
+            this.txtInstrumentsNew.ShowLineNumbers = false;
+            this.txtInstrumentsNew.Size = new System.Drawing.Size(178, 56);
+            this.txtInstrumentsNew.TabIndex = 10;
+            this.txtInstrumentsNew.Text = "txtInstrumentsNew";
+            this.txtInstrumentsNew.WordWrap = true;
+            this.txtInstrumentsNew.Zoom = 100;
+            // 
+            // txtInstrumentsOrg
+            // 
+            this.txtInstrumentsOrg.AllowMacroRecording = false;
+            this.txtInstrumentsOrg.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtInstrumentsOrg.AutoScrollMinSize = new System.Drawing.Size(0, 18);
+            this.txtInstrumentsOrg.BackBrush = null;
+            this.txtInstrumentsOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtInstrumentsOrg.CharHeight = 12;
+            this.txtInstrumentsOrg.CharWidth = 6;
+            this.txtInstrumentsOrg.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtInstrumentsOrg.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtInstrumentsOrg.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtInstrumentsOrg.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtInstrumentsOrg.IsReplaceMode = false;
+            this.txtInstrumentsOrg.Location = new System.Drawing.Point(0, 0);
+            this.txtInstrumentsOrg.Name = "txtInstrumentsOrg";
+            this.txtInstrumentsOrg.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtInstrumentsOrg.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtInstrumentsOrg.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtInstrumentsOrg.ServiceColors")));
+            this.txtInstrumentsOrg.ShowLineNumbers = false;
+            this.txtInstrumentsOrg.Size = new System.Drawing.Size(178, 56);
+            this.txtInstrumentsOrg.TabIndex = 9;
+            this.txtInstrumentsOrg.Text = "txtInstrumentsOrg";
+            this.txtInstrumentsOrg.WordWrap = true;
+            this.txtInstrumentsOrg.Zoom = 100;
+            // 
             // pnlMessage
             // 
             this.pnlMessage.Controls.Add(this.txtMessageNew);
@@ -393,6 +545,78 @@
             this.pnlMessage.Name = "pnlMessage";
             this.pnlMessage.Size = new System.Drawing.Size(645, 331);
             this.pnlMessage.TabIndex = 12;
+            // 
+            // txtMessageNew
+            // 
+            this.txtMessageNew.AllowMacroRecording = false;
+            this.txtMessageNew.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtMessageNew.AutoScrollMinSize = new System.Drawing.Size(0, 18);
+            this.txtMessageNew.BackBrush = null;
+            this.txtMessageNew.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMessageNew.CharHeight = 12;
+            this.txtMessageNew.CharWidth = 6;
+            this.txtMessageNew.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMessageNew.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtMessageNew.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtMessageNew.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtMessageNew.IsReplaceMode = false;
+            this.txtMessageNew.Location = new System.Drawing.Point(0, 56);
+            this.txtMessageNew.Name = "txtMessageNew";
+            this.txtMessageNew.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtMessageNew.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtMessageNew.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtMessageNew.ServiceColors")));
+            this.txtMessageNew.ShowLineNumbers = false;
+            this.txtMessageNew.Size = new System.Drawing.Size(645, 56);
+            this.txtMessageNew.TabIndex = 11;
+            this.txtMessageNew.Text = "txtMessageNew";
+            this.txtMessageNew.WordWrap = true;
+            this.txtMessageNew.Zoom = 100;
+            // 
+            // txtMessageOrg
+            // 
+            this.txtMessageOrg.AllowMacroRecording = false;
+            this.txtMessageOrg.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.txtMessageOrg.AutoScrollMinSize = new System.Drawing.Size(0, 18);
+            this.txtMessageOrg.BackBrush = null;
+            this.txtMessageOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMessageOrg.CharHeight = 12;
+            this.txtMessageOrg.CharWidth = 6;
+            this.txtMessageOrg.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMessageOrg.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtMessageOrg.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtMessageOrg.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.txtMessageOrg.IsReplaceMode = false;
+            this.txtMessageOrg.Location = new System.Drawing.Point(0, 0);
+            this.txtMessageOrg.Name = "txtMessageOrg";
+            this.txtMessageOrg.Paddings = new System.Windows.Forms.Padding(3);
+            this.txtMessageOrg.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.txtMessageOrg.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtMessageOrg.ServiceColors")));
+            this.txtMessageOrg.ShowLineNumbers = false;
+            this.txtMessageOrg.Size = new System.Drawing.Size(645, 56);
+            this.txtMessageOrg.TabIndex = 10;
+            this.txtMessageOrg.Text = "txtMessageOrg";
+            this.txtMessageOrg.WordWrap = true;
+            this.txtMessageOrg.Zoom = 100;
             // 
             // tableLayoutPanelBot
             // 
@@ -417,7 +641,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.txtOutput, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ctrSummary, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panelSave, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(371, 23);
@@ -427,6 +651,42 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 334);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // ctrSummary
+            // 
+            this.ctrSummary.AllowMacroRecording = false;
+            this.ctrSummary.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.ctrSummary.AutoScrollMinSize = new System.Drawing.Size(0, 18);
+            this.ctrSummary.BackBrush = null;
+            this.ctrSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ctrSummary.CharHeight = 12;
+            this.ctrSummary.CharWidth = 6;
+            this.ctrSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.ctrSummary.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.ctrSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrSummary.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.ctrSummary.IsReplaceMode = false;
+            this.ctrSummary.Location = new System.Drawing.Point(3, 3);
+            this.ctrSummary.Name = "ctrSummary";
+            this.ctrSummary.Paddings = new System.Windows.Forms.Padding(3);
+            this.ctrSummary.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.ctrSummary.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("ctrSummary.ServiceColors")));
+            this.ctrSummary.ShowLineNumbers = false;
+            this.ctrSummary.Size = new System.Drawing.Size(639, 298);
+            this.ctrSummary.TabIndex = 10;
+            this.ctrSummary.Text = "txtOutput";
+            this.ctrSummary.WordWrap = true;
+            this.ctrSummary.Zoom = 100;
             // 
             // panelSave
             // 
@@ -478,6 +738,22 @@
             this.pnlMetaOrg.Size = new System.Drawing.Size(362, 313);
             this.pnlMetaOrg.TabIndex = 0;
             // 
+            // ctrMetaData
+            // 
+            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrMetaData.Location = new System.Drawing.Point(0, 0);
+            this.ctrMetaData.Name = "ctrMetaData";
+            this.ctrMetaData.Size = new System.Drawing.Size(362, 313);
+            this.ctrMetaData.TabIndex = 0;
+            // 
+            // listViewControl1
+            // 
+            this.listViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewControl1.Location = new System.Drawing.Point(253, 3);
+            this.listViewControl1.Name = "listViewControl1";
+            this.listViewControl1.Size = new System.Drawing.Size(344, 804);
+            this.listViewControl1.TabIndex = 3;
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -506,6 +782,14 @@
             this.btnBla.UseVisualStyleBackColor = true;
             this.btnBla.Click += new System.EventHandler(this.btnBla_Click);
             // 
+            // browserControl1
+            // 
+            this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.browserControl1.Location = new System.Drawing.Point(3, 3);
+            this.browserControl1.Name = "browserControl1";
+            this.browserControl1.Size = new System.Drawing.Size(238, 738);
+            this.browserControl1.TabIndex = 1;
+            // 
             // btnTest
             // 
             this.btnTest.Location = new System.Drawing.Point(3, 747);
@@ -524,283 +808,6 @@
             this.button2.TabIndex = 0;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // musicControl1
-            // 
-            this.musicControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.musicControl1.Location = new System.Drawing.Point(3, 738);
-            this.musicControl1.Name = "musicControl1";
-            this.musicControl1.Size = new System.Drawing.Size(1019, 63);
-            this.musicControl1.TabIndex = 9;
-            // 
-            // txtSamplesNew
-            // 
-            this.txtSamplesNew.AllowMacroRecording = false;
-            this.txtSamplesNew.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtSamplesNew.AutoScrollMinSize = new System.Drawing.Size(86, 18);
-            this.txtSamplesNew.BackBrush = null;
-            this.txtSamplesNew.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSamplesNew.CharHeight = 12;
-            this.txtSamplesNew.CharWidth = 6;
-            this.txtSamplesNew.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSamplesNew.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSamplesNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtSamplesNew.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtSamplesNew.IsReplaceMode = false;
-            this.txtSamplesNew.Location = new System.Drawing.Point(0, 56);
-            this.txtSamplesNew.Name = "txtSamplesNew";
-            this.txtSamplesNew.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtSamplesNew.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtSamplesNew.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSamplesNew.ServiceColors")));
-            this.txtSamplesNew.ShowLineNumbers = false;
-            this.txtSamplesNew.Size = new System.Drawing.Size(178, 56);
-            this.txtSamplesNew.TabIndex = 9;
-            this.txtSamplesNew.Text = "txtSamplesNew";
-            this.txtSamplesNew.Zoom = 100;
-            // 
-            // txtSamplesOrg
-            // 
-            this.txtSamplesOrg.AllowMacroRecording = false;
-            this.txtSamplesOrg.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtSamplesOrg.AutoScrollMinSize = new System.Drawing.Size(86, 18);
-            this.txtSamplesOrg.BackBrush = null;
-            this.txtSamplesOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtSamplesOrg.CharHeight = 12;
-            this.txtSamplesOrg.CharWidth = 6;
-            this.txtSamplesOrg.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSamplesOrg.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtSamplesOrg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtSamplesOrg.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtSamplesOrg.IsReplaceMode = false;
-            this.txtSamplesOrg.Location = new System.Drawing.Point(0, 0);
-            this.txtSamplesOrg.Name = "txtSamplesOrg";
-            this.txtSamplesOrg.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtSamplesOrg.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtSamplesOrg.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtSamplesOrg.ServiceColors")));
-            this.txtSamplesOrg.ShowLineNumbers = false;
-            this.txtSamplesOrg.Size = new System.Drawing.Size(178, 56);
-            this.txtSamplesOrg.TabIndex = 8;
-            this.txtSamplesOrg.Text = "txtSamplesOrg";
-            this.txtSamplesOrg.Zoom = 100;
-            // 
-            // txtInstrumentsNew
-            // 
-            this.txtInstrumentsNew.AllowMacroRecording = false;
-            this.txtInstrumentsNew.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtInstrumentsNew.AutoScrollMinSize = new System.Drawing.Size(110, 18);
-            this.txtInstrumentsNew.BackBrush = null;
-            this.txtInstrumentsNew.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtInstrumentsNew.CharHeight = 12;
-            this.txtInstrumentsNew.CharWidth = 6;
-            this.txtInstrumentsNew.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtInstrumentsNew.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtInstrumentsNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtInstrumentsNew.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtInstrumentsNew.IsReplaceMode = false;
-            this.txtInstrumentsNew.Location = new System.Drawing.Point(0, 56);
-            this.txtInstrumentsNew.Name = "txtInstrumentsNew";
-            this.txtInstrumentsNew.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtInstrumentsNew.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtInstrumentsNew.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtInstrumentsNew.ServiceColors")));
-            this.txtInstrumentsNew.ShowLineNumbers = false;
-            this.txtInstrumentsNew.Size = new System.Drawing.Size(178, 56);
-            this.txtInstrumentsNew.TabIndex = 10;
-            this.txtInstrumentsNew.Text = "txtInstrumentsNew";
-            this.txtInstrumentsNew.Zoom = 100;
-            // 
-            // txtInstrumentsOrg
-            // 
-            this.txtInstrumentsOrg.AllowMacroRecording = false;
-            this.txtInstrumentsOrg.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtInstrumentsOrg.AutoScrollMinSize = new System.Drawing.Size(110, 18);
-            this.txtInstrumentsOrg.BackBrush = null;
-            this.txtInstrumentsOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtInstrumentsOrg.CharHeight = 12;
-            this.txtInstrumentsOrg.CharWidth = 6;
-            this.txtInstrumentsOrg.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtInstrumentsOrg.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtInstrumentsOrg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtInstrumentsOrg.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtInstrumentsOrg.IsReplaceMode = false;
-            this.txtInstrumentsOrg.Location = new System.Drawing.Point(0, 0);
-            this.txtInstrumentsOrg.Name = "txtInstrumentsOrg";
-            this.txtInstrumentsOrg.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtInstrumentsOrg.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtInstrumentsOrg.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtInstrumentsOrg.ServiceColors")));
-            this.txtInstrumentsOrg.ShowLineNumbers = false;
-            this.txtInstrumentsOrg.Size = new System.Drawing.Size(178, 56);
-            this.txtInstrumentsOrg.TabIndex = 9;
-            this.txtInstrumentsOrg.Text = "txtInstrumentsOrg";
-            this.txtInstrumentsOrg.Zoom = 100;
-            // 
-            // txtMessageNew
-            // 
-            this.txtMessageNew.AllowMacroRecording = false;
-            this.txtMessageNew.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtMessageNew.AutoScrollMinSize = new System.Drawing.Size(86, 18);
-            this.txtMessageNew.BackBrush = null;
-            this.txtMessageNew.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMessageNew.CharHeight = 12;
-            this.txtMessageNew.CharWidth = 6;
-            this.txtMessageNew.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtMessageNew.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtMessageNew.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtMessageNew.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtMessageNew.IsReplaceMode = false;
-            this.txtMessageNew.Location = new System.Drawing.Point(0, 56);
-            this.txtMessageNew.Name = "txtMessageNew";
-            this.txtMessageNew.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtMessageNew.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtMessageNew.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtMessageNew.ServiceColors")));
-            this.txtMessageNew.ShowLineNumbers = false;
-            this.txtMessageNew.Size = new System.Drawing.Size(645, 56);
-            this.txtMessageNew.TabIndex = 11;
-            this.txtMessageNew.Text = "txtMessageNew";
-            this.txtMessageNew.Zoom = 100;
-            // 
-            // txtMessageOrg
-            // 
-            this.txtMessageOrg.AllowMacroRecording = false;
-            this.txtMessageOrg.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtMessageOrg.AutoScrollMinSize = new System.Drawing.Size(86, 18);
-            this.txtMessageOrg.BackBrush = null;
-            this.txtMessageOrg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtMessageOrg.CharHeight = 12;
-            this.txtMessageOrg.CharWidth = 6;
-            this.txtMessageOrg.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtMessageOrg.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtMessageOrg.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtMessageOrg.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtMessageOrg.IsReplaceMode = false;
-            this.txtMessageOrg.Location = new System.Drawing.Point(0, 0);
-            this.txtMessageOrg.Name = "txtMessageOrg";
-            this.txtMessageOrg.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtMessageOrg.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtMessageOrg.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtMessageOrg.ServiceColors")));
-            this.txtMessageOrg.ShowLineNumbers = false;
-            this.txtMessageOrg.Size = new System.Drawing.Size(645, 56);
-            this.txtMessageOrg.TabIndex = 10;
-            this.txtMessageOrg.Text = "txtMessageOrg";
-            this.txtMessageOrg.Zoom = 100;
-            // 
-            // txtOutput
-            // 
-            this.txtOutput.AllowMacroRecording = false;
-            this.txtOutput.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.txtOutput.AutoScrollMinSize = new System.Drawing.Size(62, 18);
-            this.txtOutput.BackBrush = null;
-            this.txtOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtOutput.CharHeight = 12;
-            this.txtOutput.CharWidth = 6;
-            this.txtOutput.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtOutput.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtOutput.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.txtOutput.IsReplaceMode = false;
-            this.txtOutput.Location = new System.Drawing.Point(3, 3);
-            this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Paddings = new System.Windows.Forms.Padding(3);
-            this.txtOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.txtOutput.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("txtOutput.ServiceColors")));
-            this.txtOutput.ShowLineNumbers = false;
-            this.txtOutput.Size = new System.Drawing.Size(639, 298);
-            this.txtOutput.TabIndex = 10;
-            this.txtOutput.Text = "txtOutput";
-            this.txtOutput.Zoom = 100;
-            // 
-            // ctrMetaData
-            // 
-            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrMetaData.Location = new System.Drawing.Point(0, 0);
-            this.ctrMetaData.Name = "ctrMetaData";
-            this.ctrMetaData.Size = new System.Drawing.Size(362, 313);
-            this.ctrMetaData.TabIndex = 0;
-            // 
-            // listViewControl1
-            // 
-            this.listViewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewControl1.Location = new System.Drawing.Point(253, 3);
-            this.listViewControl1.Name = "listViewControl1";
-            this.listViewControl1.Size = new System.Drawing.Size(344, 804);
-            this.listViewControl1.TabIndex = 3;
-            // 
-            // browserControl1
-            // 
-            this.browserControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browserControl1.Location = new System.Drawing.Point(3, 3);
-            this.browserControl1.Name = "browserControl1";
-            this.browserControl1.Size = new System.Drawing.Size(238, 738);
-            this.browserControl1.TabIndex = 1;
             // 
             // FormMain
             // 
@@ -829,21 +836,21 @@
             this.tableLayoutPanelTop.ResumeLayout(false);
             this.tableLayoutPanelTop.PerformLayout();
             this.pnlSamples.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtSamplesNew)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSamplesOrg)).EndInit();
             this.pnlInstruments.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtInstrumentsNew)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInstrumentsOrg)).EndInit();
             this.pnlMessage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtMessageNew)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMessageOrg)).EndInit();
             this.tableLayoutPanelBot.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ctrSummary)).EndInit();
             this.panelSave.ResumeLayout(false);
             this.pnlMeta.ResumeLayout(false);
             this.pnlMetaOrg.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtSamplesNew)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSamplesOrg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInstrumentsNew)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInstrumentsOrg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMessageNew)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMessageOrg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOutput)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -864,7 +871,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Controls.TextAreaControl txtOutput;
+        private Controls.TextAreaControl ctrSummary;
         private System.Windows.Forms.Panel panelSave;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox comboBox1;

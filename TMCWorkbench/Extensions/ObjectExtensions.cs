@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TMCWorkbench.Tools;
 
-namespace Extensions
+namespace TMCWorkbench
 {
     public static class ObjectExtensions
     {
@@ -18,7 +18,7 @@ namespace Extensions
         {
             if (value == null) { return false; }
             var s = value.ToString();
-            return Extensions.StringExtensions.IsNumeric(s);
+            return StringExtensions.IsNumeric(s);
         }
 
         public static int ToInt(this object value)
@@ -26,5 +26,10 @@ namespace Extensions
             return Converter.ToInt32(value);
         }
 
+        public static string ToStr(this object value)
+        {
+            if (value == null) return string.Empty;
+            return value.ToString();
+        }
     }
 }

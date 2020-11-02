@@ -6,7 +6,8 @@ using System.Linq;
 using TMCWorkbench.DB;
 using TMCDatabase.DBModel;
 using System.Drawing;
-using Extensions;
+using TMCWorkbench;
+using System.Text;
 
 namespace TMCWorkbench
 {
@@ -106,26 +107,106 @@ namespace TMCWorkbench
 
             if (modInfo != null)
             {
-
                 txtSamplesOrg.Do(()=> txtSamplesOrg.Text = modInfo.SampleText);
                 txtInstrumentsOrg.Do(()=> txtInstrumentsOrg.Text = modInfo.InstrumentText);
                 txtMessageOrg.Do(()=> txtMessageOrg.Text = modInfo.SongText);
-
-                //if (track == null)
-                //{
-                //    SwitchTabs(false);
-                //    DisableTabDatabase();
-                //}
             }
             if (track != null)
             {
                 txtSamplesNew.Do(()=> txtSamplesNew.Text = track.SampleText);
                 txtInstrumentsNew.Do(()=> txtInstrumentsNew.Text = track.InstrumentText);
                 txtMessageNew.Do(()=>txtMessageNew.Text = track.SongText);
-
-                //SwitchTabs(true);
             }
 
+            GenerateSummary();
+        }
+
+        private void GenerateSummary()
+        {
+            var fileName = ctrMetaData.ctrFileInfo.Text;
+            var title = ctrMetaData.ctrTrackTitle.Text;
+            var style = ctrMetaData.ctrStyle.GetValue();
+            var date = ctrMetaData.ctrDate.Date.HasValue ? ctrMetaData.ctrDate.Date.Value : new DateTime(1900,1,1);
+            var composer = ctrMetaData.ctrComposer.GetValue();
+            var scenegroup = ctrMetaData.ctrScenegroup.GetValue();
+
+            if (style.IsNullOrEmpty())
+            {
+                style = ctrMetaData.ctrStyleText.Text;
+            }
+            if (composer.IsNullOrEmpty())
+            {
+                composer = ctrMetaData.ctrComposerText.Text;
+            }
+            if (scenegroup.IsNullOrEmpty())
+            {
+                scenegroup = ctrMetaData.ctrScenegroupText.Text;
+            }
+
+            var text = new StringBuilder();
+            
+            if (title.IsNullOrEmpty())
+            {
+                text.Append(fileName);
+            }
+            else
+            {
+                text.Append($"{title} (${fileName} ");
+            }
+            
+            if (style.IsNotNullOrEmpty())
+            {
+                var an = "a";
+
+                if ("aeiouAEIOU".IndexOf(style.Substring(0,1), StringComparison.InvariantCulture) >= 0)
+                {
+                    an = "an";
+                }
+
+                text.Append($"is {an} {style} track created in ");
+            }
+            else
+            {
+                text.Append("is a track created in ");
+            }
+
+            text.Append($"{date.Year}");
+
+            if (composer.IsNotNullOrEmpty())
+            {
+                text.Append($" by {composer}");
+            }
+            if (scenegroup.IsNotNullOrEmpty())
+            {
+                if (composer.IsNotNullOrEmpty())
+                {
+                    text.Append($" of {scenegroup}");
+                }
+                else
+                {
+                    text.Append($" by the group {scenegroup}");
+                }
+            }
+
+            text.Append(".");
+
+            ctrSummary.Text = text.ToString();
+            
+
+
+
+
+
+            //Generate text
+            //var title = track == null ? modInfo.SongName : track.TrackTitle;
+            //title = track == null ? $"{title} ({modInfo.FileName})" : $"{title} ({track.FileName})";
+            //title = $"{title} is a";
+
+
+            //if (track != null)
+            //{
+            //    //So we 
+            //}
         }
 
         private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TMCWorkbench.Controls.Resettable;
 using System.ComponentModel.Design;
-using TMCWorkbench.Extensions;
+using TMCWorkbench;
 
 namespace TMCWorkbench.Controls
 {

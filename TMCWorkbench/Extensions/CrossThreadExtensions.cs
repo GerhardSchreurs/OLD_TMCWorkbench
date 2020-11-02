@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Extensions
+namespace TMCWorkbench
 {
     public static class CrossThreadExtensions
     {
