@@ -53,16 +53,26 @@ namespace TMCWorkbench.Controls.Resettable
             ddList.DataSource = bindingSource;
         }
 
-        public void SetComposer(string text)
+        public void Reset()
         {
-            if (text == null) return;
+            ddList.SelectedValue = 0;
+        }
 
-            var composer = DBManager.Instance.Composers.Where(x => x.Name.ToLower() == text.ToLower()).FirstOrNull();
-
-            if (composer != null)
+        public bool SetComposer(string text)
+        {
+            if (text != null)
             {
-                ddList.SelectedValue = composer.Composer_id;
+                var composer = DBManager.Instance.Composers.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
+
+                if (composer != null)
+                {
+                    ddList.SelectedValue = composer.Composer_id;
+                    return true;
+                }
             }
+
+            ddList.SelectedValue = 0;
+            return false;
         }
 
         public void SetComposer(int? id)

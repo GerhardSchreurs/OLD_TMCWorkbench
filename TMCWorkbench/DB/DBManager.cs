@@ -44,6 +44,7 @@ namespace TMCWorkbench.DB
         public MySqlConnection CON;
 
         public List<Style> Styles;
+        public List<Tracker> Trackers;
         public List<TrackStyle> TrackStyles;
         public List<Scenegroup> SceneGroups;
         public List<Composer> Composers;
@@ -57,6 +58,15 @@ namespace TMCWorkbench.DB
             CON.Open();
             C = new DatabaseContext(CON,false);
             C.Database.Log = Console.WriteLine;
+        }
+
+        public void LoadTrackers(bool refresh = false)
+        {
+            if (refresh || refresh == false && Trackers == null)
+            {
+                C.Trackers.Load();
+                Trackers = C.Trackers.ToList();
+            }
         }
 
         public void LoadStyles(bool refresh = false)

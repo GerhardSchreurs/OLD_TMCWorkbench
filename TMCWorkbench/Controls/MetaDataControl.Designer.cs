@@ -42,6 +42,7 @@
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
             this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
+            this.ctrTracker = new TMCWorkbench.Controls.Resettable.ResettableTrackerDropDownControl();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +53,7 @@
             this.pnlMeta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMeta.Location = new System.Drawing.Point(0, 0);
             this.pnlMeta.Name = "pnlMeta";
-            this.pnlMeta.Size = new System.Drawing.Size(654, 300);
+            this.pnlMeta.Size = new System.Drawing.Size(654, 320);
             this.pnlMeta.TabIndex = 2;
             // 
             // pnlMetaOrg
@@ -63,6 +64,7 @@
             this.pnlMetaOrg.Controls.Add(this.ctrComposer);
             this.pnlMetaOrg.Controls.Add(this.ctrStyleText);
             this.pnlMetaOrg.Controls.Add(this.ctrStyle);
+            this.pnlMetaOrg.Controls.Add(this.ctrTracker);
             this.pnlMetaOrg.Controls.Add(this.ctrBPM);
             this.pnlMetaOrg.Controls.Add(this.ctrSpeed);
             this.pnlMetaOrg.Controls.Add(this.ctrLength);
@@ -72,14 +74,14 @@
             this.pnlMetaOrg.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMetaOrg.Location = new System.Drawing.Point(0, 0);
             this.pnlMetaOrg.Name = "pnlMetaOrg";
-            this.pnlMetaOrg.Size = new System.Drawing.Size(654, 295);
+            this.pnlMetaOrg.Size = new System.Drawing.Size(654, 320);
             this.pnlMetaOrg.TabIndex = 0;
             // 
             // ctrScenegroupText
             // 
             this.ctrScenegroupText.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctrScenegroupText.LabelTitle = "Scenegroup (S)";
-            this.ctrScenegroupText.Location = new System.Drawing.Point(0, 264);
+            this.ctrScenegroupText.Location = new System.Drawing.Point(0, 288);
             this.ctrScenegroupText.Margin = new System.Windows.Forms.Padding(0);
             this.ctrScenegroupText.Name = "ctrScenegroupText";
             this.ctrScenegroupText.Original = null;
@@ -90,7 +92,7 @@
             // 
             this.ctrScenegroup.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctrScenegroup.LabelTitle = "Scenegroup";
-            this.ctrScenegroup.Location = new System.Drawing.Point(0, 240);
+            this.ctrScenegroup.Location = new System.Drawing.Point(0, 264);
             this.ctrScenegroup.Margin = new System.Windows.Forms.Padding(0);
             this.ctrScenegroup.Name = "ctrScenegroup";
             this.ctrScenegroup.Size = new System.Drawing.Size(654, 24);
@@ -100,7 +102,7 @@
             // 
             this.ctrComposerText.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctrComposerText.LabelTitle = "Composer (S)";
-            this.ctrComposerText.Location = new System.Drawing.Point(0, 216);
+            this.ctrComposerText.Location = new System.Drawing.Point(0, 240);
             this.ctrComposerText.Margin = new System.Windows.Forms.Padding(0);
             this.ctrComposerText.Name = "ctrComposerText";
             this.ctrComposerText.Original = null;
@@ -111,7 +113,7 @@
             // 
             this.ctrComposer.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctrComposer.LabelTitle = "Composer";
-            this.ctrComposer.Location = new System.Drawing.Point(0, 192);
+            this.ctrComposer.Location = new System.Drawing.Point(0, 216);
             this.ctrComposer.Margin = new System.Windows.Forms.Padding(0);
             this.ctrComposer.Name = "ctrComposer";
             this.ctrComposer.Size = new System.Drawing.Size(654, 24);
@@ -121,7 +123,7 @@
             // 
             this.ctrStyleText.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctrStyleText.LabelTitle = "Style (S)";
-            this.ctrStyleText.Location = new System.Drawing.Point(0, 168);
+            this.ctrStyleText.Location = new System.Drawing.Point(0, 192);
             this.ctrStyleText.Margin = new System.Windows.Forms.Padding(0);
             this.ctrStyleText.Name = "ctrStyleText";
             this.ctrStyleText.Original = null;
@@ -132,7 +134,7 @@
             // 
             this.ctrStyle.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctrStyle.LabelTitle = "Style";
-            this.ctrStyle.Location = new System.Drawing.Point(0, 144);
+            this.ctrStyle.Location = new System.Drawing.Point(0, 168);
             this.ctrStyle.Margin = new System.Windows.Forms.Padding(0);
             this.ctrStyle.Name = "ctrStyle";
             this.ctrStyle.Size = new System.Drawing.Size(654, 24);
@@ -202,13 +204,23 @@
             this.ctrFileInfo.Size = new System.Drawing.Size(654, 24);
             this.ctrFileInfo.TabIndex = 6;
             // 
+            // ctrTracker
+            // 
+            this.ctrTracker.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrTracker.LabelTitle = "Tracker";
+            this.ctrTracker.Location = new System.Drawing.Point(0, 144);
+            this.ctrTracker.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrTracker.Name = "ctrTracker";
+            this.ctrTracker.Size = new System.Drawing.Size(654, 24);
+            this.ctrTracker.TabIndex = 18;
+            // 
             // MetaDataControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlMeta);
             this.Name = "MetaDataControl";
-            this.Size = new System.Drawing.Size(654, 300);
+            this.Size = new System.Drawing.Size(654, 320);
             this.pnlMeta.ResumeLayout(false);
             this.pnlMetaOrg.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -231,5 +243,6 @@
         public Resettable.ResettableDateControl ctrDate;
         public Resettable.ResettableTextControl ctrFileInfo;
         public Resettable.ResettableTextControl ctrTrackTitle;
+        private Resettable.ResettableTrackerDropDownControl ctrTracker;
     }
 }

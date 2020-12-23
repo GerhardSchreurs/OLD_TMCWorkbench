@@ -26,6 +26,7 @@ namespace TMCWorkbench.Controls
         {
             DB = DBManager.Instance;
 
+            ctrTracker.Init();
             ctrStyle.Init();
             ctrComposer.Init();
             ctrScenegroup.Init();
@@ -35,27 +36,29 @@ namespace TMCWorkbench.Controls
             ctrScenegroupText.SwitchMode();
         }
 
-        public void LoadData(ModInfo modInfo, TMCDatabase.DBModel.Track track, long duration)
+        public void LoadData(ModInfo modInfo, TMCDatabase.DBModel.Track data, long duration)
         {
             if (modInfo == null) return;
 
             var time = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(duration);
-            if (track != null)
-            {
-                var timeDB = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(track.Length);
 
-                ctrFileInfo.Text = track.FileName;
-                ctrTrackTitle.Text = track.TrackTitle;
-                ctrDate.Date = track.Date_created;
+            if (data != null)
+            {
+                var timeDB = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(data.Length);
+
+                ctrFileInfo.Text = data.FileName;
+                ctrTrackTitle.Text = data.TrackTitle;
+                ctrDate.Date = data.Date_created;
                 ctrLength.SetValues(timeDB.Item1, timeDB.Item2);
-                ctrSpeed.SetValues(track.Speed, track.Tempo);
-                ctrBPM.SetValue(track.Bpm);
-                ctrStyle.SetStyle(track.FK_style_id);
-                ctrStyleText.Text = track.StyleName;
-                ctrComposer.SetComposer(track.FK_composer_id);
-                ctrComposerText.Text = track.ComposerName;
-                ctrScenegroup.SetScenegroup(track.FK_scenegroup_id);
-                ctrScenegroupText.Text = track.ScenegroupName;
+                ctrSpeed.SetValues(data.Speed, data.Tempo);
+                ctrBPM.SetValue(data.Bpm);
+                ctrStyle.SetStyle(data.FK_style_id);
+                ctrStyleText.Text = data.StyleName;
+                ctrComposer.SetComposer(data.FK_composer_id);
+                ctrComposerText.Text = data.ComposerName;
+                ctrScenegroup.SetScenegroup(data.FK_scenegroup_id);
+                ctrScenegroupText.Text = data.ScenegroupName;
+                ctrTracker.SetTracker(data.Tracker.Name);
 
                 ctrFileInfo.Original = modInfo.FileName;
                 ctrDate.Original = modInfo.DateCreated;
@@ -67,10 +70,12 @@ namespace TMCWorkbench.Controls
             {
                 //NOT IN DB, ONLY LOAD FROM DISK
                 ctrFileInfo.Text = modInfo.FileName;
+                ctrTrackTitle.Text = modInfo.SongName;
                 ctrDate.Date = modInfo.DateCreated;
                 ctrLength.SetValues(time.Item1, time.Item2);
                 ctrSpeed.SetValues(modInfo.Speed, modInfo.Tempo);
                 ctrBPM.SetValue(modInfo.EstimatedBPM);
+                ctrTracker.SetTracker(modInfo.Tracker.ToStr());
 
                 ctrStyleText.Text = modInfo.TrackStyle;
                 ctrScenegroupText.Text = "";
@@ -81,6 +86,9 @@ namespace TMCWorkbench.Controls
                 {
                     ctrStyleText.Text = "";
                 }
+
+                ctrScenegroup.Reset();
+                ctrComposer.Reset();
             }
 
 

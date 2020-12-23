@@ -60,18 +60,25 @@ namespace TMCWorkbench.Controls.Resettable
 
         }
 
+        public void Reset()
+        {
+            ddList.SelectedValue = 0;
+        }
+
         public bool SetStyle(string text)
         {
-            if (text == null) return false;
-
-            var style = DB.DBManager.Instance.Styles.Where(x => x.Name.ToLower() == text.ToLower()).FirstOrNull();
-
-            if (style != null)
+            if (text != null)
             {
-                ddList.SelectedValue = style.Style_id;
-                return true;
+                var style = DB.DBManager.Instance.Styles.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
+
+                if (style != null)
+                {
+                    ddList.SelectedValue = style.Style_id;
+                    return true;
+                }
             }
 
+            ddList.SelectedValue = 0;
             return false;
         }
 

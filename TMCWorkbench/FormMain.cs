@@ -8,6 +8,7 @@ using TMCDatabase.DBModel;
 using System.Drawing;
 using TMCWorkbench;
 using System.Text;
+using TMCWorkbench.Extensions;
 
 namespace TMCWorkbench
 {
@@ -96,7 +97,7 @@ namespace TMCWorkbench
             tabControl.Refresh();
         }
 
-        void InitTextFields(ModInfo modInfo, Track track)
+        void InitTextFields()
         {
             txtSamplesOrg.Text = "";
             txtInstrumentsOrg.Text = "";
@@ -105,30 +106,45 @@ namespace TMCWorkbench
             txtInstrumentsNew.Text = "";
             txtMessageNew.Text = "";
 
-            if (modInfo != null)
+            if (_mod != null)
             {
-                txtSamplesOrg.Text = modInfo.SampleText;
-                txtInstrumentsOrg.Text = modInfo.InstrumentText;
-                txtMessageOrg.Text = modInfo.SongText;
+                txtSamplesOrg.Text = _mod.SampleText;
+                txtInstrumentsOrg.Text = _mod.InstrumentText;
+                txtMessageOrg.Text = _mod.SongText;
             }
-            if (track != null)
+            if (_track != null)
             {
-                txtSamplesNew.Text = track.SampleText;
-                txtInstrumentsNew.Text = track.InstrumentText;
-                txtMessageNew.Text = track.SongText;
+                txtSamplesNew.Text = _track.SampleText;
+                txtInstrumentsNew.Text = _track.InstrumentText;
+                txtMessageNew.Text = _track.SongText;
             }
-
-            GenerateSummary();
         }
 
         private void GenerateSummary()
         {
+            //Artificial Sun(ARTIFSUN.IT) is a 120 bpm Impulse Tracker Noise track that was created in 1997
+            //C djnonsens of eXploitation.
+
+            //Acid Rain (ACIDRAIN.IT) is a 140 bpm alternative Impulse tracker track that was created in 1998.
+            //© djnonsens of eXploitation.
+
+            //Acid Rain (ACIDRAIN.IT) is an impulse tracker alternative track at 140 bpm that was created in 1998.
+            //© djnonsens of eXploitation.
+
+            //Acid Rain(ACIDRAIN.IT) is a 140 bpm Impulse tracker rave style track. 
+            //© 1998 - djnonsens of eXploitation.
+
+            //Alisia went home(ALISIA.MOD) is a 125 bpm Protracker track that was created in 1997.
+            //© Unknown.
+
             var fileName = ctrMetaData.ctrFileInfo.Text;
             var title = ctrMetaData.ctrTrackTitle.Text;
             var style = ctrMetaData.ctrStyle.GetValue();
             var date = ctrMetaData.ctrDate.Date.HasValue ? ctrMetaData.ctrDate.Date.Value : new DateTime(1900,1,1);
             var composer = ctrMetaData.ctrComposer.GetValue();
             var scenegroup = ctrMetaData.ctrScenegroup.GetValue();
+            var tracker = _mod.Tracker.GetValue();
+            var bpm = _mod.EstimatedBPM; //TODO: TRACK
 
             if (style.IsNullOrEmpty())
             {
@@ -147,49 +163,46 @@ namespace TMCWorkbench
             
             if (title.IsNullOrEmpty())
             {
-                text.Append(fileName);
+                text.Append($"{fileName} ");
             }
             else
             {
-                text.Append($"{title} (${fileName} ");
+                text.Append($"{title} ({fileName}) ");
             }
+
+            text.Append($"is a {bpm} bpm ");
             
             if (style.IsNotNullOrEmpty())
             {
-                var an = "a";
+                //if ("aeiouAEIOU".IndexOf(style.Substring(0,1), StringComparison.InvariantCulture) >= 0)
+                //{
+                //    an = "an";
+                //}
 
-                if ("aeiouAEIOU".IndexOf(style.Substring(0,1), StringComparison.InvariantCulture) >= 0)
-                {
-                    an = "an";
-                }
+                text.Append($"{style} ");
+            }
+            text.Append($"track.");
+            text.AppendLine();
+            text.Append($"© {date.Year} - ");
 
-                text.Append($"is {an} {style} track created in ");
+            if (composer.IsNotNullOrEmpty() && scenegroup.IsNotNullOrEmpty())
+            {
+                text.Append($"{composer} of {scenegroup}.");
+            }
+            else if (composer.IsNotNullOrEmpty())
+            {
+                text.Append($"{composer}.");
+            }
+            else if (scenegroup.IsNotNullOrEmpty())
+            {
+                text.Append($"{scenegroup}.");
             }
             else
             {
-                text.Append("is a track created in ");
+                text.Append("Unknown.");
             }
 
-            text.Append($"{date.Year}");
-
-            if (composer.IsNotNullOrEmpty())
-            {
-                text.Append($" by {composer}");
-            }
-            if (scenegroup.IsNotNullOrEmpty())
-            {
-                if (composer.IsNotNullOrEmpty())
-                {
-                    text.Append($" of {scenegroup}");
-                }
-                else
-                {
-                    text.Append($" by the group {scenegroup}");
-                }
-            }
-
-            text.Append(".");
-
+            text.Append($" Tracked with {tracker}.");
             ctrSummary.Text = text.ToString();
             
 
@@ -209,41 +222,47 @@ namespace TMCWorkbench
             //}
         }
 
+        private ModInfo _mod;
+        private Track _track;
+        private Guid _guid;
+        private bool _isInDB;
+
         private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
         {
             toolStripStatusLabel.Text = fileinfoEventArgs.FileInfo.FullName;
             await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName).ConfigureAwait(true);
 
-            var guid = Manager.Instance.GetFileGuid(fileinfoEventArgs.FileInfo.FullName);
-            var isInDb = DB.IsTrackInDB(guid);
-            var modInfo = ModLibrary.ModLibrary.ParseAndGuessStyle(fileinfoEventArgs.FileInfo.FullName, DBManager.Instance.TrackStyles);
+            _guid = Manager.Instance.GetFileGuid(fileinfoEventArgs.FileInfo.FullName);
+            _isInDB = DB.IsTrackInDB(_guid);
+            _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(fileinfoEventArgs.FileInfo.FullName, DBManager.Instance.TrackStyles);
+            _track = null;
 
-            Track track = null;
-
-            if (isInDb)
+            if (_isInDB)
             {
-                if (DB.LoadTrackInfo(guid))
+                if (DB.LoadTrackInfo(_guid))
                 {
-                    track = DB.Track;
+                    _track = DB.Track;
                 }
             }
 
-            InitTextFields(modInfo, track);
+            InitTextFields();
 
             //Setup tabs
             EnableTabControl();
 
-            if (modInfo != null && track == null)
+            if (_mod != null && _track == null)
             {
                 DisableTabDatabase();
             } 
-            else if (track != null && modInfo == null)
+            else if (_track != null && _mod == null)
             {
                 DisableTabOriginal();
             }
 
-            SwitchTabs(track != null);
-            ctrMetaData.LoadData(modInfo, track, musicControl1.Media.Duration);
+            SwitchTabs(_track != null);
+            ctrMetaData.LoadData(_mod, _track, musicControl1.Media.Duration);
+
+            GenerateSummary();
         }
 
         private void Handle_BrowserControl_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
@@ -351,6 +370,11 @@ namespace TMCWorkbench
             {
                 form.ShowDialog();
             }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

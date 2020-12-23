@@ -17,15 +17,17 @@ namespace TMCWorkbench.Controls.Resettable
             InitializeComponent();
         }
 
+   
         public string GetValue()
         {
             var value = string.Empty;
 
             if (ddList.SelectedIndex > 0)
             {
-                value = ddList.SelectedValue.ToStr();
+                dynamic item = ddList.SelectedItem;
+                value = item.Name;
             }
-          
+
             return value;
         }
     }

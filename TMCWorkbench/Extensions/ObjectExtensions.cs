@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,12 @@ namespace TMCWorkbench
         {
             if (value == null) return string.Empty;
             return value.ToString();
+        }
+
+        public static string ToLow(this object value)
+        {
+            if (value == null) return string.Empty;
+            return value.ToString().ToLower();
         }
     }
 }

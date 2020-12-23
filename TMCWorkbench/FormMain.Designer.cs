@@ -64,10 +64,10 @@
             this.txtMessageOrg = new TMCWorkbench.Controls.TextAreaControl();
             this.tableLayoutPanelBot = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrSummary = new TMCWorkbench.Controls.TextAreaControl();
             this.panelSave = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ctrSummary = new TMCWorkbench.Controls.HistoryTextBox();
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
             this.ctrMetaData = new TMCWorkbench.Controls.MetaDataControl();
@@ -100,7 +100,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMessageOrg)).BeginInit();
             this.tableLayoutPanelBot.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ctrSummary)).BeginInit();
             this.panelSave.SuspendLayout();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
@@ -641,8 +640,8 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.ctrSummary, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panelSave, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ctrSummary, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(371, 23);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -651,42 +650,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 334);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // ctrSummary
-            // 
-            this.ctrSummary.AllowMacroRecording = false;
-            this.ctrSummary.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.ctrSummary.AutoScrollMinSize = new System.Drawing.Size(0, 18);
-            this.ctrSummary.BackBrush = null;
-            this.ctrSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ctrSummary.CharHeight = 12;
-            this.ctrSummary.CharWidth = 6;
-            this.ctrSummary.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.ctrSummary.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.ctrSummary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrSummary.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.ctrSummary.IsReplaceMode = false;
-            this.ctrSummary.Location = new System.Drawing.Point(3, 3);
-            this.ctrSummary.Name = "ctrSummary";
-            this.ctrSummary.Paddings = new System.Windows.Forms.Padding(3);
-            this.ctrSummary.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.ctrSummary.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("ctrSummary.ServiceColors")));
-            this.ctrSummary.ShowLineNumbers = false;
-            this.ctrSummary.Size = new System.Drawing.Size(639, 298);
-            this.ctrSummary.TabIndex = 10;
-            this.ctrSummary.Text = "txtOutput";
-            this.ctrSummary.WordWrap = true;
-            this.ctrSummary.Zoom = 100;
             // 
             // panelSave
             // 
@@ -707,6 +670,7 @@
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // comboBox1
             // 
@@ -719,6 +683,16 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 1;
+            // 
+            // ctrSummary
+            // 
+            this.ctrSummary.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ctrSummary.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrSummary.Location = new System.Drawing.Point(3, 3);
+            this.ctrSummary.Multiline = true;
+            this.ctrSummary.Name = "ctrSummary";
+            this.ctrSummary.Size = new System.Drawing.Size(562, 298);
+            this.ctrSummary.TabIndex = 12;
             // 
             // pnlMeta
             // 
@@ -846,7 +820,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMessageOrg)).EndInit();
             this.tableLayoutPanelBot.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ctrSummary)).EndInit();
+            this.tableLayoutPanel1.PerformLayout();
             this.panelSave.ResumeLayout(false);
             this.pnlMeta.ResumeLayout(false);
             this.pnlMetaOrg.ResumeLayout(false);
@@ -871,7 +845,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Controls.TextAreaControl ctrSummary;
         private System.Windows.Forms.Panel panelSave;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -903,6 +876,7 @@
         private System.Windows.Forms.ToolStripMenuItem scenegroupsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem composersToolStripMenuItem;
         private Controls.MetaDataControl ctrMetaData;
+        private Controls.HistoryTextBox ctrSummary;
     }
 }
 

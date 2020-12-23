@@ -120,6 +120,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
@@ -154,6 +155,9 @@
     </Compile>
     <Compile Include="Controls\BrowserControl.Designer.cs">
       <DependentUpon>BrowserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HistoryTextBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\IntegerTextBox.cs">
       <SubType>Component</SubType>
@@ -208,6 +212,12 @@
     </Compile>
     <Compile Include="Controls\Resettable\ResettableTextAreaControl.Designer.cs">
       <DependentUpon>ResettableTextAreaControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableTrackerDropDownControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableTrackerDropDownControl.Designer.cs">
+      <DependentUpon>ResettableTrackerDropDownControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\_ResettableDropDownControl.cs">
       <SubType>UserControl</SubType>
@@ -274,6 +284,7 @@
     <Compile Include="Events\EventInvoker.cs" />
     <Compile Include="Extensions\CrossThreadExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
