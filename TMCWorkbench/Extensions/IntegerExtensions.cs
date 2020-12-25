@@ -13,5 +13,10 @@ namespace TMCWorkbench
         {
             return i.ToString(CultureInfo.InvariantCulture);
         }
+
+        public static short ToSht(this int i)
+        {
+            return Convert.ToInt16(i);
+        }
     }
 }

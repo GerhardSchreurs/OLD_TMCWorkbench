@@ -60,7 +60,7 @@ namespace TMCWorkbench.Controls.Resettable
 
         public bool SetComposer(string text)
         {
-            if (text != null)
+            if (text.IsNotNullOrEmpty())
             {
                 var composer = DBManager.Instance.Composers.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
 

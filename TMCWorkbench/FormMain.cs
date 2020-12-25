@@ -10,12 +10,18 @@ using TMCWorkbench;
 using System.Text;
 using TMCWorkbench.Extensions;
 using TMCWorkbench.Properties;
+using System.Diagnostics;
 
 namespace TMCWorkbench
 {
     public partial class FormMain : Form
     {
         public DBManager DB = DBManager.Instance;
+
+        private ModInfo _mod;
+        private Track _track;
+        private Guid _guid;
+        private bool _isInDB;
 
         public FormMain()
         {
@@ -142,10 +148,10 @@ namespace TMCWorkbench
 
             var fileName = ctrMetaData.ctrFileInfo.Text;
             var title = ctrMetaData.ctrTrackTitle.Text;
-            var style = ctrMetaData.ctrStyle.GetValue();
+            var style = ctrMetaData.ctrStyle.GetStringValue();
             var date = ctrMetaData.ctrDate.Date.HasValue ? ctrMetaData.ctrDate.Date.Value : new DateTime(1900,1,1);
-            var composer = ctrMetaData.ctrComposer.GetValue();
-            var scenegroup = ctrMetaData.ctrScenegroup.GetValue();
+            var composer = ctrMetaData.ctrComposer.GetStringValue();
+            var scenegroup = ctrMetaData.ctrScenegroup.GetStringValue();
             var tracker = _mod.Tracker.GetValue();
             var bpm = _mod.EstimatedBPM; //TODO: TRACK
 
@@ -177,13 +183,9 @@ namespace TMCWorkbench
             
             if (style.IsNotNullOrEmpty())
             {
-                //if ("aeiouAEIOU".IndexOf(style.Substring(0,1), StringComparison.InvariantCulture) >= 0)
-                //{
-                //    an = "an";
-                //}
-
                 text.Append($"{style} ");
             }
+
             text.Append($"track.");
             text.AppendLine();
             text.Append($"© {date.Year} - ");
@@ -207,36 +209,15 @@ namespace TMCWorkbench
 
             text.Append($" Tracked with {tracker}.");
             ctrSummary.Text = text.ToString();
-            
-
-
-
-
-
-            //Generate text
-            //var title = track == null ? modInfo.SongName : track.TrackTitle;
-            //title = track == null ? $"{title} ({modInfo.FileName})" : $"{title} ({track.FileName})";
-            //title = $"{title} is a";
-
-
-            //if (track != null)
-            //{
-            //    //So we 
-            //}
         }
-
-        private ModInfo _mod;
-        private Track _track;
-        private Guid _guid;
-        private bool _isInDB;
 
         private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
         {
             toolStripStatusLabel.Text = fileinfoEventArgs.FileInfo.FullName;
             await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName).ConfigureAwait(true);
 
-            _guid = Manager.Instance.GetFileGuid(fileinfoEventArgs.FileInfo.FullName);
-            _isInDB = DB.IsTrackInDB(_guid);
+            _isInDB = Manager.Instance.IsTrackInDB(fileinfoEventArgs.FileInfo.FullName);
+            _guid = Manager.Instance.LastMd5Guid;
             _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(fileinfoEventArgs.FileInfo.FullName, DBManager.Instance.TrackStyles);
             _track = null;
 
@@ -250,22 +231,55 @@ namespace TMCWorkbench
 
             InitTextFields();
 
+            bool newTrack = false;
+
+            if (_track == null)
+            {                
+                _track = new Track();
+                newTrack = true;
+            }
+
             //Setup tabs
             EnableTabControl();
 
-            if (_mod != null && _track == null)
+            if (_mod != null && newTrack)
             {
                 DisableTabDatabase();
             } 
-            else if (_track != null && _mod == null)
+            else if (!newTrack && _mod == null)
             {
                 DisableTabOriginal();
             }
 
-            SwitchTabs(_track != null);
+            SwitchTabs(!newTrack);
             ctrMetaData.LoadData(_mod, _track, musicControl1.Media.Duration);
 
             GenerateSummary();
+        }
+
+        private void UpdateMetaData()
+        {
+            _track.FileName = ctrMetaData.FileName;
+            _track.Md5 = Manager.Instance.GetFileGuid(ctrMetaData.FileName);
+            _track.TrackTitle = ctrMetaData.TrackTitle;
+            _track.Date_track_created = ctrMetaData.Date;
+            _track.Date_track_modified = _mod.DateModified;
+            _track.Length = ctrMetaData.LengthInMs;
+            _track.Speed = ctrMetaData.Speed.ToSht();
+            _track.Tempo = ctrMetaData.Tempo.ToSht();
+            _track.Bpm = ctrMetaData.Bpm.ToSht();
+            _track.FK_tracker_id = ctrMetaData.TrackerID;
+            _track.FK_style_id = ctrMetaData.StyleID;
+            _track.FK_composer_id = ctrMetaData.ComposerID;
+            _track.FK_scenegroup_id = ctrMetaData.ScenegroupID;
+            _track.StyleName = ctrMetaData.StyleText;
+            _track.ComposerName = ctrMetaData.ComposerText;
+            _track.ScenegroupName = ctrMetaData.ScenegroupText;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            UpdateMetaData();
         }
 
         private void Handle_BrowserControl_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
@@ -375,11 +389,6 @@ namespace TMCWorkbench
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
@@ -457,6 +466,16 @@ namespace TMCWorkbench
             }
 
             return false;
+        }
+
+        private void btnSaveAndContine_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRefreshSummary_Click(object sender, EventArgs e)
+        {
+            GenerateSummary();
         }
     }
 }

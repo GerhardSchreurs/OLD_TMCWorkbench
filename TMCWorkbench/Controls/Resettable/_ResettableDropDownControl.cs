@@ -16,5 +16,10 @@ namespace TMCWorkbench.Controls.Resettable
         {
             InitializeComponent();
         }
+
+        public int GetValue()
+        {
+            return this.ddList.SelectedValue.ToInt();
+        }
     }
 }

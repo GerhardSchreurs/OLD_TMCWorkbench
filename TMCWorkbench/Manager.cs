@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using TMCWorkbench.DB;
 
 namespace TMCWorkbench
 {
@@ -35,11 +36,32 @@ namespace TMCWorkbench
 
         //Todo: dispose
         private MD5 _md5 = MD5.Create();
+        private string LastMd5Path = string.Empty;
+        public Guid LastMd5Guid = Guid.Empty;
+        public bool LastMdSuccess = false;
 
         private void Init()
         {
 
         }
+
+        public bool IsTrackInDB(FileInfo fileInfo)
+        {
+            return IsTrackInDB(fileInfo.FullName);
+        }
+
+        public bool IsTrackInDB(string path)
+        {
+            if (path != LastMd5Path)
+            {
+                LastMd5Path = path;
+                LastMd5Guid = GetFileGuid(path);
+                LastMdSuccess = DBManager.Instance.IsTrackInDB(LastMd5Guid);
+            }
+
+            return LastMdSuccess;
+        }
+
 
         public Guid GetFileGuid(string path)
         {

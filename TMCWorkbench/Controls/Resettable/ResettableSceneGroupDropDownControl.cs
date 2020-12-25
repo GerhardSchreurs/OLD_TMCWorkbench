@@ -60,7 +60,7 @@ namespace TMCWorkbench.Controls.Resettable
 
         public bool SetScenegroup(string text)
         {
-            if (text != null)
+            if (text.IsNotNullOrEmpty())
             {
                 var scenegroup = DBManager.Instance.SceneGroups.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
 

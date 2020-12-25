@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TMCWorkbench.Tools
 {
-    public static class MillisecondsConverter
+    public static class TimeConverter
     {
         public static Tuple<int, int> ConvertToMinutesAndSeconds(long ms)
         {
@@ -16,6 +16,11 @@ namespace TMCWorkbench.Tools
             var seconds = timeSpan.Seconds;
 
             return new Tuple<int, int>(minutes, seconds);
+        }
+
+        public static int ConvertToMilliseconds(int minutes, int seconds)
+        {
+           return (minutes * 60000) + (seconds * 1000);
         }
     }
 }

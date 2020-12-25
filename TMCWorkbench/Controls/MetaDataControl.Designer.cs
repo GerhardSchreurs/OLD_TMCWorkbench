@@ -243,6 +243,6 @@
         public Resettable.ResettableDateControl ctrDate;
         public Resettable.ResettableTextControl ctrFileInfo;
         public Resettable.ResettableTextControl ctrTrackTitle;
-        private Resettable.ResettableTrackerDropDownControl ctrTracker;
+        public Resettable.ResettableTrackerDropDownControl ctrTracker;
     }
 }

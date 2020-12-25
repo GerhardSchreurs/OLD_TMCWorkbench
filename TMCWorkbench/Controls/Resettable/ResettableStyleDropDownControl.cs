@@ -67,7 +67,7 @@ namespace TMCWorkbench.Controls.Resettable
 
         public bool SetStyle(string text)
         {
-            if (text != null)
+            if (text.IsNotNullOrEmpty())
             {
                 var style = DB.DBManager.Instance.Styles.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
 

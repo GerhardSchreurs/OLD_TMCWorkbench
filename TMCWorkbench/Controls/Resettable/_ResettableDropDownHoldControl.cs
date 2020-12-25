@@ -18,7 +18,7 @@ namespace TMCWorkbench.Controls.Resettable
         }
 
    
-        public string GetValue()
+        public string GetStringValue()
         {
             var value = string.Empty;
 
@@ -26,6 +26,18 @@ namespace TMCWorkbench.Controls.Resettable
             {
                 dynamic item = ddList.SelectedItem;
                 value = item.Name;
+            }
+
+            return value;
+        }
+
+        public int GetIntValue()
+        {
+            var value = 0;
+
+            if (ddList.SelectedValue.IsNumeric())
+            {
+                value = ddList.SelectedValue.ToInt();
             }
 
             return value;

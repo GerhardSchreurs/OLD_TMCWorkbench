@@ -47,6 +47,12 @@ namespace TMCWorkbench.Controls.Resettable
             ddList.DataSource = bindingSource;
         }
 
+        public string GetTracker()
+        {
+            dynamic item = ddList.SelectedItem;
+            return item.Name;
+        }
+
         public bool SetTracker(string text)
         {
             if (text == null) return false;

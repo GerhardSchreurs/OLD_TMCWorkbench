@@ -65,6 +65,23 @@ namespace TMCWorkbench.Controls.Resettable
             UpdateUI(ValueA, ValueB);
         }
 
+        public (int valueA, int valueB) GetValues()
+        {
+            var numA = 0;
+            var numB = 0;
+
+            if (txtValueA.Text.IsNumeric())
+            {
+                numA = txtValueA.Text.ToInt();
+            }
+            if (txtValueB.Text.IsNumeric())
+            {
+                numB = txtValueB.Text.ToInt();
+            }
+
+            return (numA, numB);
+        }
+
         public void SetValuesOriginal(int valueA, int valueB)
         {
             _valueOriginalA = valueA;

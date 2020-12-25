@@ -69,6 +69,16 @@ namespace TMCWorkbench.Controls.Resettable
             UpdateUI(bpm);
         }
 
+        public int GetValue()
+        {
+            if (txtBPM.IsNumeric())
+            {
+                return txtBPM.ToInt();
+            }
+            return 0;
+        }
+
+
         public void SetValueOriginal(int bpm)
         {
             _bpmOriginal = bpm;

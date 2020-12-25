@@ -36,53 +36,209 @@ namespace TMCWorkbench.Controls
             ctrScenegroupText.SwitchMode();
         }
 
-        public void LoadData(ModInfo modInfo, TMCDatabase.DBModel.Track data, long duration)
+        private ModInfo _mod;
+        private TMCDatabase.DBModel.Track _data;
+
+
+        public string FileName
         {
-            if (modInfo == null) return;
+            get => ctrFileInfo.Text;
+            set => ctrFileInfo.Text = value;
+        }
 
-            var time = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(duration);
+        public string TrackTitle { 
+            get => ctrTrackTitle.Text;
+            set => ctrTrackTitle.Text = value;
+        }
 
-            if (data != null)
+        public DateTime? Date
+        {
+            get => ctrDate.Date;
+            set => ctrDate.Date = value;
+        }
+
+        public long LengthInMs
+        {
+            get
             {
-                var timeDB = Tools.MillisecondsConverter.ConvertToMinutesAndSeconds(data.Length);
+                var data = ctrLength.GetValues();
+                return Tools.TimeConverter.ConvertToMilliseconds(data.valueA, data.valueB);
+            }
+            set
+            {
+                var length = Tools.TimeConverter.ConvertToMinutesAndSeconds(value);
+                ctrLength.SetValues(length.Item1, length.Item2);
+            }
+        }
 
-                ctrFileInfo.Text = data.FileName;
-                ctrTrackTitle.Text = data.TrackTitle;
-                ctrDate.Date = data.Date_created;
-                ctrLength.SetValues(timeDB.Item1, timeDB.Item2);
-                ctrSpeed.SetValues(data.Speed, data.Tempo);
-                ctrBPM.SetValue(data.Bpm);
-                ctrStyle.SetStyle(data.FK_style_id);
-                ctrStyleText.Text = data.StyleName;
-                ctrComposer.SetComposer(data.FK_composer_id);
-                ctrComposerText.Text = data.ComposerName;
-                ctrScenegroup.SetScenegroup(data.FK_scenegroup_id);
-                ctrScenegroupText.Text = data.ScenegroupName;
-                ctrTracker.SetTracker(data.Tracker.Name);
+        public void SetLengthInMsOriginal(long value)
+        {
+            var length = Tools.TimeConverter.ConvertToMinutesAndSeconds(value);
+            ctrLength.SetValuesOriginal(length.Item1, length.Item2);
+        }
 
-                ctrFileInfo.Original = modInfo.FileName;
-                ctrDate.Original = modInfo.DateCreated;
-                ctrLength.SetValuesOriginal(time.Item1, time.Item2);
-                ctrSpeed.SetValuesOriginal(modInfo.Speed, modInfo.Tempo);
-                ctrBPM.SetValueOriginal(modInfo.EstimatedBPM);
+        public void SetSpeedAndTempo(int speed, int tempo)
+        {
+            ctrSpeed.SetValues(speed, tempo);
+        }
+
+        public int Speed
+        {
+            get => ctrSpeed.GetValues().valueA;
+        }
+
+        public int Tempo
+        {
+            get => ctrSpeed.GetValues().valueB;
+        }
+
+        public int Bpm
+        {
+            get => ctrBPM.GetValue();
+            set => ctrBPM.SetValue(value);
+        }
+
+        //TRACKER
+        public string Tracker
+        {
+            get => ctrTracker.GetTracker();
+            set => ctrTracker.SetTracker(value);
+        }
+
+
+        public int TrackerID
+        {
+            get => ctrTracker.GetValue();
+            set => ctrTracker.SetTracker(value);
+        }
+
+        //STYLE
+        public string Style
+        {
+            get => ctrStyle.GetStringValue();
+            set => ctrStyle.SetStyle(value);
+        }
+
+        public int? StyleID
+        {
+            get 
+            {
+                var id = ctrStyle.GetIntValue();
+                if (id == 0) return null;
+                return id;
+            }
+            set => ctrStyle.SetStyle(value);
+        }
+
+        public string StyleText
+        {
+            get => ctrStyleText.Text;
+            set => ctrStyleText.Text = value;
+        }
+
+        //COMPOSER
+        public string Composer
+        {
+            get => ctrComposer.GetStringValue();
+            set => ctrComposer.SetComposer(value);
+        }
+
+        public int? ComposerID
+        {
+            get
+            {
+                var id = ctrComposer.GetIntValue();
+                if (id == 0) return null;
+                return id;
+            }
+            set => ctrComposer.SetComposer(value);
+        }
+
+        public string ComposerText
+        {
+            get => ctrComposerText.Text;
+            set => ctrComposerText.Text = value;
+        }
+
+        //SCENEGROUP
+        public string SceneGroup
+        {
+            get => ctrScenegroup.GetStringValue();
+            set => ctrScenegroup.SetScenegroup(value);
+        }
+
+        public int? ScenegroupID
+        {
+            get
+            {
+                var id = ctrScenegroup.GetIntValue();
+                if (id == 0) return null;
+                return id;
+            }
+            set => ctrScenegroup.SetScenegroup(value);
+        }
+
+        public string ScenegroupText
+        {
+            get => ctrScenegroupText.Text;
+            set => ctrComposerText.Text = value;
+        }
+
+        public void LoadData(ModInfo modInfo, TMCDatabase.DBModel.Track track, long duration)
+        {
+            if (modInfo == null)
+            {
+                _mod = null;
+                throw new ArgumentException("Mod is null");
+            }
+            else
+            {
+                _mod = modInfo;
+            }
+
+            _data = track;
+
+            if (_data.Md5 != Guid.Empty)
+            {
+                //Track is in database
+                this.FileName = _data.FileName;
+                this.TrackTitle = _data.TrackTitle;
+                this.Date = _data.Date_track_created;
+                this.LengthInMs = _data.Length;
+                this.SetSpeedAndTempo(_data.Speed, _data.Tempo);
+                this.Bpm = _data.Bpm;
+                this.StyleID = _data.FK_style_id;
+                this.StyleText = _data.StyleName;
+                this.ComposerID = _data.FK_composer_id;
+                this.ComposerText = _data.ComposerName;
+                this.ScenegroupID = _data.FK_scenegroup_id;
+                this.ScenegroupText = _data.ScenegroupName;
+                this.Tracker = _data.Tracker.Name;
+
+                //Original values
+                this.SetLengthInMsOriginal(duration);
+                ctrFileInfo.Original = _mod.FileName;
+                ctrDate.Original = _mod.DateCreated;
+                ctrSpeed.SetValuesOriginal(_mod.Speed, _mod.Tempo);
+                ctrBPM.SetValueOriginal(_mod.EstimatedBPM);
+                //TODO TRACKER ORIGINAL
             }
             else
             {
                 //NOT IN DB, ONLY LOAD FROM DISK
-                ctrFileInfo.Text = modInfo.FileName;
-                ctrTrackTitle.Text = modInfo.SongName;
-                ctrDate.Date = modInfo.DateCreated;
-                ctrLength.SetValues(time.Item1, time.Item2);
-                ctrSpeed.SetValues(modInfo.Speed, modInfo.Tempo);
-                ctrBPM.SetValue(modInfo.EstimatedBPM);
-                ctrTracker.SetTracker(modInfo.Tracker.ToStr());
+                this.FileName = _mod.FileName;
+                this.TrackTitle = _mod.SongName;
+                this.Date = _mod.DateCreated;
+                this.LengthInMs = duration;
+                this.SetSpeedAndTempo(_mod.Speed, _mod.Tempo);
+                this.Bpm = _mod.EstimatedBPM;
+                this.Tracker = _mod.Tracker.ToStr();
+                this.StyleText = _mod.TrackStyle;
+                this.ScenegroupText = "";
+                this.ComposerText = "";
+                this.ScenegroupText = "";
 
-                ctrStyleText.Text = modInfo.TrackStyle;
-                ctrScenegroupText.Text = "";
-                ctrComposerText.Text = "";
-                ctrScenegroupText.Text = "";
-
-                if (ctrStyle.SetStyle(modInfo.TrackStyle))
+                if (ctrStyle.SetStyle(_mod.TrackStyle))
                 {
                     ctrStyleText.Text = "";
                 }
@@ -90,45 +246,6 @@ namespace TMCWorkbench.Controls
                 ctrScenegroup.Reset();
                 ctrComposer.Reset();
             }
-
-
-
-            //lblTest.Text = modInfo.TrackStyle;
-
-            //txtSamplesOrg.Text = modInfo.SampleText;
-            //txtMessageOrg.Text = modInfo.SongText;
-            //txtInstrumentsOrg.Text = modInfo.InstrumentText;
-
-            //txtSamplesOrg.ClearUndo();
-            //txtMessageOrg.ClearUndo();
-            //txtInstrumentsOrg.ClearUndo();
-
-            //if (isInDb)
-            //{
-            //    if (DB.LoadTrackInfo(guid) == false) return;
-
-            //    var track = DB.Track;
-
-            //    txtSamplesNew.Text = track.SampleText;
-            //    txtMessageNew.Text = track.SongText;
-            //    txtInstrumentsNew.Text = track.InstrumentText;
-
-            //    //ctrFileInfoNew.Text = track.FileName;
-            //    //ctrDateNew.Date = track.Date_created;
-
-            //    //ctrLengthNew.ValueA = 0;
-            //    //ctrLengthNew.ValueB = 0;
-
-            //    //ctrSpeedNew.ValueA = track.Speed;
-            //    //ctrSpeedNew.ValueB = track.Tempo;
-
-            //    //ctrBPMNew.BPM = track.Bpm;
-
-            //    //ctrStyleNew.SetStyle(track.Style?.Name);
-            //    //ctrComposerNew.SetComposer(track.FK_composer_id);
-
-
-            //}
         }
     }
 }
