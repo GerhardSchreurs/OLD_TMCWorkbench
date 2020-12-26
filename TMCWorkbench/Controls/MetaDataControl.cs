@@ -101,7 +101,15 @@ namespace TMCWorkbench.Controls
         //TRACKER
         public string Tracker
         {
-            get => ctrTracker.GetTracker();
+            get
+            {
+                //HACK: FOR WINFORMS NULL REFERENCE
+                var tracker = ctrTracker.GetTracker();
+                if (tracker == null) tracker = "Unknown";
+
+                return tracker;
+
+            }
             set => ctrTracker.SetTracker(value);
         }
 
@@ -136,6 +144,11 @@ namespace TMCWorkbench.Controls
             set => ctrStyleText.Text = value;
         }
 
+        public string GetStyleCalulated()
+        {
+            return Style.IsNullOrEmpty() ? StyleText : Style;
+        }
+
         //COMPOSER
         public string Composer
         {
@@ -158,6 +171,11 @@ namespace TMCWorkbench.Controls
         {
             get => ctrComposerText.Text;
             set => ctrComposerText.Text = value;
+        }
+
+        public string GetComposerCalculated()
+        {
+            return Composer.IsNullOrEmpty() ? ComposerText : Composer;
         }
 
         //SCENEGROUP
@@ -183,6 +201,12 @@ namespace TMCWorkbench.Controls
             get => ctrScenegroupText.Text;
             set => ctrComposerText.Text = value;
         }
+
+        public string GetScenegroupCalulated()
+        {
+            return SceneGroup.IsNullOrEmpty() ? ScenegroupText : SceneGroup;
+        }
+
 
         public void LoadData(ModInfo modInfo, TMCDatabase.DBModel.Track track, long duration)
         {

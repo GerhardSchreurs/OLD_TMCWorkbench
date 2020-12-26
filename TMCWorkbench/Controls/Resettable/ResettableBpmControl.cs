@@ -71,9 +71,9 @@ namespace TMCWorkbench.Controls.Resettable
 
         public int GetValue()
         {
-            if (txtBPM.IsNumeric())
+            if (txtBPM.Text.IsNumeric())
             {
-                return txtBPM.ToInt();
+                return txtBPM.Text.ToInt();
             }
             return 0;
         }

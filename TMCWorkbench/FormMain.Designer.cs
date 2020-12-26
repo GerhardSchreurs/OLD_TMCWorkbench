@@ -64,6 +64,12 @@
             this.txtMessageOrg = new TMCWorkbench.Controls.TextAreaControl();
             this.tableLayoutPanelBot = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.ctrHeader = new TMCWorkbench.Controls.HistoryTextBox();
+            this.panelSave = new System.Windows.Forms.Panel();
+            this.btnRefreshSummary = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnSaveAndContine = new System.Windows.Forms.Button();
+            this.ctrSummary = new TMCWorkbench.Controls.HistoryTextBox();
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
             this.ctrMetaData = new TMCWorkbench.Controls.MetaDataControl();
@@ -73,12 +79,7 @@
             this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
             this.btnTest = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.panelSave = new System.Windows.Forms.Panel();
-            this.btnRefreshSummary = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnSaveAndContine = new System.Windows.Forms.Button();
-            this.ctrSummary = new TMCWorkbench.Controls.HistoryTextBox();
-            this.ctrHeader = new TMCWorkbench.Controls.HistoryTextBox();
+            this.chkPreferSamples = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableMenu.SuspendLayout();
@@ -102,10 +103,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMessageOrg)).BeginInit();
             this.tableLayoutPanelBot.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panelSave.SuspendLayout();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.panelSave.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -648,12 +649,73 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(371, 23);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(645, 334);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // ctrHeader
+            // 
+            this.ctrHeader.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ctrHeader.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrHeader.Location = new System.Drawing.Point(3, 3);
+            this.ctrHeader.Multiline = true;
+            this.ctrHeader.Name = "ctrHeader";
+            this.ctrHeader.Size = new System.Drawing.Size(562, 54);
+            this.ctrHeader.TabIndex = 14;
+            // 
+            // panelSave
+            // 
+            this.panelSave.Controls.Add(this.chkPreferSamples);
+            this.panelSave.Controls.Add(this.btnRefreshSummary);
+            this.panelSave.Controls.Add(this.btnSave);
+            this.panelSave.Controls.Add(this.btnSaveAndContine);
+            this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSave.Location = new System.Drawing.Point(3, 307);
+            this.panelSave.Name = "panelSave";
+            this.panelSave.Size = new System.Drawing.Size(639, 24);
+            this.panelSave.TabIndex = 13;
+            // 
+            // btnRefreshSummary
+            // 
+            this.btnRefreshSummary.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRefreshSummary.Location = new System.Drawing.Point(0, 0);
+            this.btnRefreshSummary.Name = "btnRefreshSummary";
+            this.btnRefreshSummary.Size = new System.Drawing.Size(75, 24);
+            this.btnRefreshSummary.TabIndex = 1;
+            this.btnRefreshSummary.Text = "Refresh";
+            this.btnRefreshSummary.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSave.Location = new System.Drawing.Point(405, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 24);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveAndContine
+            // 
+            this.btnSaveAndContine.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSaveAndContine.Location = new System.Drawing.Point(480, 0);
+            this.btnSaveAndContine.Name = "btnSaveAndContine";
+            this.btnSaveAndContine.Size = new System.Drawing.Size(159, 24);
+            this.btnSaveAndContine.TabIndex = 2;
+            this.btnSaveAndContine.Text = "Save and Continue";
+            this.btnSaveAndContine.UseVisualStyleBackColor = true;
+            // 
+            // ctrSummary
+            // 
+            this.ctrSummary.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ctrSummary.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrSummary.Location = new System.Drawing.Point(3, 63);
+            this.ctrSummary.Multiline = true;
+            this.ctrSummary.Name = "ctrSummary";
+            this.ctrSummary.Size = new System.Drawing.Size(562, 238);
+            this.ctrSummary.TabIndex = 12;
             // 
             // pnlMeta
             // 
@@ -759,66 +821,16 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // panelSave
+            // chkPreferSamples
             // 
-            this.panelSave.Controls.Add(this.btnRefreshSummary);
-            this.panelSave.Controls.Add(this.btnSave);
-            this.panelSave.Controls.Add(this.btnSaveAndContine);
-            this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSave.Location = new System.Drawing.Point(3, 307);
-            this.panelSave.Name = "panelSave";
-            this.panelSave.Size = new System.Drawing.Size(639, 24);
-            this.panelSave.TabIndex = 13;
-            // 
-            // btnRefreshSummary
-            // 
-            this.btnRefreshSummary.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRefreshSummary.Location = new System.Drawing.Point(0, 0);
-            this.btnRefreshSummary.Name = "btnRefreshSummary";
-            this.btnRefreshSummary.Size = new System.Drawing.Size(75, 24);
-            this.btnRefreshSummary.TabIndex = 1;
-            this.btnRefreshSummary.Text = "Refresh";
-            this.btnRefreshSummary.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSave.Location = new System.Drawing.Point(405, 0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 24);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            // 
-            // btnSaveAndContine
-            // 
-            this.btnSaveAndContine.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSaveAndContine.Location = new System.Drawing.Point(480, 0);
-            this.btnSaveAndContine.Name = "btnSaveAndContine";
-            this.btnSaveAndContine.Size = new System.Drawing.Size(159, 24);
-            this.btnSaveAndContine.TabIndex = 2;
-            this.btnSaveAndContine.Text = "Save and Continue";
-            this.btnSaveAndContine.UseVisualStyleBackColor = true;
-            // 
-            // ctrSummary
-            // 
-            this.ctrSummary.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ctrSummary.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrSummary.Location = new System.Drawing.Point(3, 103);
-            this.ctrSummary.Multiline = true;
-            this.ctrSummary.Name = "ctrSummary";
-            this.ctrSummary.Size = new System.Drawing.Size(562, 198);
-            this.ctrSummary.TabIndex = 12;
-            // 
-            // ctrHeader
-            // 
-            this.ctrHeader.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ctrHeader.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrHeader.Location = new System.Drawing.Point(3, 3);
-            this.ctrHeader.Multiline = true;
-            this.ctrHeader.Name = "ctrHeader";
-            this.ctrHeader.Size = new System.Drawing.Size(562, 94);
-            this.ctrHeader.TabIndex = 14;
+            this.chkPreferSamples.AutoSize = true;
+            this.chkPreferSamples.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chkPreferSamples.Location = new System.Drawing.Point(75, 0);
+            this.chkPreferSamples.Name = "chkPreferSamples";
+            this.chkPreferSamples.Size = new System.Drawing.Size(95, 24);
+            this.chkPreferSamples.TabIndex = 3;
+            this.chkPreferSamples.Text = "Prefer samples";
+            this.chkPreferSamples.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -858,10 +870,11 @@
             this.tableLayoutPanelBot.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panelSave.ResumeLayout(false);
+            this.panelSave.PerformLayout();
             this.pnlMeta.ResumeLayout(false);
             this.pnlMetaOrg.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.panelSave.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -916,6 +929,7 @@
         private System.Windows.Forms.Button btnSaveAndContine;
         private Controls.HistoryTextBox ctrSummary;
         private Controls.HistoryTextBox ctrHeader;
+        private System.Windows.Forms.CheckBox chkPreferSamples;
     }
 }
 

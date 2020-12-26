@@ -36,6 +36,7 @@ namespace TMCWorkbench
             listViewControl1.Init();
             musicControl1.Init();
             ctrMetaData.Init();
+            chkPreferSamples.Checked = true;
 
             splitContainer1.Panel2Collapsed = false;
 
@@ -120,6 +121,13 @@ namespace TMCWorkbench
                 txtSamplesOrg.Text = _mod.SampleText;
                 txtInstrumentsOrg.Text = _mod.InstrumentText;
                 txtMessageOrg.Text = _mod.SongText;
+
+                if (_track == null)
+                {
+                    txtSamplesNew.Text = _mod.SampleText;
+                    txtInstrumentsNew.Text = _mod.InstrumentText;
+                    txtMessageNew.Text = _mod.SongText;
+                }
             }
             if (_track != null)
             {
@@ -129,7 +137,24 @@ namespace TMCWorkbench
             }
         }
 
+        private void GetSampleText()
+        {
+
+        }
+
+        private void GenerateTexts()
+        {
+            GenerateHeader();
+            GenerateSummary();
+        }
+
         private void GenerateSummary()
+        {
+
+        }
+
+
+        private void GenerateHeader()
         {
             //Artificial Sun(ARTIFSUN.IT) is a 120 bpm Impulse Tracker Noise track that was created in 1997
             //C djnonsens of eXploitation.
@@ -146,27 +171,14 @@ namespace TMCWorkbench
             //Alisia went home(ALISIA.MOD) is a 125 bpm Protracker track that was created in 1997.
             //© Unknown.
 
-            var fileName = ctrMetaData.ctrFileInfo.Text;
-            var title = ctrMetaData.ctrTrackTitle.Text;
-            var style = ctrMetaData.ctrStyle.GetStringValue();
-            var date = ctrMetaData.ctrDate.Date.HasValue ? ctrMetaData.ctrDate.Date.Value : new DateTime(1900,1,1);
-            var composer = ctrMetaData.ctrComposer.GetStringValue();
-            var scenegroup = ctrMetaData.ctrScenegroup.GetStringValue();
-            var tracker = _mod.Tracker.GetValue();
-            var bpm = _mod.EstimatedBPM; //TODO: TRACK
-
-            if (style.IsNullOrEmpty())
-            {
-                style = ctrMetaData.ctrStyleText.Text;
-            }
-            if (composer.IsNullOrEmpty())
-            {
-                composer = ctrMetaData.ctrComposerText.Text;
-            }
-            if (scenegroup.IsNullOrEmpty())
-            {
-                scenegroup = ctrMetaData.ctrScenegroupText.Text;
-            }
+            var fileName = ctrMetaData.FileName;
+            var title = ctrMetaData.TrackTitle;
+            var style = ctrMetaData.GetStyleCalulated();
+            var date = ctrMetaData.Date.HasValue ? ctrMetaData.Date.Value : new DateTime(1900,1,1);
+            var composer = ctrMetaData.GetComposerCalculated();
+            var scenegroup = ctrMetaData.GetScenegroupCalulated();
+            var tracker = ctrMetaData.Tracker;
+            var bpm = ctrMetaData.Bpm;
 
             var text = new StringBuilder();
             
@@ -208,7 +220,7 @@ namespace TMCWorkbench
             }
 
             text.Append($" Tracked with {tracker}.");
-            ctrSummary.Text = text.ToString();
+            ctrHeader.Text = text.ToString();
         }
 
         private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
@@ -242,19 +254,19 @@ namespace TMCWorkbench
             //Setup tabs
             EnableTabControl();
 
-            if (_mod != null && newTrack)
-            {
-                DisableTabDatabase();
-            } 
-            else if (!newTrack && _mod == null)
-            {
-                DisableTabOriginal();
-            }
+            //if (_mod != null && newTrack)
+            //{
+            //    DisableTabDatabase();
+            //} 
+            //else if (!newTrack && _mod == null)
+            //{
+            //    DisableTabOriginal();
+            //}
 
-            SwitchTabs(!newTrack);
+            SwitchTabs(true);
             ctrMetaData.LoadData(_mod, _track, musicControl1.Media.Duration);
 
-            GenerateSummary();
+            GenerateTexts();
         }
 
         private void UpdateMetaData()
@@ -475,7 +487,7 @@ namespace TMCWorkbench
 
         private void btnRefreshSummary_Click(object sender, EventArgs e)
         {
-            GenerateSummary();
+            GenerateHeader();
         }
     }
 }
