@@ -45,29 +45,6 @@ namespace TMCWorkbench
             tabControl.Selecting += Handle_TabControl_Selecting;
         }
 
-        private void Handle_TabControl_Selecting(object sender, TabControlCancelEventArgs e)
-        {
-            if (e.TabPageIndex < 0) return;
-            e.Cancel = !e.TabPage.Enabled;
-        }
-
-        private void Handle_TabControl_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            var tab = tabControl.TabPages[e.Index];
-            var color = Color.Black;
-            
-            if (tab.Enabled == false)
-            {
-                color = Color.LightGray;
-            }
-            else if (tabControl.SelectedTab == tab)
-            {
-                color = Color.Blue;
-            }
-
-            TextRenderer.DrawText(e.Graphics, tab.Text, e.Font, e.Bounds, color);
-        }
-
         private async void Form_Load(object sender, EventArgs e)
         {
             toolStripStatusLabel.Text = "Loading";
@@ -88,24 +65,132 @@ namespace TMCWorkbench
             SwitchTabs(false);
         }
 
-        void EnableTabControl()
+        protected override void OnClosed(EventArgs e)
         {
-            tabDatabase.Enabled = true;
-            tabOriginal.Enabled = true;
-            tabControl.Refresh();
+            base.OnClosed(e);
+            PositionFormSave();
         }
 
-        void DisableTabDatabase()
+        #region EVENT_CONTROLS
+        private void Handle_BrowserControl_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
         {
-            tabDatabase.Enabled = false;
-            tabControl.Refresh();
+            listViewControl1.BrowseDirectory(playEventArgs.DirectoryInfo);
         }
-        
-        void DisableTabOriginal()
+
+        private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
         {
-            tabOriginal.Enabled = false;
-            tabControl.Refresh();
+            toolStripStatusLabel.Text = fileinfoEventArgs.FileInfo.FullName;
+            await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName).ConfigureAwait(true);
+
+            _isInDB = Manager.Instance.IsTrackInDB(fileinfoEventArgs.FileInfo.FullName);
+            _guid = Manager.Instance.LastMd5Guid;
+            _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(fileinfoEventArgs.FileInfo.FullName, DBManager.Instance.TrackStyles);
+            _track = null;
+
+            if (_isInDB && (DB.LoadTrackInfo(_guid)))
+            {
+                _track = DB.Track;
+            }
+
+            InitTextFields();
+
+            //bool newTrack = false;
+
+            //if (_track == null)
+            //{                
+            //    _track = new Track();
+            //    newTrack = true;
+            //}
+
+            //Setup tabs
+            EnableTabControl();
+
+            //if (_mod != null && newTrack)
+            //{
+            //    DisableTabDatabase();
+            //} 
+            //else if (!newTrack && _mod == null)
+            //{
+            //    DisableTabOriginal();
+            //}
+
+            SwitchTabs(true);
+            ctrMetaData.LoadData(_mod, _track, musicControl1.Media.Duration);
+
+            GenerateTexts();
         }
+        #endregion
+
+        #region EVENT_BUTTON
+        private void Handle_btnSaveAndContine_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Handle_btnRefreshSummary_Click(object sender, EventArgs e)
+        {
+            GenerateHeader();
+        }
+
+        private void Handle_btnSave_Click(object sender, EventArgs e)
+        {
+            UpdateMetaData();
+        }
+
+        private void Handle_btnTest_Click(object sender, EventArgs e)
+        {
+            //var manager = new DB.DatabaseManager();
+
+            //using (var context = new DatabaseContext())
+            //{
+            //    manager.SetupDB(context);
+
+            //    //SetupDB(context);
+            //    //LoadStuff(context);
+            //    //PrintTable(context.Styles);
+            //}
+
+            using (var formTest = new FormTest())
+            {
+                formTest.ShowDialog();
+            }
+        }
+
+        private void Handle_btnBla_Click(object sender, EventArgs e)
+        {
+            using (var formStyles = new UCStyles())
+            {
+                formStyles.ShowDialog();
+            }
+        }
+        #endregion 
+
+        #region EVENT_MENU
+        private void Handle_stylesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var form = new UCStyles())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void Handle_scenegroupsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var form = new UCSceneGroups())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void Handle_composersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var form = new UCComposers())
+            {
+                form.ShowDialog();
+            }
+        }
+        #endregion
+
 
         void InitTextFields()
         {
@@ -152,7 +237,6 @@ namespace TMCWorkbench
         {
 
         }
-
 
         private void GenerateHeader()
         {
@@ -223,52 +307,6 @@ namespace TMCWorkbench
             ctrHeader.Text = text.ToString();
         }
 
-        private async void Handle_ListViewControl_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
-        {
-            toolStripStatusLabel.Text = fileinfoEventArgs.FileInfo.FullName;
-            await musicControl1.LoadTrack(fileinfoEventArgs.FileInfo.FullName).ConfigureAwait(true);
-
-            _isInDB = Manager.Instance.IsTrackInDB(fileinfoEventArgs.FileInfo.FullName);
-            _guid = Manager.Instance.LastMd5Guid;
-            _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(fileinfoEventArgs.FileInfo.FullName, DBManager.Instance.TrackStyles);
-            _track = null;
-
-            if (_isInDB)
-            {
-                if (DB.LoadTrackInfo(_guid))
-                {
-                    _track = DB.Track;
-                }
-            }
-
-            InitTextFields();
-
-            bool newTrack = false;
-
-            if (_track == null)
-            {                
-                _track = new Track();
-                newTrack = true;
-            }
-
-            //Setup tabs
-            EnableTabControl();
-
-            //if (_mod != null && newTrack)
-            //{
-            //    DisableTabDatabase();
-            //} 
-            //else if (!newTrack && _mod == null)
-            //{
-            //    DisableTabOriginal();
-            //}
-
-            SwitchTabs(true);
-            ctrMetaData.LoadData(_mod, _track, musicControl1.Media.Duration);
-
-            GenerateTexts();
-        }
-
         private void UpdateMetaData()
         {
             _track.FileName = ctrMetaData.FileName;
@@ -288,42 +326,48 @@ namespace TMCWorkbench
             _track.ComposerName = ctrMetaData.ComposerText;
             _track.ScenegroupName = ctrMetaData.ScenegroupText;
         }
-
-        private void btnSave_Click(object sender, EventArgs e)
+           
+        #region TABS
+        private void Handle_TabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            UpdateMetaData();
+            if (e.TabPageIndex < 0) return;
+            e.Cancel = !e.TabPage.Enabled;
         }
 
-        private void Handle_BrowserControl_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
+        private void Handle_TabControl_DrawItem(object sender, DrawItemEventArgs e)
         {
-            listViewControl1.BrowseDirectory(playEventArgs.DirectoryInfo);
-        }
+            var tab = tabControl.TabPages[e.Index];
+            var color = Color.Black;
 
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            //var manager = new DB.DatabaseManager();
-
-            //using (var context = new DatabaseContext())
-            //{
-            //    manager.SetupDB(context);
-
-            //    //SetupDB(context);
-            //    //LoadStuff(context);
-            //    //PrintTable(context.Styles);
-            //}
-
-            using (var formTest = new FormTest())
+            if (tab.Enabled == false)
             {
-                formTest.ShowDialog();
+                color = Color.LightGray;
             }
+            else if (tabControl.SelectedTab == tab)
+            {
+                color = Color.Blue;
+            }
+
+            TextRenderer.DrawText(e.Graphics, tab.Text, e.Font, e.Bounds, color);
         }
 
-        private void btnBla_Click(object sender, EventArgs e)
+        private void EnableTabControl()
         {
-            using (var formStyles = new UCStyles())
-            {
-                formStyles.ShowDialog();
-            }
+            tabDatabase.Enabled = true;
+            tabOriginal.Enabled = true;
+            tabControl.Refresh();
+        }
+
+        private void DisableTabDatabase()
+        {
+            tabDatabase.Enabled = false;
+            tabControl.Refresh();
+        }
+
+        private void DisableTabOriginal()
+        {
+            tabOriginal.Enabled = false;
+            tabControl.Refresh();
         }
 
         private void SwitchTabs(bool showNew)
@@ -370,43 +414,15 @@ namespace TMCWorkbench
             if (tabControl.SelectedIndex == 0)
             {
                 SwitchTabs(false);
-            } 
+            }
             else
             {
                 SwitchTabs(true);
             }
         }
+        #endregion TABS
 
-        private void stylesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var form = new UCStyles())
-            {
-                form.ShowDialog();
-            }
-        }
-
-        private void scenegroupsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var form = new UCSceneGroups())
-            {
-                form.ShowDialog();
-            }
-        }
-
-        private void composersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var form = new UCComposers())
-            {
-                form.ShowDialog();
-            }
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            PositionFormSave();
-        }
-
+        #region SAVEFORMPOSITION
         private void PositionFormSave()
         {
             // only save the WindowState if Normal or Maximized
@@ -479,15 +495,6 @@ namespace TMCWorkbench
 
             return false;
         }
-
-        private void btnSaveAndContine_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnRefreshSummary_Click(object sender, EventArgs e)
-        {
-            GenerateHeader();
-        }
+        #endregion SAVEFORMPOSITION
     }
 }

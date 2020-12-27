@@ -66,7 +66,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ctrHeader = new TMCWorkbench.Controls.HistoryTextBox();
             this.panelSave = new System.Windows.Forms.Panel();
-            this.btnRefreshSummary = new System.Windows.Forms.Button();
+            this.chkPreferSamples = new System.Windows.Forms.CheckBox();
+            this.btnRefreshera = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveAndContine = new System.Windows.Forms.Button();
             this.ctrSummary = new TMCWorkbench.Controls.HistoryTextBox();
@@ -79,7 +80,8 @@
             this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
             this.btnTest = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.chkPreferSamples = new System.Windows.Forms.CheckBox();
+            this.btnRefreshSummary = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableMenu.SuspendLayout();
@@ -207,21 +209,21 @@
             this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
             this.stylesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.stylesToolStripMenuItem.Text = "Styles";
-            this.stylesToolStripMenuItem.Click += new System.EventHandler(this.stylesToolStripMenuItem_Click);
+            this.stylesToolStripMenuItem.Click += new System.EventHandler(this.Handle_stylesToolStripMenuItem_Click);
             // 
             // scenegroupsToolStripMenuItem
             // 
             this.scenegroupsToolStripMenuItem.Name = "scenegroupsToolStripMenuItem";
             this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.scenegroupsToolStripMenuItem.Text = "Scenegroups";
-            this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.scenegroupsToolStripMenuItem_Click);
+            this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.Handle_scenegroupsToolStripMenuItem_Click);
             // 
             // composersToolStripMenuItem
             // 
             this.composersToolStripMenuItem.Name = "composersToolStripMenuItem";
             this.composersToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.composersToolStripMenuItem.Text = "Composers";
-            this.composersToolStripMenuItem.Click += new System.EventHandler(this.composersToolStripMenuItem_Click);
+            this.composersToolStripMenuItem.Click += new System.EventHandler(this.Handle_composersToolStripMenuItem_Click);
             // 
             // tabControl
             // 
@@ -668,7 +670,7 @@
             // panelSave
             // 
             this.panelSave.Controls.Add(this.chkPreferSamples);
-            this.panelSave.Controls.Add(this.btnRefreshSummary);
+            this.panelSave.Controls.Add(this.btnRefreshera);
             this.panelSave.Controls.Add(this.btnSave);
             this.panelSave.Controls.Add(this.btnSaveAndContine);
             this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -677,15 +679,27 @@
             this.panelSave.Size = new System.Drawing.Size(639, 24);
             this.panelSave.TabIndex = 13;
             // 
-            // btnRefreshSummary
+            // chkPreferSamples
             // 
-            this.btnRefreshSummary.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRefreshSummary.Location = new System.Drawing.Point(0, 0);
-            this.btnRefreshSummary.Name = "btnRefreshSummary";
-            this.btnRefreshSummary.Size = new System.Drawing.Size(75, 24);
-            this.btnRefreshSummary.TabIndex = 1;
-            this.btnRefreshSummary.Text = "Refresh";
-            this.btnRefreshSummary.UseVisualStyleBackColor = true;
+            this.chkPreferSamples.AutoSize = true;
+            this.chkPreferSamples.Dock = System.Windows.Forms.DockStyle.Left;
+            this.chkPreferSamples.Location = new System.Drawing.Point(75, 0);
+            this.chkPreferSamples.Name = "chkPreferSamples";
+            this.chkPreferSamples.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.chkPreferSamples.Size = new System.Drawing.Size(105, 24);
+            this.chkPreferSamples.TabIndex = 3;
+            this.chkPreferSamples.Text = "Prefer samples";
+            this.chkPreferSamples.UseVisualStyleBackColor = true;
+            // 
+            // btnRefreshera
+            // 
+            this.btnRefreshera.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRefreshera.Location = new System.Drawing.Point(0, 0);
+            this.btnRefreshera.Name = "btnRefreshera";
+            this.btnRefreshera.Size = new System.Drawing.Size(75, 24);
+            this.btnRefreshera.TabIndex = 1;
+            this.btnRefreshera.Text = "Refresh";
+            this.btnRefreshera.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
@@ -755,6 +769,7 @@
             this.ctrMetaData.StyleID = null;
             this.ctrMetaData.StyleText = "";
             this.ctrMetaData.TabIndex = 0;
+            this.ctrMetaData.Tracker = "Unknown";
             this.ctrMetaData.TrackerID = 0;
             this.ctrMetaData.TrackTitle = "";
             // 
@@ -792,7 +807,7 @@
             this.btnBla.TabIndex = 3;
             this.btnBla.Text = "Bla";
             this.btnBla.UseVisualStyleBackColor = true;
-            this.btnBla.Click += new System.EventHandler(this.btnBla_Click);
+            this.btnBla.Click += new System.EventHandler(this.Handle_btnBla_Click);
             // 
             // browserControl1
             // 
@@ -810,7 +825,7 @@
             this.btnTest.TabIndex = 2;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            this.btnTest.Click += new System.EventHandler(this.Handle_btnTest_Click);
             // 
             // button2
             // 
@@ -821,16 +836,25 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // chkPreferSamples
+            // btnRefreshSummary
             // 
-            this.chkPreferSamples.AutoSize = true;
-            this.chkPreferSamples.Dock = System.Windows.Forms.DockStyle.Left;
-            this.chkPreferSamples.Location = new System.Drawing.Point(75, 0);
-            this.chkPreferSamples.Name = "chkPreferSamples";
-            this.chkPreferSamples.Size = new System.Drawing.Size(95, 24);
-            this.chkPreferSamples.TabIndex = 3;
-            this.chkPreferSamples.Text = "Prefer samples";
-            this.chkPreferSamples.UseVisualStyleBackColor = true;
+            this.btnRefreshSummary.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRefreshSummary.Location = new System.Drawing.Point(0, 0);
+            this.btnRefreshSummary.Name = "btnRefreshSummary";
+            this.btnRefreshSummary.Size = new System.Drawing.Size(75, 24);
+            this.btnRefreshSummary.TabIndex = 1;
+            this.btnRefreshSummary.Text = "Refresh";
+            this.btnRefreshSummary.UseVisualStyleBackColor = true;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRefresh.Location = new System.Drawing.Point(0, 0);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 24);
+            this.btnRefresh.TabIndex = 1;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -924,12 +948,14 @@
         private System.Windows.Forms.ToolStripMenuItem composersToolStripMenuItem;
         private Controls.MetaDataControl ctrMetaData;
         private System.Windows.Forms.Panel panelSave;
-        private System.Windows.Forms.Button btnRefreshSummary;
+        private System.Windows.Forms.Button btnRefreshera;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnSaveAndContine;
         private Controls.HistoryTextBox ctrSummary;
         private Controls.HistoryTextBox ctrHeader;
         private System.Windows.Forms.CheckBox chkPreferSamples;
+        private System.Windows.Forms.Button btnRefreshSummary;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 

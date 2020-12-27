@@ -103,11 +103,14 @@ namespace TMCWorkbench.Controls
         {
             get
             {
-                //HACK: FOR WINFORMS NULL REFERENCE
-                var tracker = ctrTracker.GetTracker();
-                if (tracker == null) tracker = "Unknown";
+                if (ctrTracker == null)
+                {
+                    //HACK: FOR WINFORMS NULL REFERENCE
+                    //Cannot perform runtime binding on a null reference
+                    return "Unknown";
+                }
 
-                return tracker;
+                return ctrTracker.GetTracker();
 
             }
             set => ctrTracker.SetTracker(value);
@@ -256,7 +259,7 @@ namespace TMCWorkbench.Controls
                 this.LengthInMs = duration;
                 this.SetSpeedAndTempo(_mod.Speed, _mod.Tempo);
                 this.Bpm = _mod.EstimatedBPM;
-                this.Tracker = _mod.Tracker.ToStr();
+                //this.Tracker = _mod.Tracker.ToStr();
                 this.StyleText = _mod.TrackStyle;
                 this.ScenegroupText = "";
                 this.ComposerText = "";

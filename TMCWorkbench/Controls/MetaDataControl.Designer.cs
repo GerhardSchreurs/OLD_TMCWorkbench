@@ -36,13 +36,13 @@
             this.ctrComposer = new TMCWorkbench.Controls.Resettable.ResettableComposerDropDownControl();
             this.ctrStyleText = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.ctrStyle = new TMCWorkbench.Controls.Resettable.ResettableStyleDropDownControl();
+            this.ctrTracker = new TMCWorkbench.Controls.Resettable.ResettableTrackerDropDownControl();
             this.ctrBPM = new TMCWorkbench.Controls.Resettable.ResettableBpmControl();
             this.ctrSpeed = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
             this.ctrLength = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
             this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
-            this.ctrTracker = new TMCWorkbench.Controls.Resettable.ResettableTrackerDropDownControl();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.SuspendLayout();
@@ -140,6 +140,16 @@
             this.ctrStyle.Size = new System.Drawing.Size(654, 24);
             this.ctrStyle.TabIndex = 11;
             // 
+            // ctrTracker
+            // 
+            this.ctrTracker.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrTracker.LabelTitle = "Tracker";
+            this.ctrTracker.Location = new System.Drawing.Point(0, 144);
+            this.ctrTracker.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrTracker.Name = "ctrTracker";
+            this.ctrTracker.Size = new System.Drawing.Size(654, 24);
+            this.ctrTracker.TabIndex = 18;
+            // 
             // ctrBPM
             // 
             this.ctrBPM.Dock = System.Windows.Forms.DockStyle.Top;
@@ -204,16 +214,6 @@
             this.ctrFileInfo.Size = new System.Drawing.Size(654, 24);
             this.ctrFileInfo.TabIndex = 6;
             // 
-            // ctrTracker
-            // 
-            this.ctrTracker.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrTracker.LabelTitle = "Tracker";
-            this.ctrTracker.Location = new System.Drawing.Point(0, 144);
-            this.ctrTracker.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrTracker.Name = "ctrTracker";
-            this.ctrTracker.Size = new System.Drawing.Size(654, 24);
-            this.ctrTracker.TabIndex = 18;
-            // 
             // MetaDataControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,6 +243,6 @@
         public Resettable.ResettableDateControl ctrDate;
         public Resettable.ResettableTextControl ctrFileInfo;
         public Resettable.ResettableTextControl ctrTrackTitle;
-        public Resettable.ResettableTrackerDropDownControl ctrTracker;
+        private Resettable.ResettableTrackerDropDownControl ctrTracker;
     }
 }

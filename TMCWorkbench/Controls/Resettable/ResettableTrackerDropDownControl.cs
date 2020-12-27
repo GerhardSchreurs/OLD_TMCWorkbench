@@ -50,20 +50,38 @@ namespace TMCWorkbench.Controls.Resettable
         public string GetTracker()
         {
             dynamic item = ddList.SelectedItem;
+
+            if (item == null)
+            {
+                return "Unknown";
+            }
+
             return item.Name;
         }
 
         public bool SetTracker(string text)
         {
-            if (text == null) return false;
-
-            var tracker = DB.DBManager.Instance.Trackers.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
-       
-            if (tracker != null)
+            try
             {
-                ddList.SelectedValue = tracker.Tracker_id;
-                return true;
+                //HACK: FOR WINFORMS NULL REFERENCE
+                //Cannot perform runtime binding on a null reference
+                //Can't be bothered to figure out
+
+                if (text == null) return false;
+
+                var tracker = DB.DBManager.Instance.Trackers.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
+
+                if (tracker != null)
+                {
+                    ddList.SelectedValue = tracker.Tracker_id;
+                    return true;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
 
             return false;
         }
