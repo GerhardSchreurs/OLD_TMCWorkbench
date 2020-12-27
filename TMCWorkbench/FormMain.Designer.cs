@@ -67,7 +67,7 @@
             this.ctrHeader = new TMCWorkbench.Controls.HistoryTextBox();
             this.panelSave = new System.Windows.Forms.Panel();
             this.chkPreferSamples = new System.Windows.Forms.CheckBox();
-            this.btnRefreshera = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveAndContine = new System.Windows.Forms.Button();
             this.ctrSummary = new TMCWorkbench.Controls.HistoryTextBox();
@@ -79,9 +79,6 @@
             this.btnBla = new System.Windows.Forms.Button();
             this.browserControl1 = new TMCWorkbench.Controls.BrowserControl();
             this.btnTest = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnRefreshSummary = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableMenu.SuspendLayout();
@@ -670,7 +667,7 @@
             // panelSave
             // 
             this.panelSave.Controls.Add(this.chkPreferSamples);
-            this.panelSave.Controls.Add(this.btnRefreshera);
+            this.panelSave.Controls.Add(this.btnRefresh);
             this.panelSave.Controls.Add(this.btnSave);
             this.panelSave.Controls.Add(this.btnSaveAndContine);
             this.panelSave.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -691,15 +688,15 @@
             this.chkPreferSamples.Text = "Prefer samples";
             this.chkPreferSamples.UseVisualStyleBackColor = true;
             // 
-            // btnRefreshera
+            // btnRefresh
             // 
-            this.btnRefreshera.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRefreshera.Location = new System.Drawing.Point(0, 0);
-            this.btnRefreshera.Name = "btnRefreshera";
-            this.btnRefreshera.Size = new System.Drawing.Size(75, 24);
-            this.btnRefreshera.TabIndex = 1;
-            this.btnRefreshera.Text = "Refresh";
-            this.btnRefreshera.UseVisualStyleBackColor = true;
+            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnRefresh.Location = new System.Drawing.Point(0, 0);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 24);
+            this.btnRefresh.TabIndex = 1;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // btnSave
             // 
@@ -827,35 +824,6 @@
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.Handle_btnTest_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1, -7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // btnRefreshSummary
-            // 
-            this.btnRefreshSummary.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRefreshSummary.Location = new System.Drawing.Point(0, 0);
-            this.btnRefreshSummary.Name = "btnRefreshSummary";
-            this.btnRefreshSummary.Size = new System.Drawing.Size(75, 24);
-            this.btnRefreshSummary.TabIndex = 1;
-            this.btnRefreshSummary.Text = "Refresh";
-            this.btnRefreshSummary.UseVisualStyleBackColor = true;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRefresh.Location = new System.Drawing.Point(0, 0);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 24);
-            this.btnRefresh.TabIndex = 1;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -919,7 +887,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel pnlMeta;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private Controls.BrowserControl browserControl1;
@@ -948,14 +915,12 @@
         private System.Windows.Forms.ToolStripMenuItem composersToolStripMenuItem;
         private Controls.MetaDataControl ctrMetaData;
         private System.Windows.Forms.Panel panelSave;
-        private System.Windows.Forms.Button btnRefreshera;
+        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnSaveAndContine;
         private Controls.HistoryTextBox ctrSummary;
         private Controls.HistoryTextBox ctrHeader;
         private System.Windows.Forms.CheckBox chkPreferSamples;
-        private System.Windows.Forms.Button btnRefreshSummary;
-        private System.Windows.Forms.Button btnRefresh;
     }
 }
 
