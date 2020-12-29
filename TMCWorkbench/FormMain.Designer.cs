@@ -697,6 +697,7 @@
             this.btnRefresh.TabIndex = 1;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnSave
             // 
@@ -725,6 +726,7 @@
             this.ctrSummary.Location = new System.Drawing.Point(3, 63);
             this.ctrSummary.Multiline = true;
             this.ctrSummary.Name = "ctrSummary";
+            this.ctrSummary.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ctrSummary.Size = new System.Drawing.Size(562, 238);
             this.ctrSummary.TabIndex = 12;
             // 

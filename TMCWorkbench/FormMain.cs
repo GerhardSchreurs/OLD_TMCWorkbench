@@ -11,6 +11,7 @@ using System.Text;
 using TMCWorkbench.Extensions;
 using TMCWorkbench.Properties;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace TMCWorkbench
 {
@@ -94,13 +95,13 @@ namespace TMCWorkbench
 
             InitTextFields();
 
-            //bool newTrack = false;
+            bool newTrack = false;
 
-            //if (_track == null)
-            //{                
-            //    _track = new Track();
-            //    newTrack = true;
-            //}
+            if (_track == null)
+            {
+                _track = new Track();
+                newTrack = true;
+            }
 
             //Setup tabs
             EnableTabControl();
@@ -117,19 +118,19 @@ namespace TMCWorkbench
             SwitchTabs(true);
             ctrMetaData.LoadData(_mod, _track, musicControl1.Media.Duration);
 
-            GenerateTexts();
+            GenerateYoutubeTexts();
         }
         #endregion
 
         #region EVENT_BUTTON
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            GenerateYoutubeTexts();
+        }
+
         private void Handle_btnSaveAndContine_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void Handle_btnRefreshSummary_Click(object sender, EventArgs e)
-        {
-            GenerateHeader();
         }
 
         private void Handle_btnSave_Click(object sender, EventArgs e)
@@ -191,7 +192,6 @@ namespace TMCWorkbench
         }
         #endregion
 
-
         void InitTextFields()
         {
             txtSamplesOrg.Text = "";
@@ -222,12 +222,7 @@ namespace TMCWorkbench
             }
         }
 
-        private void GetSampleText()
-        {
-
-        }
-
-        private void GenerateTexts()
+        private void GenerateYoutubeTexts()
         {
             GenerateHeader();
             GenerateSummary();
@@ -235,7 +230,40 @@ namespace TMCWorkbench
 
         private void GenerateSummary()
         {
+            var output = new StringBuilder();
 
+            var samples = txtSamplesNew.Text;
+            var instruments = txtInstrumentsNew.Text;
+            var message = txtMessageNew.Text;
+
+            samples = CleanUpText(samples);
+            instruments = CleanUpText(instruments);
+            message = CleanUpText(message);
+
+            output.Append(samples);
+            output.Append(instruments);
+            output.Append(message);
+
+            ctrSummary.Text = output.ToString();
+        }
+
+        private string CleanUpText(string text)
+        {
+            //First, remove all newlines over 2
+            text = Regex.Replace(text, "(\r\n){2,}", $"{Environment.NewLine}{Environment.NewLine}");
+
+            //First, remove all newlines over 2
+            text = Regex.Replace(text, "[ ]{1,}", " ");
+
+
+
+
+            //Remove first space at start of string
+            //text = Regex.Replace(text, "^\\s", "", RegexOptions.Multiline);
+
+
+
+            return text;
         }
 
         private void GenerateHeader()
@@ -496,5 +524,6 @@ namespace TMCWorkbench
             return false;
         }
         #endregion SAVEFORMPOSITION
+
     }
 }

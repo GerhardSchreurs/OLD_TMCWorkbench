@@ -68,13 +68,14 @@ namespace TMCWorkbench.Controls
         public async Task LoadTrack(string path)
         {
             Debug.WriteLine("MusicControl LoadTrack START");
-            UnWire();
-            Debug.WriteLine("MusicControl unwired");
 
             //MediaPlayer.Stop() Might DEADLOCK, see description in Stop() method.
             //https://github.com/ZeBobo5/Vlc.DotNet/issues/542
             ThreadPool.QueueUserWorkItem(_ => _mediaPlayer.Stop());
             Debug.WriteLine("MusicControl DINGES");
+
+            UnWire();
+            Debug.WriteLine("MusicControl unwired");
 
             if (Media != null)
             {
