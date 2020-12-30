@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls
 {
-    public class IntegerTextBox : TextBox
+    public class IntegerTextBoxControl : TextBox
     {
         public bool AllowsNegatives { get; set; }
 
-        public IntegerTextBox() : base()
+        public IntegerTextBoxControl() : base()
         {
             this.KeyPress -= Handle_IntegerTextBox_KeyPress;
             this.KeyPress += Handle_IntegerTextBox_KeyPress;

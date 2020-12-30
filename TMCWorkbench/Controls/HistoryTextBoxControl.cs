@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls
 {
-    public class HistoryTextBox : System.Windows.Forms.TextBox
+    public class HistoryTextBoxControl : System.Windows.Forms.TextBox
     {
         bool ignoreChange = true;
         List<string> storageUndo = null;

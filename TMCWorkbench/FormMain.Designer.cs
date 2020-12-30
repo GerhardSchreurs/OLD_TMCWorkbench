@@ -64,13 +64,13 @@
             this.txtMessageOrg = new TMCWorkbench.Controls.TextAreaControl();
             this.tableLayoutPanelBot = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrHeader = new TMCWorkbench.Controls.HistoryTextBox();
+            this.ctrHeader = new TMCWorkbench.Controls.HistoryTextBoxControl();
             this.panelSave = new System.Windows.Forms.Panel();
             this.chkPreferSamples = new System.Windows.Forms.CheckBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveAndContine = new System.Windows.Forms.Button();
-            this.ctrSummary = new TMCWorkbench.Controls.HistoryTextBox();
+            this.ctrSummary = new TMCWorkbench.Controls.HistoryTextBoxControl();
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
             this.ctrMetaData = new TMCWorkbench.Controls.MetaDataControl();
@@ -920,8 +920,8 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnSaveAndContine;
-        private Controls.HistoryTextBox ctrSummary;
-        private Controls.HistoryTextBox ctrHeader;
+        private Controls.HistoryTextBoxControl ctrSummary;
+        private Controls.HistoryTextBoxControl ctrHeader;
         private System.Windows.Forms.CheckBox chkPreferSamples;
     }
 }

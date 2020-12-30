@@ -144,6 +144,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Controls\AddNameControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -156,10 +157,16 @@
     <Compile Include="Controls\BrowserControl.Designer.cs">
       <DependentUpon>BrowserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\HistoryTextBox.cs">
+    <Compile Include="Controls\HistoryTextBoxControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\IntegerTextBox.cs">
+    <Compile Include="Controls\HistoryTextBoxStateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\HistoryTextBoxStateControl.Designer.cs">
+      <DependentUpon>HistoryTextBoxStateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IntegerTextBoxControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ListViewControl.cs">
@@ -179,6 +186,12 @@
     </Compile>
     <Compile Include="Controls\MusicControl.Designer.cs">
       <DependentUpon>MusicControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OutputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OutputControl.Designer.cs">
+      <DependentUpon>OutputControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
@@ -269,6 +282,12 @@
     <Compile Include="Controls\Resettable\ResettableTextControl.Designer.cs">
       <DependentUpon>ResettableTextControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TextAreaStateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TextAreaStateControl.Designer.cs">
+      <DependentUpon>TextAreaStateControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TextAreaControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -288,6 +307,12 @@
     <Compile Include="Extensions\IntegerExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="FormAlpha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAlpha.Designer.cs">
+      <DependentUpon>FormAlpha.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -346,6 +371,9 @@
     <EmbeddedResource Include="Controls\BrowserControl.resx">
       <DependentUpon>BrowserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\HistoryTextBoxStateControl.resx">
+      <DependentUpon>HistoryTextBoxStateControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ListViewControl.resx">
       <DependentUpon>ListViewControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -354,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MusicControl.resx">
       <DependentUpon>MusicControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OutputControl.resx">
+      <DependentUpon>OutputControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableBpmControl.resx">
       <DependentUpon>ResettableBpmControl.cs</DependentUpon>
@@ -385,11 +416,17 @@
     <EmbeddedResource Include="Controls\Resettable\ResettableTextControl.resx">
       <DependentUpon>ResettableTextControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TextAreaStateControl.resx">
+      <DependentUpon>TextAreaStateControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\TextAreaControl.resx">
       <DependentUpon>TextAreaControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\StylesDialog.resx">
       <DependentUpon>StylesDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAlpha.resx">
+      <DependentUpon>FormAlpha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
