@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.listView1 = new System.Windows.Forms.ListView();
+            this.colDB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colCreated = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colDB = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colDB,
-            this.colName,
             this.colType,
+            this.colName,
             this.colCreated,
             this.colModified});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -55,6 +55,11 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
+            // colDB
+            // 
+            this.colDB.Text = "DB";
+            this.colDB.Width = 30;
+            // 
             // colType
             // 
             this.colType.Text = "Type";
@@ -63,22 +68,17 @@
             // colName
             // 
             this.colName.Text = "Name";
-            this.colName.Width = 66;
+            this.colName.Width = 110;
             // 
             // colCreated
             // 
             this.colCreated.Text = "Created";
-            this.colCreated.Width = 80;
+            this.colCreated.Width = 70;
             // 
             // colModified
             // 
             this.colModified.Text = "Modified";
-            this.colModified.Width = 80;
-            // 
-            // colDB
-            // 
-            this.colDB.Text = "DB";
-            this.colDB.Width = 30;
+            this.colModified.Width = 70;
             // 
             // ListViewControl
             // 

@@ -77,6 +77,23 @@ namespace TMCWorkbench
             return id;
         }
 
+        public int GetFileExtensionID(string fullName)
+        {
+            var extension = Path.GetExtension(fullName);
 
+            if (extension.IsNullOrEmpty()) return 0;
+            extension = extension.ToUpper();
+
+            if (extension == ".IT")
+                return 1;
+            if (extension == ".XM")
+                return 2;
+            if (extension == ".S3M")
+                return 3;
+            if (extension == ".MOD")
+                return 4;
+
+            return 0;
+        }
     }
 }

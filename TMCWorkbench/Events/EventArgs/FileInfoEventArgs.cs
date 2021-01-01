@@ -9,11 +9,11 @@ namespace TMCWorkbench.Events.EventArgs
 {
     public class FileInfoEventArgs
     {
-        public FileInfoEventArgs(FileInfo fileInfo)
+        public FileInfoEventArgs(string fullName)
         {
-            FileInfo = fileInfo;
+            FullName = fullName;
         }
 
-        public FileInfo FileInfo;
+        public string FullName;
     }
 }

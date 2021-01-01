@@ -26,18 +26,27 @@ namespace TMCWorkbench.Controls
             //Does nothing atm.
         }
 
+        public void MarkInDatabase(string fullName)
+        {
+            foreach (ListViewItem item in listView1.Items)
+            {
+                if (item.Tag.ToString() == fullName)
+                {
+                    item.Text = "Y";
+                }
+            }
+        }
+
         public void BrowseDirectory(DirectoryInfo directoryInfo)
         {
             try
             {
                 listView1.Items.Clear();
-                var i = 0;
                 
                 foreach (FileInfo fileInfo in directoryInfo.GetFiles())
                 {
                     var extensionString = GetStringExtensionFromFileInfo(fileInfo);
                     var extension = GetExtensionFromString(extensionString);
-
 
                     if (IsSupportedFile(extension))
                     {
@@ -47,7 +56,7 @@ namespace TMCWorkbench.Controls
 
                         var item = new ListViewItem();
                         item.UseItemStyleForSubItems = false;
-                        item.Tag = fileInfo;
+                        item.Tag = fileInfo.FullName;
                         item.Text = isInDb ? "Y" : "N";
 
                         //Type
@@ -111,7 +120,7 @@ namespace TMCWorkbench.Controls
         void PlaySelectedItemTrack()
         {
             var item = listView1.SelectedItems[0];
-            var info = (FileInfo)item.Tag;
+            var info = item.Tag.ToString();
 
             EventInvoker.RaiseOnListViewSelected(this, info);
         }

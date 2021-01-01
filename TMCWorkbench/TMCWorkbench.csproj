@@ -313,12 +313,6 @@
     <Compile Include="FormAlpha.Designer.cs">
       <DependentUpon>FormAlpha.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="FormTest.cs">
       <SubType>Form</SubType>
@@ -329,6 +323,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Model\Enums.cs" />
+    <Compile Include="Model\Bag.cs" />
     <Compile Include="Properties\Private.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -427,9 +422,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAlpha.resx">
       <DependentUpon>FormAlpha.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTest.resx">
       <DependentUpon>FormTest.cs</DependentUpon>

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ModLibrary;
 using TMCWorkbench.DB;
 using TMCWorkbench;
+using TMCWorkbench.Model;
 
 namespace TMCWorkbench.Controls
 {
@@ -36,8 +37,8 @@ namespace TMCWorkbench.Controls
             ctrScenegroupText.SwitchMode();
         }
 
-        private ModInfo _mod;
-        private TMCDatabase.DBModel.Track _data;
+        //private ModInfo _mod;
+        //private TMCDatabase.DBModel.Track _track;
 
 
         public string FileName
@@ -211,61 +212,53 @@ namespace TMCWorkbench.Controls
         }
 
 
-        public void LoadData(ModInfo modInfo, TMCDatabase.DBModel.Track track, long duration)
+        public void LoadData(Bag bag)
         {
-            if (modInfo == null)
-            {
-                _mod = null;
-                throw new ArgumentException("Mod is null");
-            }
-            else
-            {
-                _mod = modInfo;
-            }
+            var mod = bag.Mod;
+            var track = bag.Track;
 
-            _data = track;
 
-            if (_data.Md5 != Guid.Empty)
+            if (bag.IsInDB)
             {
                 //Track is in database
-                this.FileName = _data.FileName;
-                this.TrackTitle = _data.TrackTitle;
-                this.Date = _data.Date_track_created;
-                this.LengthInMs = _data.Length;
-                this.SetSpeedAndTempo(_data.Speed, _data.Tempo);
-                this.Bpm = _data.Bpm;
-                this.StyleID = _data.FK_style_id;
-                this.StyleText = _data.StyleName;
-                this.ComposerID = _data.FK_composer_id;
-                this.ComposerText = _data.ComposerName;
-                this.ScenegroupID = _data.FK_scenegroup_id;
-                this.ScenegroupText = _data.ScenegroupName;
-                this.Tracker = _data.Tracker.Name;
+                this.FileName = track.FileName;
+                this.TrackTitle = track.TrackTitle;
+                this.Date = track.Date_track_created;
+                this.LengthInMs = track.Length;
+                this.SetSpeedAndTempo(track.Speed, track.Tempo);
+                this.Bpm = track.Bpm;
+                this.StyleID = track.FK_style_id;
+                this.StyleText = track.StyleName;
+                this.ComposerID = track.FK_composer_id;
+                this.ComposerText = track.ComposerName;
+                this.ScenegroupID = track.FK_scenegroup_id;
+                this.ScenegroupText = track.ScenegroupName;
+                this.Tracker = track.Tracker.Name;
 
                 //Original values
-                this.SetLengthInMsOriginal(duration);
-                ctrFileInfo.Original = _mod.FileName;
-                ctrDate.Original = _mod.DateCreated;
-                ctrSpeed.SetValuesOriginal(_mod.Speed, _mod.Tempo);
-                ctrBPM.SetValueOriginal(_mod.EstimatedBPM);
+                this.SetLengthInMsOriginal(bag.Duration);
+                ctrFileInfo.Original = mod.FileName;
+                ctrDate.Original = mod.DateCreated;
+                ctrSpeed.SetValuesOriginal(mod.Speed, mod.Tempo);
+                ctrBPM.SetValueOriginal(mod.EstimatedBPM);
                 //TODO TRACKER ORIGINAL
             }
             else
             {
                 //NOT IN DB, ONLY LOAD FROM DISK
-                this.FileName = _mod.FileName;
-                this.TrackTitle = _mod.SongName;
-                this.Date = _mod.DateCreated;
-                this.LengthInMs = duration;
-                this.SetSpeedAndTempo(_mod.Speed, _mod.Tempo);
-                this.Bpm = _mod.EstimatedBPM;
-                //this.Tracker = _mod.Tracker.ToStr();
-                this.StyleText = _mod.TrackStyle;
-                this.ScenegroupText = "";
+                this.FileName = mod.FileName;
+                this.TrackTitle = mod.SongName;
+                this.Date = mod.DateCreated;
+                this.LengthInMs = bag.Duration;
+                this.SetSpeedAndTempo(mod.Speed, mod.Tempo);
+                this.Bpm = mod.EstimatedBPM;
+                this.Tracker = mod.Tracker.ToStr();
+                this.Style = mod.TrackStyle;
+                this.StyleText = mod.TrackStyle;
                 this.ComposerText = "";
                 this.ScenegroupText = "";
 
-                if (ctrStyle.SetStyle(_mod.TrackStyle))
+                if (ctrStyle.SetStyle(mod.TrackStyle))
                 {
                     ctrStyleText.Text = "";
                 }

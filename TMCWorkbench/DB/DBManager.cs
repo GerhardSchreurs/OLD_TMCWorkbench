@@ -78,6 +78,44 @@ namespace TMCWorkbench.DB
             }
         }
 
+        public void LoadTrackstyles()
+        {
+            LoadStyles();
+
+            if (TrackStyles == null)
+            {
+                TrackStyles = new List<TrackStyle>();
+            }
+
+            foreach (var style in Styles.Where(x => x.ParentStyle == null))
+            {
+                AddTrackStyle(null, style);
+            }
+        }
+
+        private void AddTrackStyle(TrackStyle parentStyle, Style style)
+        {
+            var trackStyle = new TrackStyle(style.Name, style.Weight);
+            trackStyle.IsAlt = style.IsAlt;
+            trackStyle.ParentStyle = parentStyle;
+
+            //foreach (var substyle in Styles.Where(x => x.IsAlt && x.Parent_style_id == style.Style_id))
+            //{
+            //    var subTrackStyle = new TrackStyle(substyle.Name, substyle.Weight);
+            //    subTrackStyle.IsAlt = substyle.IsAlt;
+            //    subTrackStyle.ParentStyle = trackStyle;
+
+            //    trackStyle.Add(subTrackStyle);
+            //}
+
+            foreach (var child in Styles.Where(x => x.Parent_style_id == style.Style_id))
+            {
+                AddTrackStyle(trackStyle, child);
+            }
+
+            TrackStyles.Add(trackStyle);
+        }
+
         public void LoadSceneGroups(bool refresh = false)
         {
             if (refresh || refresh == false && SceneGroups == null)
@@ -105,21 +143,6 @@ namespace TMCWorkbench.DB
             }
         }
 
-        public void LoadTrackstyles()
-        {
-            LoadStyles();
-
-            if (TrackStyles == null)
-            {
-                TrackStyles = new List<TrackStyle>();
-            }
-
-            foreach (var style in Styles.Where(x => x.ParentStyle == null))
-            {
-                AddStyle(null, style);
-            }
-        }
-
         public bool LoadTrackInfo(Guid guid)
         {
             Track = C.Tracks.SingleOrDefault(x => x.Md5 == guid);
@@ -127,28 +150,7 @@ namespace TMCWorkbench.DB
             return Track != null;
         }
 
-        private void AddStyle(TrackStyle parentStyle, Style style)
-        {
-            var trackStyle = new TrackStyle(style.Name, style.Weight);
-            trackStyle.IsAlt = style.IsAlt;
-            trackStyle.ParentStyle = parentStyle;
 
-            //foreach (var substyle in Styles.Where(x => x.IsAlt && x.Parent_style_id == style.Style_id))
-            //{
-            //    var subTrackStyle = new TrackStyle(substyle.Name, substyle.Weight);
-            //    subTrackStyle.IsAlt = substyle.IsAlt;
-            //    subTrackStyle.ParentStyle = trackStyle;
-
-            //    trackStyle.Add(subTrackStyle);
-            //}
-
-            foreach (var child in Styles.Where(x => x.Parent_style_id == style.Style_id))
-            {
-                AddStyle(trackStyle, child);
-            }
-
-            TrackStyles.Add(trackStyle);
-        }
 
         
 
@@ -160,6 +162,18 @@ namespace TMCWorkbench.DB
         public void Add(Style style)
         {
             C.Styles.Add(style);
+        }
+
+        public void AddOrUpdate(Track track)
+        {
+            if (IsTrackInDB(track.Md5))
+            {
+                //Do nothing
+            }
+            else
+            {
+                C.Tracks.Add(track);
+            }
         }
 
         public void AddComposerToGroup(int sceneGroupId, int composerId, bool isFounder = false)

@@ -12,36 +12,18 @@ using TMCWorkbench.Extensions;
 using TMCWorkbench.Properties;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using TMCWorkbench.Model;
 
 namespace TMCWorkbench
 {
     public partial class FormAlpha : Form
     {
         public DBManager DB = DBManager.Instance;
-
-        private const string HEADER = "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■";
-
-        private readonly Regex _regRemoveNewLines = new Regex("(\r\n){2,}");
-        private readonly Regex _regRemoveSpaces = new Regex("[ ]{1,}");
-        private readonly Regex _regRemoveLeadingStringSpace = new Regex("^\\s", RegexOptions.Multiline);
-
-        private readonly Regex _regLimitRemoveNewLines = new Regex("(\r?\n)");
-
-
+        private Bag _bag;
         private ModInfo _mod;
         private Track _track;
-        private Guid _guid;
-        private bool _isInDB;
-
-        private bool HasMod
-        {
-            get => _mod != null;
-        }
-
-        private bool HasTrack
-        {
-            get => _track != null && _track.Md5 != Guid.Empty;
-        }
+        private string _lastPath;
 
         public FormAlpha()
         {
@@ -64,11 +46,8 @@ namespace TMCWorkbench
         private void Form_Load(object sender, EventArgs e)
         {
             toolStripStatusLabel.Text = "Loading";
-            DB.LoadStyles();
             DB.LoadTrackstyles();
             toolStripStatusLabel.Text = "Done loading";
-            tabControl.SelectedIndex = 0;
-            SwitchTabs(false);
         }
 
         protected override void OnClosed(EventArgs e)
@@ -83,55 +62,16 @@ namespace TMCWorkbench
             ctrTracks.BrowseDirectory(playEventArgs.DirectoryInfo);
         }
 
-        private async void Handle_ctrTracks_OnSelected(object sender, Events.EventArgs.FileInfoEventArgs fileinfoEventArgs)
+        private async void Handle_ctrTracks_OnSelected(object sender, string fullName)
         {
-            toolStripStatusLabel.Text = fileinfoEventArgs.FileInfo.FullName;
-            await ctrPlayer.LoadTrack(fileinfoEventArgs.FileInfo.FullName).ConfigureAwait(true);
-
-            _isInDB = Manager.Instance.IsTrackInDB(fileinfoEventArgs.FileInfo.FullName);
-            _guid = Manager.Instance.LastMd5Guid;
-            _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(fileinfoEventArgs.FileInfo.FullName, DBManager.Instance.TrackStyles);
-            _track = null;
-
-            if (_isInDB && (DB.LoadTrackInfo(_guid)))
-            {
-                _track = DB.Track;
-            }
-
-            InitTextFields();
-
-            bool newTrack = false;
-
-            if (_track == null)
-            {
-                _track = new Track();
-                newTrack = true;
-            }
-
-
-            //Setup tabs
-            EnableTabControl();
-
-            //if (_mod != null && newTrack)
-            //{
-            //    DisableTabDatabase();
-            //} 
-            //else if (!newTrack && _mod == null)
-            //{
-            //    DisableTabOriginal();
-            //}
-
-            SwitchTabs(true);
-            ctrMetaData.LoadData(_mod, _track, ctrPlayer.Media.Duration);
-
-            GenerateYoutubeTexts();
+            await LoadTrack(fullName);
         }
         #endregion
 
         #region EVENT_BUTTON
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            GenerateYoutubeTexts();
+            //TODO refresh ctrOutput
         }
 
         private void Handle_btnSaveAndContine_Click(object sender, EventArgs e)
@@ -139,9 +79,9 @@ namespace TMCWorkbench
 
         }
 
-        private void Handle_btnSave_Click(object sender, EventArgs e)
+        private async void Handle_btnSave_Click(object sender, EventArgs e)
         {
-            UpdateMetaData();
+            await SaveTrack();
         }
 
         private void Handle_btnTest_Click(object sender, EventArgs e)
@@ -198,159 +138,121 @@ namespace TMCWorkbench
         }
         #endregion
 
-        void InitTextFields()
+        private async Task LoadTrack(string path)
+        {
+            toolStripStatusLabel.Text = path;
+            long duration = 0;
+
+            if (path != _lastPath)
+            {
+                await ctrPlayer.LoadTrack(path);
+
+                duration = ctrPlayer.Media.Duration;
+                _lastPath = path;
+            }
+
+            _bag = new Bag();
+
+            await _bag.Load(path, duration);
+            //For easy reference
+            _mod = _bag.Mod;
+            _track = _bag.Track;
+
+            ctrMetaData.LoadData(_bag);
+            InitTextFields();
+
+            EnableTabControl();
+            SwitchTabs(true);
+        }
+
+        //private async Task LoadTrackOLD(string path)
+        //{
+        //    toolStripStatusLabel.Text = path;
+        //    long duration = 0;
+
+        //    if (path != _lastPath)
+        //    {
+        //        await ctrPlayer.LoadTrack(path);
+
+        //        duration = ctrPlayer.Media.Duration;
+        //        _lastPath = path;
+        //    }
+
+        //    duration = ctrPlayer.Media.Duration;
+
+        //    _isInDB = Manager.Instance.IsTrackInDB(path);
+        //    _guid = Manager.Instance.LastMd5Guid;
+        //    _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(path, DBManager.Instance.TrackStyles);
+        //    _track = null;
+
+        //    if (_isInDB && (DB.LoadTrackInfo(_guid)))
+        //    {
+        //        _track = DB.Track;
+        //    }
+
+        //    InitTextFields();
+
+        //    bool newTrack = false;
+
+        //    if (_track == null)
+        //    {
+        //        _track = new Track();
+        //        newTrack = true;
+        //    }
+
+
+        //    //Setup tabs
+        //    EnableTabControl();
+
+        //    //if (_mod != null && newTrack)
+        //    //{
+        //    //    DisableTabDatabase();
+        //    //} 
+        //    //else if (!newTrack && _mod == null)
+        //    //{
+        //    //    DisableTabOriginal();
+        //    //}
+
+        //    SwitchTabs(true);
+        //    ctrMetaData.LoadData(_mod, _track, duration);
+        //}
+
+        private void InitTextFields()
         {
             ctrMessage.Clear();
             ctrSamples.Clear();
             ctrInstruments.Clear();
-            ctrOutput.Clear();
 
-            if (HasMod)
+            ctrSamples.TextOrg = _mod.SampleText;
+            ctrInstruments.TextOrg = _mod.InstrumentText;
+            ctrMessage.TextOrg = _mod.SongText;
+
+            if (_bag.IsInDB == false)
             {
-                ctrSamples.TextOrg = _mod.SampleText;
-                ctrInstruments.TextOrg = _mod.InstrumentText;
-                ctrMessage.TextOrg = _mod.SongText;
-
-                if (HasTrack == false)
-                {
-                    ctrSamples.TextNew = _mod.SampleText;
-                    ctrInstruments.TextNew = _mod.InstrumentText;
-                    ctrMessage.TextNew = _mod.SongText;
-                }
+                ctrSamples.TextNew = _mod.SampleText;
+                ctrInstruments.TextNew = _mod.InstrumentText;
+                ctrMessage.TextNew = _mod.SongText;
             }
 
-            if (HasTrack)
+            if (_bag.IsInDB)
             {
                 ctrSamples.TextNew = _track.SampleText;
                 ctrInstruments.TextNew = _track.InstrumentText;
                 ctrMessage.TextNew = _track.SongText;
             }
+
+            ctrOutput.Init(_bag, ctrMetaData, "");
         }
 
-        private void GenerateYoutubeTexts()
+   
+        private async Task SaveTrack()
         {
-            GenerateHeader();
-            GenerateSummary();
-        }
-
-        private string GenerateParagraph(string title, string text)
-        {
-            if (text.IsNullOrEmpty()) return string.Empty;
-            return $"{title}{C.BR}{HEADER}{C.BR}{text}{C.BR}{C.BR}";
-        }
-
-        private void GenerateSummary()
-        {
-            var output = new StringBuilder();
-
-            var samples = ctrSamples.TextNew;
-            var instruments = ctrInstruments.TextNew;
-            var message = ctrMessage.TextNew;
-
-            message = GenerateParagraph("MESSAGE", CleanUpText(message));
-            samples = GenerateParagraph("SAMPLES", CleanUpText(samples));
-            instruments = GenerateParagraph("INSTRUMENTS", CleanUpText(instruments));
-
-            output.Append(message);
-            output.Append(samples);
-            output.Append(instruments);
-
-            var text = output.ToString().Trim();
-
-            if (text.Length > C.YOUTUBEMAXLENGTH)
-            {
-                //TODO:
-                //message = _regLimitRemoveNewLines.Replace(message, "");
-                throw new Exception("Investigate this!");
-            }
-
-            ctrOutput.TextSummaryNew = text;
-        }
-
-        private string CleanUpText(string text)
-        {
-            //First, remove all newlines over 2
-            text = _regRemoveNewLines.Replace(text, $"{C.BR}{C.BR}");
-            text = text.Replace($"{C.BR}{C.BR}{C.BR}", $"{C.BR}{C.BR}");
-            text = _regRemoveSpaces.Replace(text, " ");
-            text = _regRemoveLeadingStringSpace.Replace(text, "");
-
-            return text.Trim();
-        }
-
-        private void GenerateHeader()
-        {
-            //Artificial Sun(ARTIFSUN.IT) is a 120 bpm Impulse Tracker Noise track that was created in 1997
-            //C djnonsens of eXploitation.
-
-            //Acid Rain (ACIDRAIN.IT) is a 140 bpm alternative Impulse tracker track that was created in 1998.
-            //© djnonsens of eXploitation.
-
-            //Acid Rain (ACIDRAIN.IT) is an impulse tracker alternative track at 140 bpm that was created in 1998.
-            //© djnonsens of eXploitation.
-
-            //Acid Rain(ACIDRAIN.IT) is a 140 bpm Impulse tracker rave style track. 
-            //© 1998 - djnonsens of eXploitation.
-
-            //Alisia went home(ALISIA.MOD) is a 125 bpm Protracker track that was created in 1997.
-            //© Unknown.
-
-            var fileName = ctrMetaData.FileName;
-            var title = ctrMetaData.TrackTitle;
-            var style = ctrMetaData.GetStyleCalulated();
-            var date = ctrMetaData.Date.HasValue ? ctrMetaData.Date.Value : new DateTime(1900, 1, 1);
-            var composer = ctrMetaData.GetComposerCalculated();
-            var scenegroup = ctrMetaData.GetScenegroupCalulated();
-            var tracker = ctrMetaData.Tracker;
-            var bpm = ctrMetaData.Bpm;
-
-            var text = new StringBuilder();
-
-            if (title.IsNullOrEmpty())
-            {
-                text.Append($"{fileName} ");
-            }
-            else
-            {
-                text.Append($"{title} ({fileName}) ");
-            }
-
-            text.Append($"is a {bpm} bpm ");
-
-            if (style.IsNotNullOrEmpty())
-            {
-                text.Append($"{style} ");
-            }
-
-            text.Append($"track.");
-            text.AppendLine();
-            text.Append($"© {date.Year} - ");
-
-            if (composer.IsNotNullOrEmpty() && scenegroup.IsNotNullOrEmpty())
-            {
-                text.Append($"{composer} of {scenegroup}.");
-            }
-            else if (composer.IsNotNullOrEmpty())
-            {
-                text.Append($"{composer}.");
-            }
-            else if (scenegroup.IsNotNullOrEmpty())
-            {
-                text.Append($"{scenegroup}.");
-            }
-            else
-            {
-                text.Append("Unknown.");
-            }
-
-            text.Append($" Tracked with {tracker}.");
-            ctrOutput.TextHeaderNew = text.ToString();
-        }
-
-        private void UpdateMetaData()
-        {
-            _track.FileName = ctrMetaData.FileName;
-            _track.Md5 = Manager.Instance.GetFileGuid(ctrMetaData.FileName);
+            _track.FileName = _mod.FileName;
+            _track.Md5 = Manager.Instance.GetFileGuid(_mod.FullName);
+            _track.FK_fileextension_id = Manager.Instance.GetFileExtensionID(_mod.FullName);
+            _track.SampleText = ctrSamples.TextNew;
+            _track.InstrumentText = ctrInstruments.TextNew;
+            _track.SongText = ctrMessage.TextNew;
             _track.TrackTitle = ctrMetaData.TrackTitle;
             _track.Date_track_created = ctrMetaData.Date;
             _track.Date_track_modified = _mod.DateModified;
@@ -365,6 +267,18 @@ namespace TMCWorkbench
             _track.StyleName = ctrMetaData.StyleText;
             _track.ComposerName = ctrMetaData.ComposerText;
             _track.ScenegroupName = ctrMetaData.ScenegroupText;
+            _track.YoutubeTextHeader = ctrOutput.TextHeaderNew;
+            _track.YoutubeTextSummary = ctrOutput.TextSummaryNew;
+            _track.YoutubeTextFooter = ctrOutput.TextFooterNew;
+
+            _track.YoutubeText = ctrOutput.TextOutput;
+
+            DB.AddOrUpdate(_track);
+            DB.Save();
+
+            await LoadTrack(_mod.FullName);
+
+            ctrTracks.MarkInDatabase(_mod.FullName);
         }
 
         #region TABS

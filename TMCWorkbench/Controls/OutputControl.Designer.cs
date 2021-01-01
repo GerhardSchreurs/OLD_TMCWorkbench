@@ -33,27 +33,32 @@ namespace TMCWorkbench.Controls
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.txtHeaderYT = new TMCWorkbench.Controls.HistoryTextBoxStateControl();
             this.txtHeader = new TMCWorkbench.Controls.TextAreaStateControl();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlSummary = new System.Windows.Forms.Panel();
             this.txtSummaryYT = new TMCWorkbench.Controls.HistoryTextBoxStateControl();
             this.txtSummary = new TMCWorkbench.Controls.TextAreaStateControl();
+            this.pnlFooter = new System.Windows.Forms.Panel();
+            this.txtFooterYT = new TMCWorkbench.Controls.HistoryTextBoxStateControl();
+            this.txtFooter = new TMCWorkbench.Controls.TextAreaStateControl();
             this.tableLayout.SuspendLayout();
             this.pnlHeader.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlSummary.SuspendLayout();
+            this.pnlFooter.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayout
             // 
             this.tableLayout.ColumnCount = 1;
             this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayout.Controls.Add(this.pnlHeader, 0, 0);
-            this.tableLayout.Controls.Add(this.panel1, 0, 1);
+            this.tableLayout.Controls.Add(this.pnlSummary, 0, 1);
+            this.tableLayout.Controls.Add(this.pnlFooter, 0, 2);
             this.tableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayout.Location = new System.Drawing.Point(0, 0);
             this.tableLayout.Name = "tableLayout";
-            this.tableLayout.RowCount = 2;
-            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayout.RowCount = 3;
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayout.Size = new System.Drawing.Size(570, 500);
             this.tableLayout.TabIndex = 0;
             // 
@@ -64,7 +69,7 @@ namespace TMCWorkbench.Controls
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlHeader.Location = new System.Drawing.Point(3, 3);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(564, 94);
+            this.pnlHeader.Size = new System.Drawing.Size(564, 54);
             this.pnlHeader.TabIndex = 17;
             // 
             // txtHeaderYT
@@ -87,15 +92,15 @@ namespace TMCWorkbench.Controls
             this.txtHeader.TextNew = "txtNew";
             this.txtHeader.TextOrg = "txtOld";
             // 
-            // panel1
+            // pnlSummary
             // 
-            this.panel1.Controls.Add(this.txtSummaryYT);
-            this.panel1.Controls.Add(this.txtSummary);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 103);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(564, 394);
-            this.panel1.TabIndex = 18;
+            this.pnlSummary.Controls.Add(this.txtSummaryYT);
+            this.pnlSummary.Controls.Add(this.txtSummary);
+            this.pnlSummary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSummary.Location = new System.Drawing.Point(3, 63);
+            this.pnlSummary.Name = "pnlSummary";
+            this.pnlSummary.Size = new System.Drawing.Size(564, 374);
+            this.pnlSummary.TabIndex = 18;
             // 
             // txtSummaryYT
             // 
@@ -117,6 +122,36 @@ namespace TMCWorkbench.Controls
             this.txtSummary.TextNew = "txtNew";
             this.txtSummary.TextOrg = "txtOld";
             // 
+            // pnlFooter
+            // 
+            this.pnlFooter.Controls.Add(this.txtFooterYT);
+            this.pnlFooter.Controls.Add(this.txtFooter);
+            this.pnlFooter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFooter.Location = new System.Drawing.Point(3, 443);
+            this.pnlFooter.Name = "pnlFooter";
+            this.pnlFooter.Size = new System.Drawing.Size(564, 54);
+            this.pnlFooter.TabIndex = 19;
+            // 
+            // txtFooterYT
+            // 
+            this.txtFooterYT.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtFooterYT.Location = new System.Drawing.Point(0, 38);
+            this.txtFooterYT.Name = "txtFooterYT";
+            this.txtFooterYT.Size = new System.Drawing.Size(564, 10);
+            this.txtFooterYT.TabIndex = 4;
+            this.txtFooterYT.TextNew = "";
+            this.txtFooterYT.TextOrg = "";
+            // 
+            // txtFooter
+            // 
+            this.txtFooter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtFooter.Location = new System.Drawing.Point(0, 0);
+            this.txtFooter.Name = "txtFooter";
+            this.txtFooter.Size = new System.Drawing.Size(564, 38);
+            this.txtFooter.TabIndex = 3;
+            this.txtFooter.TextNew = "txtNew";
+            this.txtFooter.TextOrg = "txtOld";
+            // 
             // OutputControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,7 +162,8 @@ namespace TMCWorkbench.Controls
             this.Size = new System.Drawing.Size(570, 500);
             this.tableLayout.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.pnlSummary.ResumeLayout(false);
+            this.pnlFooter.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -136,11 +172,14 @@ namespace TMCWorkbench.Controls
 
         private System.Windows.Forms.TableLayoutPanel tableLayout;
         private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlSummary;
         private HistoryTextBoxStateControl historyTextBoxStateControl1;
         private TextAreaStateControl txtHeader;
         private TextAreaStateControl txtSummary;
         private HistoryTextBoxStateControl txtHeaderYT;
         private HistoryTextBoxStateControl txtSummaryYT;
+        private System.Windows.Forms.Panel pnlFooter;
+        private HistoryTextBoxStateControl txtFooterYT;
+        private TextAreaStateControl txtFooter;
     }
 }
