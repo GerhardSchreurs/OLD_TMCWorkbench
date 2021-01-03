@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TMCWorkbench.DB;
 
 namespace TMCWorkbench
@@ -12,8 +13,9 @@ namespace TMCWorkbench
     public sealed class Manager
     {
         #region Singleton
-        private static Manager instance = null;
-        private static readonly object padlock = new object();
+        private static Manager _instance = null;
+        private static readonly object _padlock = new object();
+        private static Jot.Tracker _stateTracker = new Jot.Tracker();
 
         Manager() { }
 
@@ -21,14 +23,14 @@ namespace TMCWorkbench
         {
             get
             {
-                lock (padlock)
+                lock (_padlock)
                 {
-                    if (instance == null)
+                    if (_instance == null)
                     {
-                        instance = new Manager();
-                        instance.Init();
+                        _instance = new Manager();
+                        _instance.Init();
                     }
-                    return instance;
+                    return _instance;
                 }
             }
         }
@@ -40,9 +42,22 @@ namespace TMCWorkbench
         public Guid LastMd5Guid = Guid.Empty;
         public bool LastMdSuccess = false;
 
+        public static Jot.Tracker StateTracker
+        {
+            get
+            {
+                return _stateTracker;
+            }
+        }
+
         private void Init()
         {
-
+            _stateTracker.Configure<_UCForm>()
+                .Id(f => f.Name, SystemInformation.VirtualScreen.Size) // <-- include the screen resolution in the id
+                .Properties(f => new { f.Top, f.Width, f.Height, f.Left, f.WindowState })
+                .PersistOn(nameof(Form.Move), nameof(Form.Resize), nameof(Form.FormClosing))
+                .WhenPersistingProperty((f, p) => p.Cancel = (f.WindowState != FormWindowState.Normal && (p.Property == nameof(Form.Height) || p.Property == nameof(Form.Width) || p.Property == nameof(Form.Top) || p.Property == nameof(Form.Left)))) // do not track form size and location when minimized/maximized
+                .StopTrackingOn(nameof(Form.FormClosing)); // <-- a form should not be persisted after it is closed since properties will be empty
         }
 
         public bool IsTrackInDB(FileInfo fileInfo)

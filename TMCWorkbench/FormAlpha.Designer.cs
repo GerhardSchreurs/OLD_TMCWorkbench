@@ -218,20 +218,23 @@ namespace TMCWorkbench
             // stylesToolStripMenuItem
             // 
             this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
-            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stylesToolStripMenuItem.Text = "Styles";
+            this.stylesToolStripMenuItem.Click += new System.EventHandler(this.Handle_stylesToolStripMenuItem_Click);
             // 
             // scenegroupsToolStripMenuItem
             // 
             this.scenegroupsToolStripMenuItem.Name = "scenegroupsToolStripMenuItem";
-            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.scenegroupsToolStripMenuItem.Text = "Scenegroups";
+            this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.Handle_scenegroupsToolStripMenuItem_Click);
             // 
             // composersToolStripMenuItem
             // 
             this.composersToolStripMenuItem.Name = "composersToolStripMenuItem";
-            this.composersToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.composersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.composersToolStripMenuItem.Text = "Composers";
+            this.composersToolStripMenuItem.Click += new System.EventHandler(this.Handle_composersToolStripMenuItem_Click);
             // 
             // tabControl
             // 
