@@ -41,6 +41,11 @@ namespace TMCWorkbench
 
             tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabControl.DrawItem += Handle_TabControl_DrawItem;
+
+            resettableDDLtest1.Init();
+            resettableDDLtest1.TextValue = "CreamTracker";
+            resettableDDLtest1.TextValueOriginal = "ModPlugTracker";
+
         }
 
         private void Form_Load(object sender, EventArgs e)
@@ -424,5 +429,15 @@ namespace TMCWorkbench
             return false;
         }
         #endregion SAVEFORMPOSITION
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(resettableDDLtest1.TextValue);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            resettableDDLtest1.TextValue = "Camoto";
+        }
     }
 }

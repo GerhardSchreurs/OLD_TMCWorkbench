@@ -30,19 +30,19 @@
         {
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
-            this.ctrScenegroupText = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
-            this.ctrScenegroup = new TMCWorkbench.Controls.Resettable.ResettableSceneGroupDropDownControl();
-            this.ctrComposerText = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
-            this.ctrComposer = new TMCWorkbench.Controls.Resettable.ResettableComposerDropDownControl();
-            this.ctrStyleText = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
-            this.ctrStyle = new TMCWorkbench.Controls.Resettable.ResettableStyleDropDownControl();
-            this.ctrTracker = new TMCWorkbench.Controls.Resettable.ResettableTrackerDropDownControl();
-            this.ctrBPM = new TMCWorkbench.Controls.Resettable.ResettableBpmControl();
+            this.ctrScenegroupText = new TMCWorkbench.Controls.Resettable.ResettableText();
+            this.ctrScenegroup = new TMCWorkbench.Controls.Resettable.ResettableDropDownSceneGroup();
+            this.ctrComposerText = new TMCWorkbench.Controls.Resettable.ResettableText();
+            this.ctrComposer = new TMCWorkbench.Controls.Resettable.ResettableDropDownComposer();
+            this.ctrStyleText = new TMCWorkbench.Controls.Resettable.ResettableText();
+            this.ctrStyle = new TMCWorkbench.Controls.Resettable.ResettableDropDownStyle();
+            this.ctrTracker = new TMCWorkbench.Controls.Resettable.ResettableDropDownTracker();
+            this.ctrBPM = new TMCWorkbench.Controls.Resettable.ResettableBpm();
             this.ctrSpeed = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
             this.ctrLength = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
-            this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
-            this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
-            this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
+            this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDate();
+            this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableText();
+            this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.SuspendLayout();
@@ -231,18 +231,18 @@
 
         private System.Windows.Forms.Panel pnlMeta;
         private System.Windows.Forms.Panel pnlMetaOrg;
-        public Resettable.ResettableTextControl ctrStyleText;
-        public Resettable.ResettableTextControl ctrScenegroupText;
-        public Resettable.ResettableSceneGroupDropDownControl ctrScenegroup;
-        public Resettable.ResettableTextControl ctrComposerText;
-        public Resettable.ResettableComposerDropDownControl ctrComposer;
-        public Resettable.ResettableStyleDropDownControl ctrStyle;
-        public Resettable.ResettableBpmControl ctrBPM;
+        public Resettable.ResettableText ctrStyleText;
+        public Resettable.ResettableText ctrScenegroupText;
+        public Resettable.ResettableDropDownSceneGroup ctrScenegroup;
+        public Resettable.ResettableText ctrComposerText;
+        public Resettable.ResettableDropDownComposer ctrComposer;
+        public Resettable.ResettableDropDownStyle ctrStyle;
+        public Resettable.ResettableBpm ctrBPM;
         public Resettable.ResettableDoubleIntControl ctrSpeed;
         public Resettable.ResettableDoubleIntControl ctrLength;
-        public Resettable.ResettableDateControl ctrDate;
-        public Resettable.ResettableTextControl ctrFileInfo;
-        public Resettable.ResettableTextControl ctrTrackTitle;
-        private Resettable.ResettableTrackerDropDownControl ctrTracker;
+        public Resettable.ResettableDate ctrDate;
+        public Resettable.ResettableText ctrFileInfo;
+        public Resettable.ResettableText ctrTrackTitle;
+        private Resettable.ResettableDropDownTracker ctrTracker;
     }
 }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableTextControl : _ResettableControlPanel
+    public partial class ResettableText : _ResettablePanel
     {
-        public ResettableTextControl()
+        public ResettableText()
         {
             InitializeComponent();
 

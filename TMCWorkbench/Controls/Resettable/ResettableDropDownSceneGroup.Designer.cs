@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableComposerDropDownControl
+    partial class ResettableDropDownSceneGroup
     {
         /// <summary> 
         /// Required designer variable.

@@ -9,14 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TMCWorkbench.DB;
 using TMCWorkbench;
-using FastColoredTextBoxNS;
-using TMCDatabase.DBModel;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableStyleDropDownControl : _ResettableDropDownHoldControl
+    public partial class ResettableDropDownSceneGroup : _XResettableDropDownHoldControl
     {
-        public ResettableStyleDropDownControl()
+        public ResettableDropDownSceneGroup()
         {
             InitializeComponent();
         }
@@ -33,31 +31,26 @@ namespace TMCWorkbench.Controls.Resettable
 
         public void Init()
         {
-            DBManager.Instance.LoadStyles();
+            DBManager.Instance.LoadSceneGroups();
 
-            //var query = from style in DB.Manager.Instance.C.Styles
-            //            select new { style.Name, style.Style_id };
-
-            var query = from style in DB.DBManager.Instance.Styles
-                        where style.IsAlt == false
-                        select new { style.Name, style.Style_id };
+            var query = from scenegroup in DB.DBManager.Instance.SceneGroups
+                        select new { scenegroup.Name, scenegroup.Scenegroup_id };
 
             var bindingSource = new BindingSource();
             var list = query.ToList();
-            var s = new TMCDatabase.DBModel.Style();
-            s.Style_id = 0;
-            s.Name = "== SELECT STYLE ==";
+            var s = new TMCDatabase.DBModel.Scenegroup();
+            s.Scenegroup_id = 0;
+            s.Name = "== SELECT SCENEGROUP ==";
 
-            list.Insert(0, new { s.Name, s.Style_id });
+            list.Insert(0, new { s.Name, s.Scenegroup_id });
 
             bindingSource.DataSource = list;
 
             ddList.DisplayMember = "Name";
-            ddList.ValueMember = "Style_id";
+            ddList.ValueMember = "Scenegroup_id";
             ddList.AutoCompleteMode = AutoCompleteMode.Suggest;
             ddList.AutoCompleteSource = AutoCompleteSource.ListItems;
             ddList.DataSource = bindingSource;
-
         }
 
         public void Reset()
@@ -65,15 +58,15 @@ namespace TMCWorkbench.Controls.Resettable
             ddList.SelectedValue = 0;
         }
 
-        public bool SetStyle(string text)
+        public bool SetScenegroup(string text)
         {
             if (text.IsNotNullOrEmpty())
             {
-                var style = DB.DBManager.Instance.Styles.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
+                var scenegroup = DBManager.Instance.SceneGroups.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
 
-                if (style != null)
+                if (scenegroup != null)
                 {
-                    ddList.SelectedValue = style.Style_id;
+                    ddList.SelectedValue = scenegroup.Scenegroup_id;
                     return true;
                 }
             }
@@ -82,7 +75,7 @@ namespace TMCWorkbench.Controls.Resettable
             return false;
         }
 
-        public void SetStyle(int? id)
+        public void SetScenegroup(int? id)
         {
             if (id.HasValue)
             {

@@ -57,7 +57,9 @@ namespace TMCWorkbench.DB
             CON = new MySqlConnection(Configurator.ConnectionString);
             CON.Open();
             C = new DatabaseContext(CON,false);
-            C.Database.Log = Console.WriteLine;
+
+            //TO LOG, DO THIS
+            //C.Database.Log = Console.WriteLine;
         }
 
         public void LoadTrackers(bool refresh = false)
@@ -149,10 +151,6 @@ namespace TMCWorkbench.DB
 
             return Track != null;
         }
-
-
-
-        
 
         public bool IsTrackInDB(Guid guid)
         {
@@ -287,9 +285,7 @@ namespace TMCWorkbench.DB
 
             C.SaveChanges();
 
-  
-
-            Console.WriteLine(modifiedOrAddedEntities);
+            modifiedOrAddedEntities.Trace(true);
         }
 
         public void Dispose()

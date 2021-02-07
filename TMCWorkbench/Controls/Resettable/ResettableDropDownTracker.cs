@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TMCWorkbench.DB;
-using TMCWorkbench;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableComposerDropDownControl : _ResettableDropDownHoldControl
+    public partial class ResettableDropDownTracker : _ResettableDropDownControl
     {
-        public ResettableComposerDropDownControl()
+        public ResettableDropDownTracker()
         {
             InitializeComponent();
         }
@@ -31,51 +30,63 @@ namespace TMCWorkbench.Controls.Resettable
 
         public void Init()
         {
-            DBManager.Instance.LoadComposers();
+            DBManager.Instance.LoadTrackers();
 
-            var query = from composer in DB.DBManager.Instance.Composers
-                        select new { composer.Name, composer.Composer_id };
+            var query = from tracker in DB.DBManager.Instance.Trackers
+                        select new { tracker.Name, tracker.Tracker_id };
 
             var bindingSource = new BindingSource();
             var list = query.ToList();
-            var s = new TMCDatabase.DBModel.Composer();
-            s.Composer_id = 0;
-            s.Name = "== SELECT COMPOSER ==";
-
-            list.Insert(0, new { s.Name, s.Composer_id });
 
             bindingSource.DataSource = list;
 
             ddList.DisplayMember = "Name";
-            ddList.ValueMember = "Composer_id";
+            ddList.ValueMember = "Tracker_id";
             ddList.AutoCompleteMode = AutoCompleteMode.Suggest;
             ddList.AutoCompleteSource = AutoCompleteSource.ListItems;
             ddList.DataSource = bindingSource;
         }
 
-        public void Reset()
+        public string GetTracker()
         {
-            ddList.SelectedValue = 0;
+            dynamic item = ddList.SelectedItem;
+
+            if (item == null)
+            {
+                return "Unknown";
+            }
+
+            return item.Name;
         }
 
-        public bool SetComposer(string text)
+        public bool SetTracker(string text)
         {
-            if (text.IsNotNullOrEmpty())
+            try
             {
-                var composer = DBManager.Instance.Composers.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
+                //HACK: FOR WINFORMS NULL REFERENCE
+                //Cannot perform runtime binding on a null reference
+                //Can't be bothered to figure out
 
-                if (composer != null)
+                if (text == null) return false;
+
+                var tracker = DB.DBManager.Instance.Trackers.Where(x => x.Name.ToLow() == text.ToLow()).FirstOrNull();
+
+                if (tracker != null)
                 {
-                    ddList.SelectedValue = composer.Composer_id;
+                    ddList.SelectedValue = tracker.Tracker_id;
                     return true;
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
-            ddList.SelectedValue = 0;
+
             return false;
         }
 
-        public void SetComposer(int? id)
+        public void SetTracker(int? id)
         {
             if (id.HasValue)
             {

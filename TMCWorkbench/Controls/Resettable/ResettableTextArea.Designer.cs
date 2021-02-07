@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableTextAreaControl
+    partial class ResettableTextArea
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResettableTextAreaControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ResettableTextArea));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtArea = new FastColoredTextBoxNS.FastColoredTextBox();
             this.ctrResettable = new TMCWorkbench.Controls.ResettableControl();

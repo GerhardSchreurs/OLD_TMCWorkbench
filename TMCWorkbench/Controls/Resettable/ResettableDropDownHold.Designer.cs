@@ -1,6 +1,7 @@
-﻿namespace TMCWorkbench.Controls.Resettable
+﻿
+namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableStyleDropDownControl
+    partial class ResettableDropDownHold
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +29,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // ResettableDropDownHold
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "ResettableDropDownHold";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

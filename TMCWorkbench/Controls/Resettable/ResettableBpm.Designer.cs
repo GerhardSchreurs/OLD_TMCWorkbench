@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls.Resettable
 {
-    partial class _ResettableDropDownHoldControl
+    partial class ResettableBpm
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,30 +30,29 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.resettableControl1 = new TMCWorkbench.Controls.ResettableControl();
-            this.chkLock = new System.Windows.Forms.CheckBox();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.ddList = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMin = new System.Windows.Forms.Button();
+            this.btnPlus = new System.Windows.Forms.Button();
+            this.txtBPM = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 114F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.Controls.Add(this.resettableControl1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.chkLock, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnEdit, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ddList, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(365, 24);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
             // resettableControl1
             // 
@@ -64,45 +63,54 @@
             this.resettableControl1.Size = new System.Drawing.Size(114, 24);
             this.resettableControl1.TabIndex = 0;
             // 
-            // chkLock
+            // panel1
             // 
-            this.chkLock.AutoSize = true;
-            this.chkLock.Dock = System.Windows.Forms.DockStyle.Left;
-            this.chkLock.Location = new System.Drawing.Point(320, 3);
-            this.chkLock.Name = "chkLock";
-            this.chkLock.Size = new System.Drawing.Size(15, 18);
-            this.chkLock.TabIndex = 1;
-            this.chkLock.UseVisualStyleBackColor = true;
+            this.panel1.Controls.Add(this.btnMin);
+            this.panel1.Controls.Add(this.btnPlus);
+            this.panel1.Controls.Add(this.txtBPM);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(114, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(251, 24);
+            this.panel1.TabIndex = 1;
             // 
-            // btnEdit
+            // btnMin
             // 
-            this.btnEdit.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnEdit.Location = new System.Drawing.Point(341, 0);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(0);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(22, 24);
-            this.btnEdit.TabIndex = 2;
-            this.btnEdit.Text = "E";
-            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnMin.Location = new System.Drawing.Point(102, 1);
+            this.btnMin.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMin.Name = "btnMin";
+            this.btnMin.Size = new System.Drawing.Size(33, 22);
+            this.btnMin.TabIndex = 2;
+            this.btnMin.Text = "-";
+            this.btnMin.UseVisualStyleBackColor = true;
             // 
-            // ddList
+            // btnPlus
             // 
-            this.ddList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ddList.FormattingEnabled = true;
-            this.ddList.Location = new System.Drawing.Point(114, 3);
-            this.ddList.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
-            this.ddList.Name = "ddList";
-            this.ddList.Size = new System.Drawing.Size(200, 21);
-            this.ddList.TabIndex = 3;
+            this.btnPlus.Location = new System.Drawing.Point(68, 1);
+            this.btnPlus.Margin = new System.Windows.Forms.Padding(0);
+            this.btnPlus.Name = "btnPlus";
+            this.btnPlus.Size = new System.Drawing.Size(33, 22);
+            this.btnPlus.TabIndex = 1;
+            this.btnPlus.Text = "+";
+            this.btnPlus.UseVisualStyleBackColor = true;
             // 
-            // _ResettableDropDownHoldControl
+            // txtBPM
+            // 
+            this.txtBPM.Location = new System.Drawing.Point(0, 2);
+            this.txtBPM.Name = "txtBPM";
+            this.txtBPM.Size = new System.Drawing.Size(65, 20);
+            this.txtBPM.TabIndex = 0;
+            // 
+            // ResettableBpmControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "_ResettableDropDownHoldControl";
+            this.Name = "ResettableBpmControl";
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -110,9 +118,10 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        protected System.Windows.Forms.CheckBox chkLock;
-        protected System.Windows.Forms.Button btnEdit;
-        protected System.Windows.Forms.ComboBox ddList;
-        public ResettableControl resettableControl1;
+        private ResettableControl resettableControl1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox txtBPM;
+        private System.Windows.Forms.Button btnMin;
+        private System.Windows.Forms.Button btnPlus;
     }
 }

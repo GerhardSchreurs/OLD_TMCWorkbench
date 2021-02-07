@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableTextAreaControl : UserControl
+    public partial class ResettableTextArea : UserControl
     {
-        public ResettableTextAreaControl()
+        public ResettableTextArea()
         {
             InitializeComponent();
         }

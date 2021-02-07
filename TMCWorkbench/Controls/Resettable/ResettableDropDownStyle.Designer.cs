@@ -1,7 +1,6 @@
-﻿
-namespace TMCWorkbench.Controls.Resettable
+﻿namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableTrackerDropDownControl
+    partial class ResettableDropDownStyle
     {
         /// <summary> 
         /// Required designer variable.

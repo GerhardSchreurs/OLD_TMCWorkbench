@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class _ResettableDropDownControl : _ResettableControlPanel
+    public partial class ResettableDropDownHold : ResettableDropDown
     {
-        public _ResettableDropDownControl()
+        public ResettableDropDownHold()
         {
             InitializeComponent();
-        }
-
-        public int GetValue()
-        {
-            return this.ddList.SelectedValue.ToInt();
         }
     }
 }

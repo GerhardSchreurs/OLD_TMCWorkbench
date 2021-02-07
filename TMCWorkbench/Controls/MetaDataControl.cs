@@ -217,7 +217,6 @@ namespace TMCWorkbench.Controls
             var mod = bag.Mod;
             var track = bag.Track;
 
-
             if (bag.IsInDB)
             {
                 //Track is in database
@@ -238,6 +237,7 @@ namespace TMCWorkbench.Controls
                 //Original values
                 this.SetLengthInMsOriginal(bag.Duration);
                 ctrFileInfo.Original = mod.FileName;
+                ctrTrackTitle.Original = mod.SongName;
                 ctrDate.Original = mod.DateCreated;
                 ctrSpeed.SetValuesOriginal(mod.Speed, mod.Tempo);
                 ctrBPM.SetValueOriginal(mod.EstimatedBPM);

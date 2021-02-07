@@ -33,7 +33,6 @@ namespace TMCWorkbench
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAlpha));
             this.tableBrowser = new System.Windows.Forms.TableLayoutPanel();
             this.btnBla = new System.Windows.Forms.Button();
-            this.ctrBrowser = new TMCWorkbench.Controls.BrowserControl();
             this.btnTest = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -52,18 +51,22 @@ namespace TMCWorkbench
             this.tabDatabase = new System.Windows.Forms.TabPage();
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
             this.tableControls = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrPlayer = new TMCWorkbench.Controls.MusicControl();
             this.tableEditControls = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrOutput = new TMCWorkbench.Controls.OutputControl();
             this.tableRight = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrMessage = new TMCWorkbench.Controls.TextAreaStateControl();
             this.tableMetaData = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlEndgame = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ctrPlayer = new TMCWorkbench.Controls.MusicControl();
+            this.ctrOutput = new TMCWorkbench.Controls.OutputControl();
+            this.ctrMessage = new TMCWorkbench.Controls.TextAreaStateControl();
             this.ctrSamples = new TMCWorkbench.Controls.TextAreaStateControl();
             this.ctrInstruments = new TMCWorkbench.Controls.TextAreaStateControl();
             this.ctrMetaData = new TMCWorkbench.Controls.MetaDataControl();
-            this.pnlEndgame = new System.Windows.Forms.Panel();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.resettableDDLtest1 = new TMCWorkbench.Controls.Resettable.ResettableDDLtest();
             this.ctrTracks = new TMCWorkbench.Controls.ListViewControl();
+            this.ctrBrowser = new TMCWorkbench.Controls.BrowserControl();
+            this.button2 = new System.Windows.Forms.Button();
             this.tableBrowser.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
@@ -104,14 +107,6 @@ namespace TMCWorkbench
             this.btnBla.TabIndex = 3;
             this.btnBla.Text = "Bla";
             this.btnBla.UseVisualStyleBackColor = true;
-            // 
-            // ctrBrowser
-            // 
-            this.ctrBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrBrowser.Location = new System.Drawing.Point(3, 3);
-            this.ctrBrowser.Name = "ctrBrowser";
-            this.ctrBrowser.Size = new System.Drawing.Size(238, 738);
-            this.ctrBrowser.TabIndex = 1;
             // 
             // btnTest
             // 
@@ -218,21 +213,21 @@ namespace TMCWorkbench
             // stylesToolStripMenuItem
             // 
             this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
-            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.stylesToolStripMenuItem.Text = "Styles";
             this.stylesToolStripMenuItem.Click += new System.EventHandler(this.Handle_stylesToolStripMenuItem_Click);
             // 
             // scenegroupsToolStripMenuItem
             // 
             this.scenegroupsToolStripMenuItem.Name = "scenegroupsToolStripMenuItem";
-            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.scenegroupsToolStripMenuItem.Text = "Scenegroups";
             this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.Handle_scenegroupsToolStripMenuItem_Click);
             // 
             // composersToolStripMenuItem
             // 
             this.composersToolStripMenuItem.Name = "composersToolStripMenuItem";
-            this.composersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.composersToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.composersToolStripMenuItem.Text = "Composers";
             this.composersToolStripMenuItem.Click += new System.EventHandler(this.Handle_composersToolStripMenuItem_Click);
             // 
@@ -305,14 +300,6 @@ namespace TMCWorkbench
             this.tableControls.Size = new System.Drawing.Size(1292, 804);
             this.tableControls.TabIndex = 2;
             // 
-            // ctrPlayer
-            // 
-            this.ctrPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ctrPlayer.Location = new System.Drawing.Point(3, 738);
-            this.ctrPlayer.Name = "ctrPlayer";
-            this.ctrPlayer.Size = new System.Drawing.Size(1286, 63);
-            this.ctrPlayer.TabIndex = 9;
-            // 
             // tableEditControls
             // 
             this.tableEditControls.ColumnCount = 2;
@@ -327,21 +314,6 @@ namespace TMCWorkbench
             this.tableEditControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableEditControls.Size = new System.Drawing.Size(1286, 688);
             this.tableEditControls.TabIndex = 10;
-            // 
-            // ctrOutput
-            // 
-            this.ctrOutput.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ctrOutput.Location = new System.Drawing.Point(0, 0);
-            this.ctrOutput.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrOutput.Name = "ctrOutput";
-            this.ctrOutput.Size = new System.Drawing.Size(562, 688);
-            this.ctrOutput.TabIndex = 2;
-            this.ctrOutput.TextFooterNew = "txtNew";
-            this.ctrOutput.TextFooterOrg = "txtOld";
-            this.ctrOutput.TextHeaderNew = "txtNew";
-            this.ctrOutput.TextHeaderOrg = "txtOld";
-            this.ctrOutput.TextSummaryNew = "txtNew";
-            this.ctrOutput.TextSummaryOrg = "txtOld";
             // 
             // tableRight
             // 
@@ -359,16 +331,6 @@ namespace TMCWorkbench
             this.tableRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableRight.Size = new System.Drawing.Size(718, 688);
             this.tableRight.TabIndex = 1;
-            // 
-            // ctrMessage
-            // 
-            this.ctrMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrMessage.Location = new System.Drawing.Point(3, 3);
-            this.ctrMessage.Name = "ctrMessage";
-            this.ctrMessage.Size = new System.Drawing.Size(712, 294);
-            this.ctrMessage.TabIndex = 4;
-            this.ctrMessage.TextNew = "txtNew";
-            this.ctrMessage.TextOrg = "txtOld";
             // 
             // tableMetaData
             // 
@@ -388,6 +350,74 @@ namespace TMCWorkbench
             this.tableMetaData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableMetaData.Size = new System.Drawing.Size(718, 388);
             this.tableMetaData.TabIndex = 5;
+            // 
+            // pnlEndgame
+            // 
+            this.pnlEndgame.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.pnlEndgame.Controls.Add(this.button2);
+            this.pnlEndgame.Controls.Add(this.button1);
+            this.pnlEndgame.Controls.Add(this.resettableDDLtest1);
+            this.pnlEndgame.Controls.Add(this.btnSave);
+            this.pnlEndgame.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEndgame.Location = new System.Drawing.Point(6, 694);
+            this.pnlEndgame.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.pnlEndgame.Name = "pnlEndgame";
+            this.pnlEndgame.Size = new System.Drawing.Size(1280, 30);
+            this.pnlEndgame.TabIndex = 11;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSave.Location = new System.Drawing.Point(1205, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 30);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "SAVE";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.Handle_btnSave_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(302, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // ctrPlayer
+            // 
+            this.ctrPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ctrPlayer.Location = new System.Drawing.Point(3, 738);
+            this.ctrPlayer.Name = "ctrPlayer";
+            this.ctrPlayer.Size = new System.Drawing.Size(1286, 63);
+            this.ctrPlayer.TabIndex = 9;
+            // 
+            // ctrOutput
+            // 
+            this.ctrOutput.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ctrOutput.Location = new System.Drawing.Point(0, 0);
+            this.ctrOutput.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrOutput.Name = "ctrOutput";
+            this.ctrOutput.Size = new System.Drawing.Size(562, 688);
+            this.ctrOutput.TabIndex = 2;
+            this.ctrOutput.TextFooterNew = "txtNew";
+            this.ctrOutput.TextFooterOrg = "txtOld";
+            this.ctrOutput.TextHeaderNew = "txtNew";
+            this.ctrOutput.TextHeaderOrg = "txtOld";
+            this.ctrOutput.TextSummaryNew = "txtNew";
+            this.ctrOutput.TextSummaryOrg = "txtOld";
+            // 
+            // ctrMessage
+            // 
+            this.ctrMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrMessage.Location = new System.Drawing.Point(3, 3);
+            this.ctrMessage.Name = "ctrMessage";
+            this.ctrMessage.Size = new System.Drawing.Size(712, 294);
+            this.ctrMessage.TabIndex = 4;
+            this.ctrMessage.TextNew = "txtNew";
+            this.ctrMessage.TextOrg = "txtOld";
             // 
             // ctrSamples
             // 
@@ -433,27 +463,14 @@ namespace TMCWorkbench
             this.ctrMetaData.TrackerID = 0;
             this.ctrMetaData.TrackTitle = "";
             // 
-            // pnlEndgame
+            // resettableDDLtest1
             // 
-            this.pnlEndgame.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.pnlEndgame.Controls.Add(this.btnSave);
-            this.pnlEndgame.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEndgame.Location = new System.Drawing.Point(6, 694);
-            this.pnlEndgame.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.pnlEndgame.Name = "pnlEndgame";
-            this.pnlEndgame.Size = new System.Drawing.Size(1280, 30);
-            this.pnlEndgame.TabIndex = 11;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSave.Location = new System.Drawing.Point(1205, 0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 30);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "SAVE";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.Handle_btnSave_Click);
+            this.resettableDDLtest1.LabelTitle = null;
+            this.resettableDDLtest1.Location = new System.Drawing.Point(397, 4);
+            this.resettableDDLtest1.Margin = new System.Windows.Forms.Padding(0);
+            this.resettableDDLtest1.Name = "resettableDDLtest1";
+            this.resettableDDLtest1.Size = new System.Drawing.Size(365, 24);
+            this.resettableDDLtest1.TabIndex = 1;
             // 
             // ctrTracks
             // 
@@ -462,6 +479,24 @@ namespace TMCWorkbench
             this.ctrTracks.Name = "ctrTracks";
             this.ctrTracks.Size = new System.Drawing.Size(344, 804);
             this.ctrTracks.TabIndex = 3;
+            // 
+            // ctrBrowser
+            // 
+            this.ctrBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrBrowser.Location = new System.Drawing.Point(3, 3);
+            this.ctrBrowser.Name = "ctrBrowser";
+            this.ctrBrowser.Size = new System.Drawing.Size(238, 738);
+            this.ctrBrowser.TabIndex = 1;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(212, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FormAlpha
             // 
@@ -526,5 +561,8 @@ namespace TMCWorkbench
         private Controls.OutputControl ctrOutput;
         private System.Windows.Forms.Panel pnlEndgame;
         private System.Windows.Forms.Button btnSave;
+        private Controls.Resettable.ResettableDDLtest resettableDDLtest1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

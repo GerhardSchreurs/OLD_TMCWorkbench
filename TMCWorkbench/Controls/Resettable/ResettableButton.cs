@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableButtonControl : _ResettableControlPanel
+    public partial class ResettableButton : _ResettablePanel
     {
         public event EventHandler OnButtonClick;
 
-        public ResettableButtonControl()
+        public ResettableButton()
         {
             InitializeComponent();
         }

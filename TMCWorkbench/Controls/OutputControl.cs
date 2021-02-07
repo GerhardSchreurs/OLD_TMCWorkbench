@@ -53,22 +53,21 @@ namespace TMCWorkbench.Controls
             var header = GenerateHeader();
             var summary = GenerateSummary(samples, instruments, message, header, footer);
 
-            this.TextHeaderNew = header;
-            this.TextSummaryNew = summary;
-            this.TextFooterNew = footer;
+            this.TextHeaderOrg = header;
+            this.TextSummaryOrg = summary;
+            this.TextFooterOrg = footer;
 
             if (_bag.IsInDB)
             {
-                //Org becomes db
-                this.TextHeaderOrg = _track.YoutubeTextHeader;
-                this.TextSummaryOrg = _track.YoutubeTextSummary;
-                this.TextFooterOrg = _track.YoutubeTextFooter;
+                this.TextHeaderNew = _track.YoutubeTextHeader;
+                this.TextSummaryNew = _track.YoutubeTextSummary;
+                this.TextFooterNew = _track.YoutubeTextFooter;
             }
             else
             {
-                this.TextHeaderOrg = header;
-                this.TextSummaryOrg = summary;
-                this.TextFooterOrg = footer;
+                this.TextHeaderNew = header;
+                this.TextSummaryNew = summary;
+                this.TextFooterNew = footer;
             }
         }
 

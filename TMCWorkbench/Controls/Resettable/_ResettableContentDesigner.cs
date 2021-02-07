@@ -5,7 +5,7 @@ using System.Windows.Forms.Design;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public class _ResettableControlContentDesigner : ParentControlDesigner
+    public class _ResettableContentDesigner : ParentControlDesigner
     {
         public override void Initialize(IComponent component)
         {

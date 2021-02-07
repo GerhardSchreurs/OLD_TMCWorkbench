@@ -10,14 +10,16 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class _ResettableControlPanel : UserControl
+    public partial class _ResettableDropDownControl : _ResettablePanel
     {
-        public _ResettableControlPanel()
+        public _ResettableDropDownControl()
         {
             InitializeComponent();
         }
 
-        protected string _labelTitle;
-        public virtual string LabelTitle { get; set; }
+        public int GetValue()
+        {
+            return this.ddList.SelectedValue.ToInt();
+        }
     }
 }

@@ -199,79 +199,88 @@
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableBpmControl.cs">
+    <Compile Include="Controls\Resettable\ResettableBpm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableBpmControl.Designer.cs">
-      <DependentUpon>ResettableBpmControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableBpm.Designer.cs">
+      <DependentUpon>ResettableBpm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableButtonControl.cs">
+    <Compile Include="Controls\Resettable\ResettableButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableButtonControl.Designer.cs">
-      <DependentUpon>ResettableButtonControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableButton.Designer.cs">
+      <DependentUpon>ResettableButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableComposerDropDownControl.cs">
+    <Compile Include="Controls\Resettable\ResettableDropDownComposer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableComposerDropDownControl.Designer.cs">
-      <DependentUpon>ResettableComposerDropDownControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableDropDownComposer.Designer.cs">
+      <DependentUpon>ResettableDropDownComposer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableSceneGroupDropDownControl.cs">
+    <Compile Include="Controls\Resettable\ResettableDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableSceneGroupDropDownControl.Designer.cs">
-      <DependentUpon>ResettableSceneGroupDropDownControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableDropDown.Designer.cs">
+      <DependentUpon>ResettableDropDown.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableTextAreaControl.cs">
+    <Compile Include="Controls\Resettable\ResettableDDLtest.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableTextAreaControl.Designer.cs">
-      <DependentUpon>ResettableTextAreaControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Resettable\ResettableTrackerDropDownControl.cs">
+    <Compile Include="Controls\Resettable\ResettableDropDownSceneGroup.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableTrackerDropDownControl.Designer.cs">
-      <DependentUpon>ResettableTrackerDropDownControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableDropDownSceneGroup.Designer.cs">
+      <DependentUpon>ResettableDropDownSceneGroup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\_ResettableDropDownControl.cs">
+    <Compile Include="Controls\Resettable\ResettableTextArea.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\_ResettableDropDownControl.Designer.cs">
-      <DependentUpon>_ResettableDropDownControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableTextArea.Designer.cs">
+      <DependentUpon>ResettableTextArea.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\_ResettableDropDownHoldControl.cs">
+    <Compile Include="Controls\Resettable\ResettableDropDownTracker.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\_ResettableDropDownHoldControl.Designer.cs">
-      <DependentUpon>_ResettableDropDownHoldControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableDropDownTracker.Designer.cs">
+      <DependentUpon>ResettableDropDownTracker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableStyleDropDownControl.cs">
+    <Compile Include="Controls\Resettable\_XResettableDropDownControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableStyleDropDownControl.Designer.cs">
-      <DependentUpon>ResettableStyleDropDownControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\_XResettableDropDownControl.Designer.cs">
+      <DependentUpon>_XResettableDropDownControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\_ResettableControl.cs">
+    <Compile Include="Controls\Resettable\_XResettableDropDownHoldControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\_ResettableControl.Designer.cs">
-      <DependentUpon>_ResettableControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\_XResettableDropDownHoldControl.Designer.cs">
+      <DependentUpon>_XResettableDropDownHoldControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\_ResettableControlContentDesigner.cs" />
-    <Compile Include="Controls\Resettable\_ResettableControlPanel.cs">
+    <Compile Include="Controls\Resettable\ResettableDropDownStyle.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\_ResettableControlPanel.Designer.cs">
-      <DependentUpon>_ResettableControlPanel.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableDropDownStyle.Designer.cs">
+      <DependentUpon>ResettableDropDownStyle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Resettable\_Resettable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\_Resettable.Designer.cs">
+      <DependentUpon>_Resettable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Resettable\_ResettableContentDesigner.cs" />
+    <Compile Include="Controls\Resettable\_ResettablePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\_ResettablePanel.Designer.cs">
+      <DependentUpon>_ResettablePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\_ResettableControlPanelDesigner.cs" />
-    <Compile Include="Controls\Resettable\ResettableDateControl.cs">
+    <Compile Include="Controls\Resettable\ResettableDate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableDateControl.Designer.cs">
-      <DependentUpon>ResettableDateControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableDate.Designer.cs">
+      <DependentUpon>ResettableDate.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\ResettableDoubleIntControl.cs">
       <SubType>UserControl</SubType>
@@ -279,11 +288,11 @@
     <Compile Include="Controls\Resettable\ResettableDoubleIntControl.Designer.cs">
       <DependentUpon>ResettableDoubleIntControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableTextControl.cs">
+    <Compile Include="Controls\Resettable\ResettableText.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableTextControl.Designer.cs">
-      <DependentUpon>ResettableTextControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableText.Designer.cs">
+      <DependentUpon>ResettableText.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextAreaStateControl.cs">
       <SubType>UserControl</SubType>
@@ -384,35 +393,38 @@
     <EmbeddedResource Include="Controls\OutputControl.resx">
       <DependentUpon>OutputControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableBpmControl.resx">
-      <DependentUpon>ResettableBpmControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\ResettableBpm.resx">
+      <DependentUpon>ResettableBpm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableButtonControl.resx">
-      <DependentUpon>ResettableButtonControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\ResettableButton.resx">
+      <DependentUpon>ResettableButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Resettable\ResettableDropDown.resx">
+      <DependentUpon>ResettableDropDown.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableDoubleIntControl.resx">
       <DependentUpon>ResettableDoubleIntControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableTextAreaControl.resx">
-      <DependentUpon>ResettableTextAreaControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\ResettableTextArea.resx">
+      <DependentUpon>ResettableTextArea.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\_ResettableDropDownControl.resx">
-      <DependentUpon>_ResettableDropDownControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\_XResettableDropDownControl.resx">
+      <DependentUpon>_XResettableDropDownControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\_ResettableDropDownHoldControl.resx">
-      <DependentUpon>_ResettableDropDownHoldControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\_XResettableDropDownHoldControl.resx">
+      <DependentUpon>_XResettableDropDownHoldControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\_ResettableControl.resx">
-      <DependentUpon>_ResettableControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\_Resettable.resx">
+      <DependentUpon>_Resettable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\_ResettableControlPanel.resx">
-      <DependentUpon>_ResettableControlPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\_ResettablePanel.resx">
+      <DependentUpon>_ResettablePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableDateControl.resx">
-      <DependentUpon>ResettableDateControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\ResettableDate.resx">
+      <DependentUpon>ResettableDate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableTextControl.resx">
-      <DependentUpon>ResettableTextControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\ResettableText.resx">
+      <DependentUpon>ResettableText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TextAreaStateControl.resx">
       <DependentUpon>TextAreaStateControl.cs</DependentUpon>

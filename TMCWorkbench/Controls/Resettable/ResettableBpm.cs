@@ -11,9 +11,9 @@ using TMCWorkbench;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableBpmControl : _ResettableControlPanel
+    public partial class ResettableBpm : _ResettablePanel
     {
-        public ResettableBpmControl()
+        public ResettableBpm()
         {
             InitializeComponent();
 

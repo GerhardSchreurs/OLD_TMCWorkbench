@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableDateControl
+    partial class ResettableDate
     {
         /// <summary> 
         /// Required designer variable.

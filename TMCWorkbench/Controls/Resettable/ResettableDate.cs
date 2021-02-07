@@ -12,9 +12,9 @@ using TMCWorkbench;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableDateControl : _ResettableControlPanel
+    public partial class ResettableDate : _ResettablePanel
     {
-        public ResettableDateControl()
+        public ResettableDate()
         {
             InitializeComponent();
 

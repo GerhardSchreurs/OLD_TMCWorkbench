@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,18 @@ namespace TMCWorkbench
 {
     public static class StringExtensions
     {
+        public static string Dump<T>(this T obj, bool indent = false)
+        {
+            return JsonConvert.SerializeObject(obj, indent ? Formatting.Indented : Formatting.None,
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+        }
+        
+        public static void Trace<T>(this T obj, bool indent = false)
+        {
+            var bla = obj.Dump(indent);
+            Debug.WriteLine(bla);
+        }
+
         public static bool IsNullOrEmpty(this string s)
         {
             return s == null || s.Length == 0;

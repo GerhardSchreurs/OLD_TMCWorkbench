@@ -32,13 +32,13 @@
             this.ddlScenegroups = new System.Windows.Forms.ComboBox();
             this.btnAddScenegroup = new System.Windows.Forms.Button();
             this.chkIsComposer = new System.Windows.Forms.CheckBox();
-            this.ctrAbout = new TMCWorkbench.Controls.Resettable.ResettableTextAreaControl();
-            this.ctrDateStop = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
-            this.ctrDateStart = new TMCWorkbench.Controls.Resettable.ResettableDateControl();
-            this.ctrName = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
-            this.ctrSave = new TMCWorkbench.Controls.Resettable.ResettableButtonControl();
+            this.ctrAbout = new TMCWorkbench.Controls.Resettable.ResettableTextArea();
+            this.ctrDateStop = new TMCWorkbench.Controls.Resettable.ResettableDate();
+            this.ctrDateStart = new TMCWorkbench.Controls.Resettable.ResettableDate();
+            this.ctrName = new TMCWorkbench.Controls.Resettable.ResettableText();
+            this.ctrSave = new TMCWorkbench.Controls.Resettable.ResettableButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ctrAliases = new TMCWorkbench.Controls.Resettable.ResettableTextControl();
+            this.ctrAliases = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.gridScenegroups = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddComposer = new System.Windows.Forms.Button();
@@ -403,11 +403,11 @@
         private System.Windows.Forms.ComboBox ddlScenegroups;
         private System.Windows.Forms.Button btnAddScenegroup;
         private System.Windows.Forms.CheckBox chkIsComposer;
-        private Controls.Resettable.ResettableTextAreaControl ctrAbout;
-        private Controls.Resettable.ResettableDateControl ctrDateStop;
-        private Controls.Resettable.ResettableDateControl ctrDateStart;
-        private Controls.Resettable.ResettableTextControl ctrName;
-        private Controls.Resettable.ResettableButtonControl ctrSave;
+        private Controls.Resettable.ResettableTextArea ctrAbout;
+        private Controls.Resettable.ResettableDate ctrDateStop;
+        private Controls.Resettable.ResettableDate ctrDateStart;
+        private Controls.Resettable.ResettableText ctrName;
+        private Controls.Resettable.ResettableButton ctrSave;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView gridScenegroups;
         private System.Windows.Forms.Label label1;
@@ -422,6 +422,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelDivider;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelRight;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelOuter;
-        private Controls.Resettable.ResettableTextControl ctrAliases;
+        private Controls.Resettable.ResettableText ctrAliases;
     }
 }
