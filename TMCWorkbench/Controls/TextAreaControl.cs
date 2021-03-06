@@ -20,13 +20,6 @@ namespace TMCWorkbench.Controls
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Paddings = new System.Windows.Forms.Padding(3);
             this.WordWrap = true;
-
-
-            var x = this.HotkeysMapping;
-
-            var mapping = new HotkeysMapping();
-
-            Console.ReadLine();
         }
 
         private void InitializeComponent()
