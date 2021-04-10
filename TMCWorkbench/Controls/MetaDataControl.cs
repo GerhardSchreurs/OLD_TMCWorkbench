@@ -127,19 +127,29 @@ namespace TMCWorkbench.Controls
         //STYLE
         public string Style
         {
-            get => ctrStyle.GetStringValue();
-            set => ctrStyle.SetStyle(value);
+            //get => ctrStyle.GetStringValue();
+            get => ctrStyle.TextValue;
+            set
+            {
+                //ctrStyle.SetStyle(value);
+                ctrStyle.TextValue = value;
+            }
         }
 
         public int? StyleID
         {
             get 
             {
-                var id = ctrStyle.GetIntValue();
+                //var id = ctrStyle.Value();
+                var id = ctrStyle.IdValue;
                 if (id == 0) return null;
                 return id;
             }
-            set => ctrStyle.SetStyle(value);
+            set
+            {
+                //ctrStyle.SetStyle(value);
+                ctrStyle.IdValue = value;
+            }
         }
 
         public string StyleText
@@ -156,19 +166,30 @@ namespace TMCWorkbench.Controls
         //COMPOSER
         public string Composer
         {
-            get => ctrComposer.GetStringValue();
-            set => ctrComposer.SetComposer(value);
+            //get => ctrComposer.GetStringValue();
+            get => ctrComposer.TextValue;
+            set
+            {
+                //ctrComposer.SetComposer(value);
+                ctrComposer.TextValue = value;
+            }
         }
 
         public int? ComposerID
         {
             get
             {
-                var id = ctrComposer.GetIntValue();
+                //var id = ctrComposer.GetIntValue();
+                var id = ctrComposer.IdValue;
                 if (id == 0) return null;
                 return id;
             }
-            set => ctrComposer.SetComposer(value);
+            set
+            {
+                //ctrComposer.SetComposer(value);
+                ctrComposer.IdValue = value;
+            }
+                
         }
 
         public string ComposerText
@@ -185,19 +206,25 @@ namespace TMCWorkbench.Controls
         //SCENEGROUP
         public string SceneGroup
         {
-            get => ctrScenegroup.GetStringValue();
-            set => ctrScenegroup.SetScenegroup(value);
+            //get => ctrScenegroup.GetStringValue();
+            //set => ctrScenegroup.SetScenegroup(value);
+
+            get => ctrScenegroup.TextValue;
+            set => ctrScenegroup.TextValue = value;
+
         }
 
         public int? ScenegroupID
         {
             get
             {
-                var id = ctrScenegroup.GetIntValue();
+                //var id = ctrScenegroup.GetIntValue();
+                var id = ctrScenegroup.IdValue;
                 if (id == 0) return null;
                 return id;
             }
-            set => ctrScenegroup.SetScenegroup(value);
+            //set => ctrScenegroup.SetScenegroup(value);
+            set => ctrScenegroup.IdValue = value;
         }
 
         public string ScenegroupText
@@ -216,6 +243,10 @@ namespace TMCWorkbench.Controls
         {
             var mod = bag.Mod;
             var track = bag.Track;
+
+            ctrStyle.Reset();
+            ctrScenegroup.Reset();
+            ctrComposer.Reset();
 
             if (bag.IsInDB)
             {
@@ -241,6 +272,7 @@ namespace TMCWorkbench.Controls
                 ctrDate.Original = mod.DateCreated;
                 ctrSpeed.SetValuesOriginal(mod.Speed, mod.Tempo);
                 ctrBPM.SetValueOriginal(mod.EstimatedBPM);
+                ctrStyle.TextValueOriginal = mod.TrackStyle;
                 //TODO TRACKER ORIGINAL
             }
             else
@@ -258,13 +290,11 @@ namespace TMCWorkbench.Controls
                 this.ComposerText = "";
                 this.ScenegroupText = "";
 
-                if (ctrStyle.SetStyle(mod.TrackStyle))
-                {
-                    ctrStyleText.Text = "";
-                }
-
-                ctrScenegroup.Reset();
-                ctrComposer.Reset();
+                //TODO
+                //if (ctrStyle.SetStyle(mod.TrackStyle))
+                //{
+                //    ctrStyleText.Text = "";
+                //}
             }
         }
     }

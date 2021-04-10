@@ -54,7 +54,7 @@ namespace TMCWorkbench
             DB.LoadTrackstyles();
             toolStripStatusLabel.Text = "Done loading";
         }
-
+         
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);

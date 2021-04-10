@@ -38,5 +38,17 @@ namespace TMCWorkbench
             if (value == null) return string.Empty;
             return value.ToString().ToLower();
         }
+
+        //TODO: Use https://www.nuget.org/packages/FastMember?
+        public static object GetPropertyValue(this object obj, string propName)
+        {
+            return obj.GetType().GetProperty(propName).GetValue(obj, null);
+        }
+
+        //TODO: Use https://www.nuget.org/packages/FastMember?
+        public static void SetPropertyValue(this object obj, string propName, object value)
+        {
+            obj.GetType().GetProperty(propName).SetValue(obj, value, null);
+        }
     }
 }

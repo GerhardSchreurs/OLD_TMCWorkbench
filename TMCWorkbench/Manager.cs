@@ -86,7 +86,7 @@ namespace TMCWorkbench
             {
                 var hash = _md5.ComputeHash(stream);
                 id = new Guid(hash);
-                Console.WriteLine(BitConverter.ToString(hash));
+                Console.WriteLine($"{id} :: {BitConverter.ToString(hash)}");
             }
 
             return id;

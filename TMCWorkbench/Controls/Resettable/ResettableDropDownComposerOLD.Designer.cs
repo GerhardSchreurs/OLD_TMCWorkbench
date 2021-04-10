@@ -1,7 +1,6 @@
-﻿
-namespace TMCWorkbench.Controls.Resettable
+﻿namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableDropDownComposer
+    partial class ResettableDropDownComposerOLD
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,16 +28,8 @@ namespace TMCWorkbench.Controls.Resettable
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // ResettableDropDownComposer
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.LabelTitle = "Composer";
-            this.Name = "ResettableDropDownComposer";
-            this.ResumeLayout(false);
-
         }
 
         #endregion

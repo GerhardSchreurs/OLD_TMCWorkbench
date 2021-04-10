@@ -1,4 +1,5 @@
-﻿namespace TMCWorkbench.Controls.Resettable
+﻿
+namespace TMCWorkbench.Controls.Resettable
 {
     partial class ResettableDropDownSceneGroup
     {
