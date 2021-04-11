@@ -199,7 +199,7 @@
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\IRefreshableInit.cs" />
+    <Compile Include="Controls\Resettable\_IRefreshableInit.cs" />
     <Compile Include="Controls\Resettable\ResettableBpm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -218,20 +218,11 @@
     <Compile Include="Controls\Resettable\ResettableDropDownComposer.Designer.cs">
       <DependentUpon>ResettableDropDownComposer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableDropDownComposerOLD.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Resettable\ResettableDropDownComposerOLD.Designer.cs">
-      <DependentUpon>ResettableDropDownComposerOLD.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Resettable\ResettableDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Resettable\ResettableDropDown.Designer.cs">
       <DependentUpon>ResettableDropDown.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Resettable\ResettableDDLtest.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\Resettable\ResettableDropDownHelper.cs" />
     <Compile Include="Controls\Resettable\ResettableDropDownHold.cs">
@@ -245,12 +236,6 @@
     </Compile>
     <Compile Include="Controls\Resettable\ResettableDropDownSceneGroup.Designer.cs">
       <DependentUpon>ResettableDropDownSceneGroup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Resettable\ResettableDropDownSceneGroupOLD.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Resettable\ResettableDropDownSceneGroupOLD.Designer.cs">
-      <DependentUpon>ResettableDropDownSceneGroupOLD.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\ResettableDropDownStyle.cs">
       <SubType>UserControl</SubType>
@@ -281,12 +266,6 @@
     </Compile>
     <Compile Include="Controls\Resettable\_XResettableDropDownHoldControl.Designer.cs">
       <DependentUpon>_XResettableDropDownHoldControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Resettable\ResettableDropDownStyleOLD.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Resettable\ResettableDropDownStyleOLD.Designer.cs">
-      <DependentUpon>ResettableDropDownStyleOLD.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\_Resettable.cs">
       <SubType>UserControl</SubType>
