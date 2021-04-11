@@ -199,6 +199,7 @@
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Resettable\IRefreshableInit.cs" />
     <Compile Include="Controls\Resettable\ResettableBpm.cs">
       <SubType>UserControl</SubType>
     </Compile>

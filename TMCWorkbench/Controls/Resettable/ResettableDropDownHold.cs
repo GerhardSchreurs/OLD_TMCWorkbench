@@ -13,6 +13,8 @@ namespace TMCWorkbench.Controls.Resettable
     public partial class ResettableDropDownHold : _ResettablePanel
     {
         private ResettableDropDownHelper _helper;
+        private Form _editForm;
+        private int? _oldIndex;
 
         public ResettableDropDownHold()
         {
@@ -30,10 +32,30 @@ namespace TMCWorkbench.Controls.Resettable
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public void Init(IEnumerable<dynamic> list, string displayMember, string valueMember, int emptyID = 0, string emptyValue = null)
+        public void Init(Form editForm, IEnumerable<dynamic> list, string displayMember, string valueMember, int emptyID = 0, string emptyValue = null)
         {
+            if (_editForm == null)
+            {
+                _editForm = editForm;
+                _editForm.FormClosed += Handle_editForm_FormClosed;
+                btnEdit.Click += Handle_BtnEdit_Click;
+            }
+
+
             _helper = new ResettableDropDownHelper(this.ddList, resettableControl1, list, displayMember, valueMember, emptyID, emptyValue);
             _helper.DataBind();
+        }
+
+        private void Handle_BtnEdit_Click(object sender, EventArgs e)
+        {
+            _oldIndex = IdValue;
+            _editForm.ShowDialog();
+        }
+
+        private void Handle_editForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((IRefreshableInit)this).Init(true);
+            IdValue = _oldIndex;
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

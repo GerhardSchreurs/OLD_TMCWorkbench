@@ -12,21 +12,40 @@ using TMCWorkbench.DB;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableDropDownComposer : ResettableDropDownHold
+    public partial class ResettableDropDownComposer : ResettableDropDownHold, IRefreshableInit
     {
+        private UCComposers _form;
+
         public ResettableDropDownComposer()
         {
             InitializeComponent();
+            //_form = new UCComposers();
+            //_form.FormClosed += Handle_form_FormClosed;
+            //btnEdit.Click += Handle_BtnEdit_Click;
         }
 
-        public void Init()
+        //private void Handle_form_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    Init(true);
+        //    IdValue = _oldID;
+        //}
+
+        //private void Handle_BtnEdit_Click(object sender, EventArgs e)
+        //{
+        //    _oldID = IdValue;
+        //    _form.ShowDialog();
+        //}
+
+        public void Init(bool refresh = false)
         {
-            DBManager.Instance.LoadComposers();
+            if (_form == null) _form = new UCComposers();
+
+            DBManager.Instance.LoadComposers(refresh);
 
             var query = from composer in DB.DBManager.Instance.Composers
                         select new { composer.Name, composer.Composer_id };
 
-            Init(query, "Name", "Composer_id", 0, "== SELECT COMPOSER ==");
+            Init(_form, query, "Name", "Composer_id", 0, "== SELECT COMPOSER ==");
         }
     }
 }

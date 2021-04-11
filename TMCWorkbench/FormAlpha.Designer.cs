@@ -62,9 +62,6 @@ namespace TMCWorkbench
             this.ctrInstruments = new TMCWorkbench.Controls.TextAreaStateControl();
             this.ctrMetaData = new TMCWorkbench.Controls.MetaDataControl();
             this.pnlEndgame = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.resettableDDLtest1 = new TMCWorkbench.Controls.Resettable.ResettableDDLtest();
             this.btnSave = new System.Windows.Forms.Button();
             this.ctrTracks = new TMCWorkbench.Controls.ListViewControl();
             this.tableBrowser.SuspendLayout();
@@ -439,9 +436,6 @@ namespace TMCWorkbench
             // pnlEndgame
             // 
             this.pnlEndgame.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.pnlEndgame.Controls.Add(this.button2);
-            this.pnlEndgame.Controls.Add(this.button1);
-            this.pnlEndgame.Controls.Add(this.resettableDDLtest1);
             this.pnlEndgame.Controls.Add(this.btnSave);
             this.pnlEndgame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEndgame.Location = new System.Drawing.Point(6, 694);
@@ -449,35 +443,6 @@ namespace TMCWorkbench
             this.pnlEndgame.Name = "pnlEndgame";
             this.pnlEndgame.Size = new System.Drawing.Size(1280, 30);
             this.pnlEndgame.TabIndex = 11;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(212, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(302, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // resettableDDLtest1
-            // 
-            this.resettableDDLtest1.LabelTitle = null;
-            this.resettableDDLtest1.Location = new System.Drawing.Point(397, 4);
-            this.resettableDDLtest1.Margin = new System.Windows.Forms.Padding(0);
-            this.resettableDDLtest1.Name = "resettableDDLtest1";
-            this.resettableDDLtest1.Size = new System.Drawing.Size(365, 24);
-            this.resettableDDLtest1.TabIndex = 1;
             // 
             // btnSave
             // 
@@ -561,8 +526,5 @@ namespace TMCWorkbench
         private Controls.OutputControl ctrOutput;
         private System.Windows.Forms.Panel pnlEndgame;
         private System.Windows.Forms.Button btnSave;
-        private Controls.Resettable.ResettableDDLtest resettableDDLtest1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
     }
 }
