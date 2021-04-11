@@ -224,12 +224,12 @@
     <Compile Include="Controls\Resettable\ResettableDropDown.Designer.cs">
       <DependentUpon>ResettableDropDown.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableDropDownHelper.cs" />
-    <Compile Include="Controls\Resettable\ResettableDropDownHold.cs">
+    <Compile Include="Controls\Resettable\_ResettableDropDownHelper.cs" />
+    <Compile Include="Controls\Resettable\_ResettableDropDownHold.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableDropDownHold.Designer.cs">
-      <DependentUpon>ResettableDropDownHold.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\_ResettableDropDownHold.Designer.cs">
+      <DependentUpon>_ResettableDropDownHold.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\ResettableDropDownSceneGroup.cs">
       <SubType>UserControl</SubType>
@@ -255,17 +255,11 @@
     <Compile Include="Controls\Resettable\ResettableDropDownTracker.Designer.cs">
       <DependentUpon>ResettableDropDownTracker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\_XResettableDropDownControl.cs">
+    <Compile Include="Controls\Resettable\_ResettableDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\_XResettableDropDownControl.Designer.cs">
-      <DependentUpon>_XResettableDropDownControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Resettable\_XResettableDropDownHoldControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Resettable\_XResettableDropDownHoldControl.Designer.cs">
-      <DependentUpon>_XResettableDropDownHoldControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\_ResettableDropDown.Designer.cs">
+      <DependentUpon>_ResettableDropDown.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\_Resettable.cs">
       <SubType>UserControl</SubType>
@@ -413,17 +407,14 @@
     <EmbeddedResource Include="Controls\Resettable\ResettableDropDownComposer.resx">
       <DependentUpon>ResettableDropDownComposer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableDropDownHold.resx">
-      <DependentUpon>ResettableDropDownHold.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\_ResettableDropDownHold.resx">
+      <DependentUpon>_ResettableDropDownHold.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableTextArea.resx">
       <DependentUpon>ResettableTextArea.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\_XResettableDropDownControl.resx">
-      <DependentUpon>_XResettableDropDownControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\_XResettableDropDownHoldControl.resx">
-      <DependentUpon>_XResettableDropDownHoldControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\_ResettableDropDown.resx">
+      <DependentUpon>_ResettableDropDown.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\_Resettable.resx">
       <DependentUpon>_Resettable.cs</DependentUpon>

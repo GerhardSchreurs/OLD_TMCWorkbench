@@ -11,7 +11,7 @@ using TMCWorkbench.DB;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableDropDownTracker : _ResettableDropDownControl
+    public partial class ResettableDropDownTracker : _ResettableDropDown
     {
         public ResettableDropDownTracker()
         {

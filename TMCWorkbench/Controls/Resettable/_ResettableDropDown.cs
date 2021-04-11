@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class _ResettableDropDownControl : _ResettablePanel
+    public partial class _ResettableDropDown : _ResettablePanel
     {
-        public _ResettableDropDownControl()
+        public _ResettableDropDown()
         {
             InitializeComponent();
         }

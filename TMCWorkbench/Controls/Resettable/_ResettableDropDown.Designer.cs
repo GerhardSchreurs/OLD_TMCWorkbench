@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls.Resettable
 {
-    partial class _ResettableDropDownControl
+    partial class _ResettableDropDown
     {
         /// <summary> 
         /// Required designer variable.
