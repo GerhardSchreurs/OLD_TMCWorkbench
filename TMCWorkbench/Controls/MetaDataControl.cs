@@ -214,6 +214,12 @@ namespace TMCWorkbench.Controls
 
         }
 
+        public double? Score
+        {
+            get => ctrScore.Value;
+            set => ctrScore.Value = value;
+        }
+
         public int? ScenegroupID
         {
             get
@@ -264,6 +270,7 @@ namespace TMCWorkbench.Controls
                 this.ScenegroupID = track.FK_scenegroup_id;
                 this.ScenegroupText = track.ScenegroupName;
                 this.Tracker = track.Tracker.Name;
+                this.Score = track.Score;
 
                 //Original values
                 this.SetLengthInMsOriginal(bag.Duration);

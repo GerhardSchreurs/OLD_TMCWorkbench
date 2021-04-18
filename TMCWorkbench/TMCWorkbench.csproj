@@ -199,6 +199,12 @@
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Resettable\ResettableDoubleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableDoubleControl.Designer.cs">
+      <DependentUpon>ResettableDoubleControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Resettable\_IRefreshableInit.cs" />
     <Compile Include="Controls\Resettable\ResettableBpm.cs">
       <SubType>UserControl</SubType>
@@ -406,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableDropDownComposer.resx">
       <DependentUpon>ResettableDropDownComposer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Resettable\ResettableDoubleControl.resx">
+      <DependentUpon>ResettableDoubleControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\_ResettableDropDownHold.resx">
       <DependentUpon>_ResettableDropDownHold.cs</DependentUpon>

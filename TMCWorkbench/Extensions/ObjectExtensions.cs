@@ -39,6 +39,12 @@ namespace TMCWorkbench
             return value.ToString().ToLower();
         }
 
+        public static double ToDbl(this object value)
+        {
+            if (value == null) return 0;
+            return Converter.ToDouble(value);
+        }
+
         //TODO: Use https://www.nuget.org/packages/FastMember?
         public static object GetPropertyValue(this object obj, string propName)
         {

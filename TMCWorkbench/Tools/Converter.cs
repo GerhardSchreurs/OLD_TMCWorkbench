@@ -16,6 +16,11 @@ namespace TMCWorkbench.Tools
             return Convert.ToInt16(value, _fmt);
         }
 
+        public static Double ToDouble(object value)
+        {
+            return Convert.ToDouble(value, _fmt);
+        }
+
         public static Int32 ToInt32(object value)
         {
             return Convert.ToInt32(value, _fmt);

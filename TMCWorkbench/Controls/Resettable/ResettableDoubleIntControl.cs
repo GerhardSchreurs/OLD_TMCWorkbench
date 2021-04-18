@@ -17,10 +17,10 @@ namespace TMCWorkbench.Controls.Resettable
         {
             InitializeComponent();
 
-            this.resettableControl1.OnReset += Handle_ResettableControl1_OnReset;
+            this.resettableControl1.OnReset += Handle_OnReset;
             this.txtValueA.KeyPress += Handle_textBox_KeyPress;
             this.txtValueB.KeyPress += Handle_textBox_KeyPress;
-            this.resettableControl1.OnReset += Handle_ResettableControl1_OnReset;
+            this.resettableControl1.OnReset += Handle_OnReset;
         }
 
         public override string LabelTitle 
@@ -39,7 +39,7 @@ namespace TMCWorkbench.Controls.Resettable
             txtValueB.Text = valueB.ToStr() ;
         }
 
-        private void Handle_ResettableControl1_OnReset(object sender, EventArgs e)
+        private void Handle_OnReset(object sender, EventArgs e)
         {
             UpdateUI(_valueOriginalA, _valueOriginalB);
         }
