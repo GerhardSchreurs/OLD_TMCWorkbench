@@ -295,6 +295,7 @@
             this.ctrDateStop.Location = new System.Drawing.Point(0, 48);
             this.ctrDateStop.Margin = new System.Windows.Forms.Padding(0);
             this.ctrDateStop.Name = "ctrDateStop";
+            this.ctrDateStop.Original = null;
             this.ctrDateStop.Size = new System.Drawing.Size(461, 24);
             this.ctrDateStop.TabIndex = 10;
             // 
@@ -306,6 +307,7 @@
             this.ctrDateStart.Location = new System.Drawing.Point(0, 24);
             this.ctrDateStart.Margin = new System.Windows.Forms.Padding(0);
             this.ctrDateStart.Name = "ctrDateStart";
+            this.ctrDateStart.Original = null;
             this.ctrDateStart.Size = new System.Drawing.Size(461, 24);
             this.ctrDateStart.TabIndex = 9;
             // 
@@ -316,6 +318,7 @@
             this.ctrName.Location = new System.Drawing.Point(0, 0);
             this.ctrName.Margin = new System.Windows.Forms.Padding(0);
             this.ctrName.Name = "ctrName";
+            this.ctrName.Original = null;
             this.ctrName.Size = new System.Drawing.Size(461, 24);
             this.ctrName.TabIndex = 8;
             // 

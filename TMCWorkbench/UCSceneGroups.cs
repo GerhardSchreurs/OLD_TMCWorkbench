@@ -36,6 +36,7 @@ namespace TMCWorkbench
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
             DB.LoadSceneGroups();
             DB.LoadGroupsComposers();
             DB.LoadComposers();

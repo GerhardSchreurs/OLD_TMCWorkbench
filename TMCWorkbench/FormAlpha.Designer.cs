@@ -121,6 +121,7 @@ namespace TMCWorkbench
             this.btnTest.TabIndex = 2;
             this.btnTest.Text = "Test";
             this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // imageList1
             // 
@@ -424,6 +425,7 @@ namespace TMCWorkbench
             this.ctrMetaData.SceneGroup = "";
             this.ctrMetaData.ScenegroupID = null;
             this.ctrMetaData.ScenegroupText = "";
+            this.ctrMetaData.Score = null;
             this.ctrMetaData.Size = new System.Drawing.Size(348, 362);
             this.ctrMetaData.Style = "";
             this.ctrMetaData.StyleID = null;

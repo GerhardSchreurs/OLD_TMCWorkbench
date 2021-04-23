@@ -160,6 +160,12 @@
     <Compile Include="Controls\BrowserControl.Designer.cs">
       <DependentUpon>BrowserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EditableListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EditableListControl.Designer.cs">
+      <DependentUpon>EditableListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\HistoryTextBoxControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -309,6 +315,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DB\DBManager.cs" />
+    <Compile Include="Dialogs\DoubleStringDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DoubleStringDialog.Designer.cs">
+      <DependentUpon>DoubleStringDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\StylesDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -383,6 +395,9 @@
     <EmbeddedResource Include="Controls\BrowserControl.resx">
       <DependentUpon>BrowserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EditableListControl.resx">
+      <DependentUpon>EditableListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\HistoryTextBoxStateControl.resx">
       <DependentUpon>HistoryTextBoxStateControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -442,6 +457,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\TextAreaControl.resx">
       <DependentUpon>TextAreaControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DoubleStringDialog.resx">
+      <DependentUpon>DoubleStringDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\StylesDialog.resx">
       <DependentUpon>StylesDialog.cs</DependentUpon>

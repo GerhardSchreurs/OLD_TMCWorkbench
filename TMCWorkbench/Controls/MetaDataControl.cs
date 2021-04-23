@@ -12,6 +12,8 @@ using TMCWorkbench.DB;
 using TMCWorkbench;
 using TMCWorkbench.Model;
 
+//TAGS? Favorite? Hoe in de toekomst database updaten?
+
 namespace TMCWorkbench.Controls
 {
     public partial class MetaDataControl : UserControl

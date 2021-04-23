@@ -424,5 +424,17 @@ namespace TMCWorkbench
             return false;
         }
         #endregion SAVEFORMPOSITION
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            using (var x = new Dialogs.DoubleStringDialog())
+            {
+                var result = x.Show("title", "label 1", "label 2", "text a", "text b", "klik mij");
+
+
+                var y = x.TextA;
+                var bla = result;
+            }
+        }
     }
 }
