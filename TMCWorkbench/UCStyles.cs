@@ -106,7 +106,7 @@ namespace TMCWorkbench
             if (result == DialogResult.Yes)
             {
                 //do something
-                DB.Delete(_row);
+                DB.Remove(_row);
                 DB.Save();
                 UpdateTreeView();
             }

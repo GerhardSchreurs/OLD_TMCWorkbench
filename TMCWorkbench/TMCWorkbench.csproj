@@ -377,6 +377,12 @@
     <Compile Include="UCComposers.Designer.cs">
       <DependentUpon>UCComposers.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCTags.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCTags.Designer.cs">
+      <DependentUpon>UCTags.cs</DependentUpon>
+    </Compile>
     <Compile Include="_UCForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -484,6 +490,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCComposers.resx">
       <DependentUpon>UCComposers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCTags.resx">
+      <DependentUpon>UCTags.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_UCForm.resx">
       <DependentUpon>_UCForm.cs</DependentUpon>

@@ -21,10 +21,7 @@ namespace TMCWorkbench
 
         private Scenegroup _sceneGroup;
         private ScenegroupComposer _scenegroupComposer;
-        private List<C_Scenegroup_Composer> _groupsComposers;
-
         private List<ScenegroupComposer> _sceneGroupComposers;
-        private List<Composer> _gridComposers;
         private List<Composer> _dropDownComposers;
         private int _gridGroupsIndex;
 
@@ -50,14 +47,35 @@ namespace TMCWorkbench
 
             gridGroups.Select();
             Handle_gridGroups_SelectionChanged(null, null);
+
+            txtSearch.KeyPress += Handle_TxtSearch_KeyPress;
         }
 
-        private void BindSceneGroups()
+        private void Handle_TxtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                btnSearch.PerformClick();
+            }
+        }
+
+        private void BindSceneGroups(string query = "")
+        {
+            List<Scenegroup> datasource;
+
+            if (query.IsNullOrEmpty())
+                datasource = DB.SceneGroups.OrderByDescending(x => x.Scenegroup_id).ToList();
+            else
+            { 
+                datasource = DB.SceneGroups.Where(x => x.Name.ToLow().Contains(query.ToLow())).OrderByDescending(x => x.Scenegroup_id).ToList();
+                txtSearch.SelectAll();
+                txtSearch.Focus();
+            }
+
             gridGroups.SelectionChanged -= Handle_gridGroups_SelectionChanged;
 
             gridGroups.DataSource = null;
-            gridGroups.DataSource = DB.SceneGroups.OrderByDescending(x => x.Scenegroup_id).ToList();
+            gridGroups.DataSource = datasource;
             gridGroups.ClearSelection();
 
             if (gridGroups.Rows.Count < _gridGroupsIndex)
@@ -65,9 +83,13 @@ namespace TMCWorkbench
                 _gridGroupsIndex = 0;
             }
 
+            if (gridGroups.Rows.Count == 0) return;
+
             gridGroups.Rows[_gridGroupsIndex].Selected = true;
             gridGroups.CurrentCell = gridGroups.Rows[_gridGroupsIndex].Cells[0];
             gridGroups.SelectionChanged += Handle_gridGroups_SelectionChanged;
+
+            Handle_gridGroups_SelectionChanged(null, null);
         }
 
         private void BindComposers()
@@ -128,15 +150,13 @@ namespace TMCWorkbench
             }
         }
 
-
-
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             gridGroups.SelectionChanged -= Handle_gridGroups_SelectionChanged;
             gridArtists.SelectionChanged -= Handle_gridArists_SelectionChanged;
+            txtSearch.KeyPress -= Handle_TxtSearch_KeyPress;
             base.OnFormClosed(e);
         }
-
 
         void UpdateControls()
         {
@@ -259,6 +279,11 @@ namespace TMCWorkbench
             BindComposers();
 
             gridGroups.Select();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            BindSceneGroups(txtSearch.Text);
         }
     }
 }

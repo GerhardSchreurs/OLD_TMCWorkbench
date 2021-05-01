@@ -44,11 +44,14 @@ namespace TMCWorkbench.DB
         public MySqlConnection CON;
 
         public List<Style> Styles;
+        public List<Track> Tracks;
+        public List<Tag> Tags;
         public List<Tracker> Trackers;
         public List<TrackStyle> TrackStyles;
         public List<Scenegroup> SceneGroups;
         public List<Composer> Composers;
         public List<C_Scenegroup_Composer> GroupsComposers;
+        public List<C_Track_Tag> TracksTags;
 
         public Track Track;
 
@@ -118,6 +121,24 @@ namespace TMCWorkbench.DB
             TrackStyles.Add(trackStyle);
         }
 
+        public void LoadTracks(bool refresh = false)
+        {
+            if (refresh || refresh == false && Tracks == null)
+            {
+                C.Tracks.Load();
+                Tracks = C.Tracks.ToList();
+            }
+        }
+
+        public void LoadTags(bool refresh = false)
+        {
+            if (refresh || refresh == false && Tags == null)
+            {
+                C.Tags.Load();
+                Tags = C.Tags.ToList();
+            }
+        }
+
         public void LoadSceneGroups(bool refresh = false)
         {
             if (refresh || refresh == false && SceneGroups == null)
@@ -129,7 +150,7 @@ namespace TMCWorkbench.DB
 
         public void LoadComposers(bool refresh = false)
         {
-            if (refresh || refresh == false && Composers == null)
+            if (refresh || refresh == false && Tracks == null)
             {
                 C.Composers.Load();
                 Composers = C.Composers.ToList();
@@ -142,6 +163,15 @@ namespace TMCWorkbench.DB
             {
                 C.C_Scenegroup_Composers.Load();
                 GroupsComposers = C.C_Scenegroup_Composers.ToList();
+            }
+        }
+
+        public void LoadTracksTags(bool refresh = false)
+        {
+            if (refresh || refresh == false && TracksTags == null)
+            {
+                C.C_Track_Tags.Load();
+                TracksTags = C.C_Track_Tags.ToList();
             }
         }
 
@@ -182,6 +212,29 @@ namespace TMCWorkbench.DB
             group.IsFounder = isFounder;
 
             C.C_Scenegroup_Composers.Add(group);
+        }
+
+        public void AddTrackToTag(int tagId, int trackId)
+        {
+            var tag = new C_Track_Tag();
+            tag.FK_tag_id = tagId;
+            tag.FK_track_id = trackId;
+
+            C.C_Track_Tags.Add(tag);
+        }
+
+        public void Add(Tag tag, bool save = true, bool refresh = true)
+        {
+            C.Tags.Add(tag);
+
+            if (save)
+            {
+                C.SaveChanges();
+            }
+            if (refresh)
+            {
+                LoadTags(true);
+            }
         }
 
         public void Add(Scenegroup scenegroup, bool save = true, bool refresh = true)
@@ -252,6 +305,26 @@ namespace TMCWorkbench.DB
             C.C_Scenegroup_Composers.RemoveRange(collection);
         }
 
+        public void RemoveTrackFromTag(Tag tag, List<Track> tracks)
+        {
+            if (tracks == null) return;
+
+            var collection = new List<C_Track_Tag>();
+
+            foreach (var track in tracks)
+            {
+                foreach (var x in TracksTags.Where(x => x.FK_tag_id == tag.Tag_id))
+                {
+                    if (x.FK_track_id == track.Track_id)
+                    {
+                        collection.Add(x);
+                    }
+                }
+            }
+
+            C.C_Track_Tags.RemoveRange(collection);
+        }
+
         public void Remove(Composer composer)
         {
             C.Composers.Remove(composer);
@@ -262,9 +335,14 @@ namespace TMCWorkbench.DB
             C.Scenegroups.Remove(scenegroup);
         }
 
-        public void Delete(Style style)
+        public void Remove(Style style)
         {
             C.Styles.Remove(style);
+        }
+
+        public void Remove(Tag tag)
+        {
+            C.Tags.Remove(tag);
         }
 
         public void Replace(Scenegroup scenegroup)
@@ -285,7 +363,7 @@ namespace TMCWorkbench.DB
 
             C.SaveChanges();
 
-            modifiedOrAddedEntities.Trace(true);
+            //modifiedOrAddedEntities.Trace(true);
         }
 
         public void Dispose()

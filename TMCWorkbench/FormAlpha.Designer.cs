@@ -64,6 +64,7 @@ namespace TMCWorkbench
             this.pnlEndgame = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
             this.ctrTracks = new TMCWorkbench.Controls.ListViewControl();
+            this.tagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableBrowser.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
@@ -211,7 +212,8 @@ namespace TMCWorkbench
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stylesToolStripMenuItem,
             this.scenegroupsToolStripMenuItem,
-            this.composersToolStripMenuItem});
+            this.composersToolStripMenuItem,
+            this.tagsToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -219,21 +221,21 @@ namespace TMCWorkbench
             // stylesToolStripMenuItem
             // 
             this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
-            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stylesToolStripMenuItem.Text = "Styles";
             this.stylesToolStripMenuItem.Click += new System.EventHandler(this.Handle_stylesToolStripMenuItem_Click);
             // 
             // scenegroupsToolStripMenuItem
             // 
             this.scenegroupsToolStripMenuItem.Name = "scenegroupsToolStripMenuItem";
-            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.scenegroupsToolStripMenuItem.Text = "Scenegroups";
             this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.Handle_scenegroupsToolStripMenuItem_Click);
             // 
             // composersToolStripMenuItem
             // 
             this.composersToolStripMenuItem.Name = "composersToolStripMenuItem";
-            this.composersToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.composersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.composersToolStripMenuItem.Text = "Composers";
             this.composersToolStripMenuItem.Click += new System.EventHandler(this.Handle_composersToolStripMenuItem_Click);
             // 
@@ -465,6 +467,13 @@ namespace TMCWorkbench
             this.ctrTracks.Size = new System.Drawing.Size(344, 804);
             this.ctrTracks.TabIndex = 3;
             // 
+            // tagsToolStripMenuItem
+            // 
+            this.tagsToolStripMenuItem.Name = "tagsToolStripMenuItem";
+            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tagsToolStripMenuItem.Text = "Tags";
+            this.tagsToolStripMenuItem.Click += new System.EventHandler(this.Handle_tagsToolStripMenuItem_Click);
+            // 
             // FormAlpha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -528,5 +537,6 @@ namespace TMCWorkbench
         private Controls.OutputControl ctrOutput;
         private System.Windows.Forms.Panel pnlEndgame;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ToolStripMenuItem tagsToolStripMenuItem;
     }
 }

@@ -136,6 +136,14 @@ namespace TMCWorkbench
                 form.ShowDialog();
             }
         }
+
+        private void Handle_tagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var form = new UCTags())
+            {
+                form.ShowDialog();
+            }
+        }
         #endregion
 
         private async Task LoadTrack(string path)
@@ -436,5 +444,7 @@ namespace TMCWorkbench
                 var bla = result;
             }
         }
+
+
     }
 }

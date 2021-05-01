@@ -38,7 +38,7 @@ namespace TMCWorkbench.Dialogs
             // 
             // btnAction
             // 
-            this.btnAction.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnAction.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAction.Location = new System.Drawing.Point(311, 134);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(75, 23);
@@ -83,7 +83,6 @@ namespace TMCWorkbench.Dialogs
             this.AcceptButton = this.btnAction;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnAction;
             this.ClientSize = new System.Drawing.Size(398, 169);
             this.Controls.Add(this.btnAction);
             this.Controls.Add(this.txtB);
