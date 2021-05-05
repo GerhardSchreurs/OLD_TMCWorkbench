@@ -1,7 +1,7 @@
 ﻿
 namespace TMCWorkbench.Controls
 {
-    partial class EditableListControl
+    partial class ControlEditableList
     {
         /// <summary> 
         /// Required designer variable.

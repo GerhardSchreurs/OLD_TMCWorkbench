@@ -57,14 +57,14 @@ namespace TMCWorkbench
             this.tableMetaData = new System.Windows.Forms.TableLayoutPanel();
             this.pnlEndgame = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ctrPlayer = new TMCWorkbench.Controls.MusicControl();
-            this.ctrOutput = new TMCWorkbench.Controls.OutputControl();
-            this.ctrMessage = new TMCWorkbench.Controls.TextAreaStateControl();
-            this.ctrSamples = new TMCWorkbench.Controls.TextAreaStateControl();
-            this.ctrInstruments = new TMCWorkbench.Controls.TextAreaStateControl();
-            this.ctrMetaData = new TMCWorkbench.Controls.MetaDataControl();
-            this.ctrTracks = new TMCWorkbench.Controls.ListViewControl();
-            this.ctrBrowser = new TMCWorkbench.Controls.BrowserControl();
+            this.ctrPlayer = new TMCWorkbench.Controls.ControlMusic();
+            this.ctrOutput = new TMCWorkbench.Controls.ControlOutput();
+            this.ctrMessage = new TMCWorkbench.Controls.ControlTextAreaState();
+            this.ctrSamples = new TMCWorkbench.Controls.ControlTextAreaState();
+            this.ctrInstruments = new TMCWorkbench.Controls.ControlTextAreaState();
+            this.ctrMetaData = new TMCWorkbench.Controls.ControlMetaData();
+            this.ctrTracks = new TMCWorkbench.Controls.ControlListView();
+            this.ctrBrowser = new TMCWorkbench.Controls.ControlBrowser();
             this.tableBrowser.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
@@ -504,10 +504,10 @@ namespace TMCWorkbench
         }
 
         #endregion
-        private Controls.ListViewControl ctrTracks;
+        private Controls.ControlListView ctrTracks;
         private System.Windows.Forms.TableLayoutPanel tableBrowser;
         private System.Windows.Forms.Button btnBla;
-        private Controls.BrowserControl ctrBrowser;
+        private Controls.ControlBrowser ctrBrowser;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.StatusStrip statusStrip1;
@@ -526,15 +526,15 @@ namespace TMCWorkbench
         private System.Windows.Forms.TabPage tabDatabase;
         private System.Windows.Forms.TableLayoutPanel tableInner;
         private System.Windows.Forms.TableLayoutPanel tableControls;
-        private Controls.MusicControl ctrPlayer;
+        private Controls.ControlMusic ctrPlayer;
         private System.Windows.Forms.TableLayoutPanel tableEditControls;
         private System.Windows.Forms.TableLayoutPanel tableRight;
-        private Controls.TextAreaStateControl ctrMessage;
+        private Controls.ControlTextAreaState ctrMessage;
         private System.Windows.Forms.TableLayoutPanel tableMetaData;
-        private Controls.TextAreaStateControl ctrSamples;
-        private Controls.TextAreaStateControl ctrInstruments;
-        private Controls.MetaDataControl ctrMetaData;
-        private Controls.OutputControl ctrOutput;
+        private Controls.ControlTextAreaState ctrSamples;
+        private Controls.ControlTextAreaState ctrInstruments;
+        private Controls.ControlMetaData ctrMetaData;
+        private Controls.ControlOutput ctrOutput;
         private System.Windows.Forms.Panel pnlEndgame;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolStripMenuItem tagsToolStripMenuItem;

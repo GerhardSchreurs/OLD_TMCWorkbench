@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls
 {
-    partial class MusicControl
+    partial class ControlMusic
     {
         /// <summary> 
         /// Required designer variable.

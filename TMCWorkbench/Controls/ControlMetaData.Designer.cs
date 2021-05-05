@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls
 {
-    partial class MetaDataControl
+    partial class ControlMetaData
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
-            this.ctrScore = new TMCWorkbench.Controls.Resettable.ResettableDoubleControl();
+            this.ctrScore = new TMCWorkbench.Controls.Resettable.ResettableDouble();
             this.ctrScenegroupText = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrScenegroup = new TMCWorkbench.Controls.Resettable.ResettableDropDownSceneGroup();
             this.ctrComposerText = new TMCWorkbench.Controls.Resettable.ResettableText();
@@ -39,12 +39,12 @@
             this.ctrStyle = new TMCWorkbench.Controls.Resettable.ResettableDropDownStyle();
             this.ctrTracker = new TMCWorkbench.Controls.Resettable.ResettableDropDownTracker();
             this.ctrBPM = new TMCWorkbench.Controls.Resettable.ResettableBpm();
-            this.ctrSpeed = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
-            this.ctrLength = new TMCWorkbench.Controls.Resettable.ResettableDoubleIntControl();
+            this.ctrSpeed = new TMCWorkbench.Controls.Resettable.ResettableDoubleInt();
+            this.ctrLength = new TMCWorkbench.Controls.Resettable.ResettableDoubleInt();
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDate();
             this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableText();
-            this.ctrTags = new TMCWorkbench.Controls.CheckBoxDropDown();
+            this.ctrTags = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.SuspendLayout();
@@ -263,8 +263,8 @@
         public Resettable.ResettableText ctrScenegroupText;
         public Resettable.ResettableText ctrComposerText;
         public Resettable.ResettableBpm ctrBPM;
-        public Resettable.ResettableDoubleIntControl ctrSpeed;
-        public Resettable.ResettableDoubleIntControl ctrLength;
+        public Resettable.ResettableDoubleInt ctrSpeed;
+        public Resettable.ResettableDoubleInt ctrLength;
         public Resettable.ResettableDate ctrDate;
         public Resettable.ResettableText ctrFileInfo;
         public Resettable.ResettableText ctrTrackTitle;
@@ -272,7 +272,7 @@
         private Resettable.ResettableDropDownComposer ctrComposer;
         private Resettable.ResettableDropDownStyle ctrStyle;
         private Resettable.ResettableDropDownSceneGroup ctrScenegroup;
-        private Resettable.ResettableDoubleControl ctrScore;
-        private CheckBoxDropDown ctrTags;
+        private Resettable.ResettableDouble ctrScore;
+        private ControlCheckBoxDropDown ctrTags;
     }
 }

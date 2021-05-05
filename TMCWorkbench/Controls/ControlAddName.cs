@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,15 +10,16 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls
 {
-    public partial class EditableListControl : UserControl
+    public partial class ControlAddName : UserControl
     {
-        public EditableListControl()
+        public ControlAddName()
         {
             InitializeComponent();
+        }
 
-            gridGroups.DataSource = DB.DBManager.Instance.C.Database.SqlQuery<string>("");
+        private void button1_Click(object sender, EventArgs e)
+        {
 
-            
         }
     }
 }

@@ -18,11 +18,11 @@ using TMCDatabase.DBModel;
 
 namespace TMCWorkbench.Controls
 {
-    public partial class MetaDataControl : UserControl
+    public partial class ControlMetaData : UserControl
     {
         public DBManager DB;
 
-        public MetaDataControl()
+        public ControlMetaData()
         {
             InitializeComponent();
         }

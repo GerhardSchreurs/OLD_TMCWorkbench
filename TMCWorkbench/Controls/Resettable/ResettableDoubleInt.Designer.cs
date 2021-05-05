@@ -1,7 +1,6 @@
-﻿
-namespace TMCWorkbench.Controls.Resettable
+﻿namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableDoubleControl
+    partial class ResettableDoubleInt
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,7 +31,8 @@ namespace TMCWorkbench.Controls.Resettable
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.resettableControl1 = new TMCWorkbench.Controls.ResettableControl();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtScore = new System.Windows.Forms.TextBox();
+            this.txtValueB = new System.Windows.Forms.TextBox();
+            this.txtValueA = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +51,7 @@ namespace TMCWorkbench.Controls.Resettable
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(365, 24);
-            this.tableLayoutPanel1.TabIndex = 3;
+            this.tableLayoutPanel1.TabIndex = 1;
             // 
             // resettableControl1
             // 
@@ -64,7 +64,8 @@ namespace TMCWorkbench.Controls.Resettable
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.txtScore);
+            this.panel1.Controls.Add(this.txtValueB);
+            this.panel1.Controls.Add(this.txtValueA);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(114, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
@@ -72,20 +73,26 @@ namespace TMCWorkbench.Controls.Resettable
             this.panel1.Size = new System.Drawing.Size(251, 24);
             this.panel1.TabIndex = 1;
             // 
-            // txtScore
+            // txtValueB
             // 
-            this.txtScore.Location = new System.Drawing.Point(0, 2);
-            this.txtScore.Name = "txtScore";
-            this.txtScore.Size = new System.Drawing.Size(65, 20);
-            this.txtScore.TabIndex = 1;
-            this.txtScore.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Handle_txtScore_KeyPress);
+            this.txtValueB.Location = new System.Drawing.Point(69, 2);
+            this.txtValueB.Name = "txtValueB";
+            this.txtValueB.Size = new System.Drawing.Size(65, 20);
+            this.txtValueB.TabIndex = 1;
             // 
-            // ResettableScoreControl
+            // txtValueA
+            // 
+            this.txtValueA.Location = new System.Drawing.Point(0, 2);
+            this.txtValueA.Name = "txtValueA";
+            this.txtValueA.Size = new System.Drawing.Size(65, 20);
+            this.txtValueA.TabIndex = 0;
+            // 
+            // ResettableDoubleIntControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "ResettableScoreControl";
+            this.Name = "ResettableDoubleIntControl";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -98,6 +105,7 @@ namespace TMCWorkbench.Controls.Resettable
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private ResettableControl resettableControl1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtScore;
+        private System.Windows.Forms.TextBox txtValueB;
+        private System.Windows.Forms.TextBox txtValueA;
     }
 }

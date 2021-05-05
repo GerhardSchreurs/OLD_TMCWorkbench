@@ -1,7 +1,7 @@
 ﻿
 namespace TMCWorkbench.Controls
 {
-    partial class TextAreaStateControl
+    partial class ControlTextAreaState
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,10 +30,10 @@ namespace TMCWorkbench.Controls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextAreaStateControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlTextAreaState));
             this.panelState = new System.Windows.Forms.Panel();
-            this.txtNew = new TMCWorkbench.Controls.TextAreaControl();
-            this.txtOrg = new TMCWorkbench.Controls.TextAreaControl();
+            this.txtNew = new TMCWorkbench.Controls.ControlTextArea();
+            this.txtOrg = new TMCWorkbench.Controls.ControlTextArea();
             this.panelState.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNew)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrg)).BeginInit();
@@ -138,7 +138,7 @@ namespace TMCWorkbench.Controls
         #endregion
 
         private System.Windows.Forms.Panel panelState;
-        private TextAreaControl txtOrg;
-        private TextAreaControl txtNew;
+        private ControlTextArea txtOrg;
+        private ControlTextArea txtNew;
     }
 }

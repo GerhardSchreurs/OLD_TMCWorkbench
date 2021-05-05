@@ -1,7 +1,7 @@
 ﻿
 namespace TMCWorkbench.Controls
 {
-    partial class HistoryTextBoxStateControl
+    partial class ControlHistoryTextBoxState
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,8 +30,8 @@ namespace TMCWorkbench.Controls
         private void InitializeComponent()
         {
             this.panelState = new System.Windows.Forms.Panel();
-            this.txtNew = new TMCWorkbench.Controls.HistoryTextBoxControl();
-            this.txtOld = new TMCWorkbench.Controls.HistoryTextBoxControl();
+            this.txtNew = new TMCWorkbench.Controls.ControlHistoryTextBox();
+            this.txtOld = new TMCWorkbench.Controls.ControlHistoryTextBox();
             this.panelState.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +79,7 @@ namespace TMCWorkbench.Controls
         #endregion
 
         private System.Windows.Forms.Panel panelState;
-        private HistoryTextBoxControl txtNew;
-        private HistoryTextBoxControl txtOld;
+        private ControlHistoryTextBox txtNew;
+        private ControlHistoryTextBox txtOld;
     }
 }

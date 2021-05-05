@@ -14,13 +14,13 @@ using TMCWorkbench.Model;
 
 namespace TMCWorkbench.Controls
 {
-    public partial class OutputControl : UserControl
+    public partial class ControlOutput : UserControl
     {
         private bool showYoutube = false;
         private Bag _bag;
         private ModInfo _mod;
         private Track _track;
-        private MetaDataControl _meta;
+        private ControlMetaData _meta;
         private long _duration;
         private const string HEADER = "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■";
         private readonly Regex _regRemoveNewLines = new Regex("(\r\n){2,}");
@@ -29,7 +29,7 @@ namespace TMCWorkbench.Controls
         private readonly Regex _regLimitRemoveNewLines = new Regex("(\r?\n)");
 
 
-        public void Init(Bag bag, MetaDataControl ctrMetaData, string footer)
+        public void Init(Bag bag, ControlMetaData ctrMetaData, string footer)
         {
             if (ctrMetaData == null) throw new ArgumentException("MetaData is null");
 
@@ -301,7 +301,7 @@ namespace TMCWorkbench.Controls
             }
         }
 
-        public OutputControl()
+        public ControlOutput()
         {
             InitializeComponent();
 

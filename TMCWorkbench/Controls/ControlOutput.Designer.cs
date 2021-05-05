@@ -1,7 +1,7 @@
 ﻿
 namespace TMCWorkbench.Controls
 {
-    partial class OutputControl
+    partial class ControlOutput
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,14 +31,14 @@ namespace TMCWorkbench.Controls
         {
             this.tableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.txtHeaderYT = new TMCWorkbench.Controls.HistoryTextBoxStateControl();
-            this.txtHeader = new TMCWorkbench.Controls.TextAreaStateControl();
+            this.txtHeaderYT = new TMCWorkbench.Controls.ControlHistoryTextBoxState();
+            this.txtHeader = new TMCWorkbench.Controls.ControlTextAreaState();
             this.pnlSummary = new System.Windows.Forms.Panel();
-            this.txtSummaryYT = new TMCWorkbench.Controls.HistoryTextBoxStateControl();
-            this.txtSummary = new TMCWorkbench.Controls.TextAreaStateControl();
+            this.txtSummaryYT = new TMCWorkbench.Controls.ControlHistoryTextBoxState();
+            this.txtSummary = new TMCWorkbench.Controls.ControlTextAreaState();
             this.pnlFooter = new System.Windows.Forms.Panel();
-            this.txtFooterYT = new TMCWorkbench.Controls.HistoryTextBoxStateControl();
-            this.txtFooter = new TMCWorkbench.Controls.TextAreaStateControl();
+            this.txtFooterYT = new TMCWorkbench.Controls.ControlHistoryTextBoxState();
+            this.txtFooter = new TMCWorkbench.Controls.ControlTextAreaState();
             this.tableLayout.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.pnlSummary.SuspendLayout();
@@ -173,13 +173,13 @@ namespace TMCWorkbench.Controls
         private System.Windows.Forms.TableLayoutPanel tableLayout;
         private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Panel pnlSummary;
-        private HistoryTextBoxStateControl historyTextBoxStateControl1;
-        private TextAreaStateControl txtHeader;
-        private TextAreaStateControl txtSummary;
-        private HistoryTextBoxStateControl txtHeaderYT;
-        private HistoryTextBoxStateControl txtSummaryYT;
+        private ControlHistoryTextBoxState historyTextBoxStateControl1;
+        private ControlTextAreaState txtHeader;
+        private ControlTextAreaState txtSummary;
+        private ControlHistoryTextBoxState txtHeaderYT;
+        private ControlHistoryTextBoxState txtSummaryYT;
         private System.Windows.Forms.Panel pnlFooter;
-        private HistoryTextBoxStateControl txtFooterYT;
-        private TextAreaStateControl txtFooter;
+        private ControlHistoryTextBoxState txtFooterYT;
+        private ControlTextAreaState txtFooter;
     }
 }

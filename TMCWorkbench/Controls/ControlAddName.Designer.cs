@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls
 {
-    partial class AddNameControl
+    partial class ControlAddName
     {
         /// <summary> 
         /// Required designer variable.

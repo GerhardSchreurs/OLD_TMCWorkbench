@@ -15,13 +15,13 @@ using System.Threading;
 
 namespace TMCWorkbench.Controls
 {
-    public partial class MusicControl : UserControl
+    public partial class ControlMusic : UserControl
     {
         private LibVLC _libVLC;
         private MediaPlayer _mediaPlayer;
         public Media Media;
 
-        public MusicControl()
+        public ControlMusic()
         {
             InitializeComponent();
         }

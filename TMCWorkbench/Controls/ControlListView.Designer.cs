@@ -1,6 +1,6 @@
 ﻿namespace TMCWorkbench.Controls
 {
-    partial class ListViewControl
+    partial class ControlListView
     {
         /// <summary> 
         /// Required designer variable.

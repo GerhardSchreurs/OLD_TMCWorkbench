@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls
 {
-    public partial class TextAreaStateControl : UserControl
+    public partial class ControlHistoryTextBoxState : UserControl
     {
         public void Clear()
         {
@@ -18,10 +18,10 @@ namespace TMCWorkbench.Controls
             TextNew = string.Empty;
         }
 
-        public string TextOrg 
+        public string TextOrg
         {
-            get => txtOrg.Text;
-            set => txtOrg.Text = value;
+            get => txtOld.Text;
+            set => txtOld.Text = value;
         }
 
         public string TextNew
@@ -30,24 +30,16 @@ namespace TMCWorkbench.Controls
             set => txtNew.Text = value;
         }
 
-        public TextAreaStateControl()
+        public ControlHistoryTextBoxState()
         {
             InitializeComponent();
 
             ShowNew();
         }
 
-        public void Show(bool showNew = true)
-        {
-            if (showNew)
-                ShowNew();
-            else
-                ShowOld();
-        }
-
         public void ShowNew()
         {
-            txtOrg.Visible = false;
+            txtOld.Visible = false;
             txtNew.Visible = true;
             txtNew.Dock = DockStyle.Fill;
         }
@@ -55,8 +47,8 @@ namespace TMCWorkbench.Controls
         public void ShowOld()
         {
             txtNew.Visible = false;
-            txtOrg.Visible = true;
-            txtOrg.Dock = DockStyle.Fill;
+            txtOld.Visible = true;
+            txtOld.Dock = DockStyle.Fill;
         }
     }
 }

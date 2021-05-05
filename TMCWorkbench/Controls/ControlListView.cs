@@ -11,9 +11,9 @@ using TMCDatabase.DBModel;
 
 namespace TMCWorkbench.Controls
 {
-    public partial class ListViewControl : UserControl
+    public partial class ControlListView : UserControl
     {
-        public ListViewControl()
+        public ControlListView()
         {
             InitializeComponent();
 

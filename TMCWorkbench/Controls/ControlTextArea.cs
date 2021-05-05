@@ -7,9 +7,9 @@ using FastColoredTextBoxNS;
 
 namespace TMCWorkbench.Controls
 {
-    public class TextAreaControl : FastColoredTextBox
+    public class ControlTextArea : FastColoredTextBox
     {
-        public TextAreaControl()
+        public ControlTextArea()
         {
             this.Font = new System.Drawing.Font("Consolas", 8.25f);
             this.AllowMacroRecording = false;

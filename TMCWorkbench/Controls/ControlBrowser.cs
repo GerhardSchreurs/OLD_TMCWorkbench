@@ -13,7 +13,7 @@ using TMCWorkbench.Events;
 
 namespace TMCWorkbench.Controls
 {
-    public partial class BrowserControl : UserControl
+    public partial class ControlBrowser : UserControl
     {
         ContextMenu _contextMenuNodeOptions = new ContextMenu();
 
@@ -25,7 +25,7 @@ namespace TMCWorkbench.Controls
 
         bool IsPathASubDirectory = true;
 
-        public BrowserControl()
+        public ControlBrowser()
         {
             InitializeComponent();
 

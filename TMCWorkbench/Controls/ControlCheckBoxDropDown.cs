@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace TMCWorkbench.Controls
 {
     //https://www.codeproject.com/Articles/31105/A-ComboBox-with-a-CheckedListBox-as-a-Dropdown
-    public class CheckBoxDropDown : ComboBox
+    public class ControlCheckBoxDropDown : ComboBox
     {
         /// <summary>
         /// Internal class to represent the dropdown list of the CheckedComboBox
@@ -66,14 +66,14 @@ namespace TMCWorkbench.Controls
                     if (e.KeyCode == Keys.Enter)
                     {
                         // Enact selection.
-                        ((CheckBoxDropDown.Dropdown)Parent).OnDeactivate(new CCBoxEventArgs(null, true));
+                        ((ControlCheckBoxDropDown.Dropdown)Parent).OnDeactivate(new CCBoxEventArgs(null, true));
                         e.Handled = true;
 
                     }
                     else if (e.KeyCode == Keys.Escape)
                     {
                         // Cancel selection.
-                        ((CheckBoxDropDown.Dropdown)Parent).OnDeactivate(new CCBoxEventArgs(null, false));
+                        ((ControlCheckBoxDropDown.Dropdown)Parent).OnDeactivate(new CCBoxEventArgs(null, false));
                         e.Handled = true;
 
                     }
@@ -108,7 +108,7 @@ namespace TMCWorkbench.Controls
 
             // ********************************************* Data *********************************************
 
-            private CheckBoxDropDown ccbParent;
+            private ControlCheckBoxDropDown ccbParent;
 
             // Keeps track of whether checked item(s) changed, hence the value of the CheckedComboBox as a whole changed.
             // This is simply done via maintaining the old string-representation of the value(s) and the new one and comparing them!
@@ -144,7 +144,7 @@ namespace TMCWorkbench.Controls
 
             // ********************************************* Construction *********************************************
 
-            public Dropdown(CheckBoxDropDown ccbParent)
+            public Dropdown(ControlCheckBoxDropDown ccbParent)
             {
                 this.ccbParent = ccbParent;
                 InitializeComponent();
@@ -345,7 +345,7 @@ namespace TMCWorkbench.Controls
 
         // ******************************** Construction ********************************
 
-        public CheckBoxDropDown() : base()
+        public ControlCheckBoxDropDown() : base()
         {
             // We want to do the drawing of the dropdown.
             this.DrawMode = DrawMode.OwnerDrawVariable;

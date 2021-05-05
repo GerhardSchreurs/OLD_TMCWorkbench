@@ -11,9 +11,9 @@ using TMCWorkbench.Tools;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableDoubleControl : _ResettablePanel
+    public partial class ResettableDouble : _ResettablePanel
     {
-        public ResettableDoubleControl()
+        public ResettableDouble()
         {
             InitializeComponent();
 

@@ -148,71 +148,71 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Controls\AddNameControl.cs">
+    <Compile Include="Controls\ControlAddName.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\AddNameControl.Designer.cs">
-      <DependentUpon>AddNameControl.cs</DependentUpon>
+    <Compile Include="Controls\ControlAddName.Designer.cs">
+      <DependentUpon>ControlAddName.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BrowserControl.cs">
+    <Compile Include="Controls\ControlBrowser.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\BrowserControl.Designer.cs">
-      <DependentUpon>BrowserControl.cs</DependentUpon>
+    <Compile Include="Controls\ControlBrowser.Designer.cs">
+      <DependentUpon>ControlBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CheckBoxDropDown.cs">
+    <Compile Include="Controls\ControlCheckBoxDropDown.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\EditableListControl.cs">
+    <Compile Include="Controls\ControlEditableList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\EditableListControl.Designer.cs">
-      <DependentUpon>EditableListControl.cs</DependentUpon>
+    <Compile Include="Controls\ControlEditableList.Designer.cs">
+      <DependentUpon>ControlEditableList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\HistoryTextBoxControl.cs">
+    <Compile Include="Controls\ControlHistoryTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\HistoryTextBoxStateControl.cs">
+    <Compile Include="Controls\ControlHistoryTextBoxState.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\HistoryTextBoxStateControl.Designer.cs">
-      <DependentUpon>HistoryTextBoxStateControl.cs</DependentUpon>
+    <Compile Include="Controls\ControlHistoryTextBoxState.Designer.cs">
+      <DependentUpon>ControlHistoryTextBoxState.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\IntegerTextBoxControl.cs">
+    <Compile Include="Controls\ControlIntegerTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ListViewControl.cs">
+    <Compile Include="Controls\ControlListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ListViewControl.Designer.cs">
-      <DependentUpon>ListViewControl.cs</DependentUpon>
+    <Compile Include="Controls\ControlListView.Designer.cs">
+      <DependentUpon>ControlListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MetaDataControl.cs">
+    <Compile Include="Controls\ControlMetaData.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MetaDataControl.Designer.cs">
-      <DependentUpon>MetaDataControl.cs</DependentUpon>
+    <Compile Include="Controls\ControlMetaData.Designer.cs">
+      <DependentUpon>ControlMetaData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MusicControl.cs">
+    <Compile Include="Controls\ControlMusic.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MusicControl.Designer.cs">
-      <DependentUpon>MusicControl.cs</DependentUpon>
+    <Compile Include="Controls\ControlMusic.Designer.cs">
+      <DependentUpon>ControlMusic.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OutputControl.cs">
+    <Compile Include="Controls\ControlOutput.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OutputControl.Designer.cs">
-      <DependentUpon>OutputControl.cs</DependentUpon>
+    <Compile Include="Controls\ControlOutput.Designer.cs">
+      <DependentUpon>ControlOutput.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableDoubleControl.cs">
+    <Compile Include="Controls\Resettable\ResettableDouble.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableDoubleControl.Designer.cs">
-      <DependentUpon>ResettableDoubleControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableDouble.Designer.cs">
+      <DependentUpon>ResettableDouble.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\_IRefreshableInit.cs" />
     <Compile Include="Controls\Resettable\ResettableBpm.cs">
@@ -296,11 +296,11 @@
     <Compile Include="Controls\Resettable\ResettableDate.Designer.cs">
       <DependentUpon>ResettableDate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableDoubleIntControl.cs">
+    <Compile Include="Controls\Resettable\ResettableDoubleInt.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Resettable\ResettableDoubleIntControl.Designer.cs">
-      <DependentUpon>ResettableDoubleIntControl.cs</DependentUpon>
+    <Compile Include="Controls\Resettable\ResettableDoubleInt.Designer.cs">
+      <DependentUpon>ResettableDoubleInt.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\ResettableText.cs">
       <SubType>UserControl</SubType>
@@ -308,13 +308,13 @@
     <Compile Include="Controls\Resettable\ResettableText.Designer.cs">
       <DependentUpon>ResettableText.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TextAreaStateControl.cs">
+    <Compile Include="Controls\ControlTextAreaState.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\TextAreaStateControl.Designer.cs">
-      <DependentUpon>TextAreaStateControl.cs</DependentUpon>
+    <Compile Include="Controls\ControlTextAreaState.Designer.cs">
+      <DependentUpon>ControlTextAreaState.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TextAreaControl.cs">
+    <Compile Include="Controls\ControlTextArea.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DB\DBManager.cs" />
@@ -398,29 +398,29 @@
     <Compile Include="UCStyles.Designer.cs">
       <DependentUpon>UCStyles.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Controls\AddNameControl.resx">
-      <DependentUpon>AddNameControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlAddName.resx">
+      <DependentUpon>ControlAddName.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\BrowserControl.resx">
-      <DependentUpon>BrowserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlBrowser.resx">
+      <DependentUpon>ControlBrowser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\EditableListControl.resx">
-      <DependentUpon>EditableListControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlEditableList.resx">
+      <DependentUpon>ControlEditableList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\HistoryTextBoxStateControl.resx">
-      <DependentUpon>HistoryTextBoxStateControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlHistoryTextBoxState.resx">
+      <DependentUpon>ControlHistoryTextBoxState.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ListViewControl.resx">
-      <DependentUpon>ListViewControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlListView.resx">
+      <DependentUpon>ControlListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MetaDataControl.resx">
-      <DependentUpon>MetaDataControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlMetaData.resx">
+      <DependentUpon>ControlMetaData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MusicControl.resx">
-      <DependentUpon>MusicControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlMusic.resx">
+      <DependentUpon>ControlMusic.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OutputControl.resx">
-      <DependentUpon>OutputControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlOutput.resx">
+      <DependentUpon>ControlOutput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableBpm.resx">
       <DependentUpon>ResettableBpm.cs</DependentUpon>
@@ -431,14 +431,14 @@
     <EmbeddedResource Include="Controls\Resettable\ResettableDropDown.resx">
       <DependentUpon>ResettableDropDown.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableDoubleIntControl.resx">
-      <DependentUpon>ResettableDoubleIntControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\ResettableDoubleInt.resx">
+      <DependentUpon>ResettableDoubleInt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableDropDownComposer.resx">
       <DependentUpon>ResettableDropDownComposer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Resettable\ResettableDoubleControl.resx">
-      <DependentUpon>ResettableDoubleControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Resettable\ResettableDouble.resx">
+      <DependentUpon>ResettableDouble.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\_ResettableDropDownHold.resx">
       <DependentUpon>_ResettableDropDownHold.cs</DependentUpon>
@@ -461,11 +461,11 @@
     <EmbeddedResource Include="Controls\Resettable\ResettableText.resx">
       <DependentUpon>ResettableText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TextAreaStateControl.resx">
-      <DependentUpon>TextAreaStateControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlTextAreaState.resx">
+      <DependentUpon>ControlTextAreaState.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\TextAreaControl.resx">
-      <DependentUpon>TextAreaControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ControlTextArea.resx">
+      <DependentUpon>ControlTextArea.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DoubleStringDialog.resx">
       <DependentUpon>DoubleStringDialog.cs</DependentUpon>
