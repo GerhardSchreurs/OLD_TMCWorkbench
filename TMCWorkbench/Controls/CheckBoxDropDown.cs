@@ -459,6 +459,30 @@ namespace TMCWorkbench.Controls
             }
         }
 
+        //new
+        public void DeselectAll()
+        {
+            for (var i = Items.Count - 1; i>=0; i--)
+            {
+                SetItemChecked(i, false);
+            }
+        }
+
+        public void SetItemByIdChecked(int id, bool isChecked)
+        {
+            for (var i = 0; i<dropdown.List.Items.Count; i++)
+            {
+                var item = dropdown.List.Items[i] as CCBoxItem;
+
+                if (item.Value == id)
+                {
+                    SetItemChecked(i, isChecked);
+                    return;
+                }
+            }
+        }
+
+
         public void SetItemChecked(int index, bool isChecked)
         {
             if (index < 0 || index > Items.Count)
@@ -500,6 +524,38 @@ namespace TMCWorkbench.Controls
         }
 
     } // end public class CheckedComboBox
+
+    public class CCBoxItem
+    {
+        private int val;
+        public int Value
+        {
+            get { return val; }
+            set { val = value; }
+        }
+
+        private string name;
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public CCBoxItem()
+        {
+        }
+
+        public CCBoxItem(string name, int val)
+        {
+            this.name = name;
+            this.val = val;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("name: '{0}', value: {1}", name, val);
+        }
+    }
 }
 
 

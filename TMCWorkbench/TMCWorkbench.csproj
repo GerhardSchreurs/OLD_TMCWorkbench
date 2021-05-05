@@ -160,6 +160,9 @@
     <Compile Include="Controls\BrowserControl.Designer.cs">
       <DependentUpon>BrowserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CheckBoxDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\EditableListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

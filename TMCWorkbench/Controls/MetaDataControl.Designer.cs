@@ -30,6 +30,7 @@
         {
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
+            this.ctrScore = new TMCWorkbench.Controls.Resettable.ResettableDoubleControl();
             this.ctrScenegroupText = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrScenegroup = new TMCWorkbench.Controls.Resettable.ResettableDropDownSceneGroup();
             this.ctrComposerText = new TMCWorkbench.Controls.Resettable.ResettableText();
@@ -43,7 +44,7 @@
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDate();
             this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableText();
-            this.ctrScore = new TMCWorkbench.Controls.Resettable.ResettableDoubleControl();
+            this.ctrTags = new TMCWorkbench.Controls.CheckBoxDropDown();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +60,7 @@
             // 
             // pnlMetaOrg
             // 
+            this.pnlMetaOrg.Controls.Add(this.ctrTags);
             this.pnlMetaOrg.Controls.Add(this.ctrScore);
             this.pnlMetaOrg.Controls.Add(this.ctrScenegroupText);
             this.pnlMetaOrg.Controls.Add(this.ctrScenegroup);
@@ -78,6 +80,17 @@
             this.pnlMetaOrg.Name = "pnlMetaOrg";
             this.pnlMetaOrg.Size = new System.Drawing.Size(654, 400);
             this.pnlMetaOrg.TabIndex = 0;
+            // 
+            // ctrScore
+            // 
+            this.ctrScore.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrScore.LabelTitle = "Score";
+            this.ctrScore.Location = new System.Drawing.Point(0, 312);
+            this.ctrScore.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrScore.Name = "ctrScore";
+            this.ctrScore.Size = new System.Drawing.Size(654, 24);
+            this.ctrScore.TabIndex = 22;
+            this.ctrScore.Value = null;
             // 
             // ctrScenegroupText
             // 
@@ -216,15 +229,18 @@
             this.ctrFileInfo.Size = new System.Drawing.Size(654, 24);
             this.ctrFileInfo.TabIndex = 6;
             // 
-            // ctrScore
+            // ctrTags
             // 
-            this.ctrScore.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrScore.LabelTitle = "Score";
-            this.ctrScore.Location = new System.Drawing.Point(0, 312);
-            this.ctrScore.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrScore.Name = "ctrScore";
-            this.ctrScore.Size = new System.Drawing.Size(654, 24);
-            this.ctrScore.TabIndex = 22;
+            this.ctrTags.CheckOnClick = true;
+            this.ctrTags.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ctrTags.DropDownHeight = 1;
+            this.ctrTags.FormattingEnabled = true;
+            this.ctrTags.IntegralHeight = false;
+            this.ctrTags.Location = new System.Drawing.Point(4, 340);
+            this.ctrTags.Name = "ctrTags";
+            this.ctrTags.Size = new System.Drawing.Size(254, 21);
+            this.ctrTags.TabIndex = 23;
+            this.ctrTags.ValueSeparator = ", ";
             // 
             // MetaDataControl
             // 
@@ -257,5 +273,6 @@
         private Resettable.ResettableDropDownStyle ctrStyle;
         private Resettable.ResettableDropDownSceneGroup ctrScenegroup;
         private Resettable.ResettableDoubleControl ctrScore;
+        private CheckBoxDropDown ctrTags;
     }
 }

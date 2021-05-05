@@ -52,6 +52,7 @@ namespace TMCWorkbench.DB
         public List<Composer> Composers;
         public List<C_Scenegroup_Composer> GroupsComposers;
         public List<C_Track_Tag> TracksTags;
+        public List<C_Track_Tag> TracksTagsWithTag;
 
         public Track Track;
 
@@ -170,10 +171,20 @@ namespace TMCWorkbench.DB
         {
             if (refresh || refresh == false && TracksTags == null)
             {
-                C.C_Track_Tags.Load();
+                //C.C_Track_Tags.Load();
                 TracksTags = C.C_Track_Tags.ToList();
             }
         }
+
+        public void LoadTrackTagsWithTag(bool refresh = false)
+        {
+            if (refresh || refresh == false && TracksTagsWithTag == null)
+            {
+                //C.C_Track_Tags.Load();
+                TracksTagsWithTag = C.C_Track_Tags.Include(x => x.Tag).ToList();
+            }
+        }
+
 
         public bool LoadTrackInfo(Guid guid)
         {

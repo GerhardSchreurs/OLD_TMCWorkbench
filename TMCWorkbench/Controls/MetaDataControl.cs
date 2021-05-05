@@ -11,6 +11,8 @@ using ModLibrary;
 using TMCWorkbench.DB;
 using TMCWorkbench;
 using TMCWorkbench.Model;
+using TMCDatabase.Model;
+using TMCDatabase.DBModel;
 
 //TAGS? Favorite? Hoe in de toekomst database updaten?
 
@@ -37,7 +39,41 @@ namespace TMCWorkbench.Controls
             ctrStyleText.SwitchMode();
             ctrComposerText.SwitchMode();
             ctrScenegroupText.SwitchMode();
+
+            InitTags();
         }
+
+        private List<C_Track_Tag> _trackTagsWithTag;
+
+        void InitTags()
+        {
+            DB.LoadTags();
+            DB.LoadTrackTagsWithTag();
+
+            _trackTagsWithTag = DB.TracksTagsWithTag.ToList();
+
+            foreach (var tag in DB.Tags)
+            {
+                var box = new CCBoxItem(tag.Name, tag.Tag_id);
+                ctrTags.Items.Add(box);
+            }
+
+            ctrTags.DisplayMember = "Name";
+        }
+
+        void SelectTags(int trackId)
+        {
+            ctrTags.DeselectAll();
+
+            if (trackId <= 0) return;
+
+            foreach (var tag in _trackTagsWithTag.Where(x => x.FK_track_id == trackId))
+            {
+                ctrTags.SetItemByIdChecked(tag.FK_tag_id, true);
+            }
+        }
+
+
 
         //private ModInfo _mod;
         //private TMCDatabase.DBModel.Track _track;
@@ -274,6 +310,8 @@ namespace TMCWorkbench.Controls
                 this.Tracker = track.Tracker.Name;
                 this.Score = track.Score;
 
+
+
                 //Original values
                 this.SetLengthInMsOriginal(bag.Duration);
                 ctrFileInfo.Original = mod.FileName;
@@ -282,6 +320,8 @@ namespace TMCWorkbench.Controls
                 ctrSpeed.SetValuesOriginal(mod.Speed, mod.Tempo);
                 ctrBPM.SetValueOriginal(mod.EstimatedBPM);
                 ctrStyle.TextValueOriginal = mod.TrackStyle;
+
+                this.SelectTags(track.Track_id);
                 //TODO TRACKER ORIGINAL
             }
             else
@@ -298,6 +338,8 @@ namespace TMCWorkbench.Controls
                 this.StyleText = mod.TrackStyle;
                 this.ComposerText = "";
                 this.ScenegroupText = "";
+
+                this.SelectTags(0);
 
                 //TODO
                 //if (ctrStyle.SetStyle(mod.TrackStyle))
