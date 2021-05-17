@@ -10,51 +10,59 @@ namespace TMCWorkbench
 {
     public static class ObjectExtensions
     {
+        //TODO: Better name?
+        public static T GetValueFromAnnonymousType<T>(this object src, string itemkey)
+        {
+            Type type = src.GetType();
+            T itemvalue = (T)type.GetProperty(itemkey).GetValue(src, null);
+            return itemvalue;
+        }
+
         public static object GetPropValue(object src, string propName)
         {
             return src.GetType().GetProperty(propName).GetValue(src, null);
         }
 
-        public static bool IsNumeric(this object value)
+        public static bool IsNumeric(this object src)
         {
-            if (value == null) { return false; }
-            var s = value.ToString();
+            if (src == null) { return false; }
+            var s = src.ToString();
             return StringExtensions.IsNumeric(s);
         }
 
-        public static int ToInt(this object value)
+        public static int ToInt(this object src)
         {
-            return Converter.ToInt32(value);
+            return Converter.ToInt32(src);
         }
 
-        public static string ToStr(this object value)
+        public static string ToStr(this object src)
         {
-            if (value == null) return string.Empty;
-            return value.ToString();
+            if (src == null) return string.Empty;
+            return src.ToString();
         }
 
-        public static string ToLow(this object value)
+        public static string ToLow(this object src)
         {
-            if (value == null) return string.Empty;
-            return value.ToString().ToLower();
+            if (src == null) return string.Empty;
+            return src.ToString().ToLower();
         }
 
-        public static double ToDbl(this object value)
+        public static double ToDbl(this object src)
         {
-            if (value == null) return 0;
-            return Converter.ToDouble(value);
-        }
-
-        //TODO: Use https://www.nuget.org/packages/FastMember?
-        public static object GetPropertyValue(this object obj, string propName)
-        {
-            return obj.GetType().GetProperty(propName).GetValue(obj, null);
+            if (src == null) return 0;
+            return Converter.ToDouble(src);
         }
 
         //TODO: Use https://www.nuget.org/packages/FastMember?
-        public static void SetPropertyValue(this object obj, string propName, object value)
+        public static object GetPropertyValue(this object src, string propName)
         {
-            obj.GetType().GetProperty(propName).SetValue(obj, value, null);
+            return src.GetType().GetProperty(propName).GetValue(src, null);
+        }
+
+        //TODO: Use https://www.nuget.org/packages/FastMember?
+        public static void SetPropertyValue(this object src, string propName, object value)
+        {
+            src.GetType().GetProperty(propName).SetValue(src, value, null);
         }
     }
 }

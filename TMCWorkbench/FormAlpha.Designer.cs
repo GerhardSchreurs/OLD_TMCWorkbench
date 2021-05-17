@@ -33,6 +33,7 @@ namespace TMCWorkbench
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAlpha));
             this.tableBrowser = new System.Windows.Forms.TableLayoutPanel();
             this.btnBla = new System.Windows.Forms.Button();
+            this.ctrBrowser = new TMCWorkbench.Controls.ControlBrowser();
             this.btnTest = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -52,19 +53,18 @@ namespace TMCWorkbench
             this.tabDatabase = new System.Windows.Forms.TabPage();
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
             this.tableControls = new System.Windows.Forms.TableLayoutPanel();
-            this.tableEditControls = new System.Windows.Forms.TableLayoutPanel();
-            this.tableRight = new System.Windows.Forms.TableLayoutPanel();
-            this.tableMetaData = new System.Windows.Forms.TableLayoutPanel();
-            this.pnlEndgame = new System.Windows.Forms.Panel();
-            this.btnSave = new System.Windows.Forms.Button();
             this.ctrPlayer = new TMCWorkbench.Controls.ControlMusic();
+            this.tableEditControls = new System.Windows.Forms.TableLayoutPanel();
             this.ctrOutput = new TMCWorkbench.Controls.ControlOutput();
+            this.tableRight = new System.Windows.Forms.TableLayoutPanel();
             this.ctrMessage = new TMCWorkbench.Controls.ControlTextAreaState();
+            this.tableMetaData = new System.Windows.Forms.TableLayoutPanel();
             this.ctrSamples = new TMCWorkbench.Controls.ControlTextAreaState();
             this.ctrInstruments = new TMCWorkbench.Controls.ControlTextAreaState();
             this.ctrMetaData = new TMCWorkbench.Controls.ControlMetaData();
+            this.pnlEndgame = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
             this.ctrTracks = new TMCWorkbench.Controls.ControlListView();
-            this.ctrBrowser = new TMCWorkbench.Controls.ControlBrowser();
             this.tableBrowser.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
@@ -94,21 +94,29 @@ namespace TMCWorkbench
             this.tableBrowser.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableBrowser.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableBrowser.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableBrowser.Size = new System.Drawing.Size(244, 804);
+            this.tableBrowser.Size = new System.Drawing.Size(244, 904);
             this.tableBrowser.TabIndex = 4;
             // 
             // btnBla
             // 
-            this.btnBla.Location = new System.Drawing.Point(3, 787);
+            this.btnBla.Location = new System.Drawing.Point(3, 887);
             this.btnBla.Name = "btnBla";
             this.btnBla.Size = new System.Drawing.Size(75, 14);
             this.btnBla.TabIndex = 3;
             this.btnBla.Text = "Bla";
             this.btnBla.UseVisualStyleBackColor = true;
             // 
+            // ctrBrowser
+            // 
+            this.ctrBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrBrowser.Location = new System.Drawing.Point(3, 3);
+            this.ctrBrowser.Name = "ctrBrowser";
+            this.ctrBrowser.Size = new System.Drawing.Size(238, 838);
+            this.ctrBrowser.TabIndex = 1;
+            // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(3, 747);
+            this.btnTest.Location = new System.Drawing.Point(3, 847);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(75, 23);
             this.btnTest.TabIndex = 2;
@@ -129,7 +137,7 @@ namespace TMCWorkbench
             this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 837);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 937);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1904, 24);
             this.statusStrip1.TabIndex = 1;
@@ -155,7 +163,7 @@ namespace TMCWorkbench
             this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableOuter.Size = new System.Drawing.Size(1904, 861);
+            this.tableOuter.Size = new System.Drawing.Size(1904, 961);
             this.tableOuter.TabIndex = 2;
             // 
             // tableMenu
@@ -287,7 +295,7 @@ namespace TMCWorkbench
             this.tableInner.Name = "tableInner";
             this.tableInner.RowCount = 1;
             this.tableInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableInner.Size = new System.Drawing.Size(1898, 810);
+            this.tableInner.Size = new System.Drawing.Size(1898, 910);
             this.tableInner.TabIndex = 1;
             // 
             // tableControls
@@ -304,8 +312,16 @@ namespace TMCWorkbench
             this.tableControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableControls.Size = new System.Drawing.Size(1292, 804);
+            this.tableControls.Size = new System.Drawing.Size(1292, 904);
             this.tableControls.TabIndex = 2;
+            // 
+            // ctrPlayer
+            // 
+            this.ctrPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ctrPlayer.Location = new System.Drawing.Point(3, 838);
+            this.ctrPlayer.Name = "ctrPlayer";
+            this.ctrPlayer.Size = new System.Drawing.Size(1286, 63);
+            this.ctrPlayer.TabIndex = 9;
             // 
             // tableEditControls
             // 
@@ -319,8 +335,23 @@ namespace TMCWorkbench
             this.tableEditControls.Name = "tableEditControls";
             this.tableEditControls.RowCount = 1;
             this.tableEditControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableEditControls.Size = new System.Drawing.Size(1286, 688);
+            this.tableEditControls.Size = new System.Drawing.Size(1286, 788);
             this.tableEditControls.TabIndex = 10;
+            // 
+            // ctrOutput
+            // 
+            this.ctrOutput.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ctrOutput.Location = new System.Drawing.Point(0, 0);
+            this.ctrOutput.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrOutput.Name = "ctrOutput";
+            this.ctrOutput.Size = new System.Drawing.Size(562, 788);
+            this.ctrOutput.TabIndex = 2;
+            this.ctrOutput.TextFooterNew = "txtNew";
+            this.ctrOutput.TextFooterOrg = "txtOld";
+            this.ctrOutput.TextHeaderNew = "txtNew";
+            this.ctrOutput.TextHeaderOrg = "txtOld";
+            this.ctrOutput.TextSummaryNew = "txtNew";
+            this.ctrOutput.TextSummaryOrg = "txtOld";
             // 
             // tableRight
             // 
@@ -336,8 +367,18 @@ namespace TMCWorkbench
             this.tableRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableRight.Size = new System.Drawing.Size(718, 688);
+            this.tableRight.Size = new System.Drawing.Size(718, 788);
             this.tableRight.TabIndex = 1;
+            // 
+            // ctrMessage
+            // 
+            this.ctrMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrMessage.Location = new System.Drawing.Point(3, 3);
+            this.ctrMessage.Name = "ctrMessage";
+            this.ctrMessage.Size = new System.Drawing.Size(712, 294);
+            this.ctrMessage.TabIndex = 4;
+            this.ctrMessage.TextNew = "txtNew";
+            this.ctrMessage.TextOrg = "txtOld";
             // 
             // tableMetaData
             // 
@@ -355,70 +396,15 @@ namespace TMCWorkbench
             this.tableMetaData.RowCount = 2;
             this.tableMetaData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableMetaData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableMetaData.Size = new System.Drawing.Size(718, 388);
+            this.tableMetaData.Size = new System.Drawing.Size(718, 488);
             this.tableMetaData.TabIndex = 5;
-            // 
-            // pnlEndgame
-            // 
-            this.pnlEndgame.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.pnlEndgame.Controls.Add(this.btnSave);
-            this.pnlEndgame.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEndgame.Location = new System.Drawing.Point(6, 694);
-            this.pnlEndgame.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.pnlEndgame.Name = "pnlEndgame";
-            this.pnlEndgame.Size = new System.Drawing.Size(1280, 30);
-            this.pnlEndgame.TabIndex = 11;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnSave.Location = new System.Drawing.Point(1205, 0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 30);
-            this.btnSave.TabIndex = 0;
-            this.btnSave.Text = "SAVE";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.Handle_btnSave_Click);
-            // 
-            // ctrPlayer
-            // 
-            this.ctrPlayer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ctrPlayer.Location = new System.Drawing.Point(3, 738);
-            this.ctrPlayer.Name = "ctrPlayer";
-            this.ctrPlayer.Size = new System.Drawing.Size(1286, 63);
-            this.ctrPlayer.TabIndex = 9;
-            // 
-            // ctrOutput
-            // 
-            this.ctrOutput.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ctrOutput.Location = new System.Drawing.Point(0, 0);
-            this.ctrOutput.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrOutput.Name = "ctrOutput";
-            this.ctrOutput.Size = new System.Drawing.Size(562, 688);
-            this.ctrOutput.TabIndex = 2;
-            this.ctrOutput.TextFooterNew = "txtNew";
-            this.ctrOutput.TextFooterOrg = "txtOld";
-            this.ctrOutput.TextHeaderNew = "txtNew";
-            this.ctrOutput.TextHeaderOrg = "txtOld";
-            this.ctrOutput.TextSummaryNew = "txtNew";
-            this.ctrOutput.TextSummaryOrg = "txtOld";
-            // 
-            // ctrMessage
-            // 
-            this.ctrMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrMessage.Location = new System.Drawing.Point(3, 3);
-            this.ctrMessage.Name = "ctrMessage";
-            this.ctrMessage.Size = new System.Drawing.Size(712, 294);
-            this.ctrMessage.TabIndex = 4;
-            this.ctrMessage.TextNew = "txtNew";
-            this.ctrMessage.TextOrg = "txtOld";
             // 
             // ctrSamples
             // 
             this.ctrSamples.Dock = System.Windows.Forms.DockStyle.Left;
             this.ctrSamples.Location = new System.Drawing.Point(3, 23);
             this.ctrSamples.Name = "ctrSamples";
-            this.ctrSamples.Size = new System.Drawing.Size(176, 362);
+            this.ctrSamples.Size = new System.Drawing.Size(176, 462);
             this.ctrSamples.TabIndex = 0;
             this.ctrSamples.TextNew = "txtNew";
             this.ctrSamples.TextOrg = "txtOld";
@@ -428,7 +414,7 @@ namespace TMCWorkbench
             this.ctrInstruments.Dock = System.Windows.Forms.DockStyle.Left;
             this.ctrInstruments.Location = new System.Drawing.Point(185, 23);
             this.ctrInstruments.Name = "ctrInstruments";
-            this.ctrInstruments.Size = new System.Drawing.Size(176, 362);
+            this.ctrInstruments.Size = new System.Drawing.Size(176, 462);
             this.ctrInstruments.TabIndex = 1;
             this.ctrInstruments.TextNew = "txtNew";
             this.ctrInstruments.TextOrg = "txtOld";
@@ -449,7 +435,7 @@ namespace TMCWorkbench
             this.ctrMetaData.ScenegroupID = null;
             this.ctrMetaData.ScenegroupText = "";
             this.ctrMetaData.Score = null;
-            this.ctrMetaData.Size = new System.Drawing.Size(348, 362);
+            this.ctrMetaData.Size = new System.Drawing.Size(348, 440);
             this.ctrMetaData.Style = "";
             this.ctrMetaData.StyleID = null;
             this.ctrMetaData.StyleText = "";
@@ -458,27 +444,41 @@ namespace TMCWorkbench
             this.ctrMetaData.TrackerID = 0;
             this.ctrMetaData.TrackTitle = "";
             // 
+            // pnlEndgame
+            // 
+            this.pnlEndgame.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.pnlEndgame.Controls.Add(this.btnSave);
+            this.pnlEndgame.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEndgame.Location = new System.Drawing.Point(6, 794);
+            this.pnlEndgame.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.pnlEndgame.Name = "pnlEndgame";
+            this.pnlEndgame.Size = new System.Drawing.Size(1280, 30);
+            this.pnlEndgame.TabIndex = 11;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnSave.Location = new System.Drawing.Point(1205, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 30);
+            this.btnSave.TabIndex = 0;
+            this.btnSave.Text = "SAVE";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.Handle_btnSave_Click);
+            // 
             // ctrTracks
             // 
             this.ctrTracks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctrTracks.Location = new System.Drawing.Point(253, 3);
             this.ctrTracks.Name = "ctrTracks";
-            this.ctrTracks.Size = new System.Drawing.Size(344, 804);
+            this.ctrTracks.Size = new System.Drawing.Size(344, 904);
             this.ctrTracks.TabIndex = 3;
-            // 
-            // ctrBrowser
-            // 
-            this.ctrBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrBrowser.Location = new System.Drawing.Point(3, 3);
-            this.ctrBrowser.Name = "ctrBrowser";
-            this.ctrBrowser.Size = new System.Drawing.Size(238, 738);
-            this.ctrBrowser.TabIndex = 1;
             // 
             // FormAlpha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 861);
+            this.ClientSize = new System.Drawing.Size(1904, 961);
             this.Controls.Add(this.tableOuter);
             this.Name = "FormAlpha";
             this.Text = "FormAlpha";

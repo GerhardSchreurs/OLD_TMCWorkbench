@@ -13,6 +13,7 @@ namespace TMCWorkbench.Model
     {
         private DBManager _db = DBManager.Instance;
         private Manager _manager = Manager.Instance;
+        private List<C_Track_Tag> _trackTags;
 
         private ModInfo _mod;
         private Track _track;
@@ -32,7 +33,7 @@ namespace TMCWorkbench.Model
             }
         }
 
-        public async Task Load(string path, long duration)
+        public async Task Load(string path, long duration, bool refresh = false)
         {
             _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(path, _db.TrackStyles);
 
@@ -53,21 +54,46 @@ namespace TMCWorkbench.Model
 
             if (_track == null)
             {
+                _trackTags = null;
                 _track = new Track();
                 IsNewTrack = true;
             }
+            else
+            {
+                DBManager.Instance.LoadTrackTagsWithTag(refresh);
+                _trackTags = DBManager.Instance.TracksTagsWithTag.Where(x => x.FK_track_id == _track.Track_id).ToList();
+            }
         }
 
-        public ModInfo Mod 
-        { 
-            get => _mod; 
-            set => _mod = value; 
+        public ModInfo Mod
+        {
+            get => _mod;
+            set => _mod = value;
         }
 
         public Track Track
         {
             get => _track;
             set => _track = value;
+        }
+
+        public List<C_Track_Tag> TrackTags
+        {
+            get => _trackTags;
+            private set => _trackTags = value;
+        }
+        
+        public int[] GetTrackTagsArray()
+        {
+            if (_trackTags == null) return null;
+            var arr = new int[_trackTags.Count];
+
+            for (var i = 0; i < arr.Length; i++)
+            {
+                arr[i] = _trackTags[i].FK_tag_id;
+            }
+
+            return arr;
         }
     }
 }

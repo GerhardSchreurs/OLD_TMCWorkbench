@@ -208,6 +208,16 @@
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Resettable\ResettableCheckBoxDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableCheckBoxDropDown.Designer.cs">
+      <DependentUpon>ResettableCheckBoxDropDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Resettable\_ResettableCheckBoxDropDownHelper.cs" />
+    <Compile Include="Controls\Resettable\ResettableCheckBoxDropDownTags.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\Resettable\ResettableDouble.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -335,6 +345,7 @@
     <Compile Include="Events\EventInvoker.cs" />
     <Compile Include="Extensions\CrossThreadExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DynamicExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
@@ -427,6 +438,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableButton.resx">
       <DependentUpon>ResettableButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Resettable\ResettableCheckBoxDropDown.resx">
+      <DependentUpon>ResettableCheckBoxDropDown.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableDropDown.resx">
       <DependentUpon>ResettableDropDown.cs</DependentUpon>

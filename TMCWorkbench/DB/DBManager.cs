@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -232,6 +233,21 @@ namespace TMCWorkbench.DB
             tag.FK_track_id = trackId;
 
             C.C_Track_Tags.Add(tag);
+        }
+
+        public void UpdateTrackTags(int trackId, int[] tagIds)
+        {
+            C.C_Track_Tags.RemoveRange(C.C_Track_Tags.Where(x => x.FK_track_id == trackId));
+            if (tagIds == null) return;
+
+            foreach (var tagId in tagIds)
+            {
+                var trackTag = new C_Track_Tag();
+                trackTag.FK_track_id = trackId;
+                trackTag.FK_tag_id = tagId;
+
+                C.C_Track_Tags.Add(trackTag);
+            }
         }
 
         public void Add(Tag tag, bool save = true, bool refresh = true)

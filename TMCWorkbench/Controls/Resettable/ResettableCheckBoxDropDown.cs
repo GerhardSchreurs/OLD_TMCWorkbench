@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableDropDownHold : _ResettablePanel
+    public partial class ResettableCheckBoxDropDown : _ResettablePanel
     {
-        private ResettableDropDownHelper _helper;
+        private ResettableCheckBoxDropDownHelper _helper;
         private Form _editForm;
-        private int? _oldIndex;
+        //private int? _oldIndex;
 
-        public ResettableDropDownHold()
+        public ResettableCheckBoxDropDown()
         {
             InitializeComponent();
         }
@@ -32,7 +32,7 @@ namespace TMCWorkbench.Controls.Resettable
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public void Init(Form editForm, IEnumerable<dynamic> list, string displayMember, string valueMember, int emptyID = 0, string emptyValue = null)
+        public void Init(Form editForm, IEnumerable<dynamic> list, string displayMember, string valueMember)
         {
             if (_editForm == null)
             {
@@ -41,21 +41,20 @@ namespace TMCWorkbench.Controls.Resettable
                 btnEdit.Click += Handle_BtnEdit_Click;
             }
 
-
-            _helper = new ResettableDropDownHelper(this.ddList, resettableControl1, list, displayMember, valueMember, emptyID, emptyValue);
+            _helper = new ResettableCheckBoxDropDownHelper(this.ddList, resettableControl1, list, displayMember, valueMember);
             _helper.DataBind();
         }
 
         private void Handle_BtnEdit_Click(object sender, EventArgs e)
         {
-            _oldIndex = IdValue;
+            //_oldIndex = IdValue;
             _editForm.ShowDialog();
         }
-         
+
         private void Handle_editForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ((IRefreshableInit)this).Init(true);
-            IdValue = _oldIndex;
+            //IdValue = _oldIndex;
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -75,6 +74,19 @@ namespace TMCWorkbench.Controls.Resettable
         public string TextValueOriginal
         {
             set => _helper.TextValueOriginal = value;
+        }
+
+        //[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public void SetIdValues(int[] ids)
+        {
+            if (_helper == null) return;
+            if (chkLock.Checked) return;
+            _helper.SetIdValues(ids);
+        }
+
+        public int[] GetIdValues()
+        {
+            return _helper?.GetIdValues();
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

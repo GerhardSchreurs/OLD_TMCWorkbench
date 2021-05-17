@@ -161,7 +161,7 @@ namespace TMCWorkbench
 
             _bag = new Bag();
 
-            await _bag.Load(path, duration);
+            await _bag.Load(path, duration, true);
             //For easy reference
             _mod = _bag.Mod;
             _track = _bag.Track;
@@ -281,11 +281,14 @@ namespace TMCWorkbench
 
             _track.YoutubeText = ctrOutput.TextOutput;
 
+            //Tags
+            DB.UpdateTrackTags(_track.Track_id, ctrMetaData.GetTagIds());
+
             DB.AddOrUpdate(_track);
             DB.Save();
 
+            //ctrMetaData.Refresh(true);
             await LoadTrack(_mod.FullName);
-
             ctrTracks.MarkInDatabase(_mod.FullName);
         }
 

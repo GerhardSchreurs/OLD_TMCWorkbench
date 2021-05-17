@@ -468,6 +468,21 @@ namespace TMCWorkbench.Controls
             }
         }
 
+        public int[] GetCheckedItemIds()
+        {
+            var list = new List<int>();
+
+            for (var i = 0; i<Items.Count; i++)
+            {
+                if (GetItemCheckState(i) == CheckState.Checked)
+                {
+                    list.Add(((CCBoxItem)Items[i]).Value);
+                }
+            }
+
+            return list.ToArray();
+        }
+
         public void SetItemByIdChecked(int id, bool isChecked)
         {
             for (var i = 0; i<dropdown.List.Items.Count; i++)
@@ -480,6 +495,12 @@ namespace TMCWorkbench.Controls
                     return;
                 }
             }
+        }
+
+        public void SetItemsByIdChecked(int[] ids)
+        {
+            if (ids == null || ids.Length == 0) return;
+            Array.ForEach(ids, id => SetItemByIdChecked(id, true));
         }
 
 

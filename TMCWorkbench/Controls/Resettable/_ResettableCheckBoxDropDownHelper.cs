@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public class ResettableDropDownHelper
+    public class ResettableCheckBoxDropDownHelper
     {
-        private ComboBox _box;
+        private ControlCheckBoxDropDown _box;
         private ResettableControl _resettableControl;
         private string _sourceValueMember;
         private string _sourceDisplayMember;
@@ -20,16 +18,18 @@ namespace TMCWorkbench.Controls.Resettable
         private string _value;
         private string _valueOriginal;
 
-        int _emptyID;
-        string _emptyValue;
+        //int _emptyID;
+        //string _emptyValue;
 
         private int? _id;
         private int? _idOriginal;
 
+        private int[] _ids;
+
         private const string DISPLAYMEMBER = "DisplayMember";
         private const string VALUEMEMBER = "ValueMember";
 
-        public ResettableDropDownHelper(ComboBox box, ResettableControl resttableControl, IEnumerable<dynamic> sourceList, string displayMember, string valueMember, int emptyID = 0, string emptyValue = null)
+        public ResettableCheckBoxDropDownHelper(ControlCheckBoxDropDown box, ResettableControl resttableControl, IEnumerable<dynamic> sourceList, string displayMember, string valueMember)
         {
             _sourceList = sourceList;
             _box = box;
@@ -37,18 +37,9 @@ namespace TMCWorkbench.Controls.Resettable
 
             _sourceValueMember = valueMember;         //Value (int)
             _sourceDisplayMember = displayMember;      //Name (string)
-            _emptyID = emptyID;                         //0
-            _emptyValue = emptyValue;                   //==== select =====
 
-            _resettableControl.OnReset += ResettableControl1_OnReset;
+            //_resettableControl.OnReset += ResettableControl1_OnReset;
         }
-
-        //public ExpandoObject CreateDynamicListItem(string propertyName, string PropertyValue)
-        //{
-        //    dynamic obj = new ExpandoObject();
-        //    ((IDictionary<string, object>)obj)[propertyName] = PropertyValue;
-        //    return obj;
-        //}
 
         //TODO: Ext?
         public static T GetValueFromAnonymousType<T>(object dataitem, string itemkey)
@@ -66,31 +57,20 @@ namespace TMCWorkbench.Controls.Resettable
 
         public void DataBind()
         {
-            var bindingSource = new BindingSource();
-            
             var sourceList = _sourceList.ToList();
             _targetList = new List<dynamic>();
 
 
-            for (var i = 0; i<sourceList.Count; i++)
+            for (var i = 0; i < sourceList.Count; i++)
             {
                 var sourceItem = sourceList[i];
+
                 var sourceDisplayMember = GetValueFromAnonymousType<string>(sourceItem, _sourceDisplayMember);
                 var sourceValueMember = GetValueFromAnonymousType<int>(sourceItem, _sourceValueMember);
 
-                //var sourceDisplayMember = sourceItem.GetValueFromAnonymousType<string>(_sourceDisplayMember);
-                //var sourceValueMember = sourceItem.GetValueFromAnonymousType<int>(_sourceValueMember);
 
-
-                //I just couldn't figure it out, but this hack works!! Yej.
-                if (i == 0 && _emptyValue != null)
-                {
-                    sourceDisplayMember = _emptyValue;
-                    sourceValueMember = _emptyID;
-
-                    _emptyValue = null;
-                    i = -1;
-                }
+                var item = new CCBoxItem(sourceDisplayMember, sourceValueMember);
+                _box.Items.Add(item);
 
                 var target = new
                 {
@@ -101,108 +81,14 @@ namespace TMCWorkbench.Controls.Resettable
                 _targetList.Add(target);
             }
 
-            //foreach (var sourceItem in sourceList)
-            //{
-            //    var sourceDisplayMember = GetValueFromAnonymousType<string>(sourceItem, _sourceDisplayMember);
-            //    var sourceValueMember = GetValueFromAnonymousType<int>(sourceItem, _sourceValueMember);
-
-            //    var target = new
-            //    {
-            //        DisplayMember = sourceDisplayMember,
-            //        ValueMember = sourceValueMember
-            //    };
-
-            //    _targetList.Add(target);
-            //}
-
-            bindingSource.DataSource = _targetList;
-
-            _box.DisplayMember = DISPLAYMEMBER;
-            _box.ValueMember = VALUEMEMBER;
-            _box.AutoCompleteMode = AutoCompleteMode.Suggest;
-            _box.AutoCompleteSource = AutoCompleteSource.ListItems;
-            _box.DataSource = bindingSource;
+            _box.DisplayMember = _sourceDisplayMember;
+            //_box.ValueMember = VALUEMEMBER;
+            //_box.AutoCompleteMode = AutoCompleteMode.Suggest;
+            //_box.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //_box.DataSource = bindingSource;
         }
 
-
-        public void DataBindOLD()
-        {
-            //Ok, misschien moet ik gewoon een displaymember en valuemember maken in code, dus als hier:
-            //https://stackoverflow.com/questions/36035569/using-expandoobject-with-combobox-items-not-picking-up-display-and-value-members
-
-            //Meer:
-            //https://visualstudiomagazine.com/articles/2019/04/01/working-with-dynamic-objects.aspx
-            //https://stackoverflow.com/questions/4938397/dynamically-adding-properties-to-an-expandoobject
-
-
-
-
-            var bindingSource = new BindingSource();
-            var list = _sourceList.ToList();
-            var bindingList = new List<dynamic>();
-
-            //foreach (var item in list)
-            //{
-            //    var index = GetValueFromAnonymousType<int>(item, _valueMember);
-
-            //    Console.WriteLine(index);
-
-            //    //dynamic obj = new System.Dynamic.ExpandoObject();
-            //    //var nja = (IDictionary<string, int>)item;
-
-            //    //var x = nja[_displayMember];
-
-            //    //((IDictionary<string, object>)obj)[_displayMember] = item[_displayMember];
-            //    //((IDictionary<string, object>)obj)[_valueMember] = item[_valueMember];
-
-            //    //p[_valueMember] = item[_valueMember];
-            //    //p[_displayMember] = item[_displayMember];
-
-            //    //bindingList.Add(obj);
-            //}
-
-            //if (_emptyValue != null)
-            //{
-            //    //dynamic obj = new System.Dynamic.ExpandoObject();
-            //    //var p = obj as IDictionary<string, object>;
-            //    //p[_valueMember] = _emptyID;
-            //    //p[_displayMember] = _emptyValue;
-
-            //    ////obj[_valueMember] = _emptyID;
-            //    ////obj[_displayMember] = _emptyValue;
-            //    //list.Insert(0, p);
-
-            //    ////list.Insert(0, new { valueMember = _emptyID, displayMember = _emptyValue });
-            //    //
-            //    //var x = new System.Dynamic.ExpandoObject() as IDictionary<string, Object>;
-            //    //x.Add(_displayMember, _emptyValue);
-            //    //x.Add(_valueMember, _emptyID);
-
-
-            //    var s = new TMCDatabase.DBModel.Composer();
-            //    s.Composer_id = 0;
-            //    s.Name = "== SELECT COMPOSER ==";
-            //    list.Insert(0, new { s.Name, s.Composer_id });
-
-            //    dynamic x = new System.Dynamic.ExpandoObject();
-            //    x.Composer_id = Convert.ToInt32(0);
-            //    x.Name = "x";
-            //    list.Insert(0, new { x.Name, x.Composer_id });
-
-                
-            //    var njaa = true;
-
-            //}
-
-            bindingSource.DataSource = bindingList;
-
-            _box.DisplayMember = _sourceValueMember;
-            _box.ValueMember = _sourceDisplayMember;
-            _box.AutoCompleteMode = AutoCompleteMode.Suggest;
-            _box.AutoCompleteSource = AutoCompleteSource.ListItems;
-            _box.DataSource = bindingSource;
-        }
-
+        //TODO: ext?
         private dynamic GetDynamicItemFromList(dynamic item, string property)
         {
             //return item.GetPropertyValue(property);
@@ -210,12 +96,14 @@ namespace TMCWorkbench.Controls.Resettable
             return propertyInfo.GetValue(item, null);
         }
 
+        //TODO?
         private string GetDisplayMember(dynamic item)
         {
             string value = GetDynamicItemFromList(item, DISPLAYMEMBER);
             return value;
         }
 
+        //TODO?
         private int GetValueMember(dynamic item)
         {
             int value = GetDynamicItemFromList(item, VALUEMEMBER);
@@ -291,8 +179,36 @@ namespace TMCWorkbench.Controls.Resettable
 
                 _resettableControl.SetToolTip(originalValue, currentValue);
             }
-
         }
+
+        public void SetIdValues(int[] ids)
+        {
+            _resettableControl.ResetToolTip();
+            _box.DeselectAll();
+            _box.SetItemsByIdChecked(ids);
+            _ids = ids;
+        }
+
+        public int[] GetIdValues()
+        {
+            return _box.GetCheckedItemIds();
+        }
+
+
+        //public int[] IdValues
+        //{
+        //    get
+        //    {
+        //        return _box.GetCheckedItemIds();
+        //    }
+        //    set
+        //    {
+        //        _resettableControl.ResetToolTip();
+        //        _box.DeselectAll();
+        //        _box.SetItemsByIdChecked(value);
+        //        _ids = value;
+        //    }
+        //}
 
         public int? IdValue
         {

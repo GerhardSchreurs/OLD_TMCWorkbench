@@ -30,6 +30,7 @@
         {
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
+            this.ctrTags = new TMCWorkbench.Controls.Resettable.ResettableCheckBoxDropDownTags();
             this.ctrScore = new TMCWorkbench.Controls.Resettable.ResettableDouble();
             this.ctrScenegroupText = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrScenegroup = new TMCWorkbench.Controls.Resettable.ResettableDropDownSceneGroup();
@@ -44,7 +45,6 @@
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDate();
             this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableText();
-            this.ctrTags = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +80,16 @@
             this.pnlMetaOrg.Name = "pnlMetaOrg";
             this.pnlMetaOrg.Size = new System.Drawing.Size(654, 400);
             this.pnlMetaOrg.TabIndex = 0;
+            // 
+            // ctrTags
+            // 
+            this.ctrTags.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrTags.LabelTitle = "Tags";
+            this.ctrTags.Location = new System.Drawing.Point(0, 336);
+            this.ctrTags.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrTags.Name = "ctrTags";
+            this.ctrTags.Size = new System.Drawing.Size(654, 24);
+            this.ctrTags.TabIndex = 24;
             // 
             // ctrScore
             // 
@@ -229,25 +239,12 @@
             this.ctrFileInfo.Size = new System.Drawing.Size(654, 24);
             this.ctrFileInfo.TabIndex = 6;
             // 
-            // ctrTags
-            // 
-            this.ctrTags.CheckOnClick = true;
-            this.ctrTags.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.ctrTags.DropDownHeight = 1;
-            this.ctrTags.FormattingEnabled = true;
-            this.ctrTags.IntegralHeight = false;
-            this.ctrTags.Location = new System.Drawing.Point(4, 340);
-            this.ctrTags.Name = "ctrTags";
-            this.ctrTags.Size = new System.Drawing.Size(254, 21);
-            this.ctrTags.TabIndex = 23;
-            this.ctrTags.ValueSeparator = ", ";
-            // 
-            // MetaDataControl
+            // ControlMetaData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlMeta);
-            this.Name = "MetaDataControl";
+            this.Name = "ControlMetaData";
             this.Size = new System.Drawing.Size(654, 400);
             this.pnlMeta.ResumeLayout(false);
             this.pnlMetaOrg.ResumeLayout(false);
@@ -273,6 +270,6 @@
         private Resettable.ResettableDropDownStyle ctrStyle;
         private Resettable.ResettableDropDownSceneGroup ctrScenegroup;
         private Resettable.ResettableDouble ctrScore;
-        private ControlCheckBoxDropDown ctrTags;
+        private Resettable.ResettableCheckBoxDropDownTags ctrTags;
     }
 }

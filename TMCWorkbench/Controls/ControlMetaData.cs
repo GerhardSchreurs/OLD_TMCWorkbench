@@ -35,43 +35,69 @@ namespace TMCWorkbench.Controls
             ctrStyle.Init();
             ctrComposer.Init();
             ctrScenegroup.Init();
+            ctrTags.Init();
 
             ctrStyleText.SwitchMode();
             ctrComposerText.SwitchMode();
             ctrScenegroupText.SwitchMode();
 
-            InitTags();
+            //InitTags();
         }
 
-        private List<C_Track_Tag> _trackTagsWithTag;
+        //private List<C_Track_Tag> _trackTagsWithTag;
 
-        void InitTags()
-        {
-            DB.LoadTags();
-            DB.LoadTrackTagsWithTag();
+        //void InitTags()
+        //{
+        //    DB.LoadTags();
+        //    DB.LoadTrackTagsWithTag();
 
-            _trackTagsWithTag = DB.TracksTagsWithTag.ToList();
+        //    _trackTagsWithTag = DB.TracksTagsWithTag.ToList();
 
-            foreach (var tag in DB.Tags)
-            {
-                var box = new CCBoxItem(tag.Name, tag.Tag_id);
-                ctrTags.Items.Add(box);
-            }
+        //    foreach (var tag in DB.Tags)
+        //    {
+        //        var box = new CCBoxItem(tag.Name, tag.Tag_id);
+        //        ctrTagsOLD.Items.Add(box);
+        //    }
 
-            ctrTags.DisplayMember = "Name";
-        }
+        //    ctrTagsOLD.DisplayMember = "Name";
+        //}
 
-        void SelectTags(int trackId)
-        {
-            ctrTags.DeselectAll();
+        //void SelectTags(int trackId)
+        //{
+        //    //ctrTagsOLD.DeselectAll();
 
-            if (trackId <= 0) return;
+        //    //if (trackId <= 0) return;
 
-            foreach (var tag in _trackTagsWithTag.Where(x => x.FK_track_id == trackId))
-            {
-                ctrTags.SetItemByIdChecked(tag.FK_tag_id, true);
-            }
-        }
+        //    var results = _trackTagsWithTag.Where(x => x.FK_track_id == trackId).ToList();
+        //    var arr = new int[results.Count];
+
+        //    for (var i = 0; i<arr.Length; i++)
+        //    {
+        //        arr[i] = results[i].FK_tag_id;
+        //    }
+
+        //    ctrTags.IdValues = arr;
+
+        //    //foreach (var tag in _trackTagsWithTag.Where(x => x.FK_track_id == trackId))
+        //    //{
+        //    //    ctrTagsOLD.SetItemByIdChecked(tag.FK_tag_id, true);
+        //    //}
+        //}
+
+        //void FillTags(int trackId)
+        //{
+        //    //if (trackId <= 0) return;
+
+        //    var results = _trackTagsWithTag.Where(x => x.FK_track_id == trackId).ToList();
+        //    var arr = new int[results.Count];
+
+        //    for (var i = 0; i < arr.Length; i++)
+        //    {
+        //        arr[i] = results[i].FK_tag_id;
+        //    }
+
+        //    ctrTags.IdValues = arr;
+        //}
 
 
 
@@ -282,6 +308,15 @@ namespace TMCWorkbench.Controls
             return SceneGroup.IsNullOrEmpty() ? ScenegroupText : SceneGroup;
         }
 
+        public int[] GetTagIds()
+        {
+            return ctrTags.GetIdValues();
+        }
+
+        public void SetTagIds(int[] ids)
+        {
+            ctrTags.SetIdValues(ids);
+        }
 
         public void LoadData(Bag bag)
         {
@@ -320,8 +355,8 @@ namespace TMCWorkbench.Controls
                 ctrSpeed.SetValuesOriginal(mod.Speed, mod.Tempo);
                 ctrBPM.SetValueOriginal(mod.EstimatedBPM);
                 ctrStyle.TextValueOriginal = mod.TrackStyle;
-
-                this.SelectTags(track.Track_id);
+                ctrTags.SetIdValues(bag.GetTrackTagsArray());
+                //this.SelectTags(track.Track_id);
                 //TODO TRACKER ORIGINAL
             }
             else
@@ -339,7 +374,7 @@ namespace TMCWorkbench.Controls
                 this.ComposerText = "";
                 this.ScenegroupText = "";
 
-                this.SelectTags(0);
+                this.SetTagIds(null);
 
                 //TODO
                 //if (ctrStyle.SetStyle(mod.TrackStyle))
