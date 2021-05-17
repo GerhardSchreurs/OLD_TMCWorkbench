@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TMCWorkbench.Helpers;
 
 namespace TMCWorkbench.Controls.Resettable
 {
@@ -43,13 +44,6 @@ namespace TMCWorkbench.Controls.Resettable
             _resettableControl.OnReset += ResettableControl1_OnReset;
         }
 
-        //public ExpandoObject CreateDynamicListItem(string propertyName, string PropertyValue)
-        //{
-        //    dynamic obj = new ExpandoObject();
-        //    ((IDictionary<string, object>)obj)[propertyName] = PropertyValue;
-        //    return obj;
-        //}
-
         //TODO: Ext?
         public static T GetValueFromAnonymousType<T>(object dataitem, string itemkey)
         {
@@ -71,16 +65,11 @@ namespace TMCWorkbench.Controls.Resettable
             var sourceList = _sourceList.ToList();
             _targetList = new List<dynamic>();
 
-
             for (var i = 0; i<sourceList.Count; i++)
             {
                 var sourceItem = sourceList[i];
-                var sourceDisplayMember = GetValueFromAnonymousType<string>(sourceItem, _sourceDisplayMember);
-                var sourceValueMember = GetValueFromAnonymousType<int>(sourceItem, _sourceValueMember);
-
-                //var sourceDisplayMember = sourceItem.GetValueFromAnonymousType<string>(_sourceDisplayMember);
-                //var sourceValueMember = sourceItem.GetValueFromAnonymousType<int>(_sourceValueMember);
-
+                var sourceDisplayMember = DynamicHelper.GetPropertyValueFromDynamic<string>(sourceItem, _sourceDisplayMember);
+                var sourceValueMember = DynamicHelper.GetPropertyValueFromDynamic<int>(sourceItem, _sourceValueMember);
 
                 //I just couldn't figure it out, but this hack works!! Yej.
                 if (i == 0 && _emptyValue != null)
@@ -101,103 +90,10 @@ namespace TMCWorkbench.Controls.Resettable
                 _targetList.Add(target);
             }
 
-            //foreach (var sourceItem in sourceList)
-            //{
-            //    var sourceDisplayMember = GetValueFromAnonymousType<string>(sourceItem, _sourceDisplayMember);
-            //    var sourceValueMember = GetValueFromAnonymousType<int>(sourceItem, _sourceValueMember);
-
-            //    var target = new
-            //    {
-            //        DisplayMember = sourceDisplayMember,
-            //        ValueMember = sourceValueMember
-            //    };
-
-            //    _targetList.Add(target);
-            //}
-
             bindingSource.DataSource = _targetList;
 
             _box.DisplayMember = DISPLAYMEMBER;
             _box.ValueMember = VALUEMEMBER;
-            _box.AutoCompleteMode = AutoCompleteMode.Suggest;
-            _box.AutoCompleteSource = AutoCompleteSource.ListItems;
-            _box.DataSource = bindingSource;
-        }
-
-
-        public void DataBindOLD()
-        {
-            //Ok, misschien moet ik gewoon een displaymember en valuemember maken in code, dus als hier:
-            //https://stackoverflow.com/questions/36035569/using-expandoobject-with-combobox-items-not-picking-up-display-and-value-members
-
-            //Meer:
-            //https://visualstudiomagazine.com/articles/2019/04/01/working-with-dynamic-objects.aspx
-            //https://stackoverflow.com/questions/4938397/dynamically-adding-properties-to-an-expandoobject
-
-
-
-
-            var bindingSource = new BindingSource();
-            var list = _sourceList.ToList();
-            var bindingList = new List<dynamic>();
-
-            //foreach (var item in list)
-            //{
-            //    var index = GetValueFromAnonymousType<int>(item, _valueMember);
-
-            //    Console.WriteLine(index);
-
-            //    //dynamic obj = new System.Dynamic.ExpandoObject();
-            //    //var nja = (IDictionary<string, int>)item;
-
-            //    //var x = nja[_displayMember];
-
-            //    //((IDictionary<string, object>)obj)[_displayMember] = item[_displayMember];
-            //    //((IDictionary<string, object>)obj)[_valueMember] = item[_valueMember];
-
-            //    //p[_valueMember] = item[_valueMember];
-            //    //p[_displayMember] = item[_displayMember];
-
-            //    //bindingList.Add(obj);
-            //}
-
-            //if (_emptyValue != null)
-            //{
-            //    //dynamic obj = new System.Dynamic.ExpandoObject();
-            //    //var p = obj as IDictionary<string, object>;
-            //    //p[_valueMember] = _emptyID;
-            //    //p[_displayMember] = _emptyValue;
-
-            //    ////obj[_valueMember] = _emptyID;
-            //    ////obj[_displayMember] = _emptyValue;
-            //    //list.Insert(0, p);
-
-            //    ////list.Insert(0, new { valueMember = _emptyID, displayMember = _emptyValue });
-            //    //
-            //    //var x = new System.Dynamic.ExpandoObject() as IDictionary<string, Object>;
-            //    //x.Add(_displayMember, _emptyValue);
-            //    //x.Add(_valueMember, _emptyID);
-
-
-            //    var s = new TMCDatabase.DBModel.Composer();
-            //    s.Composer_id = 0;
-            //    s.Name = "== SELECT COMPOSER ==";
-            //    list.Insert(0, new { s.Name, s.Composer_id });
-
-            //    dynamic x = new System.Dynamic.ExpandoObject();
-            //    x.Composer_id = Convert.ToInt32(0);
-            //    x.Name = "x";
-            //    list.Insert(0, new { x.Name, x.Composer_id });
-
-                
-            //    var njaa = true;
-
-            //}
-
-            bindingSource.DataSource = bindingList;
-
-            _box.DisplayMember = _sourceValueMember;
-            _box.ValueMember = _sourceDisplayMember;
             _box.AutoCompleteMode = AutoCompleteMode.Suggest;
             _box.AutoCompleteSource = AutoCompleteSource.ListItems;
             _box.DataSource = bindingSource;
@@ -212,14 +108,12 @@ namespace TMCWorkbench.Controls.Resettable
 
         private string GetDisplayMember(dynamic item)
         {
-            string value = GetDynamicItemFromList(item, DISPLAYMEMBER);
-            return value;
+            return (string)DynamicHelper.GetPropertyValueFromDynamic(item, DISPLAYMEMBER);
         }
 
         private int GetValueMember(dynamic item)
         {
-            int value = GetDynamicItemFromList(item, VALUEMEMBER);
-            return value;
+            return (int)DynamicHelper.GetPropertyValueFromDynamic(item, VALUEMEMBER);
         }
 
         public string TextValue

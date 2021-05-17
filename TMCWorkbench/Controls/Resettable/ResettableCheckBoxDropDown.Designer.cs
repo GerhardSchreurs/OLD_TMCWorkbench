@@ -74,6 +74,7 @@ namespace TMCWorkbench.Controls.Resettable
             this.chkLock.Size = new System.Drawing.Size(15, 18);
             this.chkLock.TabIndex = 1;
             this.chkLock.UseVisualStyleBackColor = true;
+            this.chkLock.CheckedChanged += new System.EventHandler(this.Handle_chkLock_CheckedChanged);
             // 
             // btnEdit
             // 

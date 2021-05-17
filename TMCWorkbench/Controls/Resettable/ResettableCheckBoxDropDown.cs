@@ -14,7 +14,7 @@ namespace TMCWorkbench.Controls.Resettable
     {
         private ResettableCheckBoxDropDownHelper _helper;
         private Form _editForm;
-        //private int? _oldIndex;
+        private int[] _oldIds;
 
         public ResettableCheckBoxDropDown()
         {
@@ -47,40 +47,24 @@ namespace TMCWorkbench.Controls.Resettable
 
         private void Handle_BtnEdit_Click(object sender, EventArgs e)
         {
-            //_oldIndex = IdValue;
+            _oldIds = GetIdValues();
             _editForm.ShowDialog();
         }
 
         private void Handle_editForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ((IRefreshableInit)this).Init(true);
-            //IdValue = _oldIndex;
+            SetIdValues(_oldIds);
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string TextValue
-        {
-            get => _helper?.TextValue ?? ""; //HACK: visual studio
-            set
-            {
-                if (_helper == null) return;
-                if (chkLock.Checked) return;
-
-                _helper.TextValue = value;
-            }
-        }
-
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string TextValueOriginal
-        {
-            set => _helper.TextValueOriginal = value;
-        }
-
-        //[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public void SetIdValues(int[] ids)
         {
             if (_helper == null) return;
-            if (chkLock.Checked) return;
+            if (chkLock.Checked)
+            {
+                _oldIds = ids;
+                return;
+            }
             _helper.SetIdValues(ids);
         }
 
@@ -90,28 +74,17 @@ namespace TMCWorkbench.Controls.Resettable
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int? IdValue
-        {
-            get => _helper?.IdValue ?? 0; //HACK: visual studio
-            set
-            {
-                if (_helper == null) return;
-                if (chkLock.Checked) return;
-                _helper.IdValue = value;
-            }
-        }
-
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int? IdValueOriginal
-        {
-            set => _helper.IdValueOriginal = value;
-        }
-
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public void Reset()
         {
             if (chkLock.Checked) return;
             _helper.Reset();
+        }
+
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        private void Handle_chkLock_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLock.Checked == false)
+                SetIdValues(_oldIds);
         }
     }
 }

@@ -364,6 +364,7 @@
       <DependentUpon>FormTest.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Helpers\DynamicHelper.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\Bag.cs" />

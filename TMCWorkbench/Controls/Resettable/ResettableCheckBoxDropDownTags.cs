@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMCDatabase.DBModel;
+﻿using System.Linq;
 using TMCWorkbench.DB;
 
 namespace TMCWorkbench.Controls.Resettable
@@ -11,24 +6,6 @@ namespace TMCWorkbench.Controls.Resettable
     public class ResettableCheckBoxDropDownTags : ResettableCheckBoxDropDown, IRefreshableInit
     {
         private UCTags _form;
-
-        private List<C_Track_Tag> _trackTagsWithTag;
-
-        private void UpdateTracksWithTag()
-        {
-            if (_trackTagsWithTag == null)
-                _trackTagsWithTag = DBManager.Instance.TracksTagsWithTag.ToList();
-        }
-
-        public void Update(int trackId)
-        {
-            if (trackId <= 0) return;
-            UpdateTracksWithTag();
-
-            var ids = _trackTagsWithTag.Where(x => x.FK_track_id == trackId);
-
-        }
-
 
         public void Init(bool refresh = false)
         {
