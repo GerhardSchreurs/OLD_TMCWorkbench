@@ -47,6 +47,7 @@ namespace TMCWorkbench.DB
         public List<Style> Styles;
         public List<Track> Tracks;
         public List<Tag> Tags;
+        public List<Playlist> Playlists;
         public List<Tracker> Trackers;
         public List<TrackStyle> TrackStyles;
         public List<Scenegroup> SceneGroups;
@@ -54,6 +55,7 @@ namespace TMCWorkbench.DB
         public List<C_Scenegroup_Composer> GroupsComposers;
         public List<C_Track_Tag> TracksTags;
         public List<C_Track_Tag> TracksTagsWithTag;
+        public List<C_Track_Playlist> TracksPlaylists;
 
         public Track Track;
 
@@ -136,8 +138,17 @@ namespace TMCWorkbench.DB
         {
             if (refresh || refresh == false && Tags == null)
             {
-                C.Tags.Load();
+                //C.Tags.Load();
                 Tags = C.Tags.ToList();
+            }
+        }
+
+        public void LoadPlaylists(bool refresh = false)
+        {
+            if (refresh || refresh == false && Playlists == null)
+            {
+                //C.Playlists.Load();
+                Playlists = C.Playlists.ToList();
             }
         }
 
@@ -145,7 +156,7 @@ namespace TMCWorkbench.DB
         {
             if (refresh || refresh == false && SceneGroups == null)
             {
-                C.Scenegroups.Load();
+                //C.Scenegroups.Load();
                 SceneGroups = C.Scenegroups.ToList();
             }
         }
@@ -154,7 +165,7 @@ namespace TMCWorkbench.DB
         {
             if (refresh || refresh == false && Tracks == null)
             {
-                C.Composers.Load();
+                //C.Composers.Load();
                 Composers = C.Composers.ToList();
             }
         }
@@ -163,7 +174,7 @@ namespace TMCWorkbench.DB
         {
             if (refresh || refresh == false && GroupsComposers == null)
             {
-                C.C_Scenegroup_Composers.Load();
+                //C.C_Scenegroup_Composers.Load();
                 GroupsComposers = C.C_Scenegroup_Composers.ToList();
             }
         }
@@ -172,8 +183,15 @@ namespace TMCWorkbench.DB
         {
             if (refresh || refresh == false && TracksTags == null)
             {
-                //C.C_Track_Tags.Load();
                 TracksTags = C.C_Track_Tags.ToList();
+            }
+        }
+
+        public void LoadTracksPlaylists(bool refresh = false)
+        {
+            if (refresh || refresh == false && TracksPlaylists == null)
+            {
+                TracksPlaylists = C.C_Track_Playlists.ToList();
             }
         }
 
@@ -185,7 +203,6 @@ namespace TMCWorkbench.DB
                 TracksTagsWithTag = C.C_Track_Tags.Include(x => x.Tag).ToList();
             }
         }
-
 
         public bool LoadTrackInfo(Guid guid)
         {
@@ -235,6 +252,15 @@ namespace TMCWorkbench.DB
             C.C_Track_Tags.Add(tag);
         }
 
+        public void AddTrackToPlaylist(int playlistId, int trackId)
+        {
+            var playlist = new C_Track_Playlist();
+            playlist.FK_playlist_id = playlistId;
+            playlist.FK_track_id = trackId;
+
+            C.C_Track_Playlists.Add(playlist);
+        }
+
         public void UpdateTrackTags(int trackId, int[] tagIds)
         {
             C.C_Track_Tags.RemoveRange(C.C_Track_Tags.Where(x => x.FK_track_id == trackId));
@@ -261,6 +287,20 @@ namespace TMCWorkbench.DB
             if (refresh)
             {
                 LoadTags(true);
+            }
+        }
+
+        public void Add(Playlist playlist, bool save = true, bool refresh = true)
+        {
+            C.Playlists.Add(playlist);
+
+            if (save)
+            {
+                C.SaveChanges();
+            }
+            if (refresh)
+            {
+                LoadPlaylists(true);
             }
         }
 
@@ -352,6 +392,26 @@ namespace TMCWorkbench.DB
             C.C_Track_Tags.RemoveRange(collection);
         }
 
+        public void RemoveTrackFromPlaylist(Playlist playlist, List<Track> tracks)
+        {
+            if (tracks == null) return;
+
+            var collection = new List<C_Track_Playlist>();
+
+            foreach (var track in tracks)
+            {
+                foreach (var x in TracksPlaylists.Where(x => x.FK_playlist_id == playlist.Playlist_id))
+                {
+                    if (x.FK_track_id == track.Track_id)
+                    {
+                        collection.Add(x);
+                    }
+                }
+            }
+
+            C.C_Track_Playlists.RemoveRange(collection);
+        }
+
         public void Remove(Composer composer)
         {
             C.Composers.Remove(composer);
@@ -370,6 +430,11 @@ namespace TMCWorkbench.DB
         public void Remove(Tag tag)
         {
             C.Tags.Remove(tag);
+        }
+
+        public void Remove(Playlist playlist)
+        {
+            C.Playlists.Remove(playlist);
         }
 
         public void Replace(Scenegroup scenegroup)

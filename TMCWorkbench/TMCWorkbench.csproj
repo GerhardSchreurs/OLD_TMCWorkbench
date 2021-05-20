@@ -328,6 +328,18 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DB\DBManager.cs" />
+    <Compile Include="Dialogs\_DialogBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\_DialogBase.Designer.cs">
+      <DependentUpon>_DialogBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PlaylistDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PlaylistDialog.Designer.cs">
+      <DependentUpon>PlaylistDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\DoubleStringDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -380,6 +392,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThreadHelperClass.cs" />
+    <Compile Include="UCPlayLists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCPlayLists.Designer.cs">
+      <DependentUpon>UCPlayLists.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCSceneGroups.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -482,6 +500,12 @@
     <EmbeddedResource Include="Controls\ControlTextArea.resx">
       <DependentUpon>ControlTextArea.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\_DialogBase.resx">
+      <DependentUpon>_DialogBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PlaylistDialog.resx">
+      <DependentUpon>PlaylistDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DoubleStringDialog.resx">
       <DependentUpon>DoubleStringDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -503,6 +527,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UCPlayLists.resx">
+      <DependentUpon>UCPlayLists.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCSceneGroups.resx">
       <DependentUpon>UCSceneGroups.cs</DependentUpon>
     </EmbeddedResource>

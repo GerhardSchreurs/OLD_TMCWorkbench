@@ -13,7 +13,7 @@ using TMCWorkbench.Tools;
 
 namespace TMCWorkbench.Dialogs
 {
-    public partial class StylesDialog : Form
+    public partial class StylesDialog : DialogBase
     {
         private TMCWorkbench.DB.DBManager DB = TMCWorkbench.DB.DBManager.Instance;
 
@@ -108,16 +108,6 @@ namespace TMCWorkbench.Dialogs
             DB.Save();
             RaiseOnUpdated();
             Close();
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Escape)
-            {
-                this.Close();
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void label2_Click(object sender, EventArgs e)

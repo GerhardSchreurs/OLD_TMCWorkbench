@@ -144,6 +144,14 @@ namespace TMCWorkbench
                 form.ShowDialog();
             }
         }
+
+        private void Handle_playlistsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var form = new UCPlayLists())
+            {
+                form.ShowDialog();
+            }
+        }
         #endregion
 
         private async Task LoadTrack(string path)

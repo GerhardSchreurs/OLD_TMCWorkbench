@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TMCWorkbench.Dialogs
 {
-    public partial class DoubleStringDialog : Form
+    public partial class DoubleStringDialog : DialogBase
     {
         public string LabelA {
             get => lblA.Text;
@@ -51,16 +51,6 @@ namespace TMCWorkbench.Dialogs
             TextB = txtB;
             btnAction.Text = okText;
             return (ShowDialog());
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Escape)
-            {
-                this.Close();
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
