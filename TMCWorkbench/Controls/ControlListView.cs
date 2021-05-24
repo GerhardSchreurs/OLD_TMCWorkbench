@@ -122,7 +122,7 @@ namespace TMCWorkbench.Controls
             var item = listView1.SelectedItems[0];
             var info = item.Tag.ToString();
 
-            EventInvoker.RaiseOnListViewSelected(this, info);
+            EventInvoker.RaiseOnBrowserListViewSelected(this, info);
         }
 
         string GetStringExtensionFromFileInfo(FileInfo info)

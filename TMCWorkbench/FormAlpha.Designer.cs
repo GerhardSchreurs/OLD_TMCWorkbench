@@ -31,10 +31,6 @@ namespace TMCWorkbench
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAlpha));
-            this.tableBrowser = new System.Windows.Forms.TableLayoutPanel();
-            this.btnBla = new System.Windows.Forms.Button();
-            this.ctrBrowser = new TMCWorkbench.Controls.ControlBrowser();
-            this.btnTest = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -48,11 +44,12 @@ namespace TMCWorkbench
             this.scenegroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.composersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playlistsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabOriginal = new System.Windows.Forms.TabPage();
             this.tabDatabase = new System.Windows.Forms.TabPage();
             this.tableInner = new System.Windows.Forms.TableLayoutPanel();
-            this.tableControls = new System.Windows.Forms.TableLayoutPanel();
+            this.tableRightControls = new System.Windows.Forms.TableLayoutPanel();
             this.ctrPlayer = new TMCWorkbench.Controls.ControlMusic();
             this.tableEditControls = new System.Windows.Forms.TableLayoutPanel();
             this.ctrOutput = new TMCWorkbench.Controls.ControlOutput();
@@ -64,66 +61,25 @@ namespace TMCWorkbench
             this.ctrMetaData = new TMCWorkbench.Controls.ControlMetaData();
             this.pnlEndgame = new System.Windows.Forms.Panel();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ctrTracks = new TMCWorkbench.Controls.ControlListView();
-            this.playlistsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableBrowser.SuspendLayout();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableOffline = new System.Windows.Forms.TableLayoutPanel();
+            this.ctrBrowser = new TMCWorkbench.Controls.ControlBrowser();
+            this.ctrListView = new TMCWorkbench.Controls.ControlListView();
+            this.controlTracks1 = new TMCWorkbench.Controls.ControlTracks();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tableInner.SuspendLayout();
-            this.tableControls.SuspendLayout();
+            this.tableRightControls.SuspendLayout();
             this.tableEditControls.SuspendLayout();
             this.tableRight.SuspendLayout();
             this.tableMetaData.SuspendLayout();
             this.pnlEndgame.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableOffline.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableBrowser
-            // 
-            this.tableBrowser.ColumnCount = 1;
-            this.tableBrowser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableBrowser.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableBrowser.Controls.Add(this.btnBla, 0, 2);
-            this.tableBrowser.Controls.Add(this.ctrBrowser, 0, 0);
-            this.tableBrowser.Controls.Add(this.btnTest, 0, 1);
-            this.tableBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableBrowser.Location = new System.Drawing.Point(3, 3);
-            this.tableBrowser.Name = "tableBrowser";
-            this.tableBrowser.RowCount = 3;
-            this.tableBrowser.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableBrowser.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableBrowser.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableBrowser.Size = new System.Drawing.Size(244, 904);
-            this.tableBrowser.TabIndex = 4;
-            // 
-            // btnBla
-            // 
-            this.btnBla.Location = new System.Drawing.Point(3, 887);
-            this.btnBla.Name = "btnBla";
-            this.btnBla.Size = new System.Drawing.Size(75, 14);
-            this.btnBla.TabIndex = 3;
-            this.btnBla.Text = "Bla";
-            this.btnBla.UseVisualStyleBackColor = true;
-            // 
-            // ctrBrowser
-            // 
-            this.ctrBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrBrowser.Location = new System.Drawing.Point(3, 3);
-            this.ctrBrowser.Name = "ctrBrowser";
-            this.ctrBrowser.Size = new System.Drawing.Size(238, 838);
-            this.ctrBrowser.TabIndex = 1;
-            // 
-            // btnTest
-            // 
-            this.btnTest.Location = new System.Drawing.Point(3, 847);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTest.TabIndex = 2;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // imageList1
             // 
@@ -223,30 +179,37 @@ namespace TMCWorkbench
             // stylesToolStripMenuItem
             // 
             this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
-            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.stylesToolStripMenuItem.Text = "Styles";
             this.stylesToolStripMenuItem.Click += new System.EventHandler(this.Handle_stylesToolStripMenuItem_Click);
             // 
             // scenegroupsToolStripMenuItem
             // 
             this.scenegroupsToolStripMenuItem.Name = "scenegroupsToolStripMenuItem";
-            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.scenegroupsToolStripMenuItem.Text = "Scenegroups";
             this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.Handle_scenegroupsToolStripMenuItem_Click);
             // 
             // composersToolStripMenuItem
             // 
             this.composersToolStripMenuItem.Name = "composersToolStripMenuItem";
-            this.composersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.composersToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.composersToolStripMenuItem.Text = "Composers";
             this.composersToolStripMenuItem.Click += new System.EventHandler(this.Handle_composersToolStripMenuItem_Click);
             // 
             // tagsToolStripMenuItem
             // 
             this.tagsToolStripMenuItem.Name = "tagsToolStripMenuItem";
-            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.tagsToolStripMenuItem.Text = "Tags";
             this.tagsToolStripMenuItem.Click += new System.EventHandler(this.Handle_tagsToolStripMenuItem_Click);
+            // 
+            // playlistsToolStripMenuItem
+            // 
+            this.playlistsToolStripMenuItem.Name = "playlistsToolStripMenuItem";
+            this.playlistsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.playlistsToolStripMenuItem.Text = "Playlists";
+            this.playlistsToolStripMenuItem.Click += new System.EventHandler(this.Handle_playlistsToolStripMenuItem_Click);
             // 
             // tabControl
             // 
@@ -284,13 +247,12 @@ namespace TMCWorkbench
             // tableInner
             // 
             this.tableInner.BackColor = System.Drawing.SystemColors.Control;
-            this.tableInner.ColumnCount = 3;
-            this.tableInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.tableInner.ColumnCount = 2;
+            this.tableInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 600F));
             this.tableInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableInner.Controls.Add(this.tableControls, 2, 0);
-            this.tableInner.Controls.Add(this.ctrTracks, 1, 0);
-            this.tableInner.Controls.Add(this.tableBrowser, 0, 0);
+            this.tableInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableInner.Controls.Add(this.tableRightControls, 1, 0);
+            this.tableInner.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableInner.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableInner.Location = new System.Drawing.Point(3, 24);
             this.tableInner.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
@@ -300,22 +262,22 @@ namespace TMCWorkbench
             this.tableInner.Size = new System.Drawing.Size(1898, 910);
             this.tableInner.TabIndex = 1;
             // 
-            // tableControls
+            // tableRightControls
             // 
-            this.tableControls.ColumnCount = 1;
-            this.tableControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableControls.Controls.Add(this.ctrPlayer, 0, 2);
-            this.tableControls.Controls.Add(this.tableEditControls, 0, 0);
-            this.tableControls.Controls.Add(this.pnlEndgame, 0, 1);
-            this.tableControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableControls.Location = new System.Drawing.Point(603, 3);
-            this.tableControls.Name = "tableControls";
-            this.tableControls.RowCount = 3;
-            this.tableControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableControls.Size = new System.Drawing.Size(1292, 904);
-            this.tableControls.TabIndex = 2;
+            this.tableRightControls.ColumnCount = 1;
+            this.tableRightControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableRightControls.Controls.Add(this.ctrPlayer, 0, 2);
+            this.tableRightControls.Controls.Add(this.tableEditControls, 0, 0);
+            this.tableRightControls.Controls.Add(this.pnlEndgame, 0, 1);
+            this.tableRightControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableRightControls.Location = new System.Drawing.Point(603, 3);
+            this.tableRightControls.Name = "tableRightControls";
+            this.tableRightControls.RowCount = 3;
+            this.tableRightControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableRightControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableRightControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableRightControls.Size = new System.Drawing.Size(1292, 904);
+            this.tableRightControls.TabIndex = 2;
             // 
             // ctrPlayer
             // 
@@ -468,20 +430,63 @@ namespace TMCWorkbench
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.Handle_btnSave_Click);
             // 
-            // ctrTracks
+            // tableLayoutPanel1
             // 
-            this.ctrTracks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrTracks.Location = new System.Drawing.Point(253, 3);
-            this.ctrTracks.Name = "ctrTracks";
-            this.ctrTracks.Size = new System.Drawing.Size(344, 904);
-            this.ctrTracks.TabIndex = 3;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.tableOffline, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.controlTracks1, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 910);
+            this.tableLayoutPanel1.TabIndex = 3;
             // 
-            // playlistsToolStripMenuItem
+            // tableOffline
             // 
-            this.playlistsToolStripMenuItem.Name = "playlistsToolStripMenuItem";
-            this.playlistsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.playlistsToolStripMenuItem.Text = "Playlists";
-            this.playlistsToolStripMenuItem.Click += new System.EventHandler(this.Handle_playlistsToolStripMenuItem_Click);
+            this.tableOffline.ColumnCount = 2;
+            this.tableOffline.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableOffline.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.tableOffline.Controls.Add(this.ctrBrowser, 0, 0);
+            this.tableOffline.Controls.Add(this.ctrListView, 1, 0);
+            this.tableOffline.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableOffline.Location = new System.Drawing.Point(0, 0);
+            this.tableOffline.Margin = new System.Windows.Forms.Padding(0);
+            this.tableOffline.Name = "tableOffline";
+            this.tableOffline.RowCount = 1;
+            this.tableOffline.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableOffline.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableOffline.Size = new System.Drawing.Size(600, 455);
+            this.tableOffline.TabIndex = 4;
+            // 
+            // ctrBrowser
+            // 
+            this.ctrBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrBrowser.Location = new System.Drawing.Point(3, 3);
+            this.ctrBrowser.Name = "ctrBrowser";
+            this.ctrBrowser.Size = new System.Drawing.Size(244, 449);
+            this.ctrBrowser.TabIndex = 0;
+            // 
+            // ctrListView
+            // 
+            this.ctrListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrListView.Location = new System.Drawing.Point(253, 3);
+            this.ctrListView.Name = "ctrListView";
+            this.ctrListView.Size = new System.Drawing.Size(344, 449);
+            this.ctrListView.TabIndex = 1;
+            // 
+            // controlTracks1
+            // 
+            this.controlTracks1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.controlTracks1.Location = new System.Drawing.Point(3, 458);
+            this.controlTracks1.Name = "controlTracks1";
+            this.controlTracks1.Size = new System.Drawing.Size(594, 449);
+            this.controlTracks1.TabIndex = 5;
             // 
             // FormAlpha
             // 
@@ -492,7 +497,6 @@ namespace TMCWorkbench
             this.Name = "FormAlpha";
             this.Text = "FormAlpha";
             this.Load += new System.EventHandler(this.Form_Load);
-            this.tableBrowser.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tableOuter.ResumeLayout(false);
@@ -503,21 +507,18 @@ namespace TMCWorkbench
             this.menuStrip1.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tableInner.ResumeLayout(false);
-            this.tableControls.ResumeLayout(false);
+            this.tableRightControls.ResumeLayout(false);
             this.tableEditControls.ResumeLayout(false);
             this.tableRight.ResumeLayout(false);
             this.tableMetaData.ResumeLayout(false);
             this.pnlEndgame.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableOffline.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private Controls.ControlListView ctrTracks;
-        private System.Windows.Forms.TableLayoutPanel tableBrowser;
-        private System.Windows.Forms.Button btnBla;
-        private Controls.ControlBrowser ctrBrowser;
-        private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
@@ -534,7 +535,7 @@ namespace TMCWorkbench
         private System.Windows.Forms.TabPage tabOriginal;
         private System.Windows.Forms.TabPage tabDatabase;
         private System.Windows.Forms.TableLayoutPanel tableInner;
-        private System.Windows.Forms.TableLayoutPanel tableControls;
+        private System.Windows.Forms.TableLayoutPanel tableRightControls;
         private Controls.ControlMusic ctrPlayer;
         private System.Windows.Forms.TableLayoutPanel tableEditControls;
         private System.Windows.Forms.TableLayoutPanel tableRight;
@@ -548,5 +549,10 @@ namespace TMCWorkbench
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolStripMenuItem tagsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem playlistsToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableOffline;
+        private Controls.ControlBrowser ctrBrowser;
+        private Controls.ControlListView ctrListView;
+        private Controls.ControlTracks controlTracks1;
     }
 }

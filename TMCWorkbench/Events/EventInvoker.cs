@@ -13,17 +13,33 @@ namespace TMCWorkbench.Events
         public delegate void BrowseEventArgsDelegate(object sender, DirectoryInfoEventArgs directoryInfoEventArgs);
         public static event BrowseEventArgsDelegate OnBrowserControlBrowse;
 
-        public delegate void ListViewSelectedEventArgsDelegate(object sender, string fullName);
-        public static event ListViewSelectedEventArgsDelegate OnListViewControlSelected;
-
         public static void RaiseOnBrowse(object sender, DirectoryInfo directoryInfo)
         {
             OnBrowserControlBrowse?.Invoke(sender, new DirectoryInfoEventArgs(directoryInfo));
         }
 
-        public static void RaiseOnListViewSelected(object sender, string fullName)
+        public delegate void ListViewSelectedEventArgsDelegate(object sender, string fullName);
+        public static event ListViewSelectedEventArgsDelegate OnListViewBrowserControlSelected;
+
+        public static void RaiseOnBrowserListViewSelected(object sender, string fullName)
         {
-            OnListViewControlSelected?.Invoke(sender, fullName);
+            OnListViewBrowserControlSelected?.Invoke(sender, fullName);
+        }
+
+        public delegate void ListViewTrackSelectedEventArgsDelegate(object sender, int trackId);
+        public static event ListViewTrackSelectedEventArgsDelegate OnListViewTrackControlSelected;
+
+        public static void RaiseOnTrackListViewSelected(object sender, int trackId)
+        {
+            OnListViewTrackControlSelected?.Invoke(sender, trackId);
+        }
+
+        public delegate void TrackProcessedEventArgsDelegate(object sender, long time);
+        public static event TrackProcessedEventArgsDelegate OnTrackProcessed;
+
+        public static void RaiseOnTrackProcessed(object sender, long time)
+        {
+            OnTrackProcessed?.Invoke(sender, time);
         }
     }
 }

@@ -205,6 +205,12 @@
     <Compile Include="Controls\ControlOutput.Designer.cs">
       <DependentUpon>ControlOutput.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ControlTracks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ControlTracks.Designer.cs">
+      <DependentUpon>ControlTracks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -451,6 +457,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ControlOutput.resx">
       <DependentUpon>ControlOutput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ControlTracks.resx">
+      <DependentUpon>ControlTracks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableBpm.resx">
       <DependentUpon>ResettableBpm.cs</DependentUpon>

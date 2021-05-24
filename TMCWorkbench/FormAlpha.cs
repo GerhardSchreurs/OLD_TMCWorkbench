@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TMCWorkbench.Model;
+using System.IO;
 
 namespace TMCWorkbench
 {
@@ -32,10 +33,12 @@ namespace TMCWorkbench
             PositionForm();
 
             EventInvoker.OnBrowserControlBrowse += Handle_ctrBrowser_OnBrowse;
-            EventInvoker.OnListViewControlSelected += Handle_ctrTracks_OnSelected;
+            EventInvoker.OnListViewBrowserControlSelected += Handle_ctrListView_OnSelected;
+            EventInvoker.OnListViewTrackControlSelected += Handle_ctrTrack_OnListViewTrackControlSelected;
+            EventInvoker.OnTrackProcessed += Handle_EventInvoker_OnTrackProcessed;
 
             ctrBrowser.Init();
-            ctrTracks.Init();
+            ctrListView.Init();
             ctrPlayer.Init();
             ctrMetaData.Init();
 
@@ -45,6 +48,8 @@ namespace TMCWorkbench
 
         private void Form_Load(object sender, EventArgs e)
         {
+            Directory.CreateDirectory(C.PATHCACHE);
+
             toolStripStatusLabel.Text = "Loading";
             DB.LoadTrackstyles();
             toolStripStatusLabel.Text = "Done loading";
@@ -53,19 +58,48 @@ namespace TMCWorkbench
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
+
             PositionFormSave();
+
+            //Clear cache
+            Directory.Delete(C.PATHCACHE, true);
+            Directory.CreateDirectory(C.PATHCACHE);
         }
 
         #region EVENT_CONTROLS
         private void Handle_ctrBrowser_OnBrowse(object sender, Events.EventArgs.DirectoryInfoEventArgs playEventArgs)
         {
-            ctrTracks.BrowseDirectory(playEventArgs.DirectoryInfo);
+            ctrListView.BrowseDirectory(playEventArgs.DirectoryInfo);
         }
 
-        private async void Handle_ctrTracks_OnSelected(object sender, string fullName)
+        private async void Handle_ctrListView_OnSelected(object sender, string fullName)
         {
             await LoadTrack(fullName);
         }
+
+        private async void Handle_ctrTrack_OnListViewTrackControlSelected(object sender, int trackId)
+        {
+            await LoadTrack(trackId);
+        }
+
+        private async void Handle_EventInvoker_OnTrackProcessed(object sender, long time)
+        {
+            long duration = ctrPlayer.MediaTrack.Duration;
+
+            _bag = new Bag();
+
+            await _bag.Load(_lastPath, duration, true);
+            //For easy reference
+            _mod = _bag.Mod;
+            _track = _bag.Track;
+
+            ctrMetaData.LoadData(_bag);
+            InitTextFields();
+
+            EnableTabControl();
+            SwitchTabs(true);
+        }
+
         #endregion
 
         #region EVENT_BUTTON
@@ -154,6 +188,36 @@ namespace TMCWorkbench
         }
         #endregion
 
+        private async Task LoadTrack(int trackId)
+        {
+            toolStripStatusLabel.Text = trackId.ToStr();
+
+        }
+
+        private async Task LoadTrackNew(string path)
+        {
+            toolStripStatusLabel.Text = path;
+
+            if (path != _lastPath)
+            {
+                Debug.WriteLine($"Firing up {path}");
+
+                //await ctrPlayer.LoadTrack(path);
+                ctrPlayer.ProcessAndPlay(path);
+                _lastPath = path;
+            }
+            else
+            {
+                Debug.WriteLine($"**** {path}");
+            }
+        }
+
+        private async Task DoData()
+        {
+
+        }
+
+
         private async Task LoadTrack(string path)
         {
             toolStripStatusLabel.Text = path;
@@ -161,10 +225,17 @@ namespace TMCWorkbench
 
             if (path != _lastPath)
             {
-                await ctrPlayer.LoadTrack(path);
+                Debug.WriteLine($"Firing up {path}");
 
-                duration = ctrPlayer.Media.Duration;
+                //await ctrPlayer.LoadTrack(path);
+                await ctrPlayer.ProcessAndPlay(path);
+
+                duration = ctrPlayer.Duration;
                 _lastPath = path;
+            }
+            else
+            {
+                Debug.WriteLine($"**** {path}");
             }
 
             _bag = new Bag();
@@ -297,7 +368,7 @@ namespace TMCWorkbench
 
             //ctrMetaData.Refresh(true);
             await LoadTrack(_mod.FullName);
-            ctrTracks.MarkInDatabase(_mod.FullName);
+            ctrListView.MarkInDatabase(_mod.FullName);
         }
 
         #region TABS
