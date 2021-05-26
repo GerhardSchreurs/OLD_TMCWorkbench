@@ -460,7 +460,7 @@ namespace TMCWorkbench
             this.tableOffline.Name = "tableOffline";
             this.tableOffline.RowCount = 1;
             this.tableOffline.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableOffline.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableOffline.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 455F));
             this.tableOffline.Size = new System.Drawing.Size(600, 455);
             this.tableOffline.TabIndex = 4;
             // 
@@ -483,9 +483,10 @@ namespace TMCWorkbench
             // controlTracks1
             // 
             this.controlTracks1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.controlTracks1.Location = new System.Drawing.Point(3, 458);
+            this.controlTracks1.Location = new System.Drawing.Point(0, 455);
+            this.controlTracks1.Margin = new System.Windows.Forms.Padding(0);
             this.controlTracks1.Name = "controlTracks1";
-            this.controlTracks1.Size = new System.Drawing.Size(594, 449);
+            this.controlTracks1.Size = new System.Drawing.Size(600, 455);
             this.controlTracks1.TabIndex = 5;
             // 
             // FormAlpha

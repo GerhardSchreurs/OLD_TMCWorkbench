@@ -26,20 +26,12 @@ namespace TMCWorkbench.Events
             OnListViewBrowserControlSelected?.Invoke(sender, fullName);
         }
 
-        public delegate void ListViewTrackSelectedEventArgsDelegate(object sender, int trackId);
+        public delegate void ListViewTrackSelectedEventArgsDelegate(object sender, int trackId, Guid guid, string fileName);
         public static event ListViewTrackSelectedEventArgsDelegate OnListViewTrackControlSelected;
 
-        public static void RaiseOnTrackListViewSelected(object sender, int trackId)
+        public static void RaiseOnTrackListViewSelected(object sender, int trackId, Guid guid, string fileName)
         {
-            OnListViewTrackControlSelected?.Invoke(sender, trackId);
-        }
-
-        public delegate void TrackProcessedEventArgsDelegate(object sender, long time);
-        public static event TrackProcessedEventArgsDelegate OnTrackProcessed;
-
-        public static void RaiseOnTrackProcessed(object sender, long time)
-        {
-            OnTrackProcessed?.Invoke(sender, time);
+            OnListViewTrackControlSelected?.Invoke(sender, trackId, guid, fileName);
         }
     }
 }

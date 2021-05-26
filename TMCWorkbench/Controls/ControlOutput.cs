@@ -41,7 +41,14 @@ namespace TMCWorkbench.Controls
 
             Clear();
 
-            Refresh(_mod.SampleText, _mod.InstrumentText, _mod.SongText, footer);
+            if (_mod == null)
+            {
+                Refresh("", "", "", footer);
+            }
+            else
+            {
+                Refresh(_mod.SampleText, _mod.InstrumentText, _mod.SongText, footer);
+            }
 
             //var header = GenerateHeader();
             //var footer = footer;

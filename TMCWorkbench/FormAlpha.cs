@@ -35,7 +35,6 @@ namespace TMCWorkbench
             EventInvoker.OnBrowserControlBrowse += Handle_ctrBrowser_OnBrowse;
             EventInvoker.OnListViewBrowserControlSelected += Handle_ctrListView_OnSelected;
             EventInvoker.OnListViewTrackControlSelected += Handle_ctrTrack_OnListViewTrackControlSelected;
-            EventInvoker.OnTrackProcessed += Handle_EventInvoker_OnTrackProcessed;
 
             ctrBrowser.Init();
             ctrListView.Init();
@@ -48,11 +47,20 @@ namespace TMCWorkbench
 
         private void Form_Load(object sender, EventArgs e)
         {
-            Directory.CreateDirectory(C.PATHCACHE);
+            Directory.CreateDirectory(C.PATHTRACKCACHE);
+            Directory.CreateDirectory(C.PATHTRACKSTORE);
 
-            toolStripStatusLabel.Text = "Loading";
+            SetStatusText("Loading");
             DB.LoadTrackstyles();
-            toolStripStatusLabel.Text = "Done loading";
+            SetStatusText("Done loading");
+        }
+
+        void SetStatusText(string status)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                toolStripStatusLabel.Text = status;
+            }));
         }
          
         protected override void OnClosed(EventArgs e)
@@ -61,9 +69,11 @@ namespace TMCWorkbench
 
             PositionFormSave();
 
+            //TODO Dispose player
+
             //Clear cache
-            Directory.Delete(C.PATHCACHE, true);
-            Directory.CreateDirectory(C.PATHCACHE);
+            Directory.Delete(C.PATHTRACKCACHE, true);
+            Directory.CreateDirectory(C.PATHTRACKCACHE);
         }
 
         #region EVENT_CONTROLS
@@ -74,32 +84,14 @@ namespace TMCWorkbench
 
         private async void Handle_ctrListView_OnSelected(object sender, string fullName)
         {
-            await LoadTrack(fullName);
+            await LoadTrackFromDisk(fullName);
         }
 
-        private async void Handle_ctrTrack_OnListViewTrackControlSelected(object sender, int trackId)
+        private async void Handle_ctrTrack_OnListViewTrackControlSelected(object sender, int trackId, Guid guid, string fileName)
         {
-            await LoadTrack(trackId);
+            var file = $@"{C.PATHTRACKSTORE}\{guid}_{fileName}";
+            await LoadTrackFromDatabase(file, trackId, guid);
         }
-
-        private async void Handle_EventInvoker_OnTrackProcessed(object sender, long time)
-        {
-            long duration = ctrPlayer.MediaTrack.Duration;
-
-            _bag = new Bag();
-
-            await _bag.Load(_lastPath, duration, true);
-            //For easy reference
-            _mod = _bag.Mod;
-            _track = _bag.Track;
-
-            ctrMetaData.LoadData(_bag);
-            InitTextFields();
-
-            EnableTabControl();
-            SwitchTabs(true);
-        }
-
         #endregion
 
         #region EVENT_BUTTON
@@ -188,39 +180,24 @@ namespace TMCWorkbench
         }
         #endregion
 
-        private async Task LoadTrack(int trackId)
+        private async Task LoadTrackFromDatabase(string path, int trackId, Guid guid)
         {
-            toolStripStatusLabel.Text = trackId.ToStr();
+            SetStatusText($"Loading: {path}");
+            ctrPlayer.Stop();
+            tableRightControls.Do(() => tableRightControls.RowStyles[2].Height = 0);
 
+            _bag = new Bag();
+            await _bag.LoadFromDatabase(guid, true);
+
+            _mod = null;
+            LoadTrackInner(path);
         }
 
-        private async Task LoadTrackNew(string path)
+        private async Task LoadTrackFromDisk(string path)
         {
-            toolStripStatusLabel.Text = path;
+            SetStatusText($"Loading: {path}");
+            tableRightControls.Do(() => tableRightControls.RowStyles[2].Height = 80);
 
-            if (path != _lastPath)
-            {
-                Debug.WriteLine($"Firing up {path}");
-
-                //await ctrPlayer.LoadTrack(path);
-                ctrPlayer.ProcessAndPlay(path);
-                _lastPath = path;
-            }
-            else
-            {
-                Debug.WriteLine($"**** {path}");
-            }
-        }
-
-        private async Task DoData()
-        {
-
-        }
-
-
-        private async Task LoadTrack(string path)
-        {
-            toolStripStatusLabel.Text = path;
             long duration = 0;
 
             if (path != _lastPath)
@@ -233,16 +210,18 @@ namespace TMCWorkbench
                 duration = ctrPlayer.Duration;
                 _lastPath = path;
             }
-            else
-            {
-                Debug.WriteLine($"**** {path}");
-            }
 
             _bag = new Bag();
 
-            await _bag.Load(path, duration, true);
+            await _bag.LoadFromDisk(path, duration, true);
             //For easy reference
             _mod = _bag.Mod;
+
+            LoadTrackInner(path);
+        }
+
+        void LoadTrackInner(string path)
+        {
             _track = _bag.Track;
 
             ctrMetaData.LoadData(_bag);
@@ -250,6 +229,8 @@ namespace TMCWorkbench
 
             EnableTabControl();
             SwitchTabs(true);
+
+            SetStatusText($"Loaded: {path}");
         }
 
         //private async Task LoadTrackOLD(string path)
@@ -310,15 +291,18 @@ namespace TMCWorkbench
             ctrSamples.Clear();
             ctrInstruments.Clear();
 
-            ctrSamples.TextOrg = _mod.SampleText;
-            ctrInstruments.TextOrg = _mod.InstrumentText;
-            ctrMessage.TextOrg = _mod.SongText;
-
-            if (_bag.IsInDB == false)
+            if (_mod != null)
             {
-                ctrSamples.TextNew = _mod.SampleText;
-                ctrInstruments.TextNew = _mod.InstrumentText;
-                ctrMessage.TextNew = _mod.SongText;
+                ctrSamples.TextOrg = _mod.SampleText;
+                ctrInstruments.TextOrg = _mod.InstrumentText;
+                ctrMessage.TextOrg = _mod.SongText;
+
+                if (_bag.IsInDB == false)
+                {
+                    ctrSamples.TextNew = _mod.SampleText;
+                    ctrInstruments.TextNew = _mod.InstrumentText;
+                    ctrMessage.TextNew = _mod.SongText;
+                }
             }
 
             if (_bag.IsInDB)
@@ -334,40 +318,71 @@ namespace TMCWorkbench
    
         private async Task SaveTrack()
         {
-            _track.FileName = _mod.FileName;
-            _track.Md5 = Manager.Instance.GetFileGuid(_mod.FullName);
-            _track.FK_fileextension_id = Manager.Instance.GetFileExtensionID(_mod.FullName);
-            _track.SampleText = ctrSamples.TextNew;
-            _track.InstrumentText = ctrInstruments.TextNew;
-            _track.SongText = ctrMessage.TextNew;
-            _track.TrackTitle = ctrMetaData.TrackTitle;
-            _track.Date_track_created = ctrMetaData.Date;
-            _track.Date_track_modified = _mod.DateModified;
-            _track.Length = ctrMetaData.LengthInMs;
-            _track.Speed = ctrMetaData.Speed.ToSht();
-            _track.Tempo = ctrMetaData.Tempo.ToSht();
-            _track.Bpm = ctrMetaData.Bpm.ToSht();
-            _track.FK_tracker_id = ctrMetaData.TrackerID;
-            _track.FK_style_id = ctrMetaData.StyleID;
-            _track.FK_composer_id = ctrMetaData.ComposerID;
-            _track.FK_scenegroup_id = ctrMetaData.ScenegroupID;
-            _track.StyleName = ctrMetaData.StyleText;
-            _track.ComposerName = ctrMetaData.ComposerText;
-            _track.ScenegroupName = ctrMetaData.ScenegroupText;
-            _track.YoutubeTextHeader = ctrOutput.TextHeaderNew;
-            _track.YoutubeTextSummary = ctrOutput.TextSummaryNew;
-            _track.YoutubeTextFooter = ctrOutput.TextFooterNew;
+            try
+            {
+                _track.FileName = _mod.FileName;
+                _track.Md5 = Manager.Instance.GetFileGuid(_mod.FullName);
+                _track.FK_fileextension_id = Manager.Instance.GetFileExtensionID(_mod.FullName);
+                _track.SampleText = ctrSamples.TextNew;
+                _track.InstrumentText = ctrInstruments.TextNew;
+                _track.SongText = ctrMessage.TextNew;
+                _track.TrackTitle = ctrMetaData.TrackTitle;
+                _track.Date_track_created = ctrMetaData.Date;
+                _track.Date_track_modified = _mod.DateModified;
+                _track.Length = ctrMetaData.LengthInMs;
+                _track.Speed = ctrMetaData.Speed.ToSht();
+                _track.Tempo = ctrMetaData.Tempo.ToSht();
+                _track.Bpm = ctrMetaData.Bpm.ToSht();
+                _track.FK_tracker_id = ctrMetaData.TrackerID;
+                _track.FK_style_id = ctrMetaData.StyleID;
+                _track.FK_composer_id = ctrMetaData.ComposerID;
+                _track.FK_scenegroup_id = ctrMetaData.ScenegroupID;
+                _track.StyleName = ctrMetaData.StyleText;
+                _track.ComposerName = ctrMetaData.ComposerText;
+                _track.ScenegroupName = ctrMetaData.ScenegroupText;
+                _track.YoutubeTextHeader = ctrOutput.TextHeaderNew;
+                _track.YoutubeTextSummary = ctrOutput.TextSummaryNew;
+                _track.YoutubeTextFooter = ctrOutput.TextFooterNew;
 
-            _track.YoutubeText = ctrOutput.TextOutput;
+                _track.YoutubeText = ctrOutput.TextOutput;
 
-            //Tags
-            DB.UpdateTrackTags(_track.Track_id, ctrMetaData.GetTagIds());
+                //Tags
+                DB.UpdateTrackTags(_track.Track_id, ctrMetaData.GetTagIds());
 
-            DB.AddOrUpdate(_track);
-            DB.Save();
+                DB.AddOrUpdate(_track);
+                DB.Save();
+
+                SetStatusText($"Saved: {_track.FileName} to database");
+            }
+            catch (Exception ex)
+            {
+                var text = $"Failed to save\n{ex.Message}";
+                SetStatusText(text);
+                MessageBox.Show(text);
+            }
+
+            if (_mod != null)
+            {
+                var pathSource = _mod.FileInfo.FullName;
+                var pathTarget = $@"{C.PATHTRACKSTORE}\{_track.Md5}_{_mod.FileName}";
+
+                if (File.Exists(pathTarget) == false)
+                {
+                    try
+                    {
+                        File.Copy(pathSource, pathTarget, true);
+                        SetStatusText($"Copied {pathSource} to {pathTarget}");
+                    }
+                    catch (Exception sex)
+                    {
+                        MessageBox.Show($"Succesfully? saved file, but couldn't copy from {pathSource} to {pathTarget}\n{sex}");
+                    }
+                }
+            }
+
 
             //ctrMetaData.Refresh(true);
-            await LoadTrack(_mod.FullName);
+            await LoadTrackFromDisk(_mod.FullName);
             ctrListView.MarkInDatabase(_mod.FullName);
         }
 
@@ -526,7 +541,5 @@ namespace TMCWorkbench
                 var bla = result;
             }
         }
-
-
-    }
+  }
 }

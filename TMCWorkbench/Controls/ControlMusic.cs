@@ -68,7 +68,7 @@ namespace TMCWorkbench.Controls
 
             await _taskLock.WaitAsync();
             var fileName = Path.GetFileNameWithoutExtension(path);
-            var cachePath = $@"{C.PATHCACHE}\{fileName}.wav";
+            var cachePath = $@"{C.PATHTRACKCACHE}\{fileName}.wav";
             var sout = $":sout=#transcode{{acodec=s16l,channels=2,ab=128,samplerate=44100}}:standard{{access=file,mux=wav,dst=\"{cachePath}\"}}";
 
             Debug.WriteLine($"_taskLock set");
@@ -77,28 +77,7 @@ namespace TMCWorkbench.Controls
             {
                 Debug.WriteLine($"in try");
 
-                //Stop and relase media player
-                //_player_TRACK.Stopped -= Handle_TRACK_Stopped;
-                //_player_TRACK.EncounteredError -= Handle_TRACK_EncounteredError;
-
-                if (_player_TRACK.IsPlaying)
-                {
-                    Debug.WriteLine("Track is playing");
-                    ThreadPool.QueueUserWorkItem(arg =>
-                    {
-                        _player_TRACK.Stop();
-                        _player_TRACK.Media = null;
-
-                        resetEvent.Set();
-                    });
-
-                    Debug.WriteLine("Track is playing -> waiting");
-                    resetEvent.WaitOne();
-                    Debug.WriteLine("Track is playing -> DONE waiting");
-                }
-
-                Debug.WriteLine($"removed position changed");
-                _player_TRACK.PositionChanged -= Handle_TRACK_PositionChanged;
+                Stop();
 
                 var mediaExport = new Media(_lib_EXPORT, path, FromType.FromPath);
                 mediaExport.AddOption(sout);
@@ -226,6 +205,41 @@ namespace TMCWorkbench.Controls
 
         }
 
+        public void Stop()
+        {
+            if (_player_TRACK.IsPlaying)
+            {
+                Debug.WriteLine("STOP : Track is playing");
+                ThreadPool.QueueUserWorkItem(arg =>
+                {
+                    _player_TRACK.Stop();
+                    _player_TRACK.Media = null;
+
+                    resetEvent.Set();
+                });
+
+                Debug.WriteLine("STOP : Track is playing -> waiting");
+                resetEvent.WaitOne();
+                Debug.WriteLine("STOP : Track is playing -> DONE waiting");
+            }
+
+            Debug.WriteLine($"STOP : removed position changed");
+            _player_TRACK.PositionChanged -= Handle_TRACK_PositionChanged;
+            Debug.WriteLine($"STOP : removed event handler");
+
+            SetTrackPosition(0);
+            Debug.WriteLine($"STOP : SetTrackPosition");
+
+            SetTimeLabel(0);
+            Debug.WriteLine($"STOP : SetTimeLabel");
+
+
+
+            //TODO?
+            //_player_TRACK.Stopped -= Handle_TRACK_Stopped;
+            //_player_TRACK.EncounteredError -= Handle_TRACK_EncounteredError;
+        }
+
         public void ProcessAndPlayOLDER(string path)
         {
             //_path = path;
@@ -343,9 +357,26 @@ namespace TMCWorkbench.Controls
 
             var seconds = (Duration * e.Position);
 
-            trackPosition.Do(() => trackPosition.Value = pos);
+            SetTrackPosition(pos);
+            SetTimeLabel(seconds);
+        }
+
+        void SetTrackPosition(int position)
+        {
+            trackPosition.Do(() => trackPosition.Value = position);
+        }
+
+
+        void SetTimeLabel(int seconds)
+        {
+            lblTime.Do(() => lblTime.Text = DurationToTimeString(seconds));
+        }
+
+        void SetTimeLabel(float seconds)
+        {
             lblTime.Do(() => lblTime.Text = DurationToTimeString((long)(seconds)));
         }
+
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {

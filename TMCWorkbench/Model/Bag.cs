@@ -1,6 +1,7 @@
 ﻿using ModLibrary;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,18 @@ namespace TMCWorkbench.Model
             }
         }
 
-        public async Task Load(string path, long duration, bool refresh = false)
+        public async Task LoadFromDatabase(Guid guid, bool refresh = false)
+        {
+            _mod = null;
+            PathLoad = null;
+
+            IsInDB = true;
+            Guid = guid;
+
+            LoadInternal(refresh);
+        }
+
+        public async Task LoadFromDisk(string path, long duration, bool refresh = false)
         {
             _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(path, _db.TrackStyles);
 
@@ -47,6 +59,12 @@ namespace TMCWorkbench.Model
                 Guid = Manager.Instance.LastMd5Guid;
             }
 
+            LoadInternal(refresh);
+        }
+
+
+        private void LoadInternal(bool refresh)
+        {
             if (IsInDB && (_db.LoadTrackInfo(Guid)))
             {
                 _track = _db.Track;
@@ -64,6 +82,8 @@ namespace TMCWorkbench.Model
                 _trackTags = DBManager.Instance.TracksTagsWithTag.Where(x => x.FK_track_id == _track.Track_id).ToList();
             }
         }
+
+
 
         public ModInfo Mod
         {

@@ -26,9 +26,12 @@ namespace TMCWorkbench.Controls
         private void Handle_ListView_DoubleClick(object sender, EventArgs e)
         {
             var item = listView.SelectedItems[0];
-            var info = item.Tag.ToInt();
+            var trackId = item.Tag.ToInt();
+            var row = _table.Rows.Where(x => x.Track_id == trackId).First();
+            var guid = row.Md5;
+            var fileName = row.FileName;
 
-            EventInvoker.RaiseOnTrackListViewSelected(this, info);
+            EventInvoker.RaiseOnTrackListViewSelected(this, trackId, guid, fileName);
         }
 
         private void Handle_ListView_KeyUp(object sender, KeyEventArgs e)

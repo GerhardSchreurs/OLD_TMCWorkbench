@@ -349,13 +349,17 @@ namespace TMCWorkbench.Controls
 
                 //Original values
                 this.SetLengthInMsOriginal(bag.Duration);
+
+                ctrTags.SetIdValues(bag.GetTrackTagsArray());
+
+                if (mod == null) return;
+
                 ctrFileInfo.Original = mod.FileName;
                 ctrTrackTitle.Original = mod.SongName;
                 ctrDate.Original = mod.DateCreated;
                 ctrSpeed.SetValuesOriginal(mod.Speed, mod.Tempo);
                 ctrBPM.SetValueOriginal(mod.EstimatedBPM);
                 ctrStyle.TextValueOriginal = mod.TrackStyle;
-                ctrTags.SetIdValues(bag.GetTrackTagsArray());
                 //this.SelectTags(track.Track_id);
                 //TODO TRACKER ORIGINAL
             }

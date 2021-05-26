@@ -10,6 +10,7 @@ namespace TMCWorkbench
     {
         public const string BR = "\r\n"; //Environment.NewLine
         public const int YOUTUBEMAXLENGTH = 5000;
-        public const string PATHCACHE = @"C:\Tracks\Cache";
+        public const string PATHTRACKCACHE = @"C:\TrackCache";
+        public const string PATHTRACKSTORE = @"C:\TrackStore";
     }
 }
