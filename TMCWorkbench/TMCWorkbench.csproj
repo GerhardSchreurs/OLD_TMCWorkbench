@@ -181,7 +181,9 @@
     <Compile Include="Controls\ControlIntegerTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ControlListView.cs" />
+    <Compile Include="Controls\ControlListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\ControlListView.Designer.cs">
       <DependentUpon>ControlListView.cs</DependentUpon>
     </Compile>
@@ -444,9 +446,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ControlHistoryTextBoxState.resx">
       <DependentUpon>ControlHistoryTextBoxState.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ControlListView.resx">
-      <DependentUpon>ControlListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ControlMetaData.resx">
       <DependentUpon>ControlMetaData.cs</DependentUpon>

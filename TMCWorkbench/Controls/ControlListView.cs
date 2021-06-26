@@ -48,7 +48,7 @@ namespace TMCWorkbench.Controls
             try
             {
                 listView1.Items.Clear();
-                
+
                 foreach (FileInfo fileInfo in directoryInfo.GetFiles())
                 {
                     var extensionString = GetStringExtensionFromFileInfo(fileInfo);
