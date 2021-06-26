@@ -107,7 +107,7 @@ namespace TMCWorkbench.Controls
                     listView1.Items.Add(item);
                 }
 
-                listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+                //listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
             catch (Exception ex)
             {

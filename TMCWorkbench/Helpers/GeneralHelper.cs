@@ -44,6 +44,22 @@ namespace TMCWorkbench.Helpers
             return (int)((Extension)Enum.Parse(typeof(Extension), extension));
         }
 
+        public static string GetExtensionNameFromInt(int extension)
+        {
+            var ext = (Extension)extension;
+
+            if (ext == Extension.IT)
+                return TrackerInfo.IT;
+            if (ext == Extension.XM)
+                return TrackerInfo.XM;
+            if (ext == Extension.S3M)
+                return TrackerInfo.S3M;
+            if (ext == Extension.MOD)
+                return TrackerInfo.MOD;
+
+            return "?";
+        }
+
         public static Color GetColorForExtension(Extension extension)
         {
             if (extension == Extension.IT)
@@ -56,6 +72,11 @@ namespace TMCWorkbench.Helpers
                 return AppColors.ColorMOD;
             else
                 return Color.Gray;
+        }
+
+        public static Color GetColorForExtension(int extension)
+        {
+            return GetColorForExtension((Extension)extension);
         }
     }
 }

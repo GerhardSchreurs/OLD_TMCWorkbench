@@ -80,12 +80,12 @@
             this.colModified.Text = "Modified";
             this.colModified.Width = 70;
             // 
-            // ListViewControl
+            // ControlListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.listView1);
-            this.Name = "ListViewControl";
+            this.Name = "ControlListView";
             this.Size = new System.Drawing.Size(300, 500);
             this.ResumeLayout(false);
 

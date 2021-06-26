@@ -32,8 +32,8 @@ namespace TMCWorkbench.Controls
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.listView = new System.Windows.Forms.ListView();
-            this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colStyle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -70,8 +70,8 @@ namespace TMCWorkbench.Controls
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colID,
             this.colType,
-            this.colName,
             this.colFileName,
+            this.colName,
             this.colStyle});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.FullRowSelect = true;
@@ -84,25 +84,30 @@ namespace TMCWorkbench.Controls
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             // 
-            // colType
-            // 
-            this.colType.Text = "Type";
-            // 
             // colID
             // 
             this.colID.Text = "ID";
+            this.colID.Width = 45;
+            // 
+            // colType
+            // 
+            this.colType.Text = "Type";
+            this.colType.Width = 45;
             // 
             // colName
             // 
             this.colName.Text = "Title";
+            this.colName.Width = 150;
             // 
             // colFileName
             // 
             this.colFileName.Text = "Filename";
+            this.colFileName.Width = 120;
             // 
             // colStyle
             // 
             this.colStyle.Text = "Style";
+            this.colStyle.Width = 100;
             // 
             // ControlTracks
             // 

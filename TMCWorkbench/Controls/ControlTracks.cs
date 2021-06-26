@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TMCDatabase.Extensions;
 using TMCDatabase.Model;
 using TMCWorkbench.Events;
+using TMCWorkbench.Helpers;
 
 namespace TMCWorkbench.Controls
 {
@@ -64,24 +65,26 @@ namespace TMCWorkbench.Controls
             var item = new ListViewItem();
             item.UseItemStyleForSubItems = false;
             item.Tag = row.Track_id;
-            item.Text = row.Track_id.ToStr();
+            item.Text = row.Track_id.ToString("D5");
 
             ListViewItem.ListViewSubItem sub;
 
             //colType
             sub = new ListViewItem.ListViewSubItem();
-            sub.Text = "TYPE";
+            sub.Text = GeneralHelper.GetExtensionNameFromInt(row.FK_filextension_id);
+            sub.ForeColor = GeneralHelper.GetColorForExtension(row.FK_filextension_id);
+            //FK_filextension_id
             //sub.ForeColor = GetColorForExtension(extension);
-            item.SubItems.Add(sub);
-
-            //colName
-            sub = new ListViewItem.ListViewSubItem();
-            sub.Text = row.TrackTitle;
             item.SubItems.Add(sub);
 
             //colFileName
             sub = new ListViewItem.ListViewSubItem();
             sub.Text = row.FileName;
+            item.SubItems.Add(sub);
+
+//colName
+            sub = new ListViewItem.ListViewSubItem();
+            sub.Text = row.TrackTitle;
             item.SubItems.Add(sub);
 
             //colStyle
