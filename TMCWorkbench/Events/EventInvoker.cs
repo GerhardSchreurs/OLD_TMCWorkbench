@@ -18,12 +18,12 @@ namespace TMCWorkbench.Events
             OnBrowserControlBrowse?.Invoke(sender, new DirectoryInfoEventArgs(directoryInfo));
         }
 
-        public delegate void ListViewSelectedEventArgsDelegate(object sender, string fullName);
+        public delegate void ListViewSelectedEventArgsDelegate(object sender, string fullName, bool isInDB, Guid guid);
         public static event ListViewSelectedEventArgsDelegate OnListViewBrowserControlSelected;
 
-        public static void RaiseOnBrowserListViewSelected(object sender, string fullName)
+        public static void RaiseOnBrowserListViewSelected(object sender, string fileName, bool isInDB, Guid guid)
         {
-            OnListViewBrowserControlSelected?.Invoke(sender, fullName);
+            OnListViewBrowserControlSelected?.Invoke(sender, fileName, isInDB, guid);
         }
 
         public delegate void ListViewTrackSelectedEventArgsDelegate(object sender, int trackId, Guid guid, string fileName);

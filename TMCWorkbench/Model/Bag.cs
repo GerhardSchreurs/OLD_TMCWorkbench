@@ -22,53 +22,80 @@ namespace TMCWorkbench.Model
 
         public string PathLoad;
         public string PathSave;
+
         public long Duration;
         public bool IsInDB;
         public bool IsNewTrack;
 
-        public void ThrowExceptionIfNull(Object obj, string message)
+        public static void ThrowExceptionIfNull(object obj, string message)
         {
-            if (obj == null)
-            {
-                throw new NullReferenceException(message);
-            }
+            if (obj == null) throw new NullReferenceException(message);
         }
 
-        public async Task LoadFromDatabase(Guid guid, bool refresh = false)
+        public async Task<string> Load(string path, bool fileExists, Guid guid, bool fromDB = false, bool refresh = false)
         {
+            var success = string.Empty;
+
             _mod = null;
-            PathLoad = null;
-
-            IsInDB = true;
+            IsInDB = fromDB;
+            PathLoad = path;
+            IsNewTrack = !fromDB;
             Guid = guid;
+            Track = null;
+            Duration = 0;
 
-            LoadInternal(refresh);
+            try
+            {
+                success = await LoadInner(path, fileExists, refresh);
+            }
+            catch(Exception ex)
+            {
+                success = ex.Message;   //TODO, clear vars?
+            }
+
+            return success;
         }
 
-        public async Task LoadFromDisk(string path, long duration, bool refresh = false)
+        public async Task<string> LoadInner(string path, bool fileExists, bool refresh)
         {
-            _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(path, _db.TrackStyles);
+            var success = string.Empty;
 
-            ThrowExceptionIfNull(_mod, "_mod is null");
+            if (fileExists)
+            {
+                _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(path, _db.TrackStyles);
 
-            PathLoad = path;
-            IsInDB = _manager.IsTrackInDB(path);
+                if (_mod == null)
+                {
+                    //This should not happen, we have path, something went wrong in ModLibrary?
+                    return $"Mod exists on disk, however got nullreference from ModLibrary: {path}";
+                }
+
+                PathLoad = path;
+            }
 
             if (IsInDB)
             {
-                Guid = Manager.Instance.LastMd5Guid;
-            }
-
-            LoadInternal(refresh);
-        }
-
-
-        private void LoadInternal(bool refresh)
-        {
-            if (IsInDB && (_db.LoadTrackInfo(Guid)))
+                if (_db.LoadTrackInfo(Guid))
+                {
+                    _track = _db.Track;
+                }
+                else
+                { 
+                    //Should be in DB!
+                    return $"Track should be in DB, but is not: {Guid}";
+                }
+            } 
+            else 
             {
-                _track = _db.Track;
+                //Not in DB
+                IsInDB = _manager.IsTrackInDB(path);
+
+                if (IsInDB)
+                {
+                    Guid = Manager.Instance.LastMd5Guid;
+                }
             }
+
 
             if (_track == null)
             {
@@ -81,7 +108,59 @@ namespace TMCWorkbench.Model
                 DBManager.Instance.LoadTrackTagsWithTag(refresh);
                 _trackTags = DBManager.Instance.TracksTagsWithTag.Where(x => x.FK_track_id == _track.Track_id).ToList();
             }
+
+            return success;
         }
+
+
+        //public async Task LoadFromDatabase(Guid guid, bool refresh = false)
+        //{
+        //    _mod = null;
+        //    PathLoad = null;
+
+        //    IsInDB = true;
+        //    Guid = guid;
+
+        //    LoadInternal(refresh);
+        //}
+
+        //public async Task LoadFromDisk(string path, long duration, bool refresh = false)
+        //{
+        //    _mod = ModLibrary.ModLibrary.ParseAndGuessStyle(path, _db.TrackStyles);
+
+        //    ThrowExceptionIfNull(_mod, "_mod is null");
+
+        //    PathLoad = path;
+        //    IsInDB = _manager.IsTrackInDB(path);
+
+        //    if (IsInDB)
+        //    {
+        //        Guid = Manager.Instance.LastMd5Guid;
+        //    }
+
+        //    LoadInternal(refresh);
+        //}
+
+
+        //private void LoadInternal(bool refresh)
+        //{
+        //    if (IsInDB && (_db.LoadTrackInfo(Guid)))
+        //    {
+        //        _track = _db.Track;
+        //    }
+
+        //    if (_track == null)
+        //    {
+        //        _trackTags = null;
+        //        _track = new Track();
+        //        IsNewTrack = true;
+        //    }
+        //    else
+        //    {
+        //        DBManager.Instance.LoadTrackTagsWithTag(refresh);
+        //        _trackTags = DBManager.Instance.TracksTagsWithTag.Where(x => x.FK_track_id == _track.Track_id).ToList();
+        //    }
+        //}
 
 
 

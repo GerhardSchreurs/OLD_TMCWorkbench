@@ -9,7 +9,7 @@ namespace TMCWorkbench
         {
             if (target.InvokeRequired)
             {
-                target.Invoke(action);
+                target.BeginInvoke(action);
             }
             else
             {
@@ -21,7 +21,7 @@ namespace TMCWorkbench
         {
             if (target.InvokeRequired)
             {
-                target.Invoke(action, parameter);
+                target.BeginInvoke(action, parameter);
             }
             else
             {
@@ -33,7 +33,7 @@ namespace TMCWorkbench
         {
             if (target.InvokeRequired)
             {
-                target.Invoke(action, p1, p2);
+                target.BeginInvoke(action, p1, p2);
             }
             else
             {

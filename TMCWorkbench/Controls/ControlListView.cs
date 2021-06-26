@@ -11,6 +11,13 @@ using TMCDatabase.DBModel;
 
 namespace TMCWorkbench.Controls
 {
+    public class ListViewItemTag
+    {
+        public string Path;
+        public bool IsInDB;
+        public Guid Guid;
+    }
+
     public partial class ControlListView : UserControl
     {
         public ControlListView()
@@ -26,13 +33,19 @@ namespace TMCWorkbench.Controls
             //Does nothing atm.
         }
 
-        public void MarkInDatabase(string fullName)
+        public void MarkInDatabase(string fullName, Guid guid)
         {
             foreach (ListViewItem item in listView1.Items)
             {
-                if (item.Tag.ToString() == fullName)
+                if (item.Name == fullName)
                 {
                     item.Text = "Y";
+                    item.Tag = new ListViewItemTag()
+                    {
+                        IsInDB = true,
+                        Path = fullName,
+                        Guid = guid
+                    };
                 }
             }
         }
@@ -46,56 +59,64 @@ namespace TMCWorkbench.Controls
                 foreach (FileInfo fileInfo in directoryInfo.GetFiles())
                 {
                     var extensionString = GetStringExtensionFromFileInfo(fileInfo);
+
+                    if (IsSupportedFile(extensionString) == false) continue;
                     var extension = GetExtensionFromString(extensionString);
+                    if (IsSupportedFile(extension) == false) continue; //Unnecessary
 
-                    if (IsSupportedFile(extension))
+                    var isInDb = Manager.Instance.IsTrackInDB(fileInfo);
+                    var guid = Manager.Instance.LastMdSuccess ? Manager.Instance.LastMd5Guid : Guid.Empty;
+
+                    var tag = new ListViewItemTag()
                     {
-                        var isInDb = Manager.Instance.IsTrackInDB(fileInfo);
+                        IsInDB = isInDb,
+                        Path = fileInfo.FullName,
+                        Guid = guid
+                    };
 
-                        ListViewItem.ListViewSubItem sub;
+                    ListViewItem.ListViewSubItem sub;
 
-                        var item = new ListViewItem();
-                        item.UseItemStyleForSubItems = false;
-                        item.Tag = fileInfo.FullName;
-                        item.Text = isInDb ? "Y" : "N";
+                    var item = new ListViewItem();
+                    item.Name = tag.Path;
+                    item.UseItemStyleForSubItems = false;
+                    item.Tag = tag;
+                    item.Text = isInDb ? "Y" : "N";
 
-                        //Type
-                        sub = new ListViewItem.ListViewSubItem();
-                        sub.Text = extensionString;
-                        sub.ForeColor = GetColorForExtension(extension);
-                        item.SubItems.Add(sub);
+                    //Type
+                    sub = new ListViewItem.ListViewSubItem();
+                    sub.Text = extensionString;
+                    sub.ForeColor = GetColorForExtension(extension);
+                    item.SubItems.Add(sub);
 
-                        //Type
-                        //var item = new ListViewItem();
-                        //item.UseItemStyleForSubItems = false;
-                        //item.Tag = fileInfo;
-                        //item.Text = extensionString;
-                        //item.ForeColor = GetColorForExtension(extension);
+                    //Type
+                    //var item = new ListViewItem();
+                    //item.UseItemStyleForSubItems = false;
+                    //item.Tag = fileInfo;
+                    //item.Text = extensionString;
+                    //item.ForeColor = GetColorForExtension(extension);
 
-                        //Name
-                        sub = new ListViewItem.ListViewSubItem();
-                        sub.Text = fileInfo.Name;
-                        item.SubItems.Add(sub);
+                    //Name
+                    sub = new ListViewItem.ListViewSubItem();
+                    sub.Text = fileInfo.Name;
+                    item.SubItems.Add(sub);
 
-                        //Created
-                        sub = new ListViewItem.ListViewSubItem();
-                        sub.Text = File.GetLastWriteTime(fileInfo.FullName).ToShortDateString();
-                        item.SubItems.Add(sub);
+                    //Created
+                    sub = new ListViewItem.ListViewSubItem();
+                    sub.Text = File.GetLastWriteTime(fileInfo.FullName).ToShortDateString();
+                    item.SubItems.Add(sub);
 
-                        //Modified
-                        sub = new ListViewItem.ListViewSubItem();
-                        sub.Text = File.GetLastAccessTime(fileInfo.FullName).ToShortDateString();
-                        item.SubItems.Add(sub);
+                    //Modified
+                    sub = new ListViewItem.ListViewSubItem();
+                    sub.Text = File.GetLastAccessTime(fileInfo.FullName).ToShortDateString();
+                    item.SubItems.Add(sub);
 
-                        listView1.Items.Add(item);
-                    }
+                    listView1.Items.Add(item);
                 }
 
                 listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
             catch (Exception ex)
             {
-
                 if (ex is System.NullReferenceException || ex is System.UnauthorizedAccessException)
                 {
                     // Do Nothing.
@@ -120,9 +141,9 @@ namespace TMCWorkbench.Controls
         void PlaySelectedItemTrack()
         {
             var item = listView1.SelectedItems[0];
-            var info = item.Tag.ToString();
+            var tag = item.Tag as ListViewItemTag;
 
-            EventInvoker.RaiseOnBrowserListViewSelected(this, info);
+            EventInvoker.RaiseOnBrowserListViewSelected(this, tag.Path, tag.IsInDB, tag.Guid);
         }
 
         string GetStringExtensionFromFileInfo(FileInfo info)
@@ -140,6 +161,11 @@ namespace TMCWorkbench.Controls
         Extension GetExtensionFromString(string extension)
         {
             return (Extension)Enum.Parse(typeof(Extension), extension);
+        }
+
+        bool IsSupportedFile(string extension)
+        {
+            return Enum.IsDefined(typeof(Extension), extension);
         }
 
         bool IsSupportedFile(Extension extension)

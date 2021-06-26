@@ -45,6 +45,14 @@ namespace TMCWorkbench
             this.composersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playlistsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFileShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFileHide = new System.Windows.Forms.ToolStripMenuItem();
+            this.miFileOnlyDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.miDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.miDatabaseShow = new System.Windows.Forms.ToolStripMenuItem();
+            this.miDatabaseHide = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabOriginal = new System.Windows.Forms.TabPage();
             this.tabDatabase = new System.Windows.Forms.TabPage();
@@ -65,7 +73,7 @@ namespace TMCWorkbench
             this.tableOffline = new System.Windows.Forms.TableLayoutPanel();
             this.ctrBrowser = new TMCWorkbench.Controls.ControlBrowser();
             this.ctrListView = new TMCWorkbench.Controls.ControlListView();
-            this.controlTracks1 = new TMCWorkbench.Controls.ControlTracks();
+            this.ctrTracks = new TMCWorkbench.Controls.ControlTracks();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableMenu.SuspendLayout();
@@ -143,7 +151,8 @@ namespace TMCWorkbench
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(608, 24);
@@ -210,6 +219,64 @@ namespace TMCWorkbench
             this.playlistsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.playlistsToolStripMenuItem.Text = "Playlists";
             this.playlistsToolStripMenuItem.Click += new System.EventHandler(this.Handle_playlistsToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miFile,
+            this.miDatabase});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // miFile
+            // 
+            this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miFileShow,
+            this.miFileHide,
+            this.miFileOnlyDetails});
+            this.miFile.Name = "miFile";
+            this.miFile.Size = new System.Drawing.Size(180, 22);
+            this.miFile.Text = "File Area";
+            // 
+            // miFileShow
+            // 
+            this.miFileShow.Name = "miFileShow";
+            this.miFileShow.Size = new System.Drawing.Size(189, 22);
+            this.miFileShow.Text = "Show";
+            // 
+            // miFileHide
+            // 
+            this.miFileHide.Name = "miFileHide";
+            this.miFileHide.Size = new System.Drawing.Size(189, 22);
+            this.miFileHide.Text = "Hide";
+            // 
+            // miFileOnlyDetails
+            // 
+            this.miFileOnlyDetails.Name = "miFileOnlyDetails";
+            this.miFileOnlyDetails.Size = new System.Drawing.Size(189, 22);
+            this.miFileOnlyDetails.Text = "Only Show File details";
+            // 
+            // miDatabase
+            // 
+            this.miDatabase.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miDatabaseShow,
+            this.miDatabaseHide});
+            this.miDatabase.Name = "miDatabase";
+            this.miDatabase.Size = new System.Drawing.Size(180, 22);
+            this.miDatabase.Text = "Database Area";
+            // 
+            // miDatabaseShow
+            // 
+            this.miDatabaseShow.Name = "miDatabaseShow";
+            this.miDatabaseShow.Size = new System.Drawing.Size(180, 22);
+            this.miDatabaseShow.Text = "Show";
+            // 
+            // miDatabaseHide
+            // 
+            this.miDatabaseHide.Name = "miDatabaseHide";
+            this.miDatabaseHide.Size = new System.Drawing.Size(180, 22);
+            this.miDatabaseHide.Text = "Hide";
             // 
             // tabControl
             // 
@@ -436,7 +503,7 @@ namespace TMCWorkbench
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.tableOffline, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.controlTracks1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ctrTracks, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -480,14 +547,14 @@ namespace TMCWorkbench
             this.ctrListView.Size = new System.Drawing.Size(344, 449);
             this.ctrListView.TabIndex = 1;
             // 
-            // controlTracks1
+            // ctrTracks
             // 
-            this.controlTracks1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.controlTracks1.Location = new System.Drawing.Point(0, 455);
-            this.controlTracks1.Margin = new System.Windows.Forms.Padding(0);
-            this.controlTracks1.Name = "controlTracks1";
-            this.controlTracks1.Size = new System.Drawing.Size(600, 455);
-            this.controlTracks1.TabIndex = 5;
+            this.ctrTracks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrTracks.Location = new System.Drawing.Point(0, 455);
+            this.ctrTracks.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrTracks.Name = "ctrTracks";
+            this.ctrTracks.Size = new System.Drawing.Size(600, 455);
+            this.ctrTracks.TabIndex = 5;
             // 
             // FormAlpha
             // 
@@ -554,6 +621,14 @@ namespace TMCWorkbench
         private System.Windows.Forms.TableLayoutPanel tableOffline;
         private Controls.ControlBrowser ctrBrowser;
         private Controls.ControlListView ctrListView;
-        private Controls.ControlTracks controlTracks1;
+        private Controls.ControlTracks ctrTracks;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miFile;
+        private System.Windows.Forms.ToolStripMenuItem miFileShow;
+        private System.Windows.Forms.ToolStripMenuItem miFileOnlyDetails;
+        private System.Windows.Forms.ToolStripMenuItem miDatabase;
+        private System.Windows.Forms.ToolStripMenuItem miFileHide;
+        private System.Windows.Forms.ToolStripMenuItem miDatabaseShow;
+        private System.Windows.Forms.ToolStripMenuItem miDatabaseHide;
     }
 }

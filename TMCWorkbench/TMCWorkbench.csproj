@@ -181,9 +181,7 @@
     <Compile Include="Controls\ControlIntegerTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ControlListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\ControlListView.cs" />
     <Compile Include="Controls\ControlListView.Designer.cs">
       <DependentUpon>ControlListView.cs</DependentUpon>
     </Compile>
@@ -576,6 +574,10 @@
     <ProjectReference Include="..\..\ModLibrary\ModLibrary\ModLibrary.csproj">
       <Project>{5bc63cd2-09af-41b7-ae3c-07efcf27a2c4}</Project>
       <Name>ModLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TMCAudioLibrary\AudioLibrary\AudioLibrary.csproj">
+      <Project>{b8c9b8b0-dcc8-448b-9db8-ce2e415d49b6}</Project>
+      <Name>AudioLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\TMCDatabase\TMCDatabase\TMCDatabase.csproj">
       <Project>{9211ae29-e6db-4f9b-acaf-db518a6c221f}</Project>

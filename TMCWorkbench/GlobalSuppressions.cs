@@ -5,5 +5,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Design", "CA1051:Do not declare visible instance fields", Justification = "<Pending>", Scope = "namespaceanddescendants", Target = "~F:TMCWorkbench")]
-[assembly: SuppressMessage("Security", "CA5351:Do Not Use Broken Cryptographic Algorithms", Justification = "<Pending>", Scope = "member", Target = "~F:TMCWorkbench.Manager._md5")]
+[assembly: SuppressMessage("Design", "CA1051:Do not declare visible instance fields", Justification = "<Pending>", Scope = "namespaceanddescendants", Target = "~N:TMCWorkbench")]
+[assembly: SuppressMessage("Reliability", "CA2007:Consider calling ConfigureAwait on the awaited task", Justification = "<Pending>", Scope = "namespaceanddescendants", Target = "~N:TMCWorkbench")]
+[assembly: SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "namespaceanddescendants", Target = "~N:TMCWorkbench")]
+[assembly: SuppressMessage("Security", "CA5351:Do Not Use Broken Cryptographic Algorithms", Justification = "<Pending>", Scope = "namespaceanddescendants", Target = "~N:TMCWorkbench")]
+[assembly: SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>", Scope = "namespaceanddescendants", Target = "~N:TMCWorkbench")]
+[assembly: SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>", Scope = "namespaceanddescendants", Target = "~N:TMCWorkbench")]

@@ -45,6 +45,9 @@ namespace TMCWorkbench.Controls
             var data = DB.DBManager.Instance.C.DataTable("SELECT * FROM view_tracks");
             _table = new ViewTracksTable(data);
 
+            if (listView.Items.Count == data.Rows.Count)
+                return;
+
             listView.Items.Clear();
 
             for (var i = 0; i< _table.Rows.Count; i++)

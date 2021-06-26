@@ -25,6 +25,8 @@ namespace TMCWorkbench
         private ModInfo _mod;
         private Track _track;
         private string _lastPath;
+        private string _statusText;
+        private bool _statusHasError;
 
         public FormAlpha()
         {
@@ -40,9 +42,26 @@ namespace TMCWorkbench
             ctrListView.Init();
             ctrPlayer.Init();
             ctrMetaData.Init();
+            ctrTracks.Init();
 
             tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabControl.DrawItem += Handle_TabControl_DrawItem;
+        }
+
+        private readonly string[] CMD_KEY_CONTROLS = new string[] { "tabControl", "ctrBrowser", "ctrPlayer", "ctrListView", "ctrTracks" };
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Space)
+            {
+                if ((CMD_KEY_CONTROLS.Contains(this.ActiveControl.Name)) == false) 
+                    return base.ProcessCmdKey(ref msg, keyData);
+
+                ctrPlayer.PauseOrPlay();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void Form_Load(object sender, EventArgs e)
@@ -55,10 +74,41 @@ namespace TMCWorkbench
             SetStatusText("Done loading");
         }
 
-        void SetStatusText(string status)
+        private void AppendStatusText(string text, bool isError = false, bool restart = false)
         {
             this.Invoke(new MethodInvoker(() =>
             {
+                if (restart)
+                {
+                    toolStripStatusLabel.Text = text;
+                    toolStripStatusLabel.ForeColor = Color.Black;
+                    return;
+                }
+
+                toolStripStatusLabel.Text += $" | {text}";
+                
+                if (isError)
+                {
+                    toolStripStatusLabel.ForeColor = Color.Red;
+                }
+            }));
+        }
+
+        void UpdateStatusText()
+        {
+            SetStatusText(_statusText, _statusHasError);
+            _statusHasError = false;
+            _statusText = "";
+        }
+
+        void SetStatusText(string status, bool asError = false)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                if (asError)
+                    toolStripStatusLabel.ForeColor = Color.Red;
+
+                toolStripStatusLabel.ForeColor = Color.Black;
                 toolStripStatusLabel.Text = status;
             }));
         }
@@ -70,10 +120,26 @@ namespace TMCWorkbench
             PositionFormSave();
 
             //TODO Dispose player
+            try
+            {
+                ctrPlayer.StopWait();
+                ctrPlayer.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Can't stop player: {ex}");
+            }
 
-            //Clear cache
-            Directory.Delete(C.PATHTRACKCACHE, true);
-            Directory.CreateDirectory(C.PATHTRACKCACHE);
+            try
+            {
+                //Clear cache
+                Directory.Delete(C.PATHTRACKCACHE, true);
+                Directory.CreateDirectory(C.PATHTRACKCACHE);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Can't reset cache dir: {ex}");
+            }
         }
 
         #region EVENT_CONTROLS
@@ -82,15 +148,17 @@ namespace TMCWorkbench
             ctrListView.BrowseDirectory(playEventArgs.DirectoryInfo);
         }
 
-        private async void Handle_ctrListView_OnSelected(object sender, string fullName)
+        private async void Handle_ctrListView_OnSelected(object sender, string fileName, bool isInDB, Guid guid)
         {
-            await LoadTrackFromDisk(fullName);
+            //await LoadTrackFromDisk(fullName);
+            await LoadTrack(fileName, isInDB, guid);
         }
 
         private async void Handle_ctrTrack_OnListViewTrackControlSelected(object sender, int trackId, Guid guid, string fileName)
         {
             var file = $@"{C.PATHTRACKSTORE}\{guid}_{fileName}";
-            await LoadTrackFromDatabase(file, trackId, guid);
+            //await LoadTrackFromDatabase(file, trackId, guid);
+            await LoadTrack(file, true, guid);
         }
         #endregion
 
@@ -180,48 +248,45 @@ namespace TMCWorkbench
         }
         #endregion
 
-        private async Task LoadTrackFromDatabase(string path, int trackId, Guid guid)
+        private async Task LoadTrack(string path, bool fromDB, Guid guid)
         {
-            SetStatusText($"Loading: {path}");
-            ctrPlayer.Stop();
-            tableRightControls.Do(() => tableRightControls.RowStyles[2].Height = 0);
+            if (path == _lastPath) return;
+
+            ctrPlayer.StopWait();
+
+            var fileExists = File.Exists(path);
+            var loadingText = $"Loading: {path}";
+
+            if (fromDB)
+                loadingText += $" -- {guid}";
+
+            if (fileExists)
+                PlayerShow();
+            else
+                PlayerHide();
+
+            SetStatusText(loadingText, !fileExists);
 
             _bag = new Bag();
-            await _bag.LoadFromDatabase(guid, true);
 
-            _mod = null;
-            LoadTrackInner(path);
-        }
+            var status = await _bag.Load(path, fileExists, guid, fromDB);
 
-        private async Task LoadTrackFromDisk(string path)
-        {
-            SetStatusText($"Loading: {path}");
-            tableRightControls.Do(() => tableRightControls.RowStyles[2].Height = 80);
-
-            long duration = 0;
-
-            if (path != _lastPath)
+            if (status.IsNotNullOrEmpty())
             {
-                Debug.WriteLine($"Firing up {path}");
+                //Something serious happened
+                MessageBox.Show(status);
+                return;
+            }
 
-                //await ctrPlayer.LoadTrack(path);
+            if (fileExists)
+            {
                 await ctrPlayer.ProcessAndPlay(path);
-
-                duration = ctrPlayer.Duration;
+                _bag.Duration = ctrPlayer.Duration;
                 _lastPath = path;
             }
 
-            _bag = new Bag();
-
-            await _bag.LoadFromDisk(path, duration, true);
             //For easy reference
             _mod = _bag.Mod;
-
-            LoadTrackInner(path);
-        }
-
-        void LoadTrackInner(string path)
-        {
             _track = _bag.Track;
 
             ctrMetaData.LoadData(_bag);
@@ -232,6 +297,82 @@ namespace TMCWorkbench
 
             SetStatusText($"Loaded: {path}");
         }
+
+        private bool PlayerIsHidden()
+        {
+            return tableRightControls.RowStyles[2].Height == 0;
+        }
+
+        private bool PlayerIsShowing()
+        {
+            return tableRightControls.RowStyles[2].Height == 80;
+        }
+
+        private void PlayerHide()
+        {
+            if (PlayerIsShowing())
+                tableRightControls.Do(() => tableRightControls.RowStyles[2].Height = 0);
+        }
+
+        private void PlayerShow()
+        {
+            if (PlayerIsHidden())
+                tableRightControls.Do(() => tableRightControls.RowStyles[2].Height = 80);
+        }
+
+
+        //private async Task LoadTrackFromDatabase(string path, int trackId, Guid guid)
+        //{
+        //    SetStatusText($"Loading: {path}");
+        //    ctrPlayer.StopWait();
+        //    tableRightControls.Do(() => tableRightControls.RowStyles[2].Height = 0);
+
+        //    _bag = new Bag();
+        //    await _bag.LoadFromDatabase(guid, true);
+
+        //    _mod = null;
+        //    LoadTrackInner(path);
+        //}
+
+        //private async Task LoadTrackFromDisk(string path)
+        //{
+        //    SetStatusText($"Loading: {path}");
+        //    tableRightControls.Do(() => tableRightControls.RowStyles[2].Height = 80);
+
+        //    long duration = 0;
+
+        //    if (path != _lastPath)
+        //    {
+        //        Debug.WriteLine($"Firing up {path}");
+
+        //        //await ctrPlayer.LoadTrack(path);
+        //        await ctrPlayer.ProcessAndPlay(path);
+
+        //        duration = ctrPlayer.Duration;
+        //        _lastPath = path;
+        //    }
+
+        //    _bag = new Bag();
+
+        //    await _bag.LoadFromDisk(path, duration, true);
+        //    //For easy reference
+        //    _mod = _bag.Mod;
+
+        //    LoadTrackInner(path);
+        //}
+
+        //void LoadTrackInner(string path)
+        //{
+        //    _track = _bag.Track;
+
+        //    ctrMetaData.LoadData(_bag);
+        //    InitTextFields();
+
+        //    EnableTabControl();
+        //    SwitchTabs(true);
+
+        //    SetStatusText($"Loaded: {path}");
+        //}
 
         //private async Task LoadTrackOLD(string path)
         //{
@@ -315,53 +456,54 @@ namespace TMCWorkbench
             ctrOutput.Init(_bag, ctrMetaData, "");
         }
 
+
+
    
         private async Task SaveTrack()
         {
-            try
+            var status = "Updated:";
+
+            if (_bag.IsInDB == false)
             {
+                status = "Saved:";
+
                 _track.FileName = _mod.FileName;
                 _track.Md5 = Manager.Instance.GetFileGuid(_mod.FullName);
                 _track.FK_fileextension_id = Manager.Instance.GetFileExtensionID(_mod.FullName);
-                _track.SampleText = ctrSamples.TextNew;
-                _track.InstrumentText = ctrInstruments.TextNew;
-                _track.SongText = ctrMessage.TextNew;
-                _track.TrackTitle = ctrMetaData.TrackTitle;
                 _track.Date_track_created = ctrMetaData.Date;
                 _track.Date_track_modified = _mod.DateModified;
-                _track.Length = ctrMetaData.LengthInMs;
-                _track.Speed = ctrMetaData.Speed.ToSht();
-                _track.Tempo = ctrMetaData.Tempo.ToSht();
-                _track.Bpm = ctrMetaData.Bpm.ToSht();
-                _track.FK_tracker_id = ctrMetaData.TrackerID;
-                _track.FK_style_id = ctrMetaData.StyleID;
-                _track.FK_composer_id = ctrMetaData.ComposerID;
-                _track.FK_scenegroup_id = ctrMetaData.ScenegroupID;
-                _track.StyleName = ctrMetaData.StyleText;
-                _track.ComposerName = ctrMetaData.ComposerText;
-                _track.ScenegroupName = ctrMetaData.ScenegroupText;
-                _track.YoutubeTextHeader = ctrOutput.TextHeaderNew;
-                _track.YoutubeTextSummary = ctrOutput.TextSummaryNew;
-                _track.YoutubeTextFooter = ctrOutput.TextFooterNew;
-
-                _track.YoutubeText = ctrOutput.TextOutput;
-
-                //Tags
-                DB.UpdateTrackTags(_track.Track_id, ctrMetaData.GetTagIds());
-
-                DB.AddOrUpdate(_track);
-                DB.Save();
-
-                SetStatusText($"Saved: {_track.FileName} to database");
-            }
-            catch (Exception ex)
-            {
-                var text = $"Failed to save\n{ex.Message}";
-                SetStatusText(text);
-                MessageBox.Show(text);
             }
 
-            if (_mod != null)
+            _track.SampleText = ctrSamples.TextNew;
+            _track.InstrumentText = ctrInstruments.TextNew;
+            _track.SongText = ctrMessage.TextNew;
+            _track.TrackTitle = ctrMetaData.TrackTitle;
+            _track.Length = ctrMetaData.LengthInMs;
+            _track.Speed = ctrMetaData.Speed.ToSht();
+            _track.Tempo = ctrMetaData.Tempo.ToSht();
+            _track.Bpm = ctrMetaData.Bpm.ToSht();
+            _track.FK_tracker_id = ctrMetaData.TrackerID;
+            _track.FK_style_id = ctrMetaData.StyleID;
+            _track.FK_composer_id = ctrMetaData.ComposerID;
+            _track.FK_scenegroup_id = ctrMetaData.ScenegroupID;
+            _track.StyleName = ctrMetaData.StyleText;
+            _track.ComposerName = ctrMetaData.ComposerText;
+            _track.ScenegroupName = ctrMetaData.ScenegroupText;
+            _track.YoutubeTextHeader = ctrOutput.TextHeaderNew;
+            _track.YoutubeTextSummary = ctrOutput.TextSummaryNew;
+            _track.YoutubeTextFooter = ctrOutput.TextFooterNew;
+
+            _track.YoutubeText = ctrOutput.TextOutput;
+
+            //Tags
+            DB.UpdateTrackTags(_track.Track_id, ctrMetaData.GetTagIds());
+
+            DB.AddOrUpdate(_track);
+            DB.Save();
+
+            AppendStatusText($"{status} {_track.FileName} in database", false, true);
+
+            if (_mod != null && _bag.IsInDB == false)
             {
                 var pathSource = _mod.FileInfo.FullName;
                 var pathTarget = $@"{C.PATHTRACKSTORE}\{_track.Md5}_{_mod.FileName}";
@@ -371,7 +513,7 @@ namespace TMCWorkbench
                     try
                     {
                         File.Copy(pathSource, pathTarget, true);
-                        SetStatusText($"Copied {pathSource} to {pathTarget}");
+                        AppendStatusText($"Copied {pathSource} to {pathTarget}");
                     }
                     catch (Exception sex)
                     {
@@ -380,10 +522,22 @@ namespace TMCWorkbench
                 }
             }
 
+            if (_mod == null)
+            {
+                AppendStatusText("NOT ON DISK", true);
+            }
+            else
+            {
+                await LoadTrack(_mod.FullName, true, _track.Md5);
+                ctrListView.MarkInDatabase(_mod.FullName, _track.Md5);
+                ctrTracks.Init();
+            }
+
 
             //ctrMetaData.Refresh(true);
-            await LoadTrackFromDisk(_mod.FullName);
-            ctrListView.MarkInDatabase(_mod.FullName);
+            //await LoadTrackFromDisk(_mod.FullName);
+
+            AppendStatusText("DONE");
         }
 
         #region TABS
@@ -541,5 +695,5 @@ namespace TMCWorkbench
                 var bla = result;
             }
         }
-  }
+    }
 }
