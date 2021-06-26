@@ -11,13 +11,6 @@ using TMCDatabase.DBModel;
 
 namespace TMCWorkbench.Controls
 {
-    public class ListViewItemTag
-    {
-        public string Path;
-        public bool IsInDB;
-        public Guid Guid;
-    }
-
     public partial class ControlListView : UserControl
     {
         public ControlListView()

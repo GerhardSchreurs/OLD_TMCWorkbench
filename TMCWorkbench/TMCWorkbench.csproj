@@ -209,6 +209,7 @@
     <Compile Include="Controls\ControlTracks.Designer.cs">
       <DependentUpon>ControlTracks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ListViewTag.cs" />
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
     </Compile>
