@@ -223,6 +223,12 @@
     <Compile Include="Controls\Resettable\ResettableCheckBoxDropDown.Designer.cs">
       <DependentUpon>ResettableCheckBoxDropDown.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Resettable\ResettableDropDownPlayList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableDropDownPlayList.Designer.cs">
+      <DependentUpon>ResettableDropDownPlayList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Resettable\_ResettableCheckBoxDropDownHelper.cs" />
     <Compile Include="Controls\Resettable\ResettableCheckBoxDropDownTags.cs">
       <SubType>UserControl</SubType>
