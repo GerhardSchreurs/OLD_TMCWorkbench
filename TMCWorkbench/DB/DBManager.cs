@@ -56,6 +56,7 @@ namespace TMCWorkbench.DB
         public List<C_Track_Tag> TracksTags;
         public List<C_Track_Tag> TracksTagsWithTag;
         public List<C_Track_Playlist> TracksPlaylists;
+        public List<C_Track_Playlist> TracksPlaylistsWithPlaylist;
 
         public Track Track;
 
@@ -187,6 +188,17 @@ namespace TMCWorkbench.DB
             }
         }
 
+        public int[] GetTagIds(int trackId)
+        {
+            return C.C_Track_Tags.Where(x => x.FK_track_id == trackId).Select(x => x.FK_tag_id).ToArray();
+        }
+
+        public int[] GetPlaylistIds(int trackId)
+        {
+            return C.C_Track_Playlists.Where(x => x.FK_track_id == trackId).Select(x => x.FK_playlist_id).ToArray();
+        }
+
+
         public void LoadTracksPlaylists(bool refresh = false)
         {
             if (refresh || refresh == false && TracksPlaylists == null)
@@ -201,6 +213,15 @@ namespace TMCWorkbench.DB
             {
                 //C.C_Track_Tags.Load();
                 TracksTagsWithTag = C.C_Track_Tags.Include(x => x.Tag).ToList();
+            }
+        }
+
+        public void LoadTrackPlaylistsWithPlaylist(bool refresh = false)
+        {
+            if (refresh || refresh == false && TracksPlaylistsWithPlaylist == null)
+            {
+                //C.C_Track_Tags.Load();
+                TracksPlaylistsWithPlaylist = C.C_Track_Playlists.Include(x => x.Playlist).ToList();
             }
         }
 
@@ -261,18 +282,33 @@ namespace TMCWorkbench.DB
             C.C_Track_Playlists.Add(playlist);
         }
 
-        public void UpdateTrackTags(int trackId, int[] tagIds)
+        public void UpdateTrackTags(int trackId, int[] ids)
         {
             C.C_Track_Tags.RemoveRange(C.C_Track_Tags.Where(x => x.FK_track_id == trackId));
-            if (tagIds == null) return;
+            if (ids == null) return;
 
-            foreach (var tagId in tagIds)
+            foreach (var id in ids)
             {
-                var trackTag = new C_Track_Tag();
-                trackTag.FK_track_id = trackId;
-                trackTag.FK_tag_id = tagId;
+                var entity = new C_Track_Tag();
+                entity.FK_track_id = trackId;
+                entity.FK_tag_id = id;
 
-                C.C_Track_Tags.Add(trackTag);
+                C.C_Track_Tags.Add(entity);
+            }
+        }
+
+        public void UpdateTrackPlaylists(int trackId, int[] ids)
+        {
+            C.C_Track_Playlists.RemoveRange(C.C_Track_Playlists.Where(x => x.FK_track_id == trackId));
+            if (ids == null) return;
+
+            foreach (var id in ids)
+            {
+                var entity = new C_Track_Playlist();
+                entity.FK_track_id = trackId;
+                entity.FK_playlist_id = id;
+
+                C.C_Track_Playlists.Add(entity);
             }
         }
 

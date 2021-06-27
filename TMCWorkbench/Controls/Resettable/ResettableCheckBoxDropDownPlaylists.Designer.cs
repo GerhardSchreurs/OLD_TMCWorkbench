@@ -1,7 +1,7 @@
 ﻿
 namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableDropDownPlayList
+    partial class ResettableCheckBoxDropDownPlaylists
     {
         /// <summary> 
         /// Required designer variable.

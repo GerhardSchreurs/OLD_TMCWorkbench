@@ -30,8 +30,8 @@
         {
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
-            this.ctrTags = new TMCWorkbench.Controls.Resettable.ResettableCheckBoxDropDownTags();
             this.ctrScore = new TMCWorkbench.Controls.Resettable.ResettableDouble();
+            this.ctrTags = new TMCWorkbench.Controls.Resettable.ResettableCheckBoxDropDownTags();
             this.ctrScenegroupText = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrScenegroup = new TMCWorkbench.Controls.Resettable.ResettableDropDownSceneGroup();
             this.ctrComposerText = new TMCWorkbench.Controls.Resettable.ResettableText();
@@ -45,6 +45,7 @@
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDate();
             this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableText();
+            this.ctrPlaylists = new TMCWorkbench.Controls.Resettable.ResettableCheckBoxDropDownPlaylists();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.SuspendLayout();
@@ -55,13 +56,14 @@
             this.pnlMeta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMeta.Location = new System.Drawing.Point(0, 0);
             this.pnlMeta.Name = "pnlMeta";
-            this.pnlMeta.Size = new System.Drawing.Size(654, 400);
+            this.pnlMeta.Size = new System.Drawing.Size(654, 440);
             this.pnlMeta.TabIndex = 2;
             // 
             // pnlMetaOrg
             // 
-            this.pnlMetaOrg.Controls.Add(this.ctrTags);
             this.pnlMetaOrg.Controls.Add(this.ctrScore);
+            this.pnlMetaOrg.Controls.Add(this.ctrPlaylists);
+            this.pnlMetaOrg.Controls.Add(this.ctrTags);
             this.pnlMetaOrg.Controls.Add(this.ctrScenegroupText);
             this.pnlMetaOrg.Controls.Add(this.ctrScenegroup);
             this.pnlMetaOrg.Controls.Add(this.ctrComposerText);
@@ -78,29 +80,29 @@
             this.pnlMetaOrg.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMetaOrg.Location = new System.Drawing.Point(0, 0);
             this.pnlMetaOrg.Name = "pnlMetaOrg";
-            this.pnlMetaOrg.Size = new System.Drawing.Size(654, 400);
+            this.pnlMetaOrg.Size = new System.Drawing.Size(654, 440);
             this.pnlMetaOrg.TabIndex = 0;
-            // 
-            // ctrTags
-            // 
-            this.ctrTags.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrTags.LabelTitle = "Tags";
-            this.ctrTags.Location = new System.Drawing.Point(0, 336);
-            this.ctrTags.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrTags.Name = "ctrTags";
-            this.ctrTags.Size = new System.Drawing.Size(654, 24);
-            this.ctrTags.TabIndex = 24;
             // 
             // ctrScore
             // 
             this.ctrScore.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctrScore.LabelTitle = "Score";
-            this.ctrScore.Location = new System.Drawing.Point(0, 312);
+            this.ctrScore.Location = new System.Drawing.Point(0, 360);
             this.ctrScore.Margin = new System.Windows.Forms.Padding(0);
             this.ctrScore.Name = "ctrScore";
             this.ctrScore.Size = new System.Drawing.Size(654, 24);
             this.ctrScore.TabIndex = 22;
             this.ctrScore.Value = null;
+            // 
+            // ctrTags
+            // 
+            this.ctrTags.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrTags.LabelTitle = "Tags";
+            this.ctrTags.Location = new System.Drawing.Point(0, 312);
+            this.ctrTags.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrTags.Name = "ctrTags";
+            this.ctrTags.Size = new System.Drawing.Size(654, 24);
+            this.ctrTags.TabIndex = 24;
             // 
             // ctrScenegroupText
             // 
@@ -239,13 +241,23 @@
             this.ctrFileInfo.Size = new System.Drawing.Size(654, 24);
             this.ctrFileInfo.TabIndex = 6;
             // 
+            // ctrPlaylists
+            // 
+            this.ctrPlaylists.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrPlaylists.LabelTitle = "Playlists";
+            this.ctrPlaylists.Location = new System.Drawing.Point(0, 336);
+            this.ctrPlaylists.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrPlaylists.Name = "ctrPlaylists";
+            this.ctrPlaylists.Size = new System.Drawing.Size(654, 24);
+            this.ctrPlaylists.TabIndex = 26;
+            // 
             // ControlMetaData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlMeta);
             this.Name = "ControlMetaData";
-            this.Size = new System.Drawing.Size(654, 400);
+            this.Size = new System.Drawing.Size(654, 440);
             this.pnlMeta.ResumeLayout(false);
             this.pnlMetaOrg.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -271,5 +283,6 @@
         private Resettable.ResettableDropDownSceneGroup ctrScenegroup;
         private Resettable.ResettableDouble ctrScore;
         private Resettable.ResettableCheckBoxDropDownTags ctrTags;
+        private Resettable.ResettableCheckBoxDropDownPlaylists ctrPlaylists;
     }
 }

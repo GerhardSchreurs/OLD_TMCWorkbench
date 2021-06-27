@@ -497,6 +497,7 @@ namespace TMCWorkbench
 
             //Tags
             DB.UpdateTrackTags(_track.Track_id, ctrMetaData.GetTagIds());
+            DB.UpdateTrackPlaylists(_track.Track_id, ctrMetaData.GetPlaylistIds());
 
             DB.AddOrUpdate(_track);
             DB.Save();

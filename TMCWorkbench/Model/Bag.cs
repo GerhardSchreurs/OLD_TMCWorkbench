@@ -15,10 +15,14 @@ namespace TMCWorkbench.Model
         private DBManager _db = DBManager.Instance;
         private Manager _manager = Manager.Instance;
         private List<C_Track_Tag> _trackTags;
+        private List<C_Track_Playlist> _trackPlaylists;
 
         private ModInfo _mod;
         private Track _track;
         public Guid Guid;
+        public int[] TrackTagIds;
+        public int[] TrackPlaylistIds;
+
 
         public string PathLoad;
         public string PathSave;
@@ -105,8 +109,14 @@ namespace TMCWorkbench.Model
             }
             else
             {
-                DBManager.Instance.LoadTrackTagsWithTag(refresh);
-                _trackTags = DBManager.Instance.TracksTagsWithTag.Where(x => x.FK_track_id == _track.Track_id).ToList();
+                //DBManager.Instance.LoadTrackTagsWithTag(true);
+                //TrackTags = DBManager.Instance.TracksTagsWithTag.Where(x => x.FK_track_id == _track.Track_id).ToList();
+
+                //DBManager.Instance.LoadTrackPlaylistsWithPlaylist(refresh);
+                //TrackPlaylists = DBManager.Instance.TracksPlaylistsWithPlaylist.Where(x => x.FK_track_id == _track.Track_id).ToList();
+
+                TrackTagIds = DBManager.Instance.GetTagIds(_track.Track_id);
+                TrackPlaylistIds = DBManager.Instance.GetPlaylistIds(_track.Track_id);
             }
 
             return success;
@@ -181,15 +191,34 @@ namespace TMCWorkbench.Model
             get => _trackTags;
             private set => _trackTags = value;
         }
-        
+
+        public List<C_Track_Playlist> TrackPlaylists
+        {
+            get => _trackPlaylists;
+            private set => _trackPlaylists = value;
+        }
+
         public int[] GetTrackTagsArray()
         {
-            if (_trackTags == null) return null;
+            if (TrackTags == null) return null;
             var arr = new int[_trackTags.Count];
 
             for (var i = 0; i < arr.Length; i++)
             {
                 arr[i] = _trackTags[i].FK_tag_id;
+            }
+
+            return arr;
+        }
+
+        public int[] GetTrackPlaylistsArray()
+        {
+            if (TrackPlaylists == null) return null;
+            var arr = new int[_trackPlaylists.Count];
+
+            for (var i = 0; i < arr.Length; i++)
+            {
+                arr[i] = _trackPlaylists[i].FK_playlist_id;
             }
 
             return arr;

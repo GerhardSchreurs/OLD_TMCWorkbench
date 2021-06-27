@@ -36,6 +36,7 @@ namespace TMCWorkbench.Controls
             ctrComposer.Init();
             ctrScenegroup.Init();
             ctrTags.Init();
+            ctrPlaylists.Init();
 
             ctrStyleText.SwitchMode();
             ctrComposerText.SwitchMode();
@@ -318,6 +319,16 @@ namespace TMCWorkbench.Controls
             ctrTags.SetIdValues(ids);
         }
 
+        public int[] GetPlaylistIds()
+        {
+            return ctrPlaylists.GetIdValues();
+        }
+
+        public void SetPlaylistIds(int[] ids)
+        {
+            ctrPlaylists.SetIdValues(ids);
+        }
+
         public void LoadData(Bag bag)
         {
             var mod = bag.Mod;
@@ -350,7 +361,10 @@ namespace TMCWorkbench.Controls
                 //Original values
                 this.SetLengthInMsOriginal(bag.Duration);
 
-                ctrTags.SetIdValues(bag.GetTrackTagsArray());
+                this.SetTagIds(bag.TrackTagIds);
+                this.SetPlaylistIds(bag.TrackPlaylistIds);
+                //ctrTags.SetIdValues(bag.GetTrackTagsArray());
+                //ctrPlaylists.SetIdValues(bag.GetTrackPlaylistsArray());
 
                 if (mod == null) return;
 
@@ -379,6 +393,7 @@ namespace TMCWorkbench.Controls
                 this.ScenegroupText = "";
 
                 this.SetTagIds(null);
+                this.SetPlaylistIds(null);
 
                 //TODO
                 //if (ctrStyle.SetStyle(mod.TrackStyle))
