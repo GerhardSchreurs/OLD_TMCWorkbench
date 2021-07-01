@@ -74,6 +74,8 @@ namespace TMCWorkbench
             this.ctrBrowser = new TMCWorkbench.Controls.ControlBrowser();
             this.ctrListView = new TMCWorkbench.Controls.ControlListView();
             this.ctrTracks = new TMCWorkbench.Controls.ControlTracks();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.massInsertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.tableOuter.SuspendLayout();
             this.tableMenu.SuspendLayout();
@@ -152,7 +154,8 @@ namespace TMCWorkbench
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.viewToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(608, 24);
@@ -188,35 +191,35 @@ namespace TMCWorkbench
             // stylesToolStripMenuItem
             // 
             this.stylesToolStripMenuItem.Name = "stylesToolStripMenuItem";
-            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.stylesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stylesToolStripMenuItem.Text = "Styles";
             this.stylesToolStripMenuItem.Click += new System.EventHandler(this.Handle_stylesToolStripMenuItem_Click);
             // 
             // scenegroupsToolStripMenuItem
             // 
             this.scenegroupsToolStripMenuItem.Name = "scenegroupsToolStripMenuItem";
-            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.scenegroupsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.scenegroupsToolStripMenuItem.Text = "Scenegroups";
             this.scenegroupsToolStripMenuItem.Click += new System.EventHandler(this.Handle_scenegroupsToolStripMenuItem_Click);
             // 
             // composersToolStripMenuItem
             // 
             this.composersToolStripMenuItem.Name = "composersToolStripMenuItem";
-            this.composersToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.composersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.composersToolStripMenuItem.Text = "Composers";
             this.composersToolStripMenuItem.Click += new System.EventHandler(this.Handle_composersToolStripMenuItem_Click);
             // 
             // tagsToolStripMenuItem
             // 
             this.tagsToolStripMenuItem.Name = "tagsToolStripMenuItem";
-            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.tagsToolStripMenuItem.Text = "Tags";
             this.tagsToolStripMenuItem.Click += new System.EventHandler(this.Handle_tagsToolStripMenuItem_Click);
             // 
             // playlistsToolStripMenuItem
             // 
             this.playlistsToolStripMenuItem.Name = "playlistsToolStripMenuItem";
-            this.playlistsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.playlistsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.playlistsToolStripMenuItem.Text = "Playlists";
             this.playlistsToolStripMenuItem.Click += new System.EventHandler(this.Handle_playlistsToolStripMenuItem_Click);
             // 
@@ -236,7 +239,7 @@ namespace TMCWorkbench
             this.miFileHide,
             this.miFileOnlyDetails});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(180, 22);
+            this.miFile.Size = new System.Drawing.Size(149, 22);
             this.miFile.Text = "File Area";
             // 
             // miFileShow
@@ -263,19 +266,19 @@ namespace TMCWorkbench
             this.miDatabaseShow,
             this.miDatabaseHide});
             this.miDatabase.Name = "miDatabase";
-            this.miDatabase.Size = new System.Drawing.Size(180, 22);
+            this.miDatabase.Size = new System.Drawing.Size(149, 22);
             this.miDatabase.Text = "Database Area";
             // 
             // miDatabaseShow
             // 
             this.miDatabaseShow.Name = "miDatabaseShow";
-            this.miDatabaseShow.Size = new System.Drawing.Size(180, 22);
+            this.miDatabaseShow.Size = new System.Drawing.Size(103, 22);
             this.miDatabaseShow.Text = "Show";
             // 
             // miDatabaseHide
             // 
             this.miDatabaseHide.Name = "miDatabaseHide";
-            this.miDatabaseHide.Size = new System.Drawing.Size(180, 22);
+            this.miDatabaseHide.Size = new System.Drawing.Size(103, 22);
             this.miDatabaseHide.Text = "Hide";
             // 
             // tabControl
@@ -459,6 +462,7 @@ namespace TMCWorkbench
             this.ctrMetaData.Date = new System.DateTime(((long)(0)));
             this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Top;
             this.ctrMetaData.FileName = "";
+            this.ctrMetaData.IsFavorite = false;
             this.ctrMetaData.LengthInMs = ((long)(0));
             this.ctrMetaData.Location = new System.Drawing.Point(367, 23);
             this.ctrMetaData.Name = "ctrMetaData";
@@ -556,6 +560,21 @@ namespace TMCWorkbench
             this.ctrTracks.Size = new System.Drawing.Size(600, 455);
             this.ctrTracks.TabIndex = 5;
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.massInsertToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // massInsertToolStripMenuItem
+            // 
+            this.massInsertToolStripMenuItem.Name = "massInsertToolStripMenuItem";
+            this.massInsertToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.massInsertToolStripMenuItem.Text = "Mass Insert";
+            this.massInsertToolStripMenuItem.Click += new System.EventHandler(this.Handle_massInsertToolStripMenuItem_Click);
+            // 
             // FormAlpha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -630,5 +649,7 @@ namespace TMCWorkbench
         private System.Windows.Forms.ToolStripMenuItem miFileHide;
         private System.Windows.Forms.ToolStripMenuItem miDatabaseShow;
         private System.Windows.Forms.ToolStripMenuItem miDatabaseHide;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem massInsertToolStripMenuItem;
     }
 }

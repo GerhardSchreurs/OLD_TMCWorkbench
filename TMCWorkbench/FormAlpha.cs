@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TMCWorkbench.Model;
 using System.IO;
+using TMCWorkbench.Controls;
 
 namespace TMCWorkbench
 {
@@ -44,8 +45,18 @@ namespace TMCWorkbench
             ctrMetaData.Init();
             ctrTracks.Init();
 
+            //TODO
+            ctrTracks.ListView.MouseMove += Handle_ListView_MouseMove;
+
             tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabControl.DrawItem += Handle_TabControl_DrawItem;
+        }
+
+        private void Handle_ListView_MouseMove(object sender, MouseEventArgs e)
+        {
+            //https://stackoverflow.com/questions/1045621/getting-the-item-under-mouse-cursor-in-a-listview-control
+            //TODO
+            Console.WriteLine($"{e.X} {e.Y}");
         }
 
         private readonly string[] CMD_KEY_CONTROLS = new string[] { "tabControl", "ctrBrowser", "ctrPlayer", "ctrListView", "ctrTracks" };
@@ -248,7 +259,7 @@ namespace TMCWorkbench
         }
         #endregion
 
-        private async Task LoadTrack(string path, bool fromDB, Guid guid)
+        private async Task LoadTrack(string path, bool fromDB, Guid guid, bool autoPlay = true)
         {
             if (path == _lastPath) return;
 
@@ -280,7 +291,7 @@ namespace TMCWorkbench
 
             if (fileExists)
             {
-                await ctrPlayer.ProcessAndPlay(path);
+                await ctrPlayer.ProcessAndPlay(path, autoPlay);
                 _bag.Duration = ctrPlayer.Duration;
                 _lastPath = path;
             }
@@ -477,6 +488,7 @@ namespace TMCWorkbench
             _track.SampleText = ctrSamples.TextNew;
             _track.InstrumentText = ctrInstruments.TextNew;
             _track.SongText = ctrMessage.TextNew;
+            _track.Is_favorite = ctrMetaData.IsFavorite;
             _track.TrackTitle = ctrMetaData.TrackTitle;
             _track.Length = ctrMetaData.LengthInMs;
             _track.Speed = ctrMetaData.Speed.ToSht();
@@ -531,7 +543,7 @@ namespace TMCWorkbench
             {
                 await LoadTrack(_mod.FullName, true, _track.Md5);
                 ctrListView.MarkInDatabase(_mod.FullName, _track.Md5);
-                ctrTracks.Init();
+                ctrTracks.Search();
             }
 
 
@@ -695,6 +707,24 @@ namespace TMCWorkbench
                 var y = x.TextA;
                 var bla = result;
             }
+        }
+
+        public bool InMassInsert;
+
+        private async void Handle_massInsertToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in ctrListView.ListView.Items)
+            {
+                var tag = (ListViewItemTag)item.Tag;
+
+                if (tag.IsInDB) continue;
+
+                await LoadTrack(tag.Path, false, tag.Guid, false);
+                await Task.Delay(100);
+                await SaveTrack();
+                await Task.Delay(100);
+            }
+
         }
     }
 }

@@ -19,22 +19,7 @@ namespace TMCWorkbench.Controls.Resettable
         public ResettableDropDownComposer()
         {
             InitializeComponent();
-            //_form = new UCComposers();
-            //_form.FormClosed += Handle_form_FormClosed;
-            //btnEdit.Click += Handle_BtnEdit_Click;
         }
-
-        //private void Handle_form_FormClosed(object sender, FormClosedEventArgs e)
-        //{
-        //    Init(true);
-        //    IdValue = _oldID;
-        //}
-
-        //private void Handle_BtnEdit_Click(object sender, EventArgs e)
-        //{
-        //    _oldID = IdValue;
-        //    _form.ShowDialog();
-        //}
 
         public void Init(bool refresh = false)
         {

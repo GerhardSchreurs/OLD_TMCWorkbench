@@ -31,6 +31,7 @@
             this.pnlMeta = new System.Windows.Forms.Panel();
             this.pnlMetaOrg = new System.Windows.Forms.Panel();
             this.ctrScore = new TMCWorkbench.Controls.Resettable.ResettableDouble();
+            this.ctrPlaylists = new TMCWorkbench.Controls.Resettable.ResettableCheckBoxDropDownPlaylists();
             this.ctrTags = new TMCWorkbench.Controls.Resettable.ResettableCheckBoxDropDownTags();
             this.ctrScenegroupText = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrScenegroup = new TMCWorkbench.Controls.Resettable.ResettableDropDownSceneGroup();
@@ -45,7 +46,7 @@
             this.ctrDate = new TMCWorkbench.Controls.Resettable.ResettableDate();
             this.ctrTrackTitle = new TMCWorkbench.Controls.Resettable.ResettableText();
             this.ctrFileInfo = new TMCWorkbench.Controls.Resettable.ResettableText();
-            this.ctrPlaylists = new TMCWorkbench.Controls.Resettable.ResettableCheckBoxDropDownPlaylists();
+            this.ctrFavorite = new TMCWorkbench.Controls.Resettable.ResettableCheckBox();
             this.pnlMeta.SuspendLayout();
             this.pnlMetaOrg.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +62,7 @@
             // 
             // pnlMetaOrg
             // 
+            this.pnlMetaOrg.Controls.Add(this.ctrFavorite);
             this.pnlMetaOrg.Controls.Add(this.ctrScore);
             this.pnlMetaOrg.Controls.Add(this.ctrPlaylists);
             this.pnlMetaOrg.Controls.Add(this.ctrTags);
@@ -93,6 +95,16 @@
             this.ctrScore.Size = new System.Drawing.Size(654, 24);
             this.ctrScore.TabIndex = 22;
             this.ctrScore.Value = null;
+            // 
+            // ctrPlaylists
+            // 
+            this.ctrPlaylists.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrPlaylists.LabelTitle = "Playlists";
+            this.ctrPlaylists.Location = new System.Drawing.Point(0, 336);
+            this.ctrPlaylists.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrPlaylists.Name = "ctrPlaylists";
+            this.ctrPlaylists.Size = new System.Drawing.Size(654, 24);
+            this.ctrPlaylists.TabIndex = 26;
             // 
             // ctrTags
             // 
@@ -241,15 +253,16 @@
             this.ctrFileInfo.Size = new System.Drawing.Size(654, 24);
             this.ctrFileInfo.TabIndex = 6;
             // 
-            // ctrPlaylists
+            // ctrFavorite
             // 
-            this.ctrPlaylists.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrPlaylists.LabelTitle = "Playlists";
-            this.ctrPlaylists.Location = new System.Drawing.Point(0, 336);
-            this.ctrPlaylists.Margin = new System.Windows.Forms.Padding(0);
-            this.ctrPlaylists.Name = "ctrPlaylists";
-            this.ctrPlaylists.Size = new System.Drawing.Size(654, 24);
-            this.ctrPlaylists.TabIndex = 26;
+            this.ctrFavorite.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrFavorite.LabelTitle = "Is Favorite";
+            this.ctrFavorite.Location = new System.Drawing.Point(0, 384);
+            this.ctrFavorite.Margin = new System.Windows.Forms.Padding(0);
+            this.ctrFavorite.Name = "ctrFavorite";
+            this.ctrFavorite.Size = new System.Drawing.Size(654, 24);
+            this.ctrFavorite.TabIndex = 27;
+            this.ctrFavorite.Value = false;
             // 
             // ControlMetaData
             // 
@@ -284,5 +297,6 @@
         private Resettable.ResettableDouble ctrScore;
         private Resettable.ResettableCheckBoxDropDownTags ctrTags;
         private Resettable.ResettableCheckBoxDropDownPlaylists ctrPlaylists;
+        private Resettable.ResettableCheckBox ctrFavorite;
     }
 }

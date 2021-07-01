@@ -171,6 +171,9 @@
     <Compile Include="Controls\ControlEditableList.Designer.cs">
       <DependentUpon>ControlEditableList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ControlHintTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ControlHistoryTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -216,6 +219,12 @@
     <Compile Include="Controls\ListViewTag.cs" />
     <Compile Include="Controls\PausableTimer.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableCheckBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Resettable\ResettableCheckBox.Designer.cs">
+      <DependentUpon>ResettableCheckBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Resettable\ResettableCheckBoxDropDown.cs">
       <SubType>UserControl</SubType>
@@ -432,6 +441,7 @@
     <Compile Include="UCTags.Designer.cs">
       <DependentUpon>UCTags.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility\SearchQueryExecutor.cs" />
     <Compile Include="_UCForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -476,6 +486,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableButton.resx">
       <DependentUpon>ResettableButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Resettable\ResettableCheckBox.resx">
+      <DependentUpon>ResettableCheckBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Resettable\ResettableCheckBoxDropDown.resx">
       <DependentUpon>ResettableCheckBoxDropDown.cs</DependentUpon>

@@ -60,7 +60,7 @@ namespace TMCWorkbench.Controls
                 _mediaPlayer.Play();
         }
 
-        public async Task ProcessAndPlay(string path)
+        public async Task ProcessAndPlay(string path, bool autoPlay = true)
         {
             Cursor.Current = Cursors.WaitCursor;
 
@@ -77,9 +77,11 @@ namespace TMCWorkbench.Controls
             {
                 Debug.WriteLine($"in try");
 
-                StopWait();
+                if (autoPlay) StopWait();
 
                 await AudioLibrary.Lib.ExportToWaveAsync(path, cachePath);
+
+                if (autoPlay == false) return;
 
                 var mediaTrack = new Media(_libVlc, cachePath, FromType.FromPath);
                 await mediaTrack.Parse(MediaParseOptions.ParseLocal).ConfigureAwait(true);

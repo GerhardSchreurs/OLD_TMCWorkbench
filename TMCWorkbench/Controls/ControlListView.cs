@@ -119,6 +119,15 @@ namespace TMCWorkbench.Controls
             }
         }
 
+        public ListView ListView
+        {
+            get 
+            {
+                return listView1;
+            }
+        }
+
+
         private void Handle_ListView1_DoubleClick(object sender, EventArgs e)
         {
             PlaySelectedItemTrack();

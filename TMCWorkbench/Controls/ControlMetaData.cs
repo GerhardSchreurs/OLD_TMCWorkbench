@@ -304,6 +304,12 @@ namespace TMCWorkbench.Controls
             set => ctrComposerText.Text = value;
         }
 
+        public bool IsFavorite
+        {
+            get => ctrFavorite.Value;
+            set => ctrFavorite.Value = value;
+        }
+
         public string GetScenegroupCalulated()
         {
             return SceneGroup.IsNullOrEmpty() ? ScenegroupText : SceneGroup;
@@ -345,6 +351,7 @@ namespace TMCWorkbench.Controls
                 this.TrackTitle = track.TrackTitle;
                 this.Date = track.Date_track_created;
                 this.LengthInMs = track.Length;
+                this.IsFavorite = track.Is_favorite;
                 this.SetSpeedAndTempo(track.Speed, track.Tempo);
                 this.Bpm = track.Bpm;
                 this.StyleID = track.FK_style_id;
@@ -355,8 +362,6 @@ namespace TMCWorkbench.Controls
                 this.ScenegroupText = track.ScenegroupName;
                 this.Tracker = track.Tracker.Name;
                 this.Score = track.Score;
-
-
 
                 //Original values
                 this.SetLengthInMsOriginal(bag.Duration);
