@@ -1,7 +1,7 @@
 ﻿
 namespace TMCWorkbench.Controls.Resettable
 {
-    partial class ResettableDropDownHold
+    partial class _ResettableDropDownHold
     {
         /// <summary> 
         /// Required designer variable.
@@ -96,12 +96,12 @@ namespace TMCWorkbench.Controls.Resettable
             this.ddList.Size = new System.Drawing.Size(200, 21);
             this.ddList.TabIndex = 3;
             // 
-            // ResettableDropDownHold
+            // _ResettableDropDownHold
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "ResettableDropDownHold";
+            this.Name = "_ResettableDropDownHold";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

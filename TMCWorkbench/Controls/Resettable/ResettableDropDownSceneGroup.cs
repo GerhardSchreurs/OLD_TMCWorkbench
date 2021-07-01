@@ -11,7 +11,7 @@ using TMCWorkbench.DB;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableDropDownSceneGroup : ResettableDropDownHold, IRefreshableInit
+    public partial class ResettableDropDownSceneGroup : _ResettableDropDownHold, IRefreshableInit
     {
         private UCSceneGroups _form;
         //private int? _oldID;

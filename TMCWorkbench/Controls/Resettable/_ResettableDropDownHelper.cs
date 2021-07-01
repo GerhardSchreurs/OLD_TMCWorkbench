@@ -94,7 +94,7 @@ namespace TMCWorkbench.Controls.Resettable
 
             _box.DisplayMember = DISPLAYMEMBER;
             _box.ValueMember = VALUEMEMBER;
-            _box.AutoCompleteMode = AutoCompleteMode.Suggest;
+            _box.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             _box.AutoCompleteSource = AutoCompleteSource.ListItems;
             _box.DataSource = bindingSource;
         }

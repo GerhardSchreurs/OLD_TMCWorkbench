@@ -42,7 +42,7 @@ namespace TMCWorkbench.Controls.Resettable
 
             ddList.DisplayMember = "Name";
             ddList.ValueMember = "Tracker_id";
-            ddList.AutoCompleteMode = AutoCompleteMode.Suggest;
+            ddList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             ddList.AutoCompleteSource = AutoCompleteSource.ListItems;
             ddList.DataSource = bindingSource;
         }

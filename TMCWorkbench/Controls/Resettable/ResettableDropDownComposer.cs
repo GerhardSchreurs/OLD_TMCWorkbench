@@ -12,7 +12,7 @@ using TMCWorkbench.DB;
 
 namespace TMCWorkbench.Controls.Resettable
 {
-    public partial class ResettableDropDownComposer : ResettableDropDownHold, IRefreshableInit
+    public partial class ResettableDropDownComposer : _ResettableDropDownHold, IRefreshableInit
     {
         private UCComposers _form;
 

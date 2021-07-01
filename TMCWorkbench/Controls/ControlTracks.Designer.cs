@@ -38,6 +38,9 @@ namespace TMCWorkbench.Controls
             this.colStyle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateSaved = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tblTopControls = new System.Windows.Forms.TableLayoutPanel();
+            this.ctrMetaData = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.ctrFileName = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.ctrTrackTitle = new TMCWorkbench.Controls.ControlHintTextBox();
             this.tblTopRightControls = new System.Windows.Forms.TableLayoutPanel();
             this.btnSwitch = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -45,9 +48,6 @@ namespace TMCWorkbench.Controls
             this.btnSearch = new System.Windows.Forms.Button();
             this.tblBottomControlsContainer = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrMetaData = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.ctrFileName = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.ctrTrackTitle = new TMCWorkbench.Controls.ControlHintTextBox();
             this.controlHintTextBox4 = new TMCWorkbench.Controls.ControlHintTextBox();
             this.controlHintTextBox1 = new TMCWorkbench.Controls.ControlHintTextBox();
             this.controlHintTextBox2 = new TMCWorkbench.Controls.ControlHintTextBox();
@@ -147,6 +147,33 @@ namespace TMCWorkbench.Controls
             this.tblTopControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tblTopControls.Size = new System.Drawing.Size(600, 30);
             this.tblTopControls.TabIndex = 6;
+            // 
+            // ctrMetaData
+            // 
+            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrMetaData.Hint = "Meta data";
+            this.ctrMetaData.Location = new System.Drawing.Point(303, 3);
+            this.ctrMetaData.Name = "ctrMetaData";
+            this.ctrMetaData.Size = new System.Drawing.Size(144, 20);
+            this.ctrMetaData.TabIndex = 2;
+            // 
+            // ctrFileName
+            // 
+            this.ctrFileName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrFileName.Hint = "File name";
+            this.ctrFileName.Location = new System.Drawing.Point(153, 3);
+            this.ctrFileName.Name = "ctrFileName";
+            this.ctrFileName.Size = new System.Drawing.Size(144, 20);
+            this.ctrFileName.TabIndex = 1;
+            // 
+            // ctrTrackTitle
+            // 
+            this.ctrTrackTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrTrackTitle.Hint = "Track title";
+            this.ctrTrackTitle.Location = new System.Drawing.Point(3, 3);
+            this.ctrTrackTitle.Name = "ctrTrackTitle";
+            this.ctrTrackTitle.Size = new System.Drawing.Size(144, 20);
+            this.ctrTrackTitle.TabIndex = 0;
             // 
             // tblTopRightControls
             // 
@@ -250,33 +277,6 @@ namespace TMCWorkbench.Controls
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 40);
             this.tableLayoutPanel1.TabIndex = 7;
-            // 
-            // ctrMetaData
-            // 
-            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrMetaData.Hint = "Meta data";
-            this.ctrMetaData.Location = new System.Drawing.Point(303, 3);
-            this.ctrMetaData.Name = "ctrMetaData";
-            this.ctrMetaData.Size = new System.Drawing.Size(144, 20);
-            this.ctrMetaData.TabIndex = 2;
-            // 
-            // ctrFileName
-            // 
-            this.ctrFileName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrFileName.Hint = "File name";
-            this.ctrFileName.Location = new System.Drawing.Point(153, 3);
-            this.ctrFileName.Name = "ctrFileName";
-            this.ctrFileName.Size = new System.Drawing.Size(144, 20);
-            this.ctrFileName.TabIndex = 1;
-            // 
-            // ctrTrackTitle
-            // 
-            this.ctrTrackTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrTrackTitle.Hint = "Track title";
-            this.ctrTrackTitle.Location = new System.Drawing.Point(3, 3);
-            this.ctrTrackTitle.Name = "ctrTrackTitle";
-            this.ctrTrackTitle.Size = new System.Drawing.Size(144, 20);
-            this.ctrTrackTitle.TabIndex = 0;
             // 
             // controlHintTextBox4
             // 
