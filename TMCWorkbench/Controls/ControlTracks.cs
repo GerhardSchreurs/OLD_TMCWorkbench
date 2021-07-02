@@ -20,6 +20,8 @@ namespace TMCWorkbench.Controls
     public partial class ControlTracks : UserControl
     {
         readonly List<string> _listTrackers = new List<string>() { "ALL", "IT", "XM", "S3M", "MOD" };
+        private ViewTracksTable _table;
+        private DB.DBManager _db = DB.DBManager.Instance;
 
         public ListView ListView
         {
@@ -30,8 +32,18 @@ namespace TMCWorkbench.Controls
         {
             InitializeComponent();
 
-            listView.KeyUp += Handle_ListView_KeyUp;
             listView.DoubleClick += Handle_ListView_DoubleClick;
+
+            EventInvoker.OnCachedEntityRefreshed += Handle_EventInvoker_OnCachedEntityRefreshed;
+        }
+
+        private void Handle_EventInvoker_OnCachedEntityRefreshed(object sender, string entityName)
+        {
+            if (entityName != nameof(_db.Styles)) return;
+
+            InitStylesDDL();
+
+            Console.WriteLine("x");
         }
 
         private void Handle_ListView_DoubleClick(object sender, EventArgs e)
@@ -45,12 +57,6 @@ namespace TMCWorkbench.Controls
             EventInvoker.RaiseOnTrackListViewSelected(this, trackId, guid, fileName);
         }
 
-        private void Handle_ListView_KeyUp(object sender, KeyEventArgs e)
-        {
-        }
-
-        private ViewTracksTable _table;
-
         public void Init()
         {
             InitControls();
@@ -60,20 +66,38 @@ namespace TMCWorkbench.Controls
         void InitControls()
         {
             ddlFormat.DataSource = _listTrackers;
+
+            InitStylesDDL();
+        }
+
+        void InitStylesDDL()
+        {
+            _db.LoadStyles();
+
+            foreach(var style in _db.Styles.Where(x => x.IsAlt == false))
+            {
+                var item = new CCBoxItem(style.Name, style.Style_id);
+                ddlStyles.Items.Add(item);
+                ddlStyles.DisplayMember = "Name";
+                ddlStyles.MaxDropDownItems = 25;
+            }
         }
 
         public void Search(bool forceRefresh = false)
         {
             var builder = new SearchQueryExecutor();
 
-            if (ctrFileName.Text.IsNotNullOrEmpty())
-                builder.SearchFileName(ctrFileName.Text);
-            if (ctrTrackTitle.Text.IsNotNullOrEmpty())
-                builder.SearchTrackTitle(ctrTrackTitle.Text);
-            if (ctrMetaData.Text.IsNotNullOrEmpty())
-                builder.SearchMetaData(ctrMetaData.Text);
-            if (ddlFormat.SelectedIndex > 0)
-                builder.SearchFormat(ddlFormat.SelectedIndex);
+            builder.SearchFileName(ctrFileName.Text);
+            builder.SearchTrackTitle(ctrTrackTitle.Text);
+            builder.SearchMetaData(ctrMetaData.Text);
+            builder.SearchFormat(ddlFormat.SelectedIndex);
+            builder.SearchStyles(ddlStyles.GetCheckedItemIds());
+
+
+            
+
+
+
 
             var data = builder.ExecuteAndRetrieve();
             _table = new ViewTracksTable(data);

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using TMCDatabase;
 using TMCDatabase.DBModel;
 using TMCWorkbench.Dialogs;
+using TMCWorkbench.Events;
 //using TMCWorkbench.Dialogs;
 using TMCWorkbench.Tools;
 
@@ -19,7 +20,7 @@ namespace TMCWorkbench
 {
     public partial class UCStyles : _UCForm
     {
-        private TMCWorkbench.DB.DBManager DB = TMCWorkbench.DB.DBManager.Instance;
+        private DB.DBManager _db = TMCWorkbench.DB.DBManager.Instance;
 
         private ContextMenu _contextMenuNodeOptions = new ContextMenu();
 
@@ -29,31 +30,47 @@ namespace TMCWorkbench
         private Style _row;
         private bool _isDirty;
 
-        List<Style> Styles;
+        List<Style> CachedStyles;
 
         public UCStyles()
         {
             InitializeComponent();
+
+            _contextMenuNodeOptions.MenuItems.Add(_menuItemAdd);
+            _contextMenuNodeOptions.MenuItems.Add(_menuItemEdit);
+            _contextMenuNodeOptions.MenuItems.Add(_menuItemDelete);
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
-            _contextMenuNodeOptions.MenuItems.Add(_menuItemAdd);
-            _contextMenuNodeOptions.MenuItems.Add(_menuItemEdit);
-            _contextMenuNodeOptions.MenuItems.Add(_menuItemDelete);
-
             _menuItemAdd.Click += Handle_menuItemAdd_Click;
             _menuItemEdit.Click += Handle_menuItemEdit_Click;
             _menuItemDelete.Click += Handle_menuItemDelete_Click;
 
-            Styles = DB.C.Styles.ToList();
+            CachedStyles = _db.C.Styles.ToList(); //We want a copy
             PopulateTree();
 
             this.treeView.NodeMouseClick += Handle_TreeView_NodeMouseClick;
-
             StylesDialog.OnUpdated += Handle_StylesDialog_OnUpdated;
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            this.treeView.NodeMouseClick -= Handle_TreeView_NodeMouseClick;
+            _menuItemAdd.Click -= Handle_menuItemAdd_Click;
+            _menuItemEdit.Click -= Handle_menuItemEdit_Click;
+            _menuItemDelete.Click -= Handle_menuItemDelete_Click;
+            StylesDialog.OnUpdated -= Handle_StylesDialog_OnUpdated;
+
+            if (_isDirty)
+            {
+                _db.LoadStyles(true);
+                EventInvoker.RaiseOnCachedEntityRefreshed(this, nameof(_db.Styles));
+            }
+
+            base.OnClosed(e);
         }
 
         private void Handle_StylesDialog_OnUpdated(object sender, EventArgs e)
@@ -74,14 +91,14 @@ namespace TMCWorkbench
                 //Get parent rows
                 while (row.Parent_style_id != null)
                 {
-                    row = Styles.Where(x => x.Style_id == row.Parent_style_id).First();
+                    row = CachedStyles.Where(x => x.Style_id == row.Parent_style_id).First();
                     _expanded.Add(row);
                 }
 
                 _expanded.Add(_row);
             }
 
-            Styles = DB.C.Styles.ToList();
+            CachedStyles = _db.C.Styles.ToList();
             PopulateTree();
             _isDirty = true;
         }
@@ -106,8 +123,8 @@ namespace TMCWorkbench
             if (result == DialogResult.Yes)
             {
                 //do something
-                DB.Remove(_row);
-                DB.Save();
+                _db.Remove(_row);
+                _db.Save();
                 UpdateTreeView();
             }
         }
@@ -122,7 +139,7 @@ namespace TMCWorkbench
 
         private bool HasRowChildRows()
         {
-            return Styles.Where(x => x.Parent_style_id == _row.Style_id).Any();
+            return CachedStyles.Where(x => x.Parent_style_id == _row.Style_id).Any();
         }
 
         private void Handle_TreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -144,7 +161,7 @@ namespace TMCWorkbench
             }
             else
             {
-                _row = Styles.Where(x => x.Style_id == tag).First();
+                _row = CachedStyles.Where(x => x.Style_id == tag).First();
 
                 if (HasRowChildRows())
                 {
@@ -164,7 +181,7 @@ namespace TMCWorkbench
             rootNode.Text = "ROOT";
             this.treeView.Nodes.Add(rootNode);
 
-            foreach (var row in Styles.Where(x => x.Parent_style_id == null))
+            foreach (var row in CachedStyles.Where(x => x.Parent_style_id == null))
             {
                 var node = new TreeNode();
                 node.Text = $"[{row.Weight}] {row.Name}";
@@ -191,7 +208,7 @@ namespace TMCWorkbench
             int parentID = parentRow.Style_id;
             var nodes = new List<TreeNode>();
 
-            var rows = Styles.Where(x => x.Parent_style_id != null && x.Parent_style_id == parentID);
+            var rows = CachedStyles.Where(x => x.Parent_style_id != null && x.Parent_style_id == parentID);
 
             foreach (var row in rows)
             {

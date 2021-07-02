@@ -40,7 +40,7 @@ namespace TMCWorkbench.Controls.Resettable
         {
             if (_form == null) _form = new UCStyles();
 
-            DBManager.Instance.LoadStyles(refresh );
+            DBManager.Instance.LoadStyles(refresh);
 
             var query = from style in DB.DBManager.Instance.Styles
                         where style.IsAlt == false

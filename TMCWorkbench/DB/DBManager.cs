@@ -70,21 +70,49 @@ namespace TMCWorkbench.DB
             //C.Database.Log = Console.WriteLine;
         }
 
-        public void LoadTrackers(bool refresh = false)
+        public List<T> LoadEntity<T>(ref List<T> cachedEntity, DbSet<T> dbEntity, bool refresh) where T : class
         {
-            if (refresh || refresh == false && Trackers == null)
+            if (refresh || refresh == false && cachedEntity == null)
             {
-                C.Trackers.Load();
-                Trackers = C.Trackers.ToList();
+                cachedEntity = dbEntity.ToList();
+            }
+
+            return cachedEntity;
+        }
+
+        public List<Tracker> LoadTrackers(bool refresh = false) => LoadEntity(ref Trackers, C.Trackers, refresh);
+        public List<Style> LoadStyles(bool refresh = false) => LoadEntity(ref Styles, C.Styles, refresh);
+        public List<Track> LoadTracks(bool refresh = false) => LoadEntity(ref Tracks, C.Tracks, refresh);
+        public List<Tag> LoadTags(bool refresh = false) => LoadEntity(ref Tags, C.Tags, refresh);
+        public List<Playlist> LoadPlaylists(bool refresh = false) => LoadEntity(ref Playlists, C.Playlists, refresh);
+        public List<Scenegroup> LoadSceneGroups(bool refresh = false) => LoadEntity(ref SceneGroups, C.Scenegroups, refresh);
+        public List<Composer> LoadComposers(bool refresh = false) => LoadEntity(ref Composers, C.Composers, refresh);
+        public List<C_Scenegroup_Composer> LoadGroupsComposers(bool refresh = false) => LoadEntity(ref GroupsComposers, C.C_Scenegroup_Composers, refresh);
+        public List<C_Track_Tag> LoadTracksTags(bool refresh = false) => LoadEntity(ref TracksTags, C.C_Track_Tags, refresh);
+        public List<C_Track_Playlist> LoadTracksPlaylists(bool refresh = false) => LoadEntity(ref TracksPlaylists, C.C_Track_Playlists, refresh);
+
+        public void LoadStylesOld(bool refresh = false)
+        {
+            if (refresh || refresh == false && TracksTagsWithTag == null)
+            {
+                Styles = C.Styles.ToList();
             }
         }
 
-        public void LoadStyles(bool refresh = false)
+        public void LoadTrackTagsWithTag(bool refresh = false)
         {
-            if (refresh || refresh == false && TrackStyles == null)
+            if (refresh || refresh == false && TracksTagsWithTag == null)
             {
-                C.Styles.Load();
-                Styles = C.Styles.ToList();
+                TracksTagsWithTag = C.C_Track_Tags.Include(x => x.Tag).ToList();
+            }
+        }
+
+        public void LoadTrackPlaylistsWithPlaylist(bool refresh = false)
+        {
+            if (refresh || refresh == false && TracksPlaylistsWithPlaylist == null)
+            {
+                //C.C_Track_Tags.Load();
+                TracksPlaylistsWithPlaylist = C.C_Track_Playlists.Include(x => x.Playlist).ToList();
             }
         }
 
@@ -126,67 +154,10 @@ namespace TMCWorkbench.DB
             TrackStyles.Add(trackStyle);
         }
 
-        public void LoadTracks(bool refresh = false)
-        {
-            if (refresh || refresh == false && Tracks == null)
-            {
-                C.Tracks.Load();
-                Tracks = C.Tracks.ToList();
-            }
-        }
 
-        public void LoadTags(bool refresh = false)
-        {
-            if (refresh || refresh == false && Tags == null)
-            {
-                //C.Tags.Load();
-                Tags = C.Tags.ToList();
-            }
-        }
 
-        public void LoadPlaylists(bool refresh = false)
-        {
-            if (refresh || refresh == false && Playlists == null)
-            {
-                //C.Playlists.Load();
-                Playlists = C.Playlists.ToList();
-            }
-        }
 
-        public void LoadSceneGroups(bool refresh = false)
-        {
-            if (refresh || refresh == false && SceneGroups == null)
-            {
-                //C.Scenegroups.Load();
-                SceneGroups = C.Scenegroups.ToList();
-            }
-        }
 
-        public void LoadComposers(bool refresh = false)
-        {
-            if (refresh || refresh == false && Tracks == null)
-            {
-                //C.Composers.Load();
-                Composers = C.Composers.ToList();
-            }
-        }
-
-        public void LoadGroupsComposers(bool refresh = false)
-        {
-            if (refresh || refresh == false && GroupsComposers == null)
-            {
-                //C.C_Scenegroup_Composers.Load();
-                GroupsComposers = C.C_Scenegroup_Composers.ToList();
-            }
-        }
-
-        public void LoadTracksTags(bool refresh = false)
-        {
-            if (refresh || refresh == false && TracksTags == null)
-            {
-                TracksTags = C.C_Track_Tags.ToList();
-            }
-        }
 
         public int[] GetTagIds(int trackId)
         {
@@ -199,31 +170,7 @@ namespace TMCWorkbench.DB
         }
 
 
-        public void LoadTracksPlaylists(bool refresh = false)
-        {
-            if (refresh || refresh == false && TracksPlaylists == null)
-            {
-                TracksPlaylists = C.C_Track_Playlists.ToList();
-            }
-        }
 
-        public void LoadTrackTagsWithTag(bool refresh = false)
-        {
-            if (refresh || refresh == false && TracksTagsWithTag == null)
-            {
-                //C.C_Track_Tags.Load();
-                TracksTagsWithTag = C.C_Track_Tags.Include(x => x.Tag).ToList();
-            }
-        }
-
-        public void LoadTrackPlaylistsWithPlaylist(bool refresh = false)
-        {
-            if (refresh || refresh == false && TracksPlaylistsWithPlaylist == null)
-            {
-                //C.C_Track_Tags.Load();
-                TracksPlaylistsWithPlaylist = C.C_Track_Playlists.Include(x => x.Playlist).ToList();
-            }
-        }
 
         public bool LoadTrackInfo(Guid guid)
         {

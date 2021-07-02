@@ -11,6 +11,10 @@ using System.Windows.Forms;
 using TMCDatabase.DBModel;
 using TMCDatabase.Model;
 using TMCWorkbench.DB;
+using TMCWorkbench.Events;
+using Newtonsoft.Json;
+using TMCWorkbench.Tools;
+using Force.DeepCloner;
 
 namespace TMCWorkbench
 {
@@ -24,8 +28,9 @@ namespace TMCWorkbench
         private List<ScenegroupComposer> _sceneGroupComposers;
         private ScenegroupComposer _scenegroupComposer;
 
-
-
+        private List<Composer> _cloneComposers;
+        private List<Scenegroup> _cloneScenegroup;
+        private List<C_Scenegroup_Composer> _cloneScenegroupComposer;
 
         public UCComposers()
         {
@@ -36,9 +41,9 @@ namespace TMCWorkbench
         {
             base.OnLoad(e);
 
-            DB.LoadComposers();
-            DB.LoadSceneGroups();
-            DB.LoadGroupsComposers();
+            _cloneComposers = DB.LoadComposers().DeepClone();
+            _cloneScenegroup = DB.LoadSceneGroups().DeepClone();
+            _cloneScenegroupComposer = DB.LoadGroupsComposers().DeepClone();
 
             ddlScenegroups.AutoCompleteMode = AutoCompleteMode.Suggest;
             ddlScenegroups.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -51,6 +56,13 @@ namespace TMCWorkbench
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             gridComposers.SelectionChanged -= Handle_gridComposers_SelectionChanged;
+
+            if (ObjectCollater.NotEqual(_cloneComposers, DB.Composers))
+                EventInvoker.RaiseOnCachedEntityRefreshed(this, nameof(DB.Composers));
+    
+            if (ObjectCollater.NotEqual(_cloneScenegroup, DB.SceneGroups))
+                EventInvoker.RaiseOnCachedEntityRefreshed(this, nameof(DB.GroupsComposers));
+
             base.OnFormClosed(e);
         }
 
@@ -120,23 +132,6 @@ namespace TMCWorkbench
 
         private void RetrieveScenegroupComposerData(int id)
         {
-            //var groupComposers = DB.GroupsComposers.Where(x => x.FK_scenegroup_id == id);
-            //_gridComposers = new List<Composer>();
-            //_dropDownComposers = new List<Composer>();
-
-            //foreach (var group in groupComposers)
-            //{
-            //    _gridComposers.Add(DB.Composers.Where(c => c.Composer_id == group.FK_composer_id).FirstOrDefault());
-            //}
-
-            //foreach (var composer in DB.Composers.OrderByDescending(c => c.Composer_id))
-            //{
-            //    if (!_gridComposers.Contains(composer))
-            //    {
-            //        _dropDownComposers.Add(composer);
-            //    }
-            //}
-
             _dropDownSceneGroups = new List<Scenegroup>();
 
             var groupComposers = DB.GroupsComposers.Where(x => x.FK_composer_id == id);
@@ -181,7 +176,6 @@ namespace TMCWorkbench
             if (!ddlScenegroups.SelectedValue.IsNumeric()) return;
 
             DB.AddComposerToGroup(ddlScenegroups.SelectedValue.ToInt(), _composer.Composer_id, chkIsComposer.Checked);
-            //DB.AddComposerToGroup(_sceneGroup.Scenegroup_id, ddlComposers.SelectedValue.ToInt(), chkIsComposer.Checked);
             DB.Save();
             DB.LoadComposers();
             DB.LoadGroupsComposers(true);

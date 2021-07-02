@@ -411,6 +411,7 @@
       <DependentUpon>Private.settings</DependentUpon>
     </Compile>
     <Compile Include="Tools\Configurator.cs" />
+    <Compile Include="Tools\ObjectCollater.cs" />
     <Compile Include="Tools\Converter.cs" />
     <Compile Include="Tools\HashUtil.cs" />
     <Compile Include="Tools\TimeConverter.cs" />
@@ -441,7 +442,7 @@
     <Compile Include="UCTags.Designer.cs">
       <DependentUpon>UCTags.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utility\SearchQueryExecutor.cs" />
+    <Compile Include="Tools\SearchQueryExecutor.cs" />
     <Compile Include="_UCForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -622,6 +623,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DB\Model\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

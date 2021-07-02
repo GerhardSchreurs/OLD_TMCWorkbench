@@ -33,5 +33,13 @@ namespace TMCWorkbench.Events
         {
             OnListViewTrackControlSelected?.Invoke(sender, trackId, guid, fileName);
         }
+
+        public delegate void CachedEntityRefreshedEventArgsDelegate(object sender, string entityName);
+        public static event CachedEntityRefreshedEventArgsDelegate OnCachedEntityRefreshed;
+
+        public static void RaiseOnCachedEntityRefreshed(object sender, string entityName)
+        {
+            OnCachedEntityRefreshed?.Invoke(sender, entityName);
+        }
     }
 }

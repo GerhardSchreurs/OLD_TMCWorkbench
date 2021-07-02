@@ -22,24 +22,27 @@ namespace TMCWorkbench.Utility
         private List<MySqlParameter> _parameters;
         private string _queryRegularStart = "SELECT * FROM view_tracks";
         private string _queryRegularEnd = "ORDER by Track_id DESC LIMIT {LIMIT}";
-        private string _querySearchStart = "SELECT * FROM view_tracks WHERE Track_id IN(SELECT Track_id FROM (SELECT Track_id FROM tracks WHERE";
-        private string _querySearchEnd = "ORDER by Track_id DESC LIMIT {LIMIT}) as t1);";
+        private string _querySearchStart = $"SELECT * FROM view_tracks WHERE Track_id IN(SELECT Track_id FROM \n(\nSELECT Track_id FROM tracks WHERE\n";
+        private string _querySearchEnd = "ORDER by Track_id DESC LIMIT {LIMIT}\n)\n as t1);";
 
 
         public const string COL_TRACKTITLE = "TrackTitle";
         public const string COL_FILENAME = "FileName";
         public const string COL_METADATA = "YoutubeText";
         public const string COL_FORMAT_ID = "FK_fileextension_id";
+        public const string COL_STYLE_ID = "FK_style_id";
 
         public const string PARAM_TRACKTITLE = "@param_TrackTitle";
         public const string PARAM_FILENAME = "@param_FileName";
         public const string PARAM_METADATA = "@param_MetaData";
         public const string PARAM_FORMAT_ID = "@param_FileExtensionId";
+        public const string PARAM_STYLE_IDS = "@param_StyleIDs";
 
         public string Where_TrackTitle = "";
         public string Where_FileName = "";
         public string Where_MetaData = "";
         public string Where_Format_id = "";
+        public string Where_Styles_ids = "";
 
         bool _hasParams = false;
 
@@ -49,7 +52,7 @@ namespace TMCWorkbench.Utility
             _hasParams = true;
         }
 
-        private void AddParam(string name, int value)
+        private void AddParam(string name, object value)
         {
             _parameters.Add(new MySqlParameter(name, value));
             _hasParams = true;
@@ -83,6 +86,12 @@ namespace TMCWorkbench.Utility
             AddParam(PARAM_FORMAT_ID, id);
         }
 
+        public void SearchStyles(int[] ids)
+        {
+            if (ids == null || ids.Length == 0 || ids.Length > 99) return;
+            Where_Styles_ids = $"{COL_STYLE_ID} IN ({string.Join(",", ids)}) AND ";
+            _hasParams = true;
+        }
 
         string RemoveLastPieceOfString(string s, string remove)
         {
@@ -108,7 +117,7 @@ namespace TMCWorkbench.Utility
             }
             else
             {
-                query = $"{Where_Format_id}{Where_TrackTitle}{Where_FileName}{Where_MetaData}";
+                query = $"{Where_Format_id}{Where_Styles_ids}{Where_TrackTitle}{Where_FileName}{Where_MetaData}";
                 query = RemoveLastPieceOfString(query, " AND ");
                 query = $"{_querySearchStart} {query} {_querySearchEnd}";
             }
