@@ -41,6 +41,12 @@ namespace TMCWorkbench
             return src.ToString();
         }
 
+        public static string ToUpr(this object src)
+        {
+            if (src == null) return string.Empty;
+            return src.ToString().ToUpper();
+        }
+
         public static string ToLow(this object src)
         {
             if (src == null) return string.Empty;

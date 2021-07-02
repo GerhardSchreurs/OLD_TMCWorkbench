@@ -38,9 +38,6 @@ namespace TMCWorkbench.Controls
             this.colStyle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateSaved = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tblTopControls = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrMetaData = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.ctrFileName = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.ctrTrackTitle = new TMCWorkbench.Controls.ControlHintTextBox();
             this.tblTopRightControls = new System.Windows.Forms.TableLayoutPanel();
             this.btnSwitch = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -48,10 +45,11 @@ namespace TMCWorkbench.Controls
             this.btnSearch = new System.Windows.Forms.Button();
             this.tblBottomControlsContainer = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.controlHintTextBox4 = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.controlHintTextBox1 = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.controlHintTextBox2 = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.controlHintTextBox3 = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ctrMetaData = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.ctrFileName = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.ctrTrackTitle = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.controlCheckBoxDropDown1 = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
             this.tblOuter.SuspendLayout();
             this.tblTopControls.SuspendLayout();
             this.tblTopRightControls.SuspendLayout();
@@ -148,33 +146,6 @@ namespace TMCWorkbench.Controls
             this.tblTopControls.Size = new System.Drawing.Size(600, 30);
             this.tblTopControls.TabIndex = 6;
             // 
-            // ctrMetaData
-            // 
-            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrMetaData.Hint = "Meta data";
-            this.ctrMetaData.Location = new System.Drawing.Point(303, 3);
-            this.ctrMetaData.Name = "ctrMetaData";
-            this.ctrMetaData.Size = new System.Drawing.Size(144, 20);
-            this.ctrMetaData.TabIndex = 2;
-            // 
-            // ctrFileName
-            // 
-            this.ctrFileName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrFileName.Hint = "File name";
-            this.ctrFileName.Location = new System.Drawing.Point(153, 3);
-            this.ctrFileName.Name = "ctrFileName";
-            this.ctrFileName.Size = new System.Drawing.Size(144, 20);
-            this.ctrFileName.TabIndex = 1;
-            // 
-            // ctrTrackTitle
-            // 
-            this.ctrTrackTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrTrackTitle.Hint = "Track title";
-            this.ctrTrackTitle.Location = new System.Drawing.Point(3, 3);
-            this.ctrTrackTitle.Name = "ctrTrackTitle";
-            this.ctrTrackTitle.Size = new System.Drawing.Size(144, 20);
-            this.ctrTrackTitle.TabIndex = 0;
-            // 
             // tblTopRightControls
             // 
             this.tblTopRightControls.ColumnCount = 4;
@@ -265,54 +236,67 @@ namespace TMCWorkbench.Controls
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.controlHintTextBox4, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.controlHintTextBox1, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.controlHintTextBox2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.controlHintTextBox3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.controlCheckBoxDropDown1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 10);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 40);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
-            // controlHintTextBox4
+            // label1
             // 
-            this.controlHintTextBox4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.controlHintTextBox4.Hint = "Scenegroup";
-            this.controlHintTextBox4.Location = new System.Drawing.Point(153, 3);
-            this.controlHintTextBox4.Name = "controlHintTextBox4";
-            this.controlHintTextBox4.Size = new System.Drawing.Size(144, 20);
-            this.controlHintTextBox4.TabIndex = 3;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Style(s)";
             // 
-            // controlHintTextBox1
+            // ctrMetaData
             // 
-            this.controlHintTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.controlHintTextBox1.Hint = "Tags";
-            this.controlHintTextBox1.Location = new System.Drawing.Point(453, 3);
-            this.controlHintTextBox1.Name = "controlHintTextBox1";
-            this.controlHintTextBox1.Size = new System.Drawing.Size(144, 20);
-            this.controlHintTextBox1.TabIndex = 2;
+            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrMetaData.Hint = "Meta data";
+            this.ctrMetaData.Location = new System.Drawing.Point(303, 3);
+            this.ctrMetaData.Name = "ctrMetaData";
+            this.ctrMetaData.Size = new System.Drawing.Size(144, 20);
+            this.ctrMetaData.TabIndex = 2;
             // 
-            // controlHintTextBox2
+            // ctrFileName
             // 
-            this.controlHintTextBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.controlHintTextBox2.Hint = "Composer";
-            this.controlHintTextBox2.Location = new System.Drawing.Point(303, 3);
-            this.controlHintTextBox2.Name = "controlHintTextBox2";
-            this.controlHintTextBox2.Size = new System.Drawing.Size(144, 20);
-            this.controlHintTextBox2.TabIndex = 1;
+            this.ctrFileName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrFileName.Hint = "File name";
+            this.ctrFileName.Location = new System.Drawing.Point(153, 3);
+            this.ctrFileName.Name = "ctrFileName";
+            this.ctrFileName.Size = new System.Drawing.Size(144, 20);
+            this.ctrFileName.TabIndex = 1;
             // 
-            // controlHintTextBox3
+            // ctrTrackTitle
             // 
-            this.controlHintTextBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.controlHintTextBox3.Hint = "Style";
-            this.controlHintTextBox3.Location = new System.Drawing.Point(3, 3);
-            this.controlHintTextBox3.Name = "controlHintTextBox3";
-            this.controlHintTextBox3.Size = new System.Drawing.Size(144, 20);
-            this.controlHintTextBox3.TabIndex = 0;
+            this.ctrTrackTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrTrackTitle.Hint = "Track title";
+            this.ctrTrackTitle.Location = new System.Drawing.Point(3, 3);
+            this.ctrTrackTitle.Name = "ctrTrackTitle";
+            this.ctrTrackTitle.Size = new System.Drawing.Size(144, 20);
+            this.ctrTrackTitle.TabIndex = 0;
+            // 
+            // controlCheckBoxDropDown1
+            // 
+            this.controlCheckBoxDropDown1.CheckOnClick = true;
+            this.controlCheckBoxDropDown1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.controlCheckBoxDropDown1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.controlCheckBoxDropDown1.DropDownHeight = 1;
+            this.controlCheckBoxDropDown1.FormattingEnabled = true;
+            this.controlCheckBoxDropDown1.IntegralHeight = false;
+            this.controlCheckBoxDropDown1.Location = new System.Drawing.Point(3, 18);
+            this.controlCheckBoxDropDown1.Name = "controlCheckBoxDropDown1";
+            this.controlCheckBoxDropDown1.Size = new System.Drawing.Size(144, 21);
+            this.controlCheckBoxDropDown1.TabIndex = 1;
+            this.controlCheckBoxDropDown1.ValueSeparator = ", ";
             // 
             // ControlTracks
             // 
@@ -354,9 +338,7 @@ namespace TMCWorkbench.Controls
         private System.Windows.Forms.ComboBox ddlFormat;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private ControlHintTextBox controlHintTextBox1;
-        private ControlHintTextBox controlHintTextBox2;
-        private ControlHintTextBox controlHintTextBox3;
-        private ControlHintTextBox controlHintTextBox4;
+        private ControlCheckBoxDropDown controlCheckBoxDropDown1;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -12,6 +13,51 @@ namespace TMCWorkbench.Controls
     //https://www.codeproject.com/Articles/31105/A-ComboBox-with-a-CheckedListBox-as-a-Dropdown
     public class ControlCheckBoxDropDown : ComboBox
     {
+        //TODO: Kijken of we een hint kunnen krijgen
+        //string hint;
+        //[DefaultValue("")]
+        //public string Hint
+        //{
+        //    get { return hint; }
+        //    set { hint = value; this.Invalidate(); }
+        //}
+
+        //Color hintColor = SystemColors.GrayText;
+        //public Color HintColor
+        //{
+        //    get { return hintColor; }
+        //    set { hintColor = value; Invalidate(); }
+        //}
+
+        //protected override void WndProc(ref Message m)
+        //{
+        //    base.WndProc(ref m);
+        //    if (m.Msg == 0xf)
+        //    {
+        //        if (!this.Focused && string.IsNullOrEmpty(this.Text)
+        //            && !string.IsNullOrEmpty(this.Hint))
+        //        {
+        //            using (var g = this.CreateGraphics())
+        //            {
+        //                TextRenderer.DrawText(g, this.Hint, this.Font,
+        //                    this.ClientRectangle, this.HintColor, this.BackColor,
+        //                     TextFormatFlags.Top | TextFormatFlags.Left);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private bool ShouldSerializeHintColor()
+        //{
+        //    return HintColor != SystemColors.GrayText;
+        //}
+
+        //private void ResetHintColor()
+        //{
+        //    HintColor = SystemColors.GrayText;
+        //}
+
+
         /// <summary>
         /// Internal class to represent the dropdown list of the CheckedComboBox
         /// </summary>

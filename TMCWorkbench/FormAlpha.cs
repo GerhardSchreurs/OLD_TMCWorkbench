@@ -467,9 +467,6 @@ namespace TMCWorkbench
             ctrOutput.Init(_bag, ctrMetaData, "");
         }
 
-
-
-   
         private async Task SaveTrack()
         {
             var status = "Updated:";
@@ -519,7 +516,7 @@ namespace TMCWorkbench
             if (_mod != null && _bag.IsInDB == false)
             {
                 var pathSource = _mod.FileInfo.FullName;
-                var pathTarget = $@"{C.PATHTRACKSTORE}\{_track.Md5}_{_mod.FileName}";
+                var pathTarget = $@"{C.PATHTRACKSTORE}\{_track.Md5.ToUpr()}_{_mod.FileName}";
 
                 if (File.Exists(pathTarget) == false)
                 {
@@ -708,8 +705,6 @@ namespace TMCWorkbench
                 var bla = result;
             }
         }
-
-        public bool InMassInsert;
 
         private async void Handle_massInsertToolStripMenuItem_Click(object sender, EventArgs e)
         {

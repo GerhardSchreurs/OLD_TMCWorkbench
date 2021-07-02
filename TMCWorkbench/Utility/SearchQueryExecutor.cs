@@ -23,26 +23,35 @@ namespace TMCWorkbench.Utility
         private string _queryRegularStart = "SELECT * FROM view_tracks";
         private string _queryRegularEnd = "ORDER by Track_id DESC LIMIT {LIMIT}";
         private string _querySearchStart = "SELECT * FROM view_tracks WHERE Track_id IN(SELECT Track_id FROM (SELECT Track_id FROM tracks WHERE";
-        private string _querySearchEnd = "ORDER by Track_id DESC LIMIT 0,10) as t1);";
+        private string _querySearchEnd = "ORDER by Track_id DESC LIMIT {LIMIT}) as t1);";
 
 
         public const string COL_TRACKTITLE = "TrackTitle";
         public const string COL_FILENAME = "FileName";
         public const string COL_METADATA = "YoutubeText";
+        public const string COL_FORMAT_ID = "FK_fileextension_id";
 
         public const string PARAM_TRACKTITLE = "@param_TrackTitle";
         public const string PARAM_FILENAME = "@param_FileName";
         public const string PARAM_METADATA = "@param_MetaData";
+        public const string PARAM_FORMAT_ID = "@param_FileExtensionId";
 
         public string Where_TrackTitle = "";
         public string Where_FileName = "";
         public string Where_MetaData = "";
+        public string Where_Format_id = "";
 
         bool _hasParams = false;
 
         private void AddLikeParam(string name, string value)
         {
             _parameters.Add(new MySqlParameter(name, "%" + value + "%"));
+            _hasParams = true;
+        }
+
+        private void AddParam(string name, int value)
+        {
+            _parameters.Add(new MySqlParameter(name, value));
             _hasParams = true;
         }
 
@@ -67,6 +76,13 @@ namespace TMCWorkbench.Utility
             AddLikeParam(PARAM_METADATA, text);
         }
 
+        public void SearchFormat(int id)
+        {
+            if (id == 0) return;
+            Where_Format_id = $"{COL_FORMAT_ID} = {PARAM_FORMAT_ID} AND ";
+            AddParam(PARAM_FORMAT_ID, id);
+        }
+
 
         string RemoveLastPieceOfString(string s, string remove)
         {
@@ -84,6 +100,7 @@ namespace TMCWorkbench.Utility
 
             var limit = $"{limitStart},{limitEnd}";
             _queryRegularEnd = _queryRegularEnd.Replace("{LIMIT}", limit);
+            _querySearchEnd = _querySearchEnd.Replace("{LIMIT}", limit);
 
             if (_hasParams == false)
             {
@@ -91,7 +108,7 @@ namespace TMCWorkbench.Utility
             }
             else
             {
-                query = $"{Where_TrackTitle}{Where_FileName}{Where_MetaData}";
+                query = $"{Where_Format_id}{Where_TrackTitle}{Where_FileName}{Where_MetaData}";
                 query = RemoveLastPieceOfString(query, " AND ");
                 query = $"{_querySearchStart} {query} {_querySearchEnd}";
             }

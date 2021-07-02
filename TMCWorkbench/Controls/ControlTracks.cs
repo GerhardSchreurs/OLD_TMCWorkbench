@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -18,6 +19,8 @@ namespace TMCWorkbench.Controls
 {
     public partial class ControlTracks : UserControl
     {
+        readonly List<string> _listTrackers = new List<string>() { "ALL", "IT", "XM", "S3M", "MOD" };
+
         public ListView ListView
         {
             get => listView;
@@ -50,10 +53,16 @@ namespace TMCWorkbench.Controls
 
         public void Init()
         {
+            InitControls();
             Search();
         }
 
-        public void Search()
+        void InitControls()
+        {
+            ddlFormat.DataSource = _listTrackers;
+        }
+
+        public void Search(bool forceRefresh = false)
         {
             var builder = new SearchQueryExecutor();
 
@@ -63,11 +72,13 @@ namespace TMCWorkbench.Controls
                 builder.SearchTrackTitle(ctrTrackTitle.Text);
             if (ctrMetaData.Text.IsNotNullOrEmpty())
                 builder.SearchMetaData(ctrMetaData.Text);
+            if (ddlFormat.SelectedIndex > 0)
+                builder.SearchFormat(ddlFormat.SelectedIndex);
 
             var data = builder.ExecuteAndRetrieve();
             _table = new ViewTracksTable(data);
 
-            if (listView.Items.Count > 0 && _table.Rows.Count > 0)
+            if (forceRefresh == false && listView.Items.Count > 0 && _table.Rows.Count > 0)
             {
                 int listViewID = Converter.ToInt32(listView.Items[0].Tag);
                 int dataID = _table.Rows[0].Track_id;
@@ -108,7 +119,7 @@ namespace TMCWorkbench.Controls
             sub.Text = row.FileName;
             item.SubItems.Add(sub);
 
-//colName
+            //colName
             sub = new ListViewItem.ListViewSubItem();
             sub.Text = row.TrackTitle;
             item.SubItems.Add(sub);
@@ -133,7 +144,7 @@ namespace TMCWorkbench.Controls
 
         private void Handle_btnSearch_Click(object sender, EventArgs e)
         {
-            Search();
+            Search(true);
         }
     }
 }
