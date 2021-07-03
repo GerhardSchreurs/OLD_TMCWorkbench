@@ -59,6 +59,9 @@ namespace TMCWorkbench.Controls
 
         public void Init()
         {
+            _db.LoadStyles();
+            _db.LoadComposers();
+
             InitControls();
             Search();
         }
@@ -68,20 +71,35 @@ namespace TMCWorkbench.Controls
             ddlFormat.DataSource = _listTrackers;
 
             InitStylesDDL();
+            InitComposerDLL();
+        }
+
+        void InitComposerDLL()
+        {
+            foreach(var composer in _db.Composers)
+            {
+                var item = new CCBoxItem(composer.Name, composer.Composer_id);
+                ddlComposer.Items.Add(item);
+            }
+
+            ddlComposer.Items.Insert(0, new CCBoxItem("", 0));
         }
 
         void InitStylesDDL()
         {
-            _db.LoadStyles();
-
             foreach(var style in _db.Styles.Where(x => x.IsAlt == false))
             {
                 var item = new CCBoxItem(style.Name, style.Style_id);
                 ddlStyles.Items.Add(item);
-                ddlStyles.DisplayMember = "Name";
-                ddlStyles.MaxDropDownItems = 25;
             }
         }
+
+        int GetBoxValue(ComboBox box)
+        {
+            if (box == null || box.SelectedItem == null) return 0;
+            return ((CCBoxItem)box.SelectedItem).Value;
+        }
+
 
         public void Search(bool forceRefresh = false)
         {
@@ -93,10 +111,10 @@ namespace TMCWorkbench.Controls
             builder.SearchFormat(ddlFormat.SelectedIndex);
             builder.SearchStyles(ddlStyles.GetCheckedItemIds());
 
-
-            
-
-
+            if (ddlComposer.SelectedIndex == -1 && ddlComposer.Text.IsNotNullOrEmpty())
+                builder.SearchComposerByName(ddlComposer.Text);
+            else
+                builder.SearchComposerById(GetBoxValue(ddlComposer));
 
 
             var data = builder.ExecuteAndRetrieve();
