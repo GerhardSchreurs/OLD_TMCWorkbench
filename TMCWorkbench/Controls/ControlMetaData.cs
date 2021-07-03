@@ -301,7 +301,7 @@ namespace TMCWorkbench.Controls
         public string ScenegroupText
         {
             get => ctrScenegroupText.Text;
-            set => ctrComposerText.Text = value;
+            set => ctrScenegroupText.Text = value;
         }
 
         public bool IsFavorite
