@@ -40,7 +40,7 @@ namespace TMCWorkbench.Controls
         private void Handle_EventInvoker_OnCachedEntityRefreshed(object sender, string entityName)
         {
             if (entityName != nameof(_db.Styles)) return;
-
+            
             InitStylesDDL();
 
             Console.WriteLine("x");
@@ -61,6 +61,8 @@ namespace TMCWorkbench.Controls
         {
             _db.LoadStyles();
             _db.LoadComposers();
+            _db.LoadSceneGroups();
+            _db.LoadTags();
 
             InitControls();
             Search();
@@ -71,26 +73,48 @@ namespace TMCWorkbench.Controls
             ddlFormat.DataSource = _listTrackers;
 
             InitStylesDDL();
-            InitComposerDLL();
+            InitComposerDDL();
+            InitScenegroupDDL();
+            InitTagsDDL();
         }
 
-        void InitComposerDLL()
+        void InitStylesDDL()
         {
-            foreach(var composer in _db.Composers)
+            foreach (var entity in _db.Styles.Where(x => x.IsAlt == false))
             {
-                var item = new CCBoxItem(composer.Name, composer.Composer_id);
+                var item = new CCBoxItem(entity.Name, entity.Style_id);
+                ddlStyles.Items.Add(item);
+            }
+        }
+
+        void InitComposerDDL()
+        {
+            foreach(var entity in _db.Composers)
+            {
+                var item = new CCBoxItem(entity.Name, entity.Composer_id);
                 ddlComposer.Items.Add(item);
             }
 
             ddlComposer.Items.Insert(0, new CCBoxItem("", 0));
         }
 
-        void InitStylesDDL()
+        void InitScenegroupDDL()
         {
-            foreach(var style in _db.Styles.Where(x => x.IsAlt == false))
+            foreach (var entity in _db.SceneGroups)
             {
-                var item = new CCBoxItem(style.Name, style.Style_id);
-                ddlStyles.Items.Add(item);
+                var item = new CCBoxItem(entity.Name, entity.Scenegroup_id);
+                ddlScenegroup.Items.Add(item);
+            }
+
+            ddlScenegroup.Items.Insert(0, new CCBoxItem("", 0));
+        }
+
+        void InitTagsDDL()
+        {
+            foreach (var entity in _db.Tags)
+            {
+                var item = new CCBoxItem(entity.Name, entity.Tag_id);
+                ddlTags.Items.Add(item);
             }
         }
 
@@ -100,6 +124,7 @@ namespace TMCWorkbench.Controls
             return ((CCBoxItem)box.SelectedItem).Value;
         }
 
+        public bool IsFirstSearch = true;
 
         public void Search(bool forceRefresh = false)
         {
@@ -115,6 +140,15 @@ namespace TMCWorkbench.Controls
                 builder.SearchComposerByName(ddlComposer.Text);
             else
                 builder.SearchComposerById(GetBoxValue(ddlComposer));
+
+            if (ddlScenegroup.SelectedIndex == -1 && ddlScenegroup.Text.IsNotNullOrEmpty())
+                builder.SearchScenegroupByName(ddlScenegroup.Text);
+            else
+                builder.SearchScenegroupById(GetBoxValue(ddlScenegroup));
+
+            builder.SearchTags(ddlTags.GetCheckedItemIds());
+
+            //Retrieve data
 
 
             var data = builder.ExecuteAndRetrieve();
@@ -134,6 +168,11 @@ namespace TMCWorkbench.Controls
             {
                 GenerateRow(i);
             }
+
+            if (IsFirstSearch == false)
+                EventInvoker.RaiseOnSearchDone(this, builder.ExecutionTimeMS);
+
+            IsFirstSearch = false;
         }
 
         void GenerateRow(int index)

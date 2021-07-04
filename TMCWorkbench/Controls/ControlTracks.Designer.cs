@@ -38,6 +38,9 @@ namespace TMCWorkbench.Controls
             this.colStyle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateSaved = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tblTopControls = new System.Windows.Forms.TableLayoutPanel();
+            this.ctrMetaData = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.ctrFileName = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.ctrTrackTitle = new TMCWorkbench.Controls.ControlHintTextBox();
             this.tblTopRightControls = new System.Windows.Forms.TableLayoutPanel();
             this.btnSwitch = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -45,13 +48,14 @@ namespace TMCWorkbench.Controls
             this.btnSearch = new System.Windows.Forms.Button();
             this.tblBottomControlsContainer = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.ddlTags = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
+            this.lblTags = new System.Windows.Forms.Label();
             this.lblComposer = new System.Windows.Forms.Label();
-            this.ddlComposer = new System.Windows.Forms.ComboBox();
-            this.ctrMetaData = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.ctrFileName = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.ctrTrackTitle = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.lblScenegroup = new System.Windows.Forms.Label();
             this.ddlStyles = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
+            this.lblStyles = new System.Windows.Forms.Label();
+            this.ddlComposer = new TMCWorkbench.Controls.DropDownList();
+            this.ddlScenegroup = new TMCWorkbench.Controls.DropDownList();
             this.tblOuter.SuspendLayout();
             this.tblTopControls.SuspendLayout();
             this.tblTopRightControls.SuspendLayout();
@@ -148,6 +152,33 @@ namespace TMCWorkbench.Controls
             this.tblTopControls.Size = new System.Drawing.Size(600, 30);
             this.tblTopControls.TabIndex = 6;
             // 
+            // ctrMetaData
+            // 
+            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrMetaData.Hint = "Meta data";
+            this.ctrMetaData.Location = new System.Drawing.Point(303, 3);
+            this.ctrMetaData.Name = "ctrMetaData";
+            this.ctrMetaData.Size = new System.Drawing.Size(144, 20);
+            this.ctrMetaData.TabIndex = 2;
+            // 
+            // ctrFileName
+            // 
+            this.ctrFileName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrFileName.Hint = "File name";
+            this.ctrFileName.Location = new System.Drawing.Point(153, 3);
+            this.ctrFileName.Name = "ctrFileName";
+            this.ctrFileName.Size = new System.Drawing.Size(144, 20);
+            this.ctrFileName.TabIndex = 1;
+            // 
+            // ctrTrackTitle
+            // 
+            this.ctrTrackTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrTrackTitle.Hint = "Track title";
+            this.ctrTrackTitle.Location = new System.Drawing.Point(3, 3);
+            this.ctrTrackTitle.Name = "ctrTrackTitle";
+            this.ctrTrackTitle.Size = new System.Drawing.Size(144, 20);
+            this.ctrTrackTitle.TabIndex = 0;
+            // 
             // tblTopRightControls
             // 
             this.tblTopRightControls.ColumnCount = 4;
@@ -238,10 +269,14 @@ namespace TMCWorkbench.Controls
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.lblComposer, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ddlTags, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblTags, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblComposer, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblScenegroup, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.ddlStyles, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblStyles, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.ddlComposer, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ddlScenegroup, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 10);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -249,17 +284,35 @@ namespace TMCWorkbench.Controls
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 40);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
-            // label1
+            // ddlTags
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Style(s)";
+            this.ddlTags.CheckOnClick = true;
+            this.ddlTags.DisplayMember = "Name";
+            this.ddlTags.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ddlTags.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ddlTags.DropDownHeight = 1;
+            this.ddlTags.FormattingEnabled = true;
+            this.ddlTags.IntegralHeight = false;
+            this.ddlTags.ItemHeight = 15;
+            this.ddlTags.Location = new System.Drawing.Point(453, 18);
+            this.ddlTags.MaxDropDownItems = 25;
+            this.ddlTags.Name = "ddlTags";
+            this.ddlTags.Size = new System.Drawing.Size(144, 21);
+            this.ddlTags.TabIndex = 8;
+            this.ddlTags.ValueSeparator = ", ";
+            // 
+            // lblTags
+            // 
+            this.lblTags.AutoSize = true;
+            this.lblTags.Location = new System.Drawing.Point(453, 0);
+            this.lblTags.Name = "lblTags";
+            this.lblTags.Size = new System.Drawing.Size(31, 13);
+            this.lblTags.TabIndex = 7;
+            this.lblTags.Text = "Tags";
             // 
             // lblComposer
             // 
@@ -267,48 +320,17 @@ namespace TMCWorkbench.Controls
             this.lblComposer.Location = new System.Drawing.Point(153, 0);
             this.lblComposer.Name = "lblComposer";
             this.lblComposer.Size = new System.Drawing.Size(54, 13);
-            this.lblComposer.TabIndex = 3;
+            this.lblComposer.TabIndex = 5;
             this.lblComposer.Text = "Composer";
             // 
-            // ddlComposer
+            // lblScenegroup
             // 
-            this.ddlComposer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.ddlComposer.DisplayMember = "Name";
-            this.ddlComposer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ddlComposer.FormattingEnabled = true;
-            this.ddlComposer.Location = new System.Drawing.Point(153, 18);
-            this.ddlComposer.MaxDropDownItems = 25;
-            this.ddlComposer.Name = "ddlComposer";
-            this.ddlComposer.Size = new System.Drawing.Size(144, 21);
-            this.ddlComposer.TabIndex = 4;
-            this.ddlComposer.ValueMember = "Value";
-            // 
-            // ctrMetaData
-            // 
-            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrMetaData.Hint = "Meta data";
-            this.ctrMetaData.Location = new System.Drawing.Point(303, 3);
-            this.ctrMetaData.Name = "ctrMetaData";
-            this.ctrMetaData.Size = new System.Drawing.Size(144, 20);
-            this.ctrMetaData.TabIndex = 2;
-            // 
-            // ctrFileName
-            // 
-            this.ctrFileName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrFileName.Hint = "File name";
-            this.ctrFileName.Location = new System.Drawing.Point(153, 3);
-            this.ctrFileName.Name = "ctrFileName";
-            this.ctrFileName.Size = new System.Drawing.Size(144, 20);
-            this.ctrFileName.TabIndex = 1;
-            // 
-            // ctrTrackTitle
-            // 
-            this.ctrTrackTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrTrackTitle.Hint = "Track title";
-            this.ctrTrackTitle.Location = new System.Drawing.Point(3, 3);
-            this.ctrTrackTitle.Name = "ctrTrackTitle";
-            this.ctrTrackTitle.Size = new System.Drawing.Size(144, 20);
-            this.ctrTrackTitle.TabIndex = 0;
+            this.lblScenegroup.AutoSize = true;
+            this.lblScenegroup.Location = new System.Drawing.Point(303, 0);
+            this.lblScenegroup.Name = "lblScenegroup";
+            this.lblScenegroup.Size = new System.Drawing.Size(65, 13);
+            this.lblScenegroup.TabIndex = 3;
+            this.lblScenegroup.Text = "Scenegroup";
             // 
             // ddlStyles
             // 
@@ -326,6 +348,39 @@ namespace TMCWorkbench.Controls
             this.ddlStyles.Size = new System.Drawing.Size(144, 21);
             this.ddlStyles.TabIndex = 1;
             this.ddlStyles.ValueSeparator = ", ";
+            // 
+            // lblStyles
+            // 
+            this.lblStyles.AutoSize = true;
+            this.lblStyles.Location = new System.Drawing.Point(3, 0);
+            this.lblStyles.Name = "lblStyles";
+            this.lblStyles.Size = new System.Drawing.Size(41, 13);
+            this.lblStyles.TabIndex = 2;
+            this.lblStyles.Text = "Style(s)";
+            // 
+            // ddlComposer
+            // 
+            this.ddlComposer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ddlComposer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ddlComposer.DisplayMember = "Name";
+            this.ddlComposer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ddlComposer.FormattingEnabled = true;
+            this.ddlComposer.Location = new System.Drawing.Point(153, 18);
+            this.ddlComposer.Name = "ddlComposer";
+            this.ddlComposer.Size = new System.Drawing.Size(144, 21);
+            this.ddlComposer.TabIndex = 9;
+            // 
+            // ddlScenegroup
+            // 
+            this.ddlScenegroup.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ddlScenegroup.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ddlScenegroup.DisplayMember = "Name";
+            this.ddlScenegroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ddlScenegroup.FormattingEnabled = true;
+            this.ddlScenegroup.Location = new System.Drawing.Point(303, 18);
+            this.ddlScenegroup.Name = "ddlScenegroup";
+            this.ddlScenegroup.Size = new System.Drawing.Size(144, 21);
+            this.ddlScenegroup.TabIndex = 10;
             // 
             // ControlTracks
             // 
@@ -368,8 +423,12 @@ namespace TMCWorkbench.Controls
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private ControlCheckBoxDropDown ddlStyles;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblStyles;
+        private System.Windows.Forms.Label lblScenegroup;
         private System.Windows.Forms.Label lblComposer;
-        private System.Windows.Forms.ComboBox ddlComposer;
+        private ControlCheckBoxDropDown ddlTags;
+        private System.Windows.Forms.Label lblTags;
+        private DropDownList ddlComposer;
+        private DropDownList ddlScenegroup;
     }
 }
