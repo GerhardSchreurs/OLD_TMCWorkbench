@@ -39,6 +39,8 @@ namespace TMCWorkbench.Utility
         public const string COL_SCENEGROUP_ID = "FK_scenegroup_id";
         public const string COL_SCENEGROUP_NAME = "ScenegroupName";
         public const string COL_TAG_ID = "FK_tag_id";
+        public const string COL_TRACKER_ID = "FK_tracker_id";
+        public const string COL_DATE_TRACK_CREATED = "Date_track_created";
 
         public const string PARAM_TRACKTITLE = "@param_TrackTitle";
         public const string PARAM_FILENAME = "@param_FileName";
@@ -50,17 +52,22 @@ namespace TMCWorkbench.Utility
         public const string PARAM_SCENEGROUP_ID = "@param_ScenegroupID";
         public const string PARAM_SCENEGROUP_NAME = "@param_ScenegroupName";
         public const string PARAM_TAGS_IDS = "@param_TagIDs";
+        public const string PARAM_TRACKER_IDS = "@param_TrackerIDs";
+        public const string PARAM_DATE_FROM_1 = "@param_DateFrom1"; //not in use yet
+        public const string PARAM_DATE_FROM_2 = "@param_DateFrom2"; //not in use yet
 
-        public string Where_TrackTitle = "";
-        public string Where_FileName = "";
-        public string Where_MetaData = "";
-        public string Where_Format_id = "";
-        public string Where_Styles_ids = "";
-        public string Where_Composer_id = "";
-        public string Where_Composer_name = "";
-        public string Where_Scenegroup_id = "";
-        public string Where_Scenegroup_name = "";
-        public string Where_Tags_ids = "";
+        public string Q_TrackTitle = "";
+        public string Q_FileName = "";
+        public string Q_MetaData = "";
+        public string Q_Format_id = "";
+        public string Q_Styles_ids = "";
+        public string Q_Composer_id = "";
+        public string Q_Composer_name = "";
+        public string Q_Scenegroup_id = "";
+        public string Q_Scenegroup_name = "";
+        public string Q_Tags_ids = "";
+        public string Q_Tracker_ids = "";
+        public string Q_Date_created = "";
 
         public long ExecutionTimeMS;
 
@@ -106,16 +113,32 @@ namespace TMCWorkbench.Utility
             _hasParams = true;
         }
 
-        public void SearchTrackTitle(string text) => SearchLike(ref Where_TrackTitle, text, COL_TRACKTITLE, PARAM_TRACKTITLE);
-        public void SearchFileName(string text) => SearchLike(ref Where_FileName, text, COL_FILENAME, PARAM_FILENAME);
-        public void SearchMetaData(string text) => SearchLike(ref Where_MetaData, text, COL_METADATA, PARAM_METADATA);
-        public void SearchFormat(int id) => SearchID(ref Where_Format_id, id, COL_FORMAT_ID, PARAM_FORMAT_ID);
-        public void SearchStyles(int[] ids) => SearchIN(ref Where_Styles_ids, ids, COL_STYLE_ID);
-        public void SearchComposerById(int id) => SearchID(ref Where_Composer_id, id, COL_COMPOSER_ID, PARAM_COMPOSER_ID);
-        public void SearchComposerByName(string text) => SearchLike(ref Where_Composer_name, text, COL_COMPOSER_NAME, PARAM_COMPOSER_NAME);
-        public void SearchScenegroupById(int id) => SearchID(ref Where_Scenegroup_id, id, COL_SCENEGROUP_ID, PARAM_SCENEGROUP_ID);
-        public void SearchScenegroupByName(string text) => SearchLike(ref Where_Scenegroup_name, text, COL_SCENEGROUP_NAME, PARAM_SCENEGROUP_NAME);
-        public void SearchTags(int[] ids) => SearchCrossIN(ref Where_Tags_ids, ids, TBL_C_TRACK_TAG, COL_TAG_ID);
+        public void SearchDates(ref string where, DateTime? dateFrom, DateTime? dateTill, string column)
+        {
+            if (dateFrom == null && dateTill == null) return;
+
+            _hasParams = true; //TODO: A lie, params not working atm, find out later
+
+            if (dateFrom.HasValue && dateTill == null)
+                where = $"{column} >= {GetStr_To_Date(dateFrom.Value)} AND ";
+            if (dateTill.HasValue && dateFrom == null)
+                where = $"{column} <= {GetStr_To_Date(dateFrom.Value)} AND ";
+            if (dateFrom.HasValue && dateTill.HasValue)
+                where = $"({column} BETWEEN {GetStr_To_Date(dateFrom.Value)} AND {GetStr_To_Date(dateTill.Value)}) AND ";
+        }
+
+        public void SearchTrackTitle(string text) => SearchLike(ref Q_TrackTitle, text, COL_TRACKTITLE, PARAM_TRACKTITLE);
+        public void SearchFileName(string text) => SearchLike(ref Q_FileName, text, COL_FILENAME, PARAM_FILENAME);
+        public void SearchMetaData(string text) => SearchLike(ref Q_MetaData, text, COL_METADATA, PARAM_METADATA);
+        public void SearchFormat(int id) => SearchID(ref Q_Format_id, id, COL_FORMAT_ID, PARAM_FORMAT_ID);
+        public void SearchStyles(int[] ids) => SearchIN(ref Q_Styles_ids, ids, COL_STYLE_ID);
+        public void SearchComposerById(int id) => SearchID(ref Q_Composer_id, id, COL_COMPOSER_ID, PARAM_COMPOSER_ID);
+        public void SearchComposerByName(string text) => SearchLike(ref Q_Composer_name, text, COL_COMPOSER_NAME, PARAM_COMPOSER_NAME);
+        public void SearchScenegroupById(int id) => SearchID(ref Q_Scenegroup_id, id, COL_SCENEGROUP_ID, PARAM_SCENEGROUP_ID);
+        public void SearchScenegroupByName(string text) => SearchLike(ref Q_Scenegroup_name, text, COL_SCENEGROUP_NAME, PARAM_SCENEGROUP_NAME);
+        public void SearchTags(int[] ids) => SearchCrossIN(ref Q_Tags_ids, ids, TBL_C_TRACK_TAG, COL_TAG_ID);
+        public void SearchTrackers(int[] ids) => SearchIN(ref Q_Tracker_ids, ids, COL_TRACKER_ID);
+        public void SearchDateCreated(DateTime? from, DateTime? till) => SearchDates(ref Q_Date_created, from, till, COL_DATE_TRACK_CREATED);
 
         public DataTable ExecuteAndRetrieve()
         {
@@ -135,7 +158,7 @@ namespace TMCWorkbench.Utility
             }
             else
             {
-                query = $"{Where_Scenegroup_id}{Where_Composer_id}{Where_Format_id}{Where_Styles_ids}{Where_Tags_ids}{Where_TrackTitle}{Where_FileName}{Where_Scenegroup_name}{Where_Composer_name}{Where_MetaData}";
+                query = $"{Q_Scenegroup_id}{Q_Composer_id}{Q_Format_id}{Q_Tracker_ids}{Q_Styles_ids}{Q_Tags_ids}{Q_TrackTitle}{Q_FileName}{Q_Scenegroup_name}{Q_Composer_name}{Q_MetaData}{Q_Date_created}";
                 query = RemoveLastPieceOfString(query, " AND ");
                 query = $"{_querySearchStart} {query} {_querySearchEnd}";
             }
@@ -149,7 +172,12 @@ namespace TMCWorkbench.Utility
             return tbl;
         }
 
-        string RemoveLastPieceOfString(string s, string remove)
+        private string GetStr_To_Date(DateTime d)
+        {
+            return $"STR_TO_DATE('{d.Year},{d.Month},{d.Day}', '%Y,%m,%d')";
+        }
+
+        private string RemoveLastPieceOfString(string s, string remove)
         {
             if (s.EndsWith(remove))
                 s = s.Substring(0, s.Length - remove.Length);

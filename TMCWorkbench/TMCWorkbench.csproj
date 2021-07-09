@@ -165,6 +165,12 @@
     <Compile Include="Controls\ControlCheckBoxDropDown.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ControlDateChooser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ControlDateChooser.Designer.cs">
+      <DependentUpon>ControlDateChooser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ControlEditableList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -463,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ControlBrowser.resx">
       <DependentUpon>ControlBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ControlDateChooser.resx">
+      <DependentUpon>ControlDateChooser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ControlEditableList.resx">
       <DependentUpon>ControlEditableList.cs</DependentUpon>

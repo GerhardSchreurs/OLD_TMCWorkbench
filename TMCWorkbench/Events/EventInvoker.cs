@@ -41,5 +41,13 @@ namespace TMCWorkbench.Events
         {
             OnCachedEntityRefreshed?.Invoke(sender, entityName);
         }
+
+        public delegate void SearchDoneEventArgsDelegate(object sender, long ms);
+        public static event SearchDoneEventArgsDelegate OnSearchDone;
+
+        public static void RaiseOnSearchDone(object sender, long ms)
+        {
+            OnSearchDone?.Invoke(sender, ms);
+        }
     }
 }

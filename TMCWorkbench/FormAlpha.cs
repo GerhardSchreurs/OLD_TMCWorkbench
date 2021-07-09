@@ -38,6 +38,7 @@ namespace TMCWorkbench
             EventInvoker.OnBrowserControlBrowse += Handle_ctrBrowser_OnBrowse;
             EventInvoker.OnListViewBrowserControlSelected += Handle_ctrListView_OnSelected;
             EventInvoker.OnListViewTrackControlSelected += Handle_ctrTrack_OnListViewTrackControlSelected;
+            EventInvoker.OnSearchDone += Handle_EventInvoker_OnSearchDone;
 
             ctrBrowser.Init();
             ctrListView.Init();
@@ -50,6 +51,11 @@ namespace TMCWorkbench
 
             tabControl.DrawMode = TabDrawMode.OwnerDrawFixed;
             tabControl.DrawItem += Handle_TabControl_DrawItem;
+        }
+
+        private void Handle_EventInvoker_OnSearchDone(object sender, long ms)
+        {
+            SetStatusText($"Search took: {ms} ms");
         }
 
         private void Handle_ListView_MouseMove(object sender, MouseEventArgs e)

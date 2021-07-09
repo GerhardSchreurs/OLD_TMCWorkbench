@@ -63,8 +63,11 @@ namespace TMCWorkbench.Controls
             _db.LoadComposers();
             _db.LoadSceneGroups();
             _db.LoadTags();
+            _db.LoadTrackers();
+            _db.LoadPlaylists();
 
             InitControls();
+
             Search();
         }
 
@@ -76,6 +79,20 @@ namespace TMCWorkbench.Controls
             InitComposerDDL();
             InitScenegroupDDL();
             InitTagsDDL();
+            InitTrackersDDL();
+            InitPlaylistDDL();
+            InitDateDDLs();
+        }
+
+        void InitDateDDLs()
+        {
+            var startDate = new DateTime(1990, 1, 1);
+            var endDate = new DateTime(DateTime.Now.Year, 12, 31);
+
+            ctrDateCreated1.Init(startDate, endDate);
+            ctrDateCreated2.Init(startDate, endDate);
+            ctrDateSaved1.Init(startDate, endDate);
+            ctrDateSaved2.Init(startDate, endDate);
         }
 
         void InitStylesDDL()
@@ -85,6 +102,17 @@ namespace TMCWorkbench.Controls
                 var item = new CCBoxItem(entity.Name, entity.Style_id);
                 ddlStyles.Items.Add(item);
             }
+        }
+
+        void InitPlaylistDDL()
+        {
+            foreach (var entity in _db.Playlists)
+            {
+                var item = new CCBoxItem(entity.Name, entity.Playlist_id);
+                ddlPlaylist.Items.Add(item);
+            }
+
+            ddlPlaylist.Items.Insert(0, new CCBoxItem("", 0));
         }
 
         void InitComposerDDL()
@@ -118,6 +146,15 @@ namespace TMCWorkbench.Controls
             }
         }
 
+        void InitTrackersDDL()
+        {
+            foreach (var entity in _db.Trackers)
+            {
+                var item = new CCBoxItem(entity.Name, entity.Tracker_id);
+                ddlTrackers.Items.Add(item);
+            }
+        }
+
         int GetBoxValue(ComboBox box)
         {
             if (box == null || box.SelectedItem == null) return 0;
@@ -147,6 +184,11 @@ namespace TMCWorkbench.Controls
                 builder.SearchScenegroupById(GetBoxValue(ddlScenegroup));
 
             builder.SearchTags(ddlTags.GetCheckedItemIds());
+
+            builder.SearchTrackers(ddlTrackers.GetCheckedItemIds());
+
+            builder.SearchDateCreated(ctrDateCreated1.DateSelected, ctrDateCreated2.DateSelected);
+
 
             //Retrieve data
 

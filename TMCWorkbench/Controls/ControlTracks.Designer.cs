@@ -30,6 +30,22 @@ namespace TMCWorkbench.Controls
         private void InitializeComponent()
         {
             this.tblOuter = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.ctrDateSaved2 = new TMCWorkbench.Controls.ControlDateChooser();
+            this.ctrDateSaved1 = new TMCWorkbench.Controls.ControlDateChooser();
+            this.ctrDateCreated2 = new TMCWorkbench.Controls.ControlDateChooser();
+            this.lblFill2 = new System.Windows.Forms.Label();
+            this.lblFill1 = new System.Windows.Forms.Label();
+            this.lblDateSaved = new System.Windows.Forms.Label();
+            this.lblDateCreated = new System.Windows.Forms.Label();
+            this.ctrDateCreated1 = new TMCWorkbench.Controls.ControlDateChooser();
+            this.tblMoreCen = new System.Windows.Forms.TableLayoutPanel();
+            this.lblBPM = new System.Windows.Forms.Label();
+            this.lblPlaylists = new System.Windows.Forms.Label();
+            this.lblScore = new System.Windows.Forms.Label();
+            this.ddlTrackers = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
+            this.lblTrackers = new System.Windows.Forms.Label();
+            this.ddlPlaylist = new TMCWorkbench.Controls.DropDownList();
             this.listView = new System.Windows.Forms.ListView();
             this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -47,7 +63,7 @@ namespace TMCWorkbench.Controls
             this.ddlFormat = new System.Windows.Forms.ComboBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tblBottomControlsContainer = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tblMoreTop = new System.Windows.Forms.TableLayoutPanel();
             this.ddlTags = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
             this.lblTags = new System.Windows.Forms.Label();
             this.lblComposer = new System.Windows.Forms.Label();
@@ -57,29 +73,218 @@ namespace TMCWorkbench.Controls
             this.ddlComposer = new TMCWorkbench.Controls.DropDownList();
             this.ddlScenegroup = new TMCWorkbench.Controls.DropDownList();
             this.tblOuter.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tblMoreCen.SuspendLayout();
             this.tblTopControls.SuspendLayout();
             this.tblTopRightControls.SuspendLayout();
             this.tblBottomControlsContainer.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tblMoreTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // tblOuter
             // 
             this.tblOuter.ColumnCount = 1;
             this.tblOuter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblOuter.Controls.Add(this.listView, 0, 2);
+            this.tblOuter.Controls.Add(this.tableLayoutPanel1, 0, 3);
+            this.tblOuter.Controls.Add(this.tblMoreCen, 0, 2);
+            this.tblOuter.Controls.Add(this.listView, 0, 4);
             this.tblOuter.Controls.Add(this.tblTopControls, 0, 0);
             this.tblOuter.Controls.Add(this.tblBottomControlsContainer, 0, 1);
             this.tblOuter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblOuter.Location = new System.Drawing.Point(0, 0);
             this.tblOuter.Name = "tblOuter";
-            this.tblOuter.RowCount = 3;
+            this.tblOuter.RowCount = 6;
             this.tblOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tblOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tblOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tblOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tblOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.tblOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblOuter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblOuter.Size = new System.Drawing.Size(600, 749);
             this.tblOuter.TabIndex = 0;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Controls.Add(this.ctrDateSaved2, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ctrDateSaved1, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.ctrDateCreated2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblFill2, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblFill1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblDateSaved, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblDateCreated, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ctrDateCreated1, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 140);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 55);
+            this.tableLayoutPanel1.TabIndex = 9;
+            // 
+            // ctrDateSaved2
+            // 
+            this.ctrDateSaved2.Location = new System.Drawing.Point(453, 18);
+            this.ctrDateSaved2.Name = "ctrDateSaved2";
+            this.ctrDateSaved2.Size = new System.Drawing.Size(144, 34);
+            this.ctrDateSaved2.TabIndex = 17;
+            // 
+            // ctrDateSaved1
+            // 
+            this.ctrDateSaved1.Location = new System.Drawing.Point(303, 18);
+            this.ctrDateSaved1.Name = "ctrDateSaved1";
+            this.ctrDateSaved1.Size = new System.Drawing.Size(144, 34);
+            this.ctrDateSaved1.TabIndex = 16;
+            // 
+            // ctrDateCreated2
+            // 
+            this.ctrDateCreated2.Location = new System.Drawing.Point(153, 18);
+            this.ctrDateCreated2.Name = "ctrDateCreated2";
+            this.ctrDateCreated2.Size = new System.Drawing.Size(144, 34);
+            this.ctrDateCreated2.TabIndex = 15;
+            // 
+            // lblFill2
+            // 
+            this.lblFill2.AutoSize = true;
+            this.lblFill2.Location = new System.Drawing.Point(453, 0);
+            this.lblFill2.Name = "lblFill2";
+            this.lblFill2.Size = new System.Drawing.Size(80, 13);
+            this.lblFill2.TabIndex = 7;
+            this.lblFill2.Text = "Date saved (till)";
+            // 
+            // lblFill1
+            // 
+            this.lblFill1.AutoSize = true;
+            this.lblFill1.Location = new System.Drawing.Point(153, 0);
+            this.lblFill1.Name = "lblFill1";
+            this.lblFill1.Size = new System.Drawing.Size(87, 13);
+            this.lblFill1.TabIndex = 5;
+            this.lblFill1.Text = "Date created (till)";
+            // 
+            // lblDateSaved
+            // 
+            this.lblDateSaved.AutoSize = true;
+            this.lblDateSaved.Location = new System.Drawing.Point(303, 0);
+            this.lblDateSaved.Name = "lblDateSaved";
+            this.lblDateSaved.Size = new System.Drawing.Size(91, 13);
+            this.lblDateSaved.TabIndex = 3;
+            this.lblDateSaved.Text = "Date saved (from)";
+            // 
+            // lblDateCreated
+            // 
+            this.lblDateCreated.AutoSize = true;
+            this.lblDateCreated.Location = new System.Drawing.Point(3, 0);
+            this.lblDateCreated.Name = "lblDateCreated";
+            this.lblDateCreated.Size = new System.Drawing.Size(98, 13);
+            this.lblDateCreated.TabIndex = 2;
+            this.lblDateCreated.Text = "Date created (from)";
+            // 
+            // ctrDateCreated1
+            // 
+            this.ctrDateCreated1.Location = new System.Drawing.Point(3, 18);
+            this.ctrDateCreated1.Name = "ctrDateCreated1";
+            this.ctrDateCreated1.Size = new System.Drawing.Size(144, 34);
+            this.ctrDateCreated1.TabIndex = 14;
+            // 
+            // tblMoreCen
+            // 
+            this.tblMoreCen.BackColor = System.Drawing.SystemColors.Control;
+            this.tblMoreCen.ColumnCount = 4;
+            this.tblMoreCen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblMoreCen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblMoreCen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblMoreCen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblMoreCen.Controls.Add(this.lblBPM, 4, 0);
+            this.tblMoreCen.Controls.Add(this.lblPlaylists, 0, 0);
+            this.tblMoreCen.Controls.Add(this.lblScore, 1, 0);
+            this.tblMoreCen.Controls.Add(this.ddlTrackers, 0, 1);
+            this.tblMoreCen.Controls.Add(this.lblTrackers, 0, 0);
+            this.tblMoreCen.Controls.Add(this.ddlPlaylist, 1, 1);
+            this.tblMoreCen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblMoreCen.Location = new System.Drawing.Point(0, 85);
+            this.tblMoreCen.Margin = new System.Windows.Forms.Padding(0);
+            this.tblMoreCen.Name = "tblMoreCen";
+            this.tblMoreCen.RowCount = 2;
+            this.tblMoreCen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tblMoreCen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tblMoreCen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblMoreCen.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblMoreCen.Size = new System.Drawing.Size(600, 55);
+            this.tblMoreCen.TabIndex = 8;
+            // 
+            // lblBPM
+            // 
+            this.lblBPM.AutoSize = true;
+            this.lblBPM.Location = new System.Drawing.Point(453, 0);
+            this.lblBPM.Name = "lblBPM";
+            this.lblBPM.Size = new System.Drawing.Size(53, 13);
+            this.lblBPM.TabIndex = 7;
+            this.lblBPM.Text = "Fav & Stuff";
+            // 
+            // lblPlaylists
+            // 
+            this.lblPlaylists.AutoSize = true;
+            this.lblPlaylists.Location = new System.Drawing.Point(153, 0);
+            this.lblPlaylists.Name = "lblPlaylists";
+            this.lblPlaylists.Size = new System.Drawing.Size(39, 13);
+            this.lblPlaylists.TabIndex = 5;
+            this.lblPlaylists.Text = "Playlist";
+            // 
+            // lblScore
+            // 
+            this.lblScore.AutoSize = true;
+            this.lblScore.Location = new System.Drawing.Point(303, 0);
+            this.lblScore.Name = "lblScore";
+            this.lblScore.Size = new System.Drawing.Size(64, 13);
+            this.lblScore.TabIndex = 3;
+            this.lblScore.Text = "Score & BPM";
+            // 
+            // ddlTrackers
+            // 
+            this.ddlTrackers.CheckOnClick = true;
+            this.ddlTrackers.DisplayMember = "Name";
+            this.ddlTrackers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ddlTrackers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ddlTrackers.DropDownHeight = 1;
+            this.ddlTrackers.FormattingEnabled = true;
+            this.ddlTrackers.IntegralHeight = false;
+            this.ddlTrackers.ItemHeight = 15;
+            this.ddlTrackers.Location = new System.Drawing.Point(3, 18);
+            this.ddlTrackers.MaxDropDownItems = 25;
+            this.ddlTrackers.Name = "ddlTrackers";
+            this.ddlTrackers.Size = new System.Drawing.Size(144, 21);
+            this.ddlTrackers.TabIndex = 1;
+            this.ddlTrackers.ValueSeparator = ", ";
+            // 
+            // lblTrackers
+            // 
+            this.lblTrackers.AutoSize = true;
+            this.lblTrackers.Location = new System.Drawing.Point(3, 0);
+            this.lblTrackers.Name = "lblTrackers";
+            this.lblTrackers.Size = new System.Drawing.Size(55, 13);
+            this.lblTrackers.TabIndex = 2;
+            this.lblTrackers.Text = "Tracker(s)";
+            // 
+            // ddlPlaylist
+            // 
+            this.ddlPlaylist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ddlPlaylist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ddlPlaylist.DisplayMember = "Name";
+            this.ddlPlaylist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ddlPlaylist.FormattingEnabled = true;
+            this.ddlPlaylist.Location = new System.Drawing.Point(153, 18);
+            this.ddlPlaylist.Name = "ddlPlaylist";
+            this.ddlPlaylist.Size = new System.Drawing.Size(144, 21);
+            this.ddlPlaylist.TabIndex = 9;
             // 
             // listView
             // 
@@ -93,10 +298,10 @@ namespace TMCWorkbench.Controls
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.FullRowSelect = true;
             this.listView.HideSelection = false;
-            this.listView.Location = new System.Drawing.Point(3, 113);
+            this.listView.Location = new System.Drawing.Point(3, 198);
             this.listView.MultiSelect = false;
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(594, 633);
+            this.listView.Size = new System.Drawing.Size(594, 528);
             this.listView.TabIndex = 4;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
@@ -249,7 +454,7 @@ namespace TMCWorkbench.Controls
             this.tblBottomControlsContainer.ColumnCount = 1;
             this.tblBottomControlsContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblBottomControlsContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblBottomControlsContainer.Controls.Add(this.tableLayoutPanel1, 0, 1);
+            this.tblBottomControlsContainer.Controls.Add(this.tblMoreTop, 0, 1);
             this.tblBottomControlsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblBottomControlsContainer.Location = new System.Drawing.Point(0, 30);
             this.tblBottomControlsContainer.Margin = new System.Windows.Forms.Padding(0);
@@ -258,35 +463,36 @@ namespace TMCWorkbench.Controls
             this.tblBottomControlsContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tblBottomControlsContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tblBottomControlsContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tblBottomControlsContainer.Size = new System.Drawing.Size(600, 80);
+            this.tblBottomControlsContainer.Size = new System.Drawing.Size(600, 55);
             this.tblBottomControlsContainer.TabIndex = 5;
             // 
-            // tableLayoutPanel1
+            // tblMoreTop
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.ddlTags, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblTags, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblComposer, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblScenegroup, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ddlStyles, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblStyles, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ddlComposer, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.ddlScenegroup, 2, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 10);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 40);
-            this.tableLayoutPanel1.TabIndex = 7;
+            this.tblMoreTop.BackColor = System.Drawing.SystemColors.Control;
+            this.tblMoreTop.ColumnCount = 4;
+            this.tblMoreTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblMoreTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblMoreTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblMoreTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tblMoreTop.Controls.Add(this.ddlTags, 4, 1);
+            this.tblMoreTop.Controls.Add(this.lblTags, 4, 0);
+            this.tblMoreTop.Controls.Add(this.lblComposer, 0, 0);
+            this.tblMoreTop.Controls.Add(this.lblScenegroup, 1, 0);
+            this.tblMoreTop.Controls.Add(this.ddlStyles, 0, 1);
+            this.tblMoreTop.Controls.Add(this.lblStyles, 0, 0);
+            this.tblMoreTop.Controls.Add(this.ddlComposer, 1, 1);
+            this.tblMoreTop.Controls.Add(this.ddlScenegroup, 2, 1);
+            this.tblMoreTop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblMoreTop.Location = new System.Drawing.Point(0, 10);
+            this.tblMoreTop.Margin = new System.Windows.Forms.Padding(0);
+            this.tblMoreTop.Name = "tblMoreTop";
+            this.tblMoreTop.RowCount = 2;
+            this.tblMoreTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tblMoreTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tblMoreTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblMoreTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblMoreTop.Size = new System.Drawing.Size(600, 40);
+            this.tblMoreTop.TabIndex = 7;
             // 
             // ddlTags
             // 
@@ -391,12 +597,16 @@ namespace TMCWorkbench.Controls
             this.Name = "ControlTracks";
             this.Size = new System.Drawing.Size(600, 749);
             this.tblOuter.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tblMoreCen.ResumeLayout(false);
+            this.tblMoreCen.PerformLayout();
             this.tblTopControls.ResumeLayout(false);
             this.tblTopControls.PerformLayout();
             this.tblTopRightControls.ResumeLayout(false);
             this.tblBottomControlsContainer.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tblMoreTop.ResumeLayout(false);
+            this.tblMoreTop.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -421,7 +631,7 @@ namespace TMCWorkbench.Controls
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ComboBox ddlFormat;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tblMoreTop;
         private ControlCheckBoxDropDown ddlStyles;
         private System.Windows.Forms.Label lblStyles;
         private System.Windows.Forms.Label lblScenegroup;
@@ -430,5 +640,21 @@ namespace TMCWorkbench.Controls
         private System.Windows.Forms.Label lblTags;
         private DropDownList ddlComposer;
         private DropDownList ddlScenegroup;
+        private System.Windows.Forms.TableLayoutPanel tblMoreCen;
+        private System.Windows.Forms.Label lblBPM;
+        private System.Windows.Forms.Label lblPlaylists;
+        private System.Windows.Forms.Label lblScore;
+        private ControlCheckBoxDropDown ddlTrackers;
+        private System.Windows.Forms.Label lblTrackers;
+        private DropDownList ddlPlaylist;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label lblFill2;
+        private System.Windows.Forms.Label lblFill1;
+        private System.Windows.Forms.Label lblDateSaved;
+        private System.Windows.Forms.Label lblDateCreated;
+        private ControlDateChooser ctrDateCreated1;
+        private ControlDateChooser ctrDateSaved2;
+        private ControlDateChooser ctrDateSaved1;
+        private ControlDateChooser ctrDateCreated2;
     }
 }
