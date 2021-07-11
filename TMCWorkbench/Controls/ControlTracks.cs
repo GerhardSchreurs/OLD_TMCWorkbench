@@ -87,7 +87,7 @@ namespace TMCWorkbench.Controls
         void InitDateDDLs()
         {
             var startDate = new DateTime(1990, 1, 1);
-            var endDate = new DateTime(DateTime.Now.Year, 12, 31);
+            var endDate = new DateTime(DateTime.Now.Year + 1, 12, 31);
 
             ctrDateCreated1.Init(startDate, endDate);
             ctrDateCreated2.Init(startDate, endDate);
@@ -187,7 +187,10 @@ namespace TMCWorkbench.Controls
 
             builder.SearchTrackers(ddlTrackers.GetCheckedItemIds());
 
-            builder.SearchDateCreated(ctrDateCreated1.DateSelected, ctrDateCreated2.DateSelected);
+            builder.SearchDateTrackCreated(ctrDateCreated1.DateSelectedLow, ctrDateCreated2.DateSelectedHigh);
+            builder.SearchDateDatabaseStored(ctrDateSaved1.DateSelectedLow, ctrDateSaved2.DateSelectedHigh);
+            builder.SearchScore(ctrScore.Result, ctrScore.Modifier);
+
 
 
             //Retrieve data

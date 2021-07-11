@@ -31,21 +31,18 @@ namespace TMCWorkbench.Controls
         {
             this.tblOuter = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrDateSaved2 = new TMCWorkbench.Controls.ControlDateChooser();
-            this.ctrDateSaved1 = new TMCWorkbench.Controls.ControlDateChooser();
-            this.ctrDateCreated2 = new TMCWorkbench.Controls.ControlDateChooser();
             this.lblFill2 = new System.Windows.Forms.Label();
             this.lblFill1 = new System.Windows.Forms.Label();
             this.lblDateSaved = new System.Windows.Forms.Label();
             this.lblDateCreated = new System.Windows.Forms.Label();
-            this.ctrDateCreated1 = new TMCWorkbench.Controls.ControlDateChooser();
             this.tblMoreCen = new System.Windows.Forms.TableLayoutPanel();
-            this.lblBPM = new System.Windows.Forms.Label();
+            this.lblStuff = new System.Windows.Forms.Label();
             this.lblPlaylists = new System.Windows.Forms.Label();
-            this.lblScore = new System.Windows.Forms.Label();
-            this.ddlTrackers = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
             this.lblTrackers = new System.Windows.Forms.Label();
-            this.ddlPlaylist = new TMCWorkbench.Controls.DropDownList();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblBPM = new System.Windows.Forms.Label();
+            this.lblScore = new System.Windows.Forms.Label();
             this.listView = new System.Windows.Forms.ListView();
             this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -54,9 +51,6 @@ namespace TMCWorkbench.Controls
             this.colStyle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colDateSaved = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tblTopControls = new System.Windows.Forms.TableLayoutPanel();
-            this.ctrMetaData = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.ctrFileName = new TMCWorkbench.Controls.ControlHintTextBox();
-            this.ctrTrackTitle = new TMCWorkbench.Controls.ControlHintTextBox();
             this.tblTopRightControls = new System.Windows.Forms.TableLayoutPanel();
             this.btnSwitch = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -64,17 +58,30 @@ namespace TMCWorkbench.Controls
             this.btnSearch = new System.Windows.Forms.Button();
             this.tblBottomControlsContainer = new System.Windows.Forms.TableLayoutPanel();
             this.tblMoreTop = new System.Windows.Forms.TableLayoutPanel();
-            this.ddlTags = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
             this.lblTags = new System.Windows.Forms.Label();
             this.lblComposer = new System.Windows.Forms.Label();
             this.lblScenegroup = new System.Windows.Forms.Label();
-            this.ddlStyles = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
             this.lblStyles = new System.Windows.Forms.Label();
+            this.ctrDateSaved2 = new TMCWorkbench.Controls.ControlDateChooser();
+            this.ctrDateSaved1 = new TMCWorkbench.Controls.ControlDateChooser();
+            this.ctrDateCreated2 = new TMCWorkbench.Controls.ControlDateChooser();
+            this.ctrDateCreated1 = new TMCWorkbench.Controls.ControlDateChooser();
+            this.ddlTrackers = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
+            this.ddlPlaylist = new TMCWorkbench.Controls.DropDownList();
+            this.ctrScore = new TMCWorkbench.Controls.ControlDoubleTextBoxRange();
+            this.ctrBPM = new TMCWorkbench.Controls.ControlDoubleTextBoxRange();
+            this.ctrMetaData = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.ctrFileName = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.ctrTrackTitle = new TMCWorkbench.Controls.ControlHintTextBox();
+            this.ddlTags = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
+            this.ddlStyles = new TMCWorkbench.Controls.ControlCheckBoxDropDown();
             this.ddlComposer = new TMCWorkbench.Controls.DropDownList();
             this.ddlScenegroup = new TMCWorkbench.Controls.DropDownList();
             this.tblOuter.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tblMoreCen.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.tblTopControls.SuspendLayout();
             this.tblTopRightControls.SuspendLayout();
             this.tblBottomControlsContainer.SuspendLayout();
@@ -131,27 +138,6 @@ namespace TMCWorkbench.Controls
             this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 55);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
-            // ctrDateSaved2
-            // 
-            this.ctrDateSaved2.Location = new System.Drawing.Point(453, 18);
-            this.ctrDateSaved2.Name = "ctrDateSaved2";
-            this.ctrDateSaved2.Size = new System.Drawing.Size(144, 34);
-            this.ctrDateSaved2.TabIndex = 17;
-            // 
-            // ctrDateSaved1
-            // 
-            this.ctrDateSaved1.Location = new System.Drawing.Point(303, 18);
-            this.ctrDateSaved1.Name = "ctrDateSaved1";
-            this.ctrDateSaved1.Size = new System.Drawing.Size(144, 34);
-            this.ctrDateSaved1.TabIndex = 16;
-            // 
-            // ctrDateCreated2
-            // 
-            this.ctrDateCreated2.Location = new System.Drawing.Point(153, 18);
-            this.ctrDateCreated2.Name = "ctrDateCreated2";
-            this.ctrDateCreated2.Size = new System.Drawing.Size(144, 34);
-            this.ctrDateCreated2.TabIndex = 15;
-            // 
             // lblFill2
             // 
             this.lblFill2.AutoSize = true;
@@ -188,13 +174,6 @@ namespace TMCWorkbench.Controls
             this.lblDateCreated.TabIndex = 2;
             this.lblDateCreated.Text = "Date created (from)";
             // 
-            // ctrDateCreated1
-            // 
-            this.ctrDateCreated1.Location = new System.Drawing.Point(3, 18);
-            this.ctrDateCreated1.Name = "ctrDateCreated1";
-            this.ctrDateCreated1.Size = new System.Drawing.Size(144, 34);
-            this.ctrDateCreated1.TabIndex = 14;
-            // 
             // tblMoreCen
             // 
             this.tblMoreCen.BackColor = System.Drawing.SystemColors.Control;
@@ -203,12 +182,13 @@ namespace TMCWorkbench.Controls
             this.tblMoreCen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tblMoreCen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tblMoreCen.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tblMoreCen.Controls.Add(this.lblBPM, 4, 0);
+            this.tblMoreCen.Controls.Add(this.lblStuff, 4, 0);
             this.tblMoreCen.Controls.Add(this.lblPlaylists, 0, 0);
-            this.tblMoreCen.Controls.Add(this.lblScore, 1, 0);
             this.tblMoreCen.Controls.Add(this.ddlTrackers, 0, 1);
             this.tblMoreCen.Controls.Add(this.lblTrackers, 0, 0);
             this.tblMoreCen.Controls.Add(this.ddlPlaylist, 1, 1);
+            this.tblMoreCen.Controls.Add(this.tableLayoutPanel2, 2, 1);
+            this.tblMoreCen.Controls.Add(this.tableLayoutPanel3, 2, 0);
             this.tblMoreCen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblMoreCen.Location = new System.Drawing.Point(0, 85);
             this.tblMoreCen.Margin = new System.Windows.Forms.Padding(0);
@@ -221,70 +201,81 @@ namespace TMCWorkbench.Controls
             this.tblMoreCen.Size = new System.Drawing.Size(600, 55);
             this.tblMoreCen.TabIndex = 8;
             // 
-            // lblBPM
+            // lblStuff
             // 
-            this.lblBPM.AutoSize = true;
-            this.lblBPM.Location = new System.Drawing.Point(453, 0);
-            this.lblBPM.Name = "lblBPM";
-            this.lblBPM.Size = new System.Drawing.Size(53, 13);
-            this.lblBPM.TabIndex = 7;
-            this.lblBPM.Text = "Fav & Stuff";
+            this.lblStuff.AutoSize = true;
+            this.lblStuff.Location = new System.Drawing.Point(453, 0);
+            this.lblStuff.Name = "lblStuff";
+            this.lblStuff.Size = new System.Drawing.Size(53, 13);
+            this.lblStuff.TabIndex = 7;
+            this.lblStuff.Text = "Fav & Stuff";
             // 
             // lblPlaylists
             // 
             this.lblPlaylists.AutoSize = true;
-            this.lblPlaylists.Location = new System.Drawing.Point(153, 0);
+            this.lblPlaylists.Location = new System.Drawing.Point(3, 0);
             this.lblPlaylists.Name = "lblPlaylists";
             this.lblPlaylists.Size = new System.Drawing.Size(39, 13);
             this.lblPlaylists.TabIndex = 5;
             this.lblPlaylists.Text = "Playlist";
             // 
-            // lblScore
-            // 
-            this.lblScore.AutoSize = true;
-            this.lblScore.Location = new System.Drawing.Point(303, 0);
-            this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(64, 13);
-            this.lblScore.TabIndex = 3;
-            this.lblScore.Text = "Score & BPM";
-            // 
-            // ddlTrackers
-            // 
-            this.ddlTrackers.CheckOnClick = true;
-            this.ddlTrackers.DisplayMember = "Name";
-            this.ddlTrackers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ddlTrackers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.ddlTrackers.DropDownHeight = 1;
-            this.ddlTrackers.FormattingEnabled = true;
-            this.ddlTrackers.IntegralHeight = false;
-            this.ddlTrackers.ItemHeight = 15;
-            this.ddlTrackers.Location = new System.Drawing.Point(3, 18);
-            this.ddlTrackers.MaxDropDownItems = 25;
-            this.ddlTrackers.Name = "ddlTrackers";
-            this.ddlTrackers.Size = new System.Drawing.Size(144, 21);
-            this.ddlTrackers.TabIndex = 1;
-            this.ddlTrackers.ValueSeparator = ", ";
-            // 
             // lblTrackers
             // 
             this.lblTrackers.AutoSize = true;
-            this.lblTrackers.Location = new System.Drawing.Point(3, 0);
+            this.lblTrackers.Location = new System.Drawing.Point(153, 0);
             this.lblTrackers.Name = "lblTrackers";
             this.lblTrackers.Size = new System.Drawing.Size(55, 13);
             this.lblTrackers.TabIndex = 2;
             this.lblTrackers.Text = "Tracker(s)";
             // 
-            // ddlPlaylist
+            // tableLayoutPanel2
             // 
-            this.ddlPlaylist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.ddlPlaylist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ddlPlaylist.DisplayMember = "Name";
-            this.ddlPlaylist.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ddlPlaylist.FormattingEnabled = true;
-            this.ddlPlaylist.Location = new System.Drawing.Point(153, 18);
-            this.ddlPlaylist.Name = "ddlPlaylist";
-            this.ddlPlaylist.Size = new System.Drawing.Size(144, 21);
-            this.ddlPlaylist.TabIndex = 9;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.ctrScore, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.ctrBPM, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(303, 18);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(144, 34);
+            this.tableLayoutPanel2.TabIndex = 10;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.lblBPM, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblScore, 0, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(300, 0);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(150, 15);
+            this.tableLayoutPanel3.TabIndex = 11;
+            // 
+            // lblBPM
+            // 
+            this.lblBPM.AutoSize = true;
+            this.lblBPM.Location = new System.Drawing.Point(78, 0);
+            this.lblBPM.Name = "lblBPM";
+            this.lblBPM.Size = new System.Drawing.Size(30, 13);
+            this.lblBPM.TabIndex = 5;
+            this.lblBPM.Text = "BPM";
+            // 
+            // lblScore
+            // 
+            this.lblScore.AutoSize = true;
+            this.lblScore.Location = new System.Drawing.Point(3, 0);
+            this.lblScore.Name = "lblScore";
+            this.lblScore.Size = new System.Drawing.Size(35, 13);
+            this.lblScore.TabIndex = 4;
+            this.lblScore.Text = "Score";
             // 
             // listView
             // 
@@ -356,33 +347,6 @@ namespace TMCWorkbench.Controls
             this.tblTopControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tblTopControls.Size = new System.Drawing.Size(600, 30);
             this.tblTopControls.TabIndex = 6;
-            // 
-            // ctrMetaData
-            // 
-            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrMetaData.Hint = "Meta data";
-            this.ctrMetaData.Location = new System.Drawing.Point(303, 3);
-            this.ctrMetaData.Name = "ctrMetaData";
-            this.ctrMetaData.Size = new System.Drawing.Size(144, 20);
-            this.ctrMetaData.TabIndex = 2;
-            // 
-            // ctrFileName
-            // 
-            this.ctrFileName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrFileName.Hint = "File name";
-            this.ctrFileName.Location = new System.Drawing.Point(153, 3);
-            this.ctrFileName.Name = "ctrFileName";
-            this.ctrFileName.Size = new System.Drawing.Size(144, 20);
-            this.ctrFileName.TabIndex = 1;
-            // 
-            // ctrTrackTitle
-            // 
-            this.ctrTrackTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrTrackTitle.Hint = "Track title";
-            this.ctrTrackTitle.Location = new System.Drawing.Point(3, 3);
-            this.ctrTrackTitle.Name = "ctrTrackTitle";
-            this.ctrTrackTitle.Size = new System.Drawing.Size(144, 20);
-            this.ctrTrackTitle.TabIndex = 0;
             // 
             // tblTopRightControls
             // 
@@ -494,23 +458,6 @@ namespace TMCWorkbench.Controls
             this.tblMoreTop.Size = new System.Drawing.Size(600, 40);
             this.tblMoreTop.TabIndex = 7;
             // 
-            // ddlTags
-            // 
-            this.ddlTags.CheckOnClick = true;
-            this.ddlTags.DisplayMember = "Name";
-            this.ddlTags.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ddlTags.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.ddlTags.DropDownHeight = 1;
-            this.ddlTags.FormattingEnabled = true;
-            this.ddlTags.IntegralHeight = false;
-            this.ddlTags.ItemHeight = 15;
-            this.ddlTags.Location = new System.Drawing.Point(453, 18);
-            this.ddlTags.MaxDropDownItems = 25;
-            this.ddlTags.Name = "ddlTags";
-            this.ddlTags.Size = new System.Drawing.Size(144, 21);
-            this.ddlTags.TabIndex = 8;
-            this.ddlTags.ValueSeparator = ", ";
-            // 
             // lblTags
             // 
             this.lblTags.AutoSize = true;
@@ -538,6 +485,144 @@ namespace TMCWorkbench.Controls
             this.lblScenegroup.TabIndex = 3;
             this.lblScenegroup.Text = "Scenegroup";
             // 
+            // lblStyles
+            // 
+            this.lblStyles.AutoSize = true;
+            this.lblStyles.Location = new System.Drawing.Point(3, 0);
+            this.lblStyles.Name = "lblStyles";
+            this.lblStyles.Size = new System.Drawing.Size(41, 13);
+            this.lblStyles.TabIndex = 2;
+            this.lblStyles.Text = "Style(s)";
+            // 
+            // ctrDateSaved2
+            // 
+            this.ctrDateSaved2.Location = new System.Drawing.Point(453, 18);
+            this.ctrDateSaved2.Name = "ctrDateSaved2";
+            this.ctrDateSaved2.Size = new System.Drawing.Size(144, 34);
+            this.ctrDateSaved2.TabIndex = 17;
+            // 
+            // ctrDateSaved1
+            // 
+            this.ctrDateSaved1.Location = new System.Drawing.Point(303, 18);
+            this.ctrDateSaved1.Name = "ctrDateSaved1";
+            this.ctrDateSaved1.Size = new System.Drawing.Size(144, 34);
+            this.ctrDateSaved1.TabIndex = 16;
+            // 
+            // ctrDateCreated2
+            // 
+            this.ctrDateCreated2.Location = new System.Drawing.Point(153, 18);
+            this.ctrDateCreated2.Name = "ctrDateCreated2";
+            this.ctrDateCreated2.Size = new System.Drawing.Size(144, 34);
+            this.ctrDateCreated2.TabIndex = 15;
+            // 
+            // ctrDateCreated1
+            // 
+            this.ctrDateCreated1.Location = new System.Drawing.Point(3, 18);
+            this.ctrDateCreated1.Name = "ctrDateCreated1";
+            this.ctrDateCreated1.Size = new System.Drawing.Size(144, 34);
+            this.ctrDateCreated1.TabIndex = 14;
+            // 
+            // ddlTrackers
+            // 
+            this.ddlTrackers.CheckOnClick = true;
+            this.ddlTrackers.DisplayMember = "Name";
+            this.ddlTrackers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ddlTrackers.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ddlTrackers.DropDownHeight = 1;
+            this.ddlTrackers.FormattingEnabled = true;
+            this.ddlTrackers.IntegralHeight = false;
+            this.ddlTrackers.ItemHeight = 15;
+            this.ddlTrackers.Location = new System.Drawing.Point(3, 18);
+            this.ddlTrackers.MaxDropDownItems = 25;
+            this.ddlTrackers.Name = "ddlTrackers";
+            this.ddlTrackers.Size = new System.Drawing.Size(144, 21);
+            this.ddlTrackers.TabIndex = 1;
+            this.ddlTrackers.ValueSeparator = ", ";
+            // 
+            // ddlPlaylist
+            // 
+            this.ddlPlaylist.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ddlPlaylist.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ddlPlaylist.DisplayMember = "Name";
+            this.ddlPlaylist.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ddlPlaylist.FormattingEnabled = true;
+            this.ddlPlaylist.Location = new System.Drawing.Point(153, 18);
+            this.ddlPlaylist.Name = "ddlPlaylist";
+            this.ddlPlaylist.Size = new System.Drawing.Size(144, 21);
+            this.ddlPlaylist.TabIndex = 9;
+            // 
+            // ctrScore
+            // 
+            this.ctrScore.AllowsNegatives = false;
+            this.ctrScore.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrScore.Location = new System.Drawing.Point(0, 0);
+            this.ctrScore.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.ctrScore.MaxValue = 10;
+            this.ctrScore.MinValue = 0;
+            this.ctrScore.Modifier = null;
+            this.ctrScore.Name = "ctrScore";
+            this.ctrScore.Result = null;
+            this.ctrScore.Size = new System.Drawing.Size(69, 34);
+            this.ctrScore.TabIndex = 0;
+            // 
+            // ctrBPM
+            // 
+            this.ctrBPM.AllowsNegatives = false;
+            this.ctrBPM.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrBPM.Location = new System.Drawing.Point(75, 0);
+            this.ctrBPM.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.ctrBPM.MaxValue = 999;
+            this.ctrBPM.MinValue = 0;
+            this.ctrBPM.Modifier = null;
+            this.ctrBPM.Name = "ctrBPM";
+            this.ctrBPM.Result = null;
+            this.ctrBPM.Size = new System.Drawing.Size(69, 34);
+            this.ctrBPM.TabIndex = 1;
+            // 
+            // ctrMetaData
+            // 
+            this.ctrMetaData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrMetaData.Hint = "Meta data";
+            this.ctrMetaData.Location = new System.Drawing.Point(303, 3);
+            this.ctrMetaData.Name = "ctrMetaData";
+            this.ctrMetaData.Size = new System.Drawing.Size(144, 20);
+            this.ctrMetaData.TabIndex = 2;
+            // 
+            // ctrFileName
+            // 
+            this.ctrFileName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrFileName.Hint = "File name";
+            this.ctrFileName.Location = new System.Drawing.Point(153, 3);
+            this.ctrFileName.Name = "ctrFileName";
+            this.ctrFileName.Size = new System.Drawing.Size(144, 20);
+            this.ctrFileName.TabIndex = 1;
+            // 
+            // ctrTrackTitle
+            // 
+            this.ctrTrackTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrTrackTitle.Hint = "Track title";
+            this.ctrTrackTitle.Location = new System.Drawing.Point(3, 3);
+            this.ctrTrackTitle.Name = "ctrTrackTitle";
+            this.ctrTrackTitle.Size = new System.Drawing.Size(144, 20);
+            this.ctrTrackTitle.TabIndex = 0;
+            // 
+            // ddlTags
+            // 
+            this.ddlTags.CheckOnClick = true;
+            this.ddlTags.DisplayMember = "Name";
+            this.ddlTags.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ddlTags.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.ddlTags.DropDownHeight = 1;
+            this.ddlTags.FormattingEnabled = true;
+            this.ddlTags.IntegralHeight = false;
+            this.ddlTags.ItemHeight = 15;
+            this.ddlTags.Location = new System.Drawing.Point(453, 18);
+            this.ddlTags.MaxDropDownItems = 25;
+            this.ddlTags.Name = "ddlTags";
+            this.ddlTags.Size = new System.Drawing.Size(144, 21);
+            this.ddlTags.TabIndex = 8;
+            this.ddlTags.ValueSeparator = ", ";
+            // 
             // ddlStyles
             // 
             this.ddlStyles.CheckOnClick = true;
@@ -554,15 +639,6 @@ namespace TMCWorkbench.Controls
             this.ddlStyles.Size = new System.Drawing.Size(144, 21);
             this.ddlStyles.TabIndex = 1;
             this.ddlStyles.ValueSeparator = ", ";
-            // 
-            // lblStyles
-            // 
-            this.lblStyles.AutoSize = true;
-            this.lblStyles.Location = new System.Drawing.Point(3, 0);
-            this.lblStyles.Name = "lblStyles";
-            this.lblStyles.Size = new System.Drawing.Size(41, 13);
-            this.lblStyles.TabIndex = 2;
-            this.lblStyles.Text = "Style(s)";
             // 
             // ddlComposer
             // 
@@ -601,6 +677,9 @@ namespace TMCWorkbench.Controls
             this.tableLayoutPanel1.PerformLayout();
             this.tblMoreCen.ResumeLayout(false);
             this.tblMoreCen.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.tblTopControls.ResumeLayout(false);
             this.tblTopControls.PerformLayout();
             this.tblTopRightControls.ResumeLayout(false);
@@ -641,9 +720,8 @@ namespace TMCWorkbench.Controls
         private DropDownList ddlComposer;
         private DropDownList ddlScenegroup;
         private System.Windows.Forms.TableLayoutPanel tblMoreCen;
-        private System.Windows.Forms.Label lblBPM;
+        private System.Windows.Forms.Label lblStuff;
         private System.Windows.Forms.Label lblPlaylists;
-        private System.Windows.Forms.Label lblScore;
         private ControlCheckBoxDropDown ddlTrackers;
         private System.Windows.Forms.Label lblTrackers;
         private DropDownList ddlPlaylist;
@@ -656,5 +734,11 @@ namespace TMCWorkbench.Controls
         private ControlDateChooser ctrDateSaved2;
         private ControlDateChooser ctrDateSaved1;
         private ControlDateChooser ctrDateCreated2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private ControlDoubleTextBoxRange ctrScore;
+        private ControlDoubleTextBoxRange ctrBPM;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label lblBPM;
+        private System.Windows.Forms.Label lblScore;
     }
 }

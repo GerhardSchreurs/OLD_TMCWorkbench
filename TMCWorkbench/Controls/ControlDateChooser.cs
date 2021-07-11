@@ -12,7 +12,7 @@ namespace TMCWorkbench.Controls
 {
     public partial class ControlDateChooser : UserControl
     {
-        public DateTime? DateSelected
+        public DateTime? DateSelectedLow
         {
             get
             {
@@ -21,6 +21,25 @@ namespace TMCWorkbench.Controls
                 var y = ddlY.SelectedItem.ToInt();
                 var m = 1;
                 var d = 1;
+
+                if (ddlM.SelectedIndex > 0)
+                    m = ddlM.SelectedItem.ToInt();
+                if (ddlD.SelectedIndex > 0)
+                    d = ddlD.SelectedItem.ToInt();
+
+                return new DateTime(y, m, d);
+            }
+        }
+
+        public DateTime? DateSelectedHigh
+        {
+            get
+            {
+                if (ddlY.SelectedIndex <= 0) return null;
+
+                var y = ddlY.SelectedItem.ToInt();
+                var m = 12;
+                var d = 31;
 
                 if (ddlM.SelectedIndex > 0)
                     m = ddlM.SelectedItem.ToInt();

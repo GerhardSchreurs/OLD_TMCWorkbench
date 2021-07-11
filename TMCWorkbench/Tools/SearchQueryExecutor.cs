@@ -41,6 +41,8 @@ namespace TMCWorkbench.Utility
         public const string COL_TAG_ID = "FK_tag_id";
         public const string COL_TRACKER_ID = "FK_tracker_id";
         public const string COL_DATE_TRACK_CREATED = "Date_track_created";
+        public const string COL_DATE_TRACK_STORED = "Date_created";
+        public const string COL_SCORE = "Score";
 
         public const string PARAM_TRACKTITLE = "@param_TrackTitle";
         public const string PARAM_FILENAME = "@param_FileName";
@@ -55,6 +57,7 @@ namespace TMCWorkbench.Utility
         public const string PARAM_TRACKER_IDS = "@param_TrackerIDs";
         public const string PARAM_DATE_FROM_1 = "@param_DateFrom1"; //not in use yet
         public const string PARAM_DATE_FROM_2 = "@param_DateFrom2"; //not in use yet
+        public const string PARAM_SCORE = "@param_Score";
 
         public string Q_TrackTitle = "";
         public string Q_FileName = "";
@@ -67,7 +70,10 @@ namespace TMCWorkbench.Utility
         public string Q_Scenegroup_name = "";
         public string Q_Tags_ids = "";
         public string Q_Tracker_ids = "";
-        public string Q_Date_created = "";
+        public string Q_Date_track_created = "";
+        public string Q_Date_track_stored = "";
+        public string Q_Score = "";
+
 
         public long ExecutionTimeMS;
 
@@ -131,6 +137,16 @@ namespace TMCWorkbench.Utility
         public void SearchFileName(string text) => SearchLike(ref Q_FileName, text, COL_FILENAME, PARAM_FILENAME);
         public void SearchMetaData(string text) => SearchLike(ref Q_MetaData, text, COL_METADATA, PARAM_METADATA);
         public void SearchFormat(int id) => SearchID(ref Q_Format_id, id, COL_FORMAT_ID, PARAM_FORMAT_ID);
+
+        public void SearchScore(double? result, string modifier)
+        {
+            if (result == null) return;
+            if (modifier.IsNullOrEmpty()) modifier = "=";
+
+            AddParam(PARAM_SCORE, result.Value);
+            Q_Score = $"{COL_SCORE} {modifier} {PARAM_SCORE} AND ";
+        }
+
         public void SearchStyles(int[] ids) => SearchIN(ref Q_Styles_ids, ids, COL_STYLE_ID);
         public void SearchComposerById(int id) => SearchID(ref Q_Composer_id, id, COL_COMPOSER_ID, PARAM_COMPOSER_ID);
         public void SearchComposerByName(string text) => SearchLike(ref Q_Composer_name, text, COL_COMPOSER_NAME, PARAM_COMPOSER_NAME);
@@ -138,7 +154,8 @@ namespace TMCWorkbench.Utility
         public void SearchScenegroupByName(string text) => SearchLike(ref Q_Scenegroup_name, text, COL_SCENEGROUP_NAME, PARAM_SCENEGROUP_NAME);
         public void SearchTags(int[] ids) => SearchCrossIN(ref Q_Tags_ids, ids, TBL_C_TRACK_TAG, COL_TAG_ID);
         public void SearchTrackers(int[] ids) => SearchIN(ref Q_Tracker_ids, ids, COL_TRACKER_ID);
-        public void SearchDateCreated(DateTime? from, DateTime? till) => SearchDates(ref Q_Date_created, from, till, COL_DATE_TRACK_CREATED);
+        public void SearchDateTrackCreated(DateTime? from, DateTime? till) => SearchDates(ref Q_Date_track_created, from, till, COL_DATE_TRACK_CREATED);
+        public void SearchDateDatabaseStored(DateTime? from, DateTime? till) => SearchDates(ref Q_Date_track_stored, from, till, COL_DATE_TRACK_STORED);
 
         public DataTable ExecuteAndRetrieve()
         {
@@ -158,7 +175,7 @@ namespace TMCWorkbench.Utility
             }
             else
             {
-                query = $"{Q_Scenegroup_id}{Q_Composer_id}{Q_Format_id}{Q_Tracker_ids}{Q_Styles_ids}{Q_Tags_ids}{Q_TrackTitle}{Q_FileName}{Q_Scenegroup_name}{Q_Composer_name}{Q_MetaData}{Q_Date_created}";
+                query = $"{Q_Scenegroup_id}{Q_Composer_id}{Q_Format_id}{Q_Tracker_ids}{Q_Score}{Q_Styles_ids}{Q_Tags_ids}{Q_TrackTitle}{Q_FileName}{Q_Scenegroup_name}{Q_Composer_name}{Q_MetaData}{Q_Date_track_stored}{Q_Date_track_created}";
                 query = RemoveLastPieceOfString(query, " AND ");
                 query = $"{_querySearchStart} {query} {_querySearchEnd}";
             }

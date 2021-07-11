@@ -171,6 +171,15 @@
     <Compile Include="Controls\ControlDateChooser.Designer.cs">
       <DependentUpon>ControlDateChooser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ControlDoubleTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ControlDoubleTextBoxRange.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ControlDoubleTextBoxRange.Designer.cs">
+      <DependentUpon>ControlDoubleTextBoxRange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ControlEditableList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -472,6 +481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ControlDateChooser.resx">
       <DependentUpon>ControlDateChooser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ControlDoubleTextBoxRange.resx">
+      <DependentUpon>ControlDoubleTextBoxRange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ControlEditableList.resx">
       <DependentUpon>ControlEditableList.cs</DependentUpon>
