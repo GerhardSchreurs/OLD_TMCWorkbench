@@ -18,9 +18,9 @@ namespace TMCWorkbench.Utility
             _parameters = new List<MySqlParameter>();
         }
 
+        private List<MySqlParameter> _parameters;
         public int Limit = 50;
         public int PageNumber = 0;
-        private List<MySqlParameter> _parameters;
 
         private string _queryRegularStart = "SELECT * FROM view_tracks";
         private string _queryRegularEnd = "ORDER by Track_id DESC LIMIT {LIMIT}";
@@ -43,6 +43,7 @@ namespace TMCWorkbench.Utility
         public const string COL_DATE_TRACK_CREATED = "Date_track_created";
         public const string COL_DATE_TRACK_STORED = "Date_created";
         public const string COL_SCORE = "Score";
+        public const string COL_BPM = "Bpm";
 
         public const string PARAM_TRACKTITLE = "@param_TrackTitle";
         public const string PARAM_FILENAME = "@param_FileName";
@@ -58,6 +59,7 @@ namespace TMCWorkbench.Utility
         public const string PARAM_DATE_FROM_1 = "@param_DateFrom1"; //not in use yet
         public const string PARAM_DATE_FROM_2 = "@param_DateFrom2"; //not in use yet
         public const string PARAM_SCORE = "@param_Score";
+        public const string PARAM_BPM = "@param_BPM";
 
         public string Q_TrackTitle = "";
         public string Q_FileName = "";
@@ -73,7 +75,7 @@ namespace TMCWorkbench.Utility
         public string Q_Date_track_created = "";
         public string Q_Date_track_stored = "";
         public string Q_Score = "";
-
+        public string Q_BPM = "";
 
         public long ExecutionTimeMS;
 
@@ -133,20 +135,19 @@ namespace TMCWorkbench.Utility
                 where = $"({column} BETWEEN {GetStr_To_Date(dateFrom.Value)} AND {GetStr_To_Date(dateTill.Value)}) AND ";
         }
 
+        private void SearchWithModifier(ref string where, double? score, string modifier, string column, string param)
+        {
+            if (score == null || modifier.IsNullOrEmpty()) return;
+            modifier = GetModifier(modifier);
+
+            AddParam(param, score.Value);
+            where = $"{column} {modifier} {param} AND ";
+        }
+
         public void SearchTrackTitle(string text) => SearchLike(ref Q_TrackTitle, text, COL_TRACKTITLE, PARAM_TRACKTITLE);
         public void SearchFileName(string text) => SearchLike(ref Q_FileName, text, COL_FILENAME, PARAM_FILENAME);
         public void SearchMetaData(string text) => SearchLike(ref Q_MetaData, text, COL_METADATA, PARAM_METADATA);
         public void SearchFormat(int id) => SearchID(ref Q_Format_id, id, COL_FORMAT_ID, PARAM_FORMAT_ID);
-
-        public void SearchScore(double? result, string modifier)
-        {
-            if (result == null) return;
-            if (modifier.IsNullOrEmpty()) modifier = "=";
-
-            AddParam(PARAM_SCORE, result.Value);
-            Q_Score = $"{COL_SCORE} {modifier} {PARAM_SCORE} AND ";
-        }
-
         public void SearchStyles(int[] ids) => SearchIN(ref Q_Styles_ids, ids, COL_STYLE_ID);
         public void SearchComposerById(int id) => SearchID(ref Q_Composer_id, id, COL_COMPOSER_ID, PARAM_COMPOSER_ID);
         public void SearchComposerByName(string text) => SearchLike(ref Q_Composer_name, text, COL_COMPOSER_NAME, PARAM_COMPOSER_NAME);
@@ -156,6 +157,8 @@ namespace TMCWorkbench.Utility
         public void SearchTrackers(int[] ids) => SearchIN(ref Q_Tracker_ids, ids, COL_TRACKER_ID);
         public void SearchDateTrackCreated(DateTime? from, DateTime? till) => SearchDates(ref Q_Date_track_created, from, till, COL_DATE_TRACK_CREATED);
         public void SearchDateDatabaseStored(DateTime? from, DateTime? till) => SearchDates(ref Q_Date_track_stored, from, till, COL_DATE_TRACK_STORED);
+        public void SearchRating(double? score, string modifier) => SearchWithModifier(ref Q_Score, score, modifier, COL_SCORE, PARAM_SCORE);
+        public void SearchBPM(double? bpm, string modifier) => SearchWithModifier(ref Q_BPM, bpm, modifier, COL_BPM, PARAM_BPM);
 
         public DataTable ExecuteAndRetrieve()
         {
@@ -175,7 +178,7 @@ namespace TMCWorkbench.Utility
             }
             else
             {
-                query = $"{Q_Scenegroup_id}{Q_Composer_id}{Q_Format_id}{Q_Tracker_ids}{Q_Score}{Q_Styles_ids}{Q_Tags_ids}{Q_TrackTitle}{Q_FileName}{Q_Scenegroup_name}{Q_Composer_name}{Q_MetaData}{Q_Date_track_stored}{Q_Date_track_created}";
+                query = $"{Q_Scenegroup_id}{Q_Composer_id}{Q_Format_id}{Q_Tracker_ids}{Q_Score}{Q_BPM}{Q_Styles_ids}{Q_Tags_ids}{Q_TrackTitle}{Q_FileName}{Q_Scenegroup_name}{Q_Composer_name}{Q_MetaData}{Q_Date_track_stored}{Q_Date_track_created}";
                 query = RemoveLastPieceOfString(query, " AND ");
                 query = $"{_querySearchStart} {query} {_querySearchEnd}";
             }
@@ -187,6 +190,18 @@ namespace TMCWorkbench.Utility
             ExecutionTimeMS = stopwatch.ElapsedMilliseconds;
 
             return tbl;
+        }
+
+        private string GetModifier(string modifier)
+        {
+            if (modifier == "<" || modifier == "<=")
+                modifier = "<=";
+            else if (modifier == ">" || modifier == ">=")
+                modifier = ">=";
+            else
+                modifier = "=";
+
+            return modifier;
         }
 
         private string GetStr_To_Date(DateTime d)

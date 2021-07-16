@@ -189,12 +189,10 @@ namespace TMCWorkbench.Controls
 
             builder.SearchDateTrackCreated(ctrDateCreated1.DateSelectedLow, ctrDateCreated2.DateSelectedHigh);
             builder.SearchDateDatabaseStored(ctrDateSaved1.DateSelectedLow, ctrDateSaved2.DateSelectedHigh);
-            builder.SearchScore(ctrScore.Result, ctrScore.Modifier);
-
-
+            builder.SearchRating(ctrScore.Result, ctrScore.Modifier);
+            builder.SearchBPM(ctrBPM.Result, ctrBPM.Modifier);
 
             //Retrieve data
-
 
             var data = builder.ExecuteAndRetrieve();
             _table = new ViewTracksTable(data);
